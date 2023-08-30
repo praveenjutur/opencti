@@ -1,12 +1,9 @@
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
-import React, { Dispatch, FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 import makeStyles from '@mui/styles/makeStyles';
 import { useFormatter } from '../../../../components/i18n';
-import {
-  directFilters,
-  FiltersVariant,
-} from '../../../../utils/filters/filtersUtils';
+import { dateFilters, directFilters, FiltersVariant, } from '../../../../utils/filters/filtersUtils';
 import FilterDate from './FilterDate';
 import FilterAutocomplete from './FilterAutocomplete';
 import { Theme } from '../../../../components/Theme';
@@ -26,12 +23,12 @@ interface FiltersElementProps {
   searchContext: { entityTypes: string[], elementId?: string[] };
   handleChangeKeyword: (event: React.SyntheticEvent) => void;
   noDirectFilters?: boolean;
-  setInputValues: Dispatch<Record<string, string | Date>>;
-  inputValues: Record<string, string | Date>;
+  setInputValues: (value: { key: string, values: (string | Date)[], operator?: string }[]) => void;
+  inputValues: { key: string, values: (string | Date)[], operator?: string }[];
   defaultHandleAddFilter: (
     k: string,
     id: string,
-    value: Record<string, unknown> | string,
+    operator?: string,
     event?: React.SyntheticEvent
   ) => void;
   availableEntityTypes?: string[];
@@ -57,6 +54,15 @@ const FiltersElement: FunctionComponent<FiltersElementProps> = ({
 }) => {
   const { t } = useFormatter();
   const classes = useStyles();
+  const displayedFilters = availableFilterKeys
+    .filter((n) => noDirectFilters || !directFilters.includes(n))
+    .map((key) => {
+      if (dateFilters.includes(key)) {
+        return [{ key, operator: 'gt' }, { key, operator: 'lt' }];
+      }
+      return { key, operator: undefined };
+    })
+    .flat();
   return (
     <div>
       <Grid container={true} spacing={2}>
@@ -72,18 +78,17 @@ const FiltersElement: FunctionComponent<FiltersElementProps> = ({
             />
           </Grid>
         )}
-        {availableFilterKeys
-          .filter((n) => noDirectFilters || !directFilters.includes(n))
-          .map((filterKey) => {
-            if (
-              filterKey.endsWith('start_date')
-              || filterKey.endsWith('end_date')
-            ) {
+        {displayedFilters
+          .map((filter) => {
+            const filterKey = filter.key;
+            if (dateFilters.includes(filterKey)) {
+              console.log('inputValues in FiltersElement', inputValues);
               return (
                 <Grid key={filterKey} item={true} xs={6}>
                   <FilterDate
                     defaultHandleAddFilter={defaultHandleAddFilter}
                     filterKey={filterKey}
+                    operator={filter.operator}
                     inputValues={inputValues}
                     setInputValues={setInputValues}
                   />

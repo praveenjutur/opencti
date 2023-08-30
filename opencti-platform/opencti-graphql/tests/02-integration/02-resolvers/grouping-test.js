@@ -12,7 +12,7 @@ const LIST_QUERY = gql`
     $after: ID
     $orderBy: GroupingsOrdering
     $orderMode: OrderingMode
-    $filters: [GroupingsFiltering!]
+    $filters: GroupingBaseFilterObject
     $filterMode: FilterMode
     $search: String
   ) {

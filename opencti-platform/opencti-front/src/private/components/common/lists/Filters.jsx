@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as R from 'ramda';
 import { useNavigate } from 'react-router-dom-v5-compat';
 import {
-  FiltersVariant,
+  FiltersVariant, findFilterFromKey,
   isUniqFilter,
 } from '../../../../utils/filters/filtersUtils';
 import FiltersElement from './FiltersElement';
@@ -29,8 +29,8 @@ const Filters = ({
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [filters, setFilters] = useState({});
-  const [inputValues, setInputValues] = useState({});
+  const [filters, setFilters] = useState({ mode: 'and', filter: [] });
+  const [inputValues, setInputValues] = useState<[{ key: string, values: [string | Date], operator: string | undefined }]>([]);
   const [keyword, setKeyword] = useState('');
 
   const handleOpenFilters = (event) => {
@@ -42,23 +42,35 @@ const Filters = ({
     setAnchorEl(null);
   };
   const defaultHandleAddFilter = handleAddFilter
-    || ((key, id, value, event = null) => {
+    || ((key, id, operator = null, event = null) => {
       if (event) {
         event.stopPropagation();
         event.preventDefault();
       }
-      if ((filters[key] ?? []).length > 0) {
-        setFilters((c) => ({
-          ...c,
-          [key]: isUniqFilter(key)
-            ? [{ id, value }]
-            : R.uniqBy(R.prop('id'), [{ id, value }, ...c[key]]),
-        }));
-      } else {
-        setFilters((c) => ({ ...c, [key]: [{ id, value }] }));
-      }
+      const filter = findFilterFromKey(filters, key, operator);
+      const newValues = (isUniqFilter(key) || !filter) ? [id] : R.uniq([...filter?.values ?? [], id]);
+      const newFilterElement = {
+        type: 'filter',
+        key,
+        values: newValues,
+        operator: operator ?? 'eq',
+        mode: 'or',
+      };
+      const newBaseFilters = {
+        mode: filters.mode,
+        filters: filter
+          ? [...filters.filters.filter((f) => f.type === 'filter' && (f.key !== key || (operator && f.operator !== operator))), newFilterElement]
+          : [...filters.filters, newFilterElement],
+      };
+      setFilters(newBaseFilters);
     });
-  const defaultHandleRemoveFilter = handleRemoveFilter || ((key) => setFilters((c) => R.dissoc(key, c)));
+  const defaultHandleRemoveFilter = handleRemoveFilter || ((key, operator = null) => {
+    const newBaseFilters = {
+      mode: filters.mode,
+      filters: filters.filters.filter((f) => f.type === 'filter' && (f.key !== key || (operator && f.operator !== operator))),
+    };
+    setFilters(newBaseFilters);
+  });
   const handleSearch = () => {
     handleCloseFilters();
     const urlParams = { filters: JSON.stringify(filters) };

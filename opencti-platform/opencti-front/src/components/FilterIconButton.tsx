@@ -1,14 +1,14 @@
-import { last, toPairs } from 'ramda';
+import { last } from 'ramda';
 import Chip from '@mui/material/Chip';
 import Tooltip from '@mui/material/Tooltip';
 import React, { FunctionComponent } from 'react';
 import makeStyles from '@mui/styles/makeStyles';
 import { truncate } from '../utils/String';
-import { DataColumns, Filters } from './list_lines';
+import { DataColumns } from './list_lines';
 import { useFormatter } from './i18n';
 import { Theme } from './Theme';
 import FilterIconButtonContentWithRedirectionContainer from './FilterIconButtonContentWithRedirectionContainer';
-import { entityFilters } from '../utils/filters/filtersUtils';
+import { BaseFilterObject, entityFilters, Filter, filterValue } from '../utils/filters/filtersUtils';
 import { TriggerLine_node$data } from '../private/components/profile/triggers/__generated__/TriggerLine_node.graphql';
 
 const useStyles = makeStyles<Theme>((theme) => ({
@@ -92,7 +92,7 @@ const useStyles = makeStyles<Theme>((theme) => ({
 
 interface FilterIconButtonProps {
   availableFilterKeys?: string[];
-  filters: Filters<{ id: string; value: string }[]>;
+  filters: BaseFilterObject;
   handleRemoveFilter?: (key: string) => void;
   classNameNumber?: number;
   styleNumber?: number;
@@ -138,50 +138,58 @@ const FilterIconButton: FunctionComponent<FilterIconButtonProps> = ({
     classFilter = classes.filter3;
     classOperator = classes.operator3;
   }
-
-  const filterPairs = toPairs(filters).filter(
-    (currentFilter) => !availableFilterKeys
-      || availableFilterKeys?.some((k) => currentFilter[0].startsWith(k)),
-  );
-  const lastKey = last(filterPairs)?.[0];
+  const displayedFilters = filters?.filters
+    .filter((currentFilter) => !availableFilterKeys
+      || availableFilterKeys?.some((k) => currentFilter.type === 'filter' && currentFilter.key === k)) as Filter[];
+  const lastKey = last(displayedFilters)?.key;
 
   return (
     <div
       className={finalClassName}
       style={{ width: dataColumns?.filters.width }}
     >
-      {filterPairs.map((currentFilter) => {
-        const filterKey = currentFilter[0];
-        const filterContent = currentFilter[1];
-        const label = `${truncate(t(`filter_${filterKey}`), 20)}`;
-        const negative = filterKey.endsWith('not_eq');
-        const localFilterMode = negative ? t('AND') : t('OR');
-        const values = (
+      {displayedFilters
+        .map((currentFilter) => {
+          console.log('currentFilter', currentFilter);
+          const filterKey = currentFilter.key;
+          const filterValues = currentFilter.values;
+          const negative = currentFilter.operator === 'not_eq';
+          const operatorDisplay = currentFilter.operator !== 'eq' && currentFilter.operator !== 'not_eq';
+          const keyLabel = operatorDisplay
+            ? truncate(t(`filter_${filterKey}_${currentFilter.operator}`), 20)
+            : truncate(t(`filter_${filterKey}`), 20);
+          const label = `${negative ? `${t('NOT')} ` : ''}${keyLabel}`;
+          const localFilterMode = negative ? t('AND') : t('OR');
+          const values = (
           <>
-            {filterContent.map((n) => (
-              <span key={n.value}>
+            {filterValues.map((n) => {
+              const value = filterValue(n);
+              return (
+                <span key={value}>
                 {redirection && entityFilters.includes(filterKey) ? (
                   <FilterIconButtonContentWithRedirectionContainer
-                    filter={n}
+                    id={n}
+                    value={value}
                     resolvedInstanceFilters={resolvedInstanceFilters}
                   />
                 ) : (
                   <span>
-                    {n.value && n.value.length > 0
-                      ? truncate(n.value, 15)
+                    {value && value.length > 0
+                      ? truncate(value, 15)
                       : t('No label')}{' '}
                   </span>
                 )}
-                {last(filterContent)?.value !== n.value && (
-                  <div className={classes.inlineOperator}>
-                    {localFilterMode}
-                  </div>
-                )}{' '}
+                  {last(filterValues) !== n && (
+                    <div className={classes.inlineOperator}>
+                      {localFilterMode}
+                    </div>
+                  )}{' '}
               </span>
-            ))}
+              );
+            })}
           </>
-        );
-        return (
+          );
+          return (
           <span key={filterKey}>
             <Tooltip
               title={
@@ -199,7 +207,7 @@ const FilterIconButton: FunctionComponent<FilterIconButtonProps> = ({
                 }
                 disabled={
                   disabledPossible
-                    ? Object.keys(filters).length === 1
+                    ? filters.filters.length === 1
                     : undefined
                 }
                 onDelete={
@@ -213,8 +221,8 @@ const FilterIconButton: FunctionComponent<FilterIconButtonProps> = ({
               <Chip classes={{ root: classOperator }} label={t('AND')} />
             )}
           </span>
-        );
-      })}
+          );
+        })}
     </div>
   );
 };

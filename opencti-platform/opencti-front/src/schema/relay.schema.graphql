@@ -1861,11 +1861,17 @@ enum ExternalReferencesFilter {
   created
 }
 
+input ExternalReferencesBaseFilterObject {
+  mode: String!
+  filters: [ExternalReferencesFiltering]!
+}
+
 input ExternalReferencesFiltering {
   key: [ExternalReferencesFilter!]!
   values: [String]
   operator: String
-  filterMode: FilterMode
+  mode: FilterMode
+  type: String
 }
 
 type ExternalReferenceConnection {
@@ -2216,11 +2222,17 @@ enum StixDomainObjectsFilter {
   operatingSystem
 }
 
+input StixDomainObjectBaseFilterObject {
+  mode: String!
+  filters: [StixDomainObjectsFiltering]!
+}
+
 input StixDomainObjectsFiltering {
   key: [StixDomainObjectsFilter!]!
   values: [String]
   operator: String
-  filterMode: FilterMode
+  mode: FilterMode
+  type: String
 }
 
 type StixDomainObjectConnection {
@@ -3131,11 +3143,17 @@ enum ReportsFilter {
   creator
 }
 
+input ReportBaseFilterObject {
+  mode: String!
+  filters: [ReportsFiltering]!
+}
+
 input ReportsFiltering {
   key: [ReportsFilter!]!
   values: [String]!
   operator: String
-  filterMode: FilterMode
+  mode: FilterMode
+  type: String!
 }
 
 type ReportConnection {
@@ -8169,7 +8187,7 @@ type Query {
   label(id: String!): Label
   labels(first: Int, after: ID, orderBy: LabelsOrdering, orderMode: OrderingMode, filters: [LabelsFiltering], filterMode: FilterMode, search: String): LabelConnection
   externalReference(id: String!): ExternalReference
-  externalReferences(first: Int, after: ID, orderBy: ExternalReferencesOrdering, orderMode: OrderingMode, filters: [ExternalReferencesFiltering], filterMode: FilterMode, search: String): ExternalReferenceConnection
+  externalReferences(first: Int, after: ID, orderBy: ExternalReferencesOrdering, orderMode: OrderingMode, filters: ExternalReferencesBaseFilterObject, filterMode: FilterMode, search: String): ExternalReferenceConnection
   killChainPhase(id: String!): KillChainPhase
   killChainPhases(first: Int, after: ID, orderBy: KillChainPhasesOrdering, orderMode: OrderingMode, filters: [KillChainPhasesFiltering], filterMode: FilterMode, search: String): KillChainPhaseConnection
   stixCoreObjectRaw(id: String!): String
@@ -8184,12 +8202,12 @@ type Query {
   stixCoreObjectsDistribution(objectId: [String], relationship_type: [String], toTypes: [String], elementWithTargetTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
   stixCoreObjectsMultiDistribution(field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, distributionParameters: StixCoreObjectsDistributionParameters): [MultiDistribution]
   stixDomainObject(id: String!): StixDomainObject
-  stixDomainObjects(first: Int, after: ID, types: [String], orderBy: StixDomainObjectsOrdering, orderMode: OrderingMode, filters: [StixDomainObjectsFiltering], filterMode: FilterMode, search: String, relationship_type: [String], elementId: String): StixDomainObjectConnection
+  stixDomainObjects(first: Int, after: ID, types: [String], orderBy: StixDomainObjectsOrdering, orderMode: OrderingMode, filters: StixDomainObjectBaseFilterObject, filterMode: FilterMode, search: String, relationship_type: [String], elementId: String): StixDomainObjectConnection
   bookmarks(first: Int, after: ID, types: [String]): StixDomainObjectConnection
   stixDomainObjectsExportFiles(first: Int, type: String!): FileConnection
-  stixDomainObjectsTimeSeries(authorId: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime, interval: String!, types: [String], onlyInferred: Boolean, filters: [StixDomainObjectsFiltering], filterMode: FilterMode, search: String): [TimeSeries]
-  stixDomainObjectsNumber(types: [String], endDate: DateTime, onlyInferred: Boolean, filters: [StixDomainObjectsFiltering], filterMode: FilterMode, search: String): Number
-  stixDomainObjectsDistribution(objectId: [String], relationship_type: [String], toTypes: [String], elementWithTargetTypes: [String], field: String!, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixDomainObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixDomainObjectsTimeSeries(authorId: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime, interval: String!, types: [String], onlyInferred: Boolean, filters: StixDomainObjectBaseFilterObject, filterMode: FilterMode, search: String): [TimeSeries]
+  stixDomainObjectsNumber(types: [String], endDate: DateTime, onlyInferred: Boolean, filters: StixDomainObjectBaseFilterObject, filterMode: FilterMode, search: String): Number
+  stixDomainObjectsDistribution(objectId: [String], relationship_type: [String], toTypes: [String], elementWithTargetTypes: [String], field: String!, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: StixDomainObjectBaseFilterObject, filterMode: FilterMode, search: String): [Distribution]
   attackPattern(id: String): AttackPattern
   attackPatterns(first: Int, after: ID, orderBy: AttackPatternsOrdering, orderMode: OrderingMode, filters: [AttackPatternsFiltering], filterMode: FilterMode, search: String, toStix: Boolean): AttackPatternConnection
   campaign(id: String): Campaign
@@ -8218,10 +8236,10 @@ type Query {
   opinionContainsStixObjectOrStixRelationship(id: String!, stixObjectOrStixRelationshipId: String!): Boolean
   myOpinion(id: String!): Opinion
   report(id: String): Report
-  reports(first: Int, after: ID, orderBy: ReportsOrdering, orderMode: OrderingMode, filters: [ReportsFiltering], filterMode: FilterMode, search: String, toStix: Boolean): ReportConnection
-  reportsTimeSeries(objectId: String, authorId: String, reportType: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime!, interval: String!, filters: [ReportsFiltering], filterMode: FilterMode, search: String): [TimeSeries]
-  reportsNumber(reportType: String, objectId: String, authorId: String, endDate: DateTime, filters: [ReportsFiltering], filterMode: FilterMode, search: String): Number
-  reportsDistribution(objectId: String, authorId: String, field: String!, operation: StatsOperation!, limit: Int, order: String, startDate: DateTime, endDate: DateTime, dateAttribute: String, filters: [ReportsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  reports(first: Int, after: ID, orderBy: ReportsOrdering, orderMode: OrderingMode, filters: ReportBaseFilterObject, filterMode: FilterMode, search: String, toStix: Boolean): ReportConnection
+  reportsTimeSeries(objectId: String, authorId: String, reportType: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime!, interval: String!, filters: ReportBaseFilterObject, filterMode: FilterMode, search: String): [TimeSeries]
+  reportsNumber(reportType: String, objectId: String, authorId: String, endDate: DateTime, filters: ReportBaseFilterObject, filterMode: FilterMode, search: String): Number
+  reportsDistribution(objectId: String, authorId: String, field: String!, operation: StatsOperation!, limit: Int, order: String, startDate: DateTime, endDate: DateTime, dateAttribute: String, filters: ReportBaseFilterObject, filterMode: FilterMode, search: String): [Distribution]
   reportContainsStixObjectOrStixRelationship(id: String!, stixObjectOrStixRelationshipId: String!): Boolean
   courseOfAction(id: String): CourseOfAction
   coursesOfAction(first: Int, after: ID, orderBy: CoursesOfActionOrdering, orderMode: OrderingMode, filters: [CoursesOfActionFiltering], filterMode: FilterMode, search: String, toStix: Boolean): CourseOfActionConnection
@@ -8305,10 +8323,10 @@ type Query {
   event(id: String!): Event
   events(first: Int, after: ID, orderBy: EventsOrdering, orderMode: OrderingMode, filters: [EventsFiltering!], filterMode: FilterMode, search: String): EventConnection
   grouping(id: String!): Grouping
-  groupings(first: Int, after: ID, orderBy: GroupingsOrdering, orderMode: OrderingMode, filters: [GroupingsFiltering!], filterMode: FilterMode, search: String, toStix: Boolean): GroupingConnection
-  groupingsTimeSeries(objectId: String, authorId: String, groupingType: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime!, interval: String!, filters: [GroupingsFiltering!], filterMode: FilterMode, search: String): [TimeSeries]
-  groupingsNumber(groupingContext: String, objectId: String, authorId: String, endDate: DateTime, filters: [GroupingsFiltering!], filterMode: FilterMode): Number
-  groupingsDistribution(objectId: String, authorId: String, field: String!, operation: StatsOperation!, limit: Int, order: String, startDate: DateTime, endDate: DateTime, dateAttribute: String, filters: [GroupingsFiltering!], filterMode: FilterMode, search: String): [Distribution]
+  groupings(first: Int, after: ID, orderBy: GroupingsOrdering, orderMode: OrderingMode, filters: GroupingBaseFilterObject, filterMode: FilterMode, search: String, toStix: Boolean): GroupingConnection
+  groupingsTimeSeries(objectId: String, authorId: String, groupingType: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime!, interval: String!, filters: GroupingBaseFilterObject, filterMode: FilterMode, search: String): [TimeSeries]
+  groupingsNumber(groupingContext: String, objectId: String, authorId: String, endDate: DateTime, filters: GroupingBaseFilterObject, filterMode: FilterMode): Number
+  groupingsDistribution(objectId: String, authorId: String, field: String!, operation: StatsOperation!, limit: Int, order: String, startDate: DateTime, endDate: DateTime, dateAttribute: String, filters: GroupingBaseFilterObject, filterMode: FilterMode, search: String): [Distribution]
   groupingContainsStixObjectOrStixRelationship(id: String!, stixObjectOrStixRelationshipId: String!): Boolean
   narrative(id: String!): Narrative
   narratives(first: Int, after: ID, orderBy: NarrativesOrdering, orderMode: OrderingMode, filters: [NarrativesFiltering!], filterMode: FilterMode, search: String): NarrativeConnection
@@ -8356,7 +8374,7 @@ type Query {
   workspace(id: String!): Workspace
   workspaces(first: Int, after: ID, orderBy: WorkspacesOrdering, orderMode: OrderingMode, filters: [WorkspacesFiltering!], filterMode: FilterMode, includeAuthorities: Boolean, search: String): WorkspaceConnection
   malwareAnalysis(id: String!): MalwareAnalysis
-  malwareAnalyses(first: Int, after: ID, orderBy: MalwareAnalysesOrdering, orderMode: OrderingMode, filters: [MalwareAnalysesFiltering!], filterMode: FilterMode, search: String): MalwareAnalysisConnection
+  malwareAnalyses(first: Int, after: ID, orderBy: MalwareAnalysesOrdering, orderMode: OrderingMode, filters: MalwareAnalysesBaseFilterObject, filterMode: FilterMode, search: String): MalwareAnalysisConnection
   notificationNotifiers: [Notifier!]!
   notifier(id: String!): Notifier
   notifierTest(input: NotifierTestInput!): String
@@ -8895,7 +8913,7 @@ type Mutation {
   stixCoreObjectsExportPush(type: String!, file: Upload!, listFilters: String): Boolean
   stixDomainObjectAdd(input: StixDomainObjectAddInput!): StixDomainObject
   stixDomainObjectEdit(id: ID!): StixDomainObjectEditMutations
-  stixDomainObjectsExportAsk(type: String!, format: String!, exportType: String!, maxMarkingDefinition: String, context: String, search: String, relationship_type: [String], elementId: String, orderBy: StixDomainObjectsOrdering, orderMode: OrderingMode, filters: [StixDomainObjectsFiltering], filterMode: FilterMode, selectedIds: [String]): [File!]
+  stixDomainObjectsExportAsk(type: String!, format: String!, exportType: String!, maxMarkingDefinition: String, context: String, search: String, relationship_type: [String], elementId: String, orderBy: StixDomainObjectsOrdering, orderMode: OrderingMode, filters: StixDomainObjectBaseFilterObject, filterMode: FilterMode, selectedIds: [String]): [File!]
   stixDomainObjectsDelete(id: [ID]!): [ID]!
   stixDomainObjectsExportPush(type: String!, file: Upload!, listFilters: String): Boolean
   attackPatternAdd(input: AttackPatternAddInput!): AttackPattern
@@ -9554,11 +9572,17 @@ enum GroupingsFilter {
   creator
 }
 
+input GroupingBaseFilterObject {
+  mode: String!
+  filters: [GroupingsFiltering]!
+}
+
 input GroupingsFiltering {
   key: [GroupingsFilter!]!
   values: [String]!
   operator: String
-  filterMode: FilterMode
+  mode: FilterMode
+  type: String!
 }
 
 type GroupingConnection {
@@ -11520,11 +11544,17 @@ enum MalwareAnalysesFilter {
   installedSoftware
 }
 
+input MalwareAnalysesBaseFilterObject {
+  mode: String!
+  filters: [MalwareAnalysesFiltering]!
+}
+
 input MalwareAnalysesFiltering {
   key: [MalwareAnalysesFilter!]!
   values: [String]
   operator: String
-  filterMode: FilterMode
+  mode: FilterMode
+  type: String
 }
 
 type MalwareAnalysisConnection {

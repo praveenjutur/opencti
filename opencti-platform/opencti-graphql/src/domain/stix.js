@@ -173,15 +173,12 @@ export const askEntityExport = async (context, user, format, entity, type = 'sim
   return worksForExport;
 };
 
-export const exportTransformFilters = (listFilters, filterOptions, orderOptions) => {
+export const exportTransformFilters = (filteringArgs, filterOptions, orderOptions) => {
   const filtersInversed = invertObj(filterOptions);
   const orderingInversed = invertObj(orderOptions);
-  return {
-    ...listFilters,
-    orderBy: listFilters.orderBy in orderingInversed
-      ? orderingInversed[listFilters.orderBy]
-      : listFilters.orderBy,
-    filters: (listFilters.filters ?? []).map(
+  const newFilters = {
+    mode: filteringArgs.filters.mode ?? 'and',
+    filters: (filteringArgs.filters.filters ?? []).map(
       (n) => {
         const keys = Array.isArray(n.key) ? n.key : [n.key];
         const key = keys.map((k) => (k in filtersInversed ? filtersInversed[k] : k));
@@ -189,9 +186,18 @@ export const exportTransformFilters = (listFilters, filterOptions, orderOptions)
           key,
           values: n.values,
           operator: n.operator ?? 'eq',
+          mode: n.mode ?? 'or',
+          type: 'filter',
         };
       }
     ),
+  };
+  return {
+    ...filteringArgs,
+    orderBy: filteringArgs.orderBy in orderingInversed
+      ? orderingInversed[filteringArgs.orderBy]
+      : filteringArgs.orderBy,
+    filters: newFilters,
   };
 };
 

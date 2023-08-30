@@ -13,7 +13,7 @@ const LIST_QUERY = gql`
     $after: ID
     $orderBy: ReportsOrdering
     $orderMode: OrderingMode
-    $filters: [ReportsFiltering]
+    $filters: ReportBaseFilterObject
     $filterMode: FilterMode
     $search: String
   ) {

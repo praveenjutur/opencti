@@ -256,7 +256,7 @@ const useSearchEntities = ({
   availableRelationshipTypes?: string[];
   searchContext: { entityTypes: string[], elementId?: string[] };
   searchScope: Record<string, string[]>;
-  setInputValues: Dispatch<Record<string, string | Date>>;
+  setInputValues: (value: { key: string, values: (string | Date)[], operator?: string }[]) => void;
   allEntityTypes?: boolean;
 }) => {
   const [entities, setEntities] = useState<Record<string, EntityValue[]>>({});
@@ -295,10 +295,11 @@ const useSearchEntities = ({
     if (!event) {
       return;
     }
-    setInputValues(((c: Record<string, string | Date>) => ({
-      ...c,
-      [filterKey]: event.target.value,
-    })) as unknown as Record<string, string | Date>);
+    const newInputValue = { key: filterKey, values: [event.target.value] };
+    setInputValues(((c: { key: string, values: (string | Date)[], operator?: string }[]) => ([
+      ...c.filter((f) => f.key !== filterKey),
+      newInputValue,
+    ])) as unknown as { key: string, values: (string | Date)[], operator?: string }[]);
     switch (filterKey) {
       case 'toSightingId':
         fetchQuery(identitySearchIdentitiesSearchQuery, {

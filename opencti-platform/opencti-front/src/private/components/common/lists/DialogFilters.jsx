@@ -44,7 +44,7 @@ const DialogFilters = ({
       >
         <DialogTitle>{t('Advanced search')}</DialogTitle>
         <DialogContent style={{ paddingTop: 10 }}>
-          {!R.isEmpty(filters) && (
+          {!R.isEmpty(filters.filters) && (
             <FilterIconButton
               filters={filters}
               handleRemoveFilter={defaultHandleRemoveFilter}

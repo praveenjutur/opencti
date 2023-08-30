@@ -17,6 +17,7 @@ import {
 } from './groupings/__generated__/GroupingsLinesPaginationQuery.graphql';
 import { GroupingLine_node$data } from './groupings/__generated__/GroupingLine_node.graphql';
 import { GroupingLineDummy } from './groupings/GroupingLine';
+import { filtersWithEntityType } from '../../../utils/filters/filtersUtils';
 
 const LOCAL_STORAGE_KEY = 'view-groupings';
 
@@ -42,6 +43,7 @@ const Groupings: FunctionComponent<GroupingsProps> = ({
       values: [authorId],
       operator: 'eq',
       filterMode: 'or',
+      type: 'filter' as const,
     });
   }
   if (objectId) {
@@ -50,6 +52,7 @@ const Groupings: FunctionComponent<GroupingsProps> = ({
       values: [objectId],
       operator: 'eq',
       filterMode: 'or',
+      type: 'filter' as const,
     });
   }
   const {
@@ -60,7 +63,7 @@ const Groupings: FunctionComponent<GroupingsProps> = ({
     LOCAL_STORAGE_KEY,
     {
       numberOfElements: { number: 0, symbol: '', original: 0 },
-      filters: {},
+      filters: { mode: 'and', filters: [] },
       searchTerm: '',
       sortBy: 'created',
       orderAsc: false,
@@ -101,11 +104,7 @@ const Groupings: FunctionComponent<GroupingsProps> = ({
       numberOfSelectedElements = (numberOfElements?.original ?? 0)
         - Object.keys(deSelectedElements || {}).length;
     }
-    let finalFilters = filters;
-    finalFilters = {
-      ...finalFilters,
-      entity_type: [{ id: 'Grouping', value: 'Grouping' }],
-    };
+    const toolBarFilters = filtersWithEntityType(filters, 'Grouping');
     const isRuntimeSort = isRuntimeFieldEnable() ?? false;
     const dataColumns = {
       name: {
@@ -180,8 +179,7 @@ const Groupings: FunctionComponent<GroupingsProps> = ({
             'source_reliability',
             'confidence',
             'creator',
-            'created_start_date',
-            'created_end_date',
+            'created',
           ]}
         >
           {queryRef && (
@@ -216,7 +214,7 @@ const Groupings: FunctionComponent<GroupingsProps> = ({
           numberOfSelectedElements={numberOfSelectedElements}
           selectAll={selectAll}
           search={searchTerm}
-          filters={finalFilters}
+          filters={toolBarFilters}
           handleClearSelectedElements={handleClearSelectedElements}
           type="Grouping"
         />

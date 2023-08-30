@@ -11,12 +11,12 @@ import {
   ReportsLinesPaginationQuery,
   ReportsLinesPaginationQuery$variables,
 } from './reports/__generated__/ReportsLinesPaginationQuery.graphql';
-import { Filters } from '../../../components/list_lines';
 import { ReportLine_node$data } from './reports/__generated__/ReportLine_node.graphql';
 import useEntityToggle from '../../../utils/hooks/useEntityToggle';
 import useQueryLoading from '../../../utils/hooks/useQueryLoading';
 import { ReportLineDummy } from './reports/ReportLine';
 import ExportContextProvider from '../../../utils/ExportContextProvider';
+import { filtersWithEntityType } from '../../../utils/filters/filtersUtils';
 
 const LOCAL_STORAGE_KEY = 'view-reports';
 
@@ -41,6 +41,7 @@ const Reports: FunctionComponent<ReportsProps> = ({
       values: [authorId],
       operator: 'eq',
       filterMode: 'or',
+      type: 'filter' as const,
     });
   }
   if (objectId) {
@@ -49,6 +50,7 @@ const Reports: FunctionComponent<ReportsProps> = ({
       values: [objectId],
       operator: 'eq',
       filterMode: 'or',
+      type: 'filter' as const,
     });
   }
   const {
@@ -58,7 +60,7 @@ const Reports: FunctionComponent<ReportsProps> = ({
   } = usePaginationLocalStorage<ReportsLinesPaginationQuery$variables>(
     LOCAL_STORAGE_KEY,
     {
-      filters: {} as Filters,
+      filters: { mode: 'and', filters: [] },
       searchTerm: '',
       sortBy: 'published',
       orderAsc: false,
@@ -96,11 +98,7 @@ const Reports: FunctionComponent<ReportsProps> = ({
     } else if (authorId) {
       exportContext = `of-entity-${authorId}`;
     }
-    let renderFilters = filters;
-    renderFilters = {
-      ...renderFilters,
-      entity_type: [{ id: 'Report', value: 'Report' }],
-    };
+    const toolBarFilters = filtersWithEntityType(filters, 'Report');
     const isRuntimeSort = isRuntimeFieldEnable() ?? false;
     const dataColumns = {
       name: {
@@ -180,10 +178,8 @@ const Reports: FunctionComponent<ReportsProps> = ({
             'participant',
             'report_types',
             'creator',
-            'published_start_date',
-            'published_end_date',
-            'created_at_start_date',
-            'created_at_end_date',
+            'published',
+            'created_at',
             'objectContains',
           ]}
         >
@@ -217,7 +213,7 @@ const Reports: FunctionComponent<ReportsProps> = ({
                 numberOfSelectedElements={numberOfSelectedElements}
                 selectAll={selectAll}
                 search={searchTerm}
-                filters={renderFilters}
+                filters={toolBarFilters}
                 handleClearSelectedElements={handleClearSelectedElements}
                 type="Report"
               />

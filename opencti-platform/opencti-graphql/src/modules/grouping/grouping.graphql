@@ -170,11 +170,16 @@ enum GroupingsFilter {
     revoked
     creator
 }
+input GroupingBaseFilterObject {
+    mode: String!
+    filters: [GroupingsFiltering]!
+}
 input GroupingsFiltering {
     key: [GroupingsFilter!]!
     values: [String]!
     operator: String
-    filterMode: FilterMode
+    mode: FilterMode
+    type: String! # type === 'filter'
 }
 
 # Relay connections
@@ -195,7 +200,7 @@ type Query {
         after: ID
         orderBy: GroupingsOrdering
         orderMode: OrderingMode
-        filters: [GroupingsFiltering!]
+        filters: GroupingBaseFilterObject
         filterMode: FilterMode
         search: String
         toStix: Boolean
@@ -209,7 +214,7 @@ type Query {
         startDate: DateTime!
         endDate: DateTime!
         interval: String!
-        filters: [GroupingsFiltering!]
+        filters: GroupingBaseFilterObject
         filterMode: FilterMode
         search: String
     ): [TimeSeries] @auth(for: [KNOWLEDGE, EXPLORE])
@@ -218,7 +223,7 @@ type Query {
         objectId: String
         authorId: String
         endDate: DateTime
-        filters: [GroupingsFiltering!]
+        filters: GroupingBaseFilterObject
         filterMode: FilterMode
     ): Number @auth(for: [KNOWLEDGE, EXPLORE])
     groupingsDistribution(
@@ -231,7 +236,7 @@ type Query {
         startDate: DateTime
         endDate: DateTime
         dateAttribute: String
-        filters: [GroupingsFiltering!]
+        filters: GroupingBaseFilterObject
         filterMode: FilterMode
         search: String
     ): [Distribution] @auth(for: [KNOWLEDGE, EXPLORE])

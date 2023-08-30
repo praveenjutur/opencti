@@ -254,13 +254,17 @@ class ListLines extends Component {
             )}
             {(!availableFilterKeys || availableFilterKeys.length === 0)
               && !noHeaders
-              && !noFilters && <div style={{ height: 38 }}> &nbsp; </div>}
-            <FilterIconButton
-              availableFilterKeys={availableFilterKeys}
-              filters={filters}
-              handleRemoveFilter={handleRemoveFilter}
-              redirection
-            />
+              && !noFilters
+              && <div style={{ height: 38 }}> &nbsp; </div>
+            }
+            {filters && filters.filters.length > 0
+              && <FilterIconButton
+                availableFilterKeys={availableFilterKeys}
+                filters={filters}
+                handleRemoveFilter={handleRemoveFilter}
+                redirection
+              />
+            }
           </div>
         )}
         <div className={classes.views}>

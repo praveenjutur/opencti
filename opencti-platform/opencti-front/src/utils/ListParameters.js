@@ -28,17 +28,22 @@ const buildParamsFromHistory = (params) => {
     dissoc('mentionKeyword'),
   )(params);
   if (params.filters) {
-    urlParams = assoc('filters', JSON.stringify(params.filters), urlParams);
+    urlParams = {
+      ...urlParams,
+      filters: JSON.stringify(params.filters),
+    };
   }
   if (params.timeLineFilters) {
-    urlParams = assoc(
-      'timeLineFilters',
-      JSON.stringify(params.timeLineFilters),
-      urlParams,
-    );
+    urlParams = {
+      ...urlParams,
+      timeLineFilters: JSON.stringify(params.timeLineFilters),
+    };
   }
   if (params.zoom) {
-    urlParams = assoc('zoom', JSON.stringify(params.zoom), urlParams);
+    urlParams = {
+      ...urlParams,
+      zoom: JSON.stringify(params.zoom),
+    };
   }
   return new URLSearchParams(urlParams).toString();
 };

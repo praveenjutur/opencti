@@ -7,16 +7,17 @@ import { useFormatter } from './i18n';
 import { TriggerLine_node$data } from '../private/components/profile/triggers/__generated__/TriggerLine_node.graphql';
 
 interface FilterIconButtonContentWithRedirectionContainerProps {
-  filter: { id: string; value: string };
+  id: string,
+  value: string,
   resolvedInstanceFilters?: TriggerLine_node$data['resolved_instance_filters'];
 }
 
 const FilterIconButtonContentWithRedirectionContainer: FunctionComponent<
 FilterIconButtonContentWithRedirectionContainerProps
-> = ({ filter, resolvedInstanceFilters }) => {
+> = ({ id, value, resolvedInstanceFilters }) => {
   const { t } = useFormatter();
-  const displayedValue = filter.value && filter.value.length > 0
-    ? truncate(filter.value, 15)
+  const displayedValue = value && value.length > 0
+    ? truncate(value, 15)
     : t('No label');
   const redirectionWithResolvedInstances = () => {
     const resolvedInstanceFiltersMap = new Map(
@@ -27,15 +28,15 @@ FilterIconButtonContentWithRedirectionContainerProps
       .map((n) => n.id);
     return (
       <span>
-        {invalidInstanceIds?.includes(filter.id) ? (
+        {invalidInstanceIds?.includes(id) ? (
           <Tooltip title={t('Deleted or restricted entity')}>
             <del>{displayedValue}</del>
           </Tooltip>
         ) : (
-          <Link to={`/dashboard/id/${filter.id}`}>
+          <Link to={`/dashboard/id/${id}`}>
             <span color="primary">
-              {resolvedInstanceFiltersMap.has(filter.id)
-                ? resolvedInstanceFiltersMap.get(filter.id)?.value
+              {resolvedInstanceFiltersMap.has(id)
+                ? resolvedInstanceFiltersMap.get(id)?.value
                 : t('No label')}
             </span>
           </Link>
@@ -46,7 +47,7 @@ FilterIconButtonContentWithRedirectionContainerProps
   const classicalRedirection = () => {
     return (
       <FilterIconButtonContentWithRedirection
-        filterId={filter.id}
+        filterId={id}
         displayedValue={displayedValue}
       />
     );

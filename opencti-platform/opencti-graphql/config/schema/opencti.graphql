@@ -1792,11 +1792,16 @@ enum ExternalReferencesFilter {
   creator
   created
 }
+input ExternalReferencesBaseFilterObject {
+  mode: String!
+  filters: [ExternalReferencesFiltering]!
+}
 input ExternalReferencesFiltering {
   key: [ExternalReferencesFilter!]!
   values: [String]
   operator: String
-  filterMode: FilterMode
+  mode: FilterMode
+  type: String
 }
 type ExternalReferenceConnection {
   pageInfo: PageInfo!
@@ -2202,11 +2207,16 @@ enum StixDomainObjectsFilter {
   result_name
   operatingSystem
 }
+input StixDomainObjectBaseFilterObject {
+  mode: String!
+  filters: [StixDomainObjectsFiltering]!
+}
 input StixDomainObjectsFiltering {
   key: [StixDomainObjectsFilter!]!
   values: [String]
   operator: String
-  filterMode: FilterMode
+  mode: FilterMode
+  type: String
 }
 type StixDomainObjectConnection {
   pageInfo: PageInfo!
@@ -3600,11 +3610,16 @@ enum ReportsFilter {
   revoked
   creator
 }
+input ReportBaseFilterObject {
+  mode: String!
+  filters: [ReportsFiltering]!
+}
 input ReportsFiltering {
   key: [ReportsFilter!]!
   values: [String]!
   operator: String
-  filterMode: FilterMode
+  mode: FilterMode
+  type: String! # type === 'filter'
 }
 type ReportConnection {
   pageInfo: PageInfo!
@@ -12150,7 +12165,7 @@ type Query {
     after: ID
     orderBy: ExternalReferencesOrdering
     orderMode: OrderingMode
-    filters: [ExternalReferencesFiltering]
+    filters: ExternalReferencesBaseFilterObject
     filterMode: FilterMode
     search: String
   ): ExternalReferenceConnection @auth(for: [KNOWLEDGE])
@@ -12269,7 +12284,7 @@ type Query {
     types: [String]
     orderBy: StixDomainObjectsOrdering
     orderMode: OrderingMode
-    filters: [StixDomainObjectsFiltering]
+    filters: StixDomainObjectBaseFilterObject
     filterMode: FilterMode
     search: String
     relationship_type: [String]
@@ -12286,7 +12301,7 @@ type Query {
     interval: String!
     types: [String]
     onlyInferred: Boolean
-    filters: [StixDomainObjectsFiltering]
+    filters: StixDomainObjectBaseFilterObject
     filterMode: FilterMode
     search: String
   ): [TimeSeries] @auth(for: [KNOWLEDGE, EXPLORE])
@@ -12294,7 +12309,7 @@ type Query {
     types: [String]
     endDate: DateTime
     onlyInferred: Boolean
-    filters: [StixDomainObjectsFiltering]
+    filters: StixDomainObjectBaseFilterObject
     filterMode: FilterMode
     search: String): Number @auth(for: [KNOWLEDGE, EXPLORE])
   stixDomainObjectsDistribution(
@@ -12308,7 +12323,7 @@ type Query {
     limit: Int
     order: String
     types: [String]
-    filters: [StixDomainObjectsFiltering]
+    filters: StixDomainObjectBaseFilterObject
     filterMode: FilterMode
     search: String
   ): [Distribution] @auth(for: [KNOWLEDGE, EXPLORE])
@@ -12462,7 +12477,7 @@ type Query {
     after: ID
     orderBy: ReportsOrdering
     orderMode: OrderingMode
-    filters: [ReportsFiltering]
+    filters: ReportBaseFilterObject
     filterMode: FilterMode
     search: String
     toStix: Boolean
@@ -12476,7 +12491,7 @@ type Query {
     startDate: DateTime!
     endDate: DateTime!
     interval: String!
-    filters: [ReportsFiltering]
+    filters: ReportBaseFilterObject
     filterMode: FilterMode
     search: String
   ): [TimeSeries] @auth(for: [KNOWLEDGE, EXPLORE])
@@ -12485,7 +12500,7 @@ type Query {
     objectId: String
     authorId: String
     endDate: DateTime
-    filters: [ReportsFiltering]
+    filters: ReportBaseFilterObject
     filterMode: FilterMode
     search: String
   ): Number @auth(for: [KNOWLEDGE, EXPLORE])
@@ -12499,7 +12514,7 @@ type Query {
     startDate: DateTime
     endDate: DateTime
     dateAttribute: String
-    filters: [ReportsFiltering]
+    filters: ReportBaseFilterObject
     filterMode: FilterMode
     search: String
   ): [Distribution] @auth(for: [KNOWLEDGE, EXPLORE])
@@ -13728,7 +13743,7 @@ type Mutation {
     elementId: String
     orderBy: StixDomainObjectsOrdering
     orderMode: OrderingMode
-    filters: [StixDomainObjectsFiltering]
+    filters: StixDomainObjectBaseFilterObject
     filterMode: FilterMode
     selectedIds: [String]
   ): [File!] @auth(for: [KNOWLEDGE_KNGETEXPORT_KNASKEXPORT])
