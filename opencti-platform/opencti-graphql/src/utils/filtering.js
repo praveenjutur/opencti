@@ -98,49 +98,47 @@ export const resolvedFiltersMapForUser = async (context, user, filters) => {
   return resolveUserMap;
 };
 
-export const convertFiltersFrontendFormat = async (context, user, filters) => {
-  // Grab all values that are internal_id that needs to be converted to standard_ids
-  const resolvedMap = await getEntitiesMapFromCache(context, SYSTEM_USER, ENTITY_TYPE_RESOLVED_FILTERS);
-  // Remap the format of specific keys
+const convertFiltersFrontendFormatContent = async (context, user, baseFiltersObject, resolvedMap) => {
   const adaptedFilters = [];
-  const filterEntries = Object.entries(filters);
-  for (let index = 0; index < filterEntries.length; index += 1) {
-    const [key, rawValues] = filterEntries[index];
-    const values = [];
-    for (let vIndex = 0; vIndex < rawValues.length; vIndex += 1) {
-      const v = rawValues[vIndex];
-      if (resolvedMap.has(v.id)) {
-        const stixInstance = resolvedMap.get(v.id);
-        const isUserHasAccessToElement = await isUserCanAccessStixElement(context, user, stixInstance);
-        const value = extractStixRepresentative(stixInstance);
-        // add id if user has access to the element
-        values.push({ id: isUserHasAccessToElement ? v.id : '<invalid access>', value });
-        // add standard id if user has access to the element
-        values.push({ id: isUserHasAccessToElement ? stixInstance.id : '<invalid access>', value });
-      } else {
-        values.push(v);
+  for (let index = 0; index < baseFiltersObject.filters.length; index += 1) {
+    const filter = baseFiltersObject.filters[index];
+    if (filter.type === 'filter') {
+      // Remap the format of specific keys
+      const rawValues = filter.values;
+      const values = [];
+      for (let vIndex = 0; vIndex < rawValues.length; vIndex += 1) {
+        const id = rawValues[vIndex];
+        if (resolvedMap.has(id)) {
+          const stixInstance = resolvedMap.get(id);
+          const isUserHasAccessToElement = await isUserCanAccessStixElement(context, user, stixInstance);
+          const value = extractStixRepresentative(stixInstance);
+          // add id if user has access to the element
+          values.push({ id: isUserHasAccessToElement ? id : '<invalid access>', value });
+          // add standard id if user has access to the element
+          values.push({ id: isUserHasAccessToElement ? stixInstance.id : '<invalid access>', value });
+        } else {
+          values.push({ id, value: 'deprecated' }); // TODO
+        }
       }
-    }
-    if (key.endsWith('start_date') || key.endsWith('_gt')) {
-      const workingKey = key.replace('_start_date', '').replace('_gt', '');
-      adaptedFilters.push({ key: workingKey, operator: 'gt', values });
-    } else if (key.endsWith('end_date') || key.endsWith('_lt')) {
-      const workingKey = key.replace('_end_date', '').replace('_lt', '');
-      adaptedFilters.push({ key: workingKey, operator: 'lt', values });
-    } else if (key.endsWith('_gte')) {
-      const workingKey = key.replace('_gte', '');
-      adaptedFilters.push({ key: workingKey, operator: 'gte', values });
-    } else if (key.endsWith('_lte')) {
-      const workingKey = key.replace('_lte', '');
-      adaptedFilters.push({ key: workingKey, operator: 'lte', values });
-    } else if (key.endsWith('_not_eq')) {
-      const workingKey = key.replace('_not_eq', '');
-      adaptedFilters.push({ key: workingKey, operator: 'not_eq', values, filterMode: 'and' });
+      adaptedFilters.push({ ...filter, values });
     } else {
-      adaptedFilters.push({ key, operator: 'eq', values, filterMode: 'or' });
+      const adaptedFilterGroup = await convertFiltersFrontendFormatContent(context, user, filter, resolvedMap);
+      adaptedFilters.push(adaptedFilterGroup);
     }
   }
-  return adaptedFilters;
+  return (baseFiltersObject
+    ? {
+      mode: baseFiltersObject.mode,
+      filters: adaptedFilters,
+    }
+    : undefined);
+};
+
+export const convertFiltersFrontendFormat = async (context, user, baseFiltersObject) => {
+  // Grab all values that are internal_id that needs to be converted to standard_ids
+  const resolvedMap = await getEntitiesMapFromCache(context, SYSTEM_USER, ENTITY_TYPE_RESOLVED_FILTERS);
+  const adaptedBaseFiltersObject = await convertFiltersFrontendFormatContent(context, user, baseFiltersObject, resolvedMap);
+  return adaptedBaseFiltersObject;
 };
 
 export const convertFiltersToQueryOptions = async (context, user, filters, opts = {}) => {
