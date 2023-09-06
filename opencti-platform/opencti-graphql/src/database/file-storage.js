@@ -121,21 +121,21 @@ export const downloadFile = async (context, id) => {
   }
 };
 
-const streamToString = (stream) => {
+const streamToString = (stream, encoding = 'utf8') => {
   return new Promise((resolve, reject) => {
     const chunks = [];
     stream.on('data', (chunk) => chunks.push(chunk));
     stream.on('error', reject);
-    stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+    stream.on('end', () => resolve(Buffer.concat(chunks).toString(encoding)));
   });
 };
 
-export const getFileContent = async (id) => {
+export const getFileContent = async (id, encoding = 'utf8') => {
   const object = await s3Client.send(new s3.GetObjectCommand({
     Bucket: bucketName,
     Key: id
   }));
-  return streamToString(object.Body);
+  return streamToString(object.Body, encoding);
 };
 
 export const storeFileConverter = (user, file) => {

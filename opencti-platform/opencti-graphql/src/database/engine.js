@@ -9,6 +9,7 @@ import {
   buildPagination,
   cursorToOffset,
   ES_INDEX_PREFIX,
+  INDEX_FILES,
   isInferredIndex,
   isNotEmptyField,
   offsetToCursor,
@@ -698,6 +699,24 @@ const elCreateIndexTemplate = async (index) => {
     throw DatabaseError('[SEARCH] Error creating index template', { error: e });
   });
 };
+export const elConfigureAttachmentProcessor = async () => {
+  await engine.ingest.put_pipeline({
+    id: 'attachment',
+    body: {
+      description: 'Extract attachment information',
+      processors: [
+        {
+          attachment: {
+            field: 'file_data',
+            remove_binary: true
+          }
+        }
+      ]
+    }
+  }).catch((e) => {
+    throw DatabaseError('[SEARCH] Error configure attachment processor', { error: e });
+  });
+};
 export const elCreateIndices = async (indexesToCreate = WRITE_PLATFORM_INDICES) => {
   await elCreateCoreSettings();
   await elCreateLifecyclePolicy();
@@ -712,6 +731,7 @@ export const elCreateIndices = async (indexesToCreate = WRITE_PLATFORM_INDICES) 
       createdIndices.push(oebp(createdIndex));
     }
   }
+  await elConfigureAttachmentProcessor();
   return createdIndices;
 };
 export const elDeleteIndices = async (indexesToDelete) => {
@@ -1921,6 +1941,25 @@ export const elAttributeValues = async (context, user, field, opts = {}) => {
 };
 // endregion
 
+// index uploaded file
+export const elIndexFile = async (fileContent, documentId = null) => {
+  const indexName = INDEX_FILES;
+  const documentBody = {
+    file_data: fileContent
+  };
+  return engine.update({
+    id: documentId,
+    index: indexName,
+    timeout: BULK_TIMEOUT,
+    refresh: true,
+    pipeline: 'attachment',
+    body: documentBody,
+  }).catch((err) => {
+    throw DatabaseError('[SEARCH] Error updating elastic (update)', { error: err, documentId, body: documentBody });
+  });
+};
+// end index uploaded file
+
 export const elBulk = async (args) => {
   return elRawBulk(args).then((data) => {
     if (data.errors) {
@@ -1992,6 +2031,16 @@ export const elReplace = (indexName, documentId, documentBody) => {
   const source = R.join(';', rawSources);
   return elUpdate(indexName, documentId, {
     script: { source, params: doc },
+  });
+};
+export const elDelete = (indexName, documentId) => {
+  return engine.delete({
+    id: documentId,
+    index: indexName,
+    timeout: BULK_TIMEOUT,
+    refresh: true,
+  }).catch((err) => {
+    throw DatabaseError('[SEARCH] Error updating elastic (delete)', { error: err, documentId });
   });
 };
 

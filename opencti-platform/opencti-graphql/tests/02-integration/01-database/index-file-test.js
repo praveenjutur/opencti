@@ -1,21 +1,25 @@
 import { describe, expect, it } from 'vitest';
 import { createReadStream } from 'node:fs';
-import { elLoadById } from '../../../src/database/engine';
+import { elDelete, elIndexFile, elLoadById } from '../../../src/database/engine';
 import { ADMIN_USER, testContext } from '../../utils/testQuery';
-import {getFileContent, upload} from '../../../src/database/file-storage';
+import { deleteFile, getFileContent, upload } from '../../../src/database/file-storage';
+import { INDEX_FILES } from '../../../src/database/utils';
 
 describe('Indexing file test', () => {
   it('should ingest correct', async () => {
-
-    // upload du file dans minio
+    // upload file in minio
     const file = {
       createReadStream: () => createReadStream('./tests/data/test-report-to-index.pdf'),
       filename: 'test-report-to-index.pdf',
       mimetype: 'application/pdf',
     };
     const uploadedFile = upload(testContext, ADMIN_USER, 'import/global', file, {});
-    const fileContent = getFileContent(uploadedFile.id);
-
+    // get file content in base64
+    const fileContent = getFileContent(uploadedFile.id, 'base64');
+    // index file content
+    const documentId = 'TEST_FILE_1';
+    const result = await elIndexFile(fileContent, documentId);
+    console.log('result', result);
     /*    const queryResult = {
       "_index": "my-index-000001",
         "_id": "my_id2",
@@ -29,14 +33,16 @@ describe('Indexing file test', () => {
       "_seq_no": 4,
         "_primary_term": 3
     } */
-
-    // const fileId = queryResult._id;
-
-    // query result
-    const result = await elLoadById(testContext, ADMIN_USER, fileId);
-
+    // load file document
+    const document = await elLoadById(testContext, ADMIN_USER, documentId);
+    console.log('document', document);
     // Assertions
-    expect(result.source.attachment.title.toEqual('How did Clop get its hands on the MOVEit zero day?'));
+    expect(document._source.attachment).not.toBeNull();
+    expect(document._source.attachment.title.toEqual('What is Elasticsearch?'));
+
+    // cleanup : delete file in minio and elastic
+    await deleteFile(testContext, ADMIN_USER, uploadedFile.id);
+    await elDelete(INDEX_FILES, documentId);
   });
 });
 
