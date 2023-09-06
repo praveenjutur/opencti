@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as R from 'ramda';
 import { useNavigate } from 'react-router-dom-v5-compat';
 import {
-  FiltersVariant, findFilterFromKey,
+  FiltersVariant, findFilterFromKey, initialFilterGroup,
   isUniqFilter,
 } from '../../../../utils/filters/filtersUtils';
 import FiltersElement from './FiltersElement';
@@ -29,8 +29,8 @@ const Filters = ({
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [filters, setFilters] = useState({ mode: 'and', filter: [] });
-  const [inputValues, setInputValues] = useState<[{ key: string, values: [string | Date], operator: string | undefined }]>([]);
+  const [filters, setFilters] = useState(initialFilterGroup);
+  const [inputValues, setInputValues] = useState([]);
   const [keyword, setKeyword] = useState('');
 
   const handleOpenFilters = (event) => {
@@ -47,10 +47,9 @@ const Filters = ({
         event.stopPropagation();
         event.preventDefault();
       }
-      const filter = findFilterFromKey(filters, key, operator);
+      const filter = findFilterFromKey(filters.filters, key, operator);
       const newValues = (isUniqFilter(key) || !filter) ? [id] : R.uniq([...filter?.values ?? [], id]);
       const newFilterElement = {
-        type: 'filter',
         key,
         values: newValues,
         operator: operator ?? 'eq',
@@ -58,8 +57,9 @@ const Filters = ({
       };
       const newBaseFilters = {
         mode: filters.mode,
+        filterGroups: filters.filterGroups,
         filters: filter
-          ? [...filters.filters.filter((f) => f.type === 'filter' && (f.key !== key || (operator && f.operator !== operator))), newFilterElement]
+          ? [...filters.filters.filter((f) => f.key !== key || (operator && f.operator !== operator)), newFilterElement]
           : [...filters.filters, newFilterElement],
       };
       setFilters(newBaseFilters);
@@ -67,7 +67,8 @@ const Filters = ({
   const defaultHandleRemoveFilter = handleRemoveFilter || ((key, operator = null) => {
     const newBaseFilters = {
       mode: filters.mode,
-      filters: filters.filters.filter((f) => f.type === 'filter' && (f.key !== key || (operator && f.operator !== operator))),
+      filterGroups: filters.filterGroups,
+      filters: filters.filters.filter((f) => f.key !== key || (operator && f.operator !== operator)),
     };
     setFilters(newBaseFilters);
   });

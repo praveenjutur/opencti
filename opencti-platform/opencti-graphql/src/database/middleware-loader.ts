@@ -217,10 +217,11 @@ export const buildRelationsFilter = <T extends BasicStoreCommon>(relationshipTyp
   } = args;
   // Handle relation type(s)
   // 0 - Check if we can support the query by Elastic
-  const finalFilters = {
+  const finalFilters = (Array.isArray(filters) || !filters) ? { // TODO remove hardcoded format and replace by 'filter' when front is migrated
     mode: 'and',
     filters: filters ?? [],
-  };
+    filterGroups: [],
+  } : filters;
   if (relationFilter) {
     const { relation, id, relationId } = relationFilter;
     finalFilters.filters.push({ key: buildRefRelationKey(relation), values: [id] });
@@ -341,10 +342,10 @@ export const buildEntityFilters = <T extends BasicStoreCommon>(args: EntityFilte
   const { toId, toRole, toTypes = [] } = args;
   const { filters = [] } = args;
   // Config
-  const customFilters = Array.isArray(filters) ? { // TODO remove hardcoded format and replace by 'filter' when front is migrated
+  const customFilters = (Array.isArray(filters) || !filters) ? { // TODO remove hardcoded format and replace by 'filter' when front is migrated
     mode: 'and',
     filters: filters ?? [],
-    type: 'group',
+    filterGroups: [],
   } : filters;
   // region element
   const nestedElement = [];

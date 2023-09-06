@@ -5,23 +5,17 @@ export const FiltersVariant = {
   dialog: 'dialog',
 };
 
-export type BaseFilterObject = {
-  mode: string;
-  filters: (FilterGroup | Filter)[];
-};
-
 export type FilterGroup = {
   mode: string;
-  type: 'group';
-  filters: (FilterGroup | Filter)[]
+  filters: Filter[];
+  filterGroups: FilterGroup[];
 };
 
 export type Filter = {
-  type: 'filter';
   key: string;
   values: string[];
-  operator?: string;
-  mode?: string;
+  operator: string;
+  mode: string;
 };
 
 export type BackendFilters = { // TODO to be removed
@@ -30,6 +24,12 @@ export type BackendFilters = { // TODO to be removed
   operator?: string;
   filterMode?: string;
 }[];
+
+export const initialFilterGroup = {
+  mode: 'and',
+  filters: [],
+  filterGroups: [],
+};
 
 export const onlyGroupOrganization = ['x_opencti_workflow_id'];
 export const directFilters = [
@@ -123,10 +123,9 @@ export const entityFilters = [
 
 export const isUniqFilter = (key: string) => uniqFilters.includes(key) || dateFilters.includes(key);
 
-export const findFilterFromKey = (baseFilters: { filters: Filter[] }, key: string, operator?: string) => {
-  const { filters } = baseFilters;
+export const findFilterFromKey = (filters: Filter[], key: string, operator?: string) => {
   for (const filter of filters) {
-    if (filter.type === 'filter' && filter.key === key) {
+    if (filter.key === key) {
       if (operator && filter.operator === operator) {
         return filter;
       }
@@ -138,17 +137,17 @@ export const findFilterFromKey = (baseFilters: { filters: Filter[] }, key: strin
   return null;
 };
 
-export const filtersWithEntityType = (filters: BaseFilterObject | undefined, type: string) => {
+export const filtersWithEntityType = (filters: FilterGroup | undefined, type: string) => {
   const entityTypeFilter = {
     key: 'entity_type',
     values: [type],
     operator: 'eq',
     mode: 'or',
-    type: 'filter' as const,
   };
   return (filters
     ? {
       mode: filters.mode,
+      filterGroups: filters.filterGroups,
       filters: [
         ...filters.filters,
         entityTypeFilter,
@@ -159,4 +158,8 @@ export const filtersWithEntityType = (filters: BaseFilterObject | undefined, typ
 
 export const filterValue = (id: string) => {
   return truncate(id, 5); // TODO implement correctly
+};
+
+export const isFilterGroupNotEmpty = (filterGroup: FilterGroup) => {
+  return filterGroup.filters.length > 0 || filterGroup.filterGroups.length > 0;
 };

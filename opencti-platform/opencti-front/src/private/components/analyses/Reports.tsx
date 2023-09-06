@@ -16,7 +16,7 @@ import useEntityToggle from '../../../utils/hooks/useEntityToggle';
 import useQueryLoading from '../../../utils/hooks/useQueryLoading';
 import { ReportLineDummy } from './reports/ReportLine';
 import ExportContextProvider from '../../../utils/ExportContextProvider';
-import { filtersWithEntityType } from '../../../utils/filters/filtersUtils';
+import { filtersWithEntityType, initialFilterGroup } from '../../../utils/filters/filtersUtils';
 
 const LOCAL_STORAGE_KEY = 'view-reports';
 
@@ -40,8 +40,7 @@ const Reports: FunctionComponent<ReportsProps> = ({
       key: 'createdBy',
       values: [authorId],
       operator: 'eq',
-      filterMode: 'or',
-      type: 'filter' as const,
+      mode: 'or',
     });
   }
   if (objectId) {
@@ -49,8 +48,7 @@ const Reports: FunctionComponent<ReportsProps> = ({
       key: 'objectContains',
       values: [objectId],
       operator: 'eq',
-      filterMode: 'or',
-      type: 'filter' as const,
+      mode: 'or',
     });
   }
   const {
@@ -60,7 +58,7 @@ const Reports: FunctionComponent<ReportsProps> = ({
   } = usePaginationLocalStorage<ReportsLinesPaginationQuery$variables>(
     LOCAL_STORAGE_KEY,
     {
-      filters: { mode: 'and', filters: [] },
+      filters: initialFilterGroup,
       searchTerm: '',
       sortBy: 'published',
       orderAsc: false,

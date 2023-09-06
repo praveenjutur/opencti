@@ -8,7 +8,7 @@ import { DataColumns } from './list_lines';
 import { useFormatter } from './i18n';
 import { Theme } from './Theme';
 import FilterIconButtonContentWithRedirectionContainer from './FilterIconButtonContentWithRedirectionContainer';
-import { BaseFilterObject, entityFilters, Filter, filterValue } from '../utils/filters/filtersUtils';
+import { entityFilters, FilterGroup, filterValue } from '../utils/filters/filtersUtils';
 import { TriggerLine_node$data } from '../private/components/profile/triggers/__generated__/TriggerLine_node.graphql';
 
 const useStyles = makeStyles<Theme>((theme) => ({
@@ -92,7 +92,7 @@ const useStyles = makeStyles<Theme>((theme) => ({
 
 interface FilterIconButtonProps {
   availableFilterKeys?: string[];
-  filters: BaseFilterObject;
+  filters: FilterGroup;
   handleRemoveFilter?: (key: string) => void;
   classNameNumber?: number;
   styleNumber?: number;
@@ -140,7 +140,7 @@ const FilterIconButton: FunctionComponent<FilterIconButtonProps> = ({
   }
   const displayedFilters = filters?.filters
     .filter((currentFilter) => !availableFilterKeys
-      || availableFilterKeys?.some((k) => currentFilter.type === 'filter' && currentFilter.key === k)) as Filter[];
+      || availableFilterKeys?.some((k) => currentFilter.key === k));
   const lastKey = last(displayedFilters)?.key;
 
   return (

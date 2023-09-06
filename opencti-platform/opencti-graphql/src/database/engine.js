@@ -1391,20 +1391,20 @@ const buildLocalMustFilter = async (context, user, validFilter) => {
 
 const buildSubQueryForFilterGroup = async (context, user, filterGroup) => {
   const { mode = 'and' } = filterGroup;
-  const filters = filterGroup.filters ?? filterGroup; // support both filterGroup and filters as entry
+  const filters = filterGroup.filters ?? filterGroup; // TODO remove support both filterGroup and filters as entry
+  const subFilterGroups = filterGroup.filterGroups ?? [];
   const localMustFilters = [];
-  console.log('filters in buildSubQueryForFilterGroup', filters);
+  // eslint-disable-next-line no-restricted-syntax
+  for (const group of subFilterGroups) {
+    const subQuery = await buildSubQueryForFilterGroup(context, user, group);
+    localMustFilters.push(subQuery);
+  }
   // eslint-disable-next-line no-restricted-syntax
   for (const filter of filters) {
-    if (filter.type === 'group') { // TODO replace by filter.type = 'group' when filters are migrated
-      const subQuery = await buildSubQueryForFilterGroup(context, user, filter);
-      localMustFilters.push(subQuery);
-    } else {
-      const isValidFilter = filter?.values?.length > 0 || filter?.nested?.length > 0;
-      if (isValidFilter) {
-        const localMustFilter = await buildLocalMustFilter(context, user, filter);
-        localMustFilters.push(localMustFilter);
-      }
+    const isValidFilter = filter?.values?.length > 0 || filter?.nested?.length > 0;
+    if (isValidFilter) {
+      const localMustFilter = await buildLocalMustFilter(context, user, filter);
+      localMustFilters.push(localMustFilter);
     }
   }
   if (localMustFilters.length > 0) {

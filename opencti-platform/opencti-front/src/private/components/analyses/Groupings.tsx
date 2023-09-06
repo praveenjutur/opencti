@@ -17,7 +17,7 @@ import {
 } from './groupings/__generated__/GroupingsLinesPaginationQuery.graphql';
 import { GroupingLine_node$data } from './groupings/__generated__/GroupingLine_node.graphql';
 import { GroupingLineDummy } from './groupings/GroupingLine';
-import { filtersWithEntityType } from '../../../utils/filters/filtersUtils';
+import { filtersWithEntityType, initialFilterGroup } from '../../../utils/filters/filtersUtils';
 
 const LOCAL_STORAGE_KEY = 'view-groupings';
 
@@ -42,8 +42,7 @@ const Groupings: FunctionComponent<GroupingsProps> = ({
       key: 'createdBy',
       values: [authorId],
       operator: 'eq',
-      filterMode: 'or',
-      type: 'filter' as const,
+      mode: 'or',
     });
   }
   if (objectId) {
@@ -51,8 +50,7 @@ const Groupings: FunctionComponent<GroupingsProps> = ({
       key: 'objectContains',
       values: [objectId],
       operator: 'eq',
-      filterMode: 'or',
-      type: 'filter' as const,
+      mode: 'or',
     });
   }
   const {
@@ -63,7 +61,7 @@ const Groupings: FunctionComponent<GroupingsProps> = ({
     LOCAL_STORAGE_KEY,
     {
       numberOfElements: { number: 0, symbol: '', original: 0 },
-      filters: { mode: 'and', filters: [] },
+      filters: initialFilterGroup,
       searchTerm: '',
       sortBy: 'created',
       orderAsc: false,

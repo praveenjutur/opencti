@@ -97,7 +97,7 @@ export const stixDomainObjectsExportAsk = async (context, user, args) => {
   const ordersOpts = stixDomainObjectOptions.StixDomainObjectsOrdering;
   let newArgsFiltersFilters = filteringArgs.filters?.filters ?? [];
   const initialParams = {};
-  if (filteringArgs.filters && filteringArgs.filters.filters && filteringArgs.filters.filters.length > 0) {
+  if (filteringArgs.filters?.filters && filteringArgs.filters.filters.length > 0) {
     if (filteringArgs.filters.filters.filter((n) => n.key.includes('elementId')).length > 0) {
       initialParams.elementId = R.head(R.head(filteringArgs.filters.filters.filter((n) => n.key.includes('elementId'))).values);
       newArgsFiltersFilters = newArgsFiltersFilters.filter((n) => !n.key.includes('elementId'));
@@ -111,6 +111,7 @@ export const stixDomainObjectsExportAsk = async (context, user, args) => {
     ...filteringArgs,
     filters: {
       mode: filteringArgs.filters?.mode ?? 'and',
+      filterGroups: filteringArgs.filters?.filterGroups ?? [],
       filters: newArgsFiltersFilters,
     },
   };

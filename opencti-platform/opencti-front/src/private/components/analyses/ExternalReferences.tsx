@@ -17,7 +17,7 @@ import {
 import ToolBar from '../data/ToolBar';
 import { ExternalReferenceLineDummy } from './external_references/ExternalReferenceLine';
 import useQueryLoading from '../../../utils/hooks/useQueryLoading';
-import { filtersWithEntityType } from '../../../utils/filters/filtersUtils';
+import { filtersWithEntityType, initialFilterGroup } from '../../../utils/filters/filtersUtils';
 
 const LOCAL_STORAGE_KEY = 'view-externalReferences';
 
@@ -37,7 +37,7 @@ const ExternalReferences: FunctionComponent<ExternalReferencesProps> = () => {
       sortBy: 'created',
       orderAsc: true,
       openExports: false,
-      filters: { mode: 'and', filters: [] },
+      filters: initialFilterGroup,
     },
   );
   const { sortBy, orderAsc, searchTerm, filters, numberOfElements } = viewStorage;

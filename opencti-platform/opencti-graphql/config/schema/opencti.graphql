@@ -1792,16 +1792,16 @@ enum ExternalReferencesFilter {
   creator
   created
 }
-input ExternalReferencesBaseFilterObject {
+input ExternalReferencesGroupFiltering {
   mode: String!
-  filters: [ExternalReferencesFiltering]!
+  filters: [ExternalReferencesFilterFiltering]!
+  filterGroups: [ExternalReferencesGroupFiltering]!
 }
-input ExternalReferencesFiltering {
+input ExternalReferencesFilterFiltering {
   key: [ExternalReferencesFilter!]!
-  values: [String]
+  values: [String]!
   operator: String
   mode: FilterMode
-  type: String
 }
 type ExternalReferenceConnection {
   pageInfo: PageInfo!
@@ -2207,16 +2207,16 @@ enum StixDomainObjectsFilter {
   result_name
   operatingSystem
 }
-input StixDomainObjectBaseFilterObject {
+input StixDomainObjectsGroupFiltering {
   mode: String!
-  filters: [StixDomainObjectsFiltering]!
+  filters: [StixDomainObjectsFilterFiltering]!
+  filterGroups: [StixDomainObjectsGroupFiltering]!
 }
-input StixDomainObjectsFiltering {
+input StixDomainObjectsFilterFiltering {
   key: [StixDomainObjectsFilter!]!
-  values: [String]
+  values: [String]!
   operator: String
   mode: FilterMode
-  type: String
 }
 type StixDomainObjectConnection {
   pageInfo: PageInfo!
@@ -3610,16 +3610,16 @@ enum ReportsFilter {
   revoked
   creator
 }
-input ReportBaseFilterObject {
+input ReportsGroupFiltering {
   mode: String!
-  filters: [ReportsFiltering]!
+  filters: [ReportsFilterFiltering]!
+  filterGroups: [ReportsGroupFiltering]!
 }
-input ReportsFiltering {
+input ReportsFilterFiltering {
   key: [ReportsFilter!]!
   values: [String]!
   operator: String
   mode: FilterMode
-  type: String! # type === 'filter'
 }
 type ReportConnection {
   pageInfo: PageInfo!
@@ -12165,7 +12165,7 @@ type Query {
     after: ID
     orderBy: ExternalReferencesOrdering
     orderMode: OrderingMode
-    filters: ExternalReferencesBaseFilterObject
+    filters: ExternalReferencesGroupFiltering
     filterMode: FilterMode
     search: String
   ): ExternalReferenceConnection @auth(for: [KNOWLEDGE])
@@ -12284,7 +12284,7 @@ type Query {
     types: [String]
     orderBy: StixDomainObjectsOrdering
     orderMode: OrderingMode
-    filters: StixDomainObjectBaseFilterObject
+    filters: StixDomainObjectsGroupFiltering
     filterMode: FilterMode
     search: String
     relationship_type: [String]
@@ -12301,7 +12301,7 @@ type Query {
     interval: String!
     types: [String]
     onlyInferred: Boolean
-    filters: StixDomainObjectBaseFilterObject
+    filters: StixDomainObjectsGroupFiltering
     filterMode: FilterMode
     search: String
   ): [TimeSeries] @auth(for: [KNOWLEDGE, EXPLORE])
@@ -12309,7 +12309,7 @@ type Query {
     types: [String]
     endDate: DateTime
     onlyInferred: Boolean
-    filters: StixDomainObjectBaseFilterObject
+    filters: StixDomainObjectsGroupFiltering
     filterMode: FilterMode
     search: String): Number @auth(for: [KNOWLEDGE, EXPLORE])
   stixDomainObjectsDistribution(
@@ -12323,7 +12323,7 @@ type Query {
     limit: Int
     order: String
     types: [String]
-    filters: StixDomainObjectBaseFilterObject
+    filters: StixDomainObjectsGroupFiltering
     filterMode: FilterMode
     search: String
   ): [Distribution] @auth(for: [KNOWLEDGE, EXPLORE])
@@ -12477,7 +12477,7 @@ type Query {
     after: ID
     orderBy: ReportsOrdering
     orderMode: OrderingMode
-    filters: ReportBaseFilterObject
+    filters: ReportsGroupFiltering
     filterMode: FilterMode
     search: String
     toStix: Boolean
@@ -12491,7 +12491,7 @@ type Query {
     startDate: DateTime!
     endDate: DateTime!
     interval: String!
-    filters: ReportBaseFilterObject
+    filters: ReportsGroupFiltering
     filterMode: FilterMode
     search: String
   ): [TimeSeries] @auth(for: [KNOWLEDGE, EXPLORE])
@@ -12500,7 +12500,7 @@ type Query {
     objectId: String
     authorId: String
     endDate: DateTime
-    filters: ReportBaseFilterObject
+    filters: ReportsGroupFiltering
     filterMode: FilterMode
     search: String
   ): Number @auth(for: [KNOWLEDGE, EXPLORE])
@@ -12514,7 +12514,7 @@ type Query {
     startDate: DateTime
     endDate: DateTime
     dateAttribute: String
-    filters: ReportBaseFilterObject
+    filters: ReportsGroupFiltering
     filterMode: FilterMode
     search: String
   ): [Distribution] @auth(for: [KNOWLEDGE, EXPLORE])
@@ -13743,7 +13743,7 @@ type Mutation {
     elementId: String
     orderBy: StixDomainObjectsOrdering
     orderMode: OrderingMode
-    filters: StixDomainObjectBaseFilterObject
+    filters: StixDomainObjectsGroupFiltering
     filterMode: FilterMode
     selectedIds: [String]
   ): [File!] @auth(for: [KNOWLEDGE_KNGETEXPORT_KNASKEXPORT])

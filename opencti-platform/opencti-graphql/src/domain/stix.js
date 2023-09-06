@@ -34,6 +34,7 @@ import { internalLoadById, storeLoadById } from '../database/middleware-loader';
 import { schemaTypesDefinition } from '../schema/schema-types';
 import { publishUserAction } from '../listener/UserActionListener';
 import { ENTITY_TYPE_IDENTITY_ORGANIZATION } from '../modules/organization/organization-types';
+import { isFilterGroupNotEmpty } from '../utils/filtering';
 
 export const stixDelete = async (context, user, id) => {
   const element = await internalLoadById(context, user, id);
@@ -173,12 +174,11 @@ export const askEntityExport = async (context, user, format, entity, type = 'sim
   return worksForExport;
 };
 
-export const exportTransformFilters = (filteringArgs, filterOptions, orderOptions) => {
-  const filtersInversed = invertObj(filterOptions);
-  const orderingInversed = invertObj(orderOptions);
-  const newFilters = {
-    mode: filteringArgs.filters.mode ?? 'and',
-    filters: (filteringArgs.filters.filters ?? []).map(
+const transformFilterGroup = (filterGroup, filtersInversed) => {
+  const newFilterGroup = {
+    mode: filterGroup.mode ?? 'and',
+    filterGroups: isFilterGroupNotEmpty(filterGroup.filterGroups) ? transformFilterGroup(filterGroup.filterGroups, filtersInversed) : [],
+    filters: (filterGroup.filters ?? []).map(
       (n) => {
         const keys = Array.isArray(n.key) ? n.key : [n.key];
         const key = keys.map((k) => (k in filtersInversed ? filtersInversed[k] : k));
@@ -187,17 +187,22 @@ export const exportTransformFilters = (filteringArgs, filterOptions, orderOption
           values: n.values,
           operator: n.operator ?? 'eq',
           mode: n.mode ?? 'or',
-          type: 'filter',
         };
       }
     ),
   };
+  return newFilterGroup;
+};
+
+export const exportTransformFilters = (filteringArgs, filterOptions, orderOptions) => {
+  const filtersInversed = invertObj(filterOptions);
+  const orderingInversed = invertObj(orderOptions);
   return {
     ...filteringArgs,
     orderBy: filteringArgs.orderBy in orderingInversed
       ? orderingInversed[filteringArgs.orderBy]
       : filteringArgs.orderBy,
-    filters: newFilters,
+    filters: transformFilterGroup(filteringArgs.filters, filtersInversed),
   };
 };
 

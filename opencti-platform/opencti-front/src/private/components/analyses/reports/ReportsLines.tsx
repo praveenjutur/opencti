@@ -24,7 +24,7 @@ export const reportsLinesQuery = graphql`
     $cursor: ID
     $orderBy: ReportsOrdering
     $orderMode: OrderingMode
-    $filters: ReportBaseFilterObject
+    $filters: ReportsGroupFiltering
   ) {
     ...ReportsLines_data
       @arguments(
@@ -46,7 +46,7 @@ const reportsLineFragment = graphql`
     cursor: { type: "ID" }
     orderBy: { type: "ReportsOrdering", defaultValue: name }
     orderMode: { type: "OrderingMode", defaultValue: asc }
-    filters: { type: "ReportBaseFilterObject" }
+    filters: { type: "ReportsGroupFiltering" }
   )
   @refetchable(queryName: "ReportsLinesRefetchQuery") {
     reports(

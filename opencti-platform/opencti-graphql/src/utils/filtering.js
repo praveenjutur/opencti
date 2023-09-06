@@ -66,6 +66,10 @@ export const GlobalFilters = {
   creator: 'creator_id',
 };
 
+export const isFilterGroupNotEmpty = (filterGroup) => {
+  return filterGroup && (filterGroup.filterGroups?.length > 0 || filterGroup.filters?.length > 0);
+};
+
 export const extractFilterIdsToResolve = (filters) => {
   const filterEntries = Object.entries(filters);
   return filterEntries
@@ -98,47 +102,51 @@ export const resolvedFiltersMapForUser = async (context, user, filters) => {
   return resolveUserMap;
 };
 
-const convertFiltersFrontendFormatContent = async (context, user, baseFiltersObject, resolvedMap) => {
+const convertFiltersFrontendFormatContent = async (context, user, mainFilterGroup, resolvedMap) => {
   const adaptedFilters = [];
-  for (let index = 0; index < baseFiltersObject.filters.length; index += 1) {
-    const filter = baseFiltersObject.filters[index];
-    if (filter.type === 'filter') {
-      // Remap the format of specific keys
-      const rawValues = filter.values;
-      const values = [];
-      for (let vIndex = 0; vIndex < rawValues.length; vIndex += 1) {
-        const id = rawValues[vIndex];
-        if (resolvedMap.has(id)) {
-          const stixInstance = resolvedMap.get(id);
-          const isUserHasAccessToElement = await isUserCanAccessStixElement(context, user, stixInstance);
-          const value = extractStixRepresentative(stixInstance);
-          // add id if user has access to the element
-          values.push({ id: isUserHasAccessToElement ? id : '<invalid access>', value });
-          // add standard id if user has access to the element
-          values.push({ id: isUserHasAccessToElement ? stixInstance.id : '<invalid access>', value });
-        } else {
-          values.push({ id, value: 'deprecated' }); // TODO
-        }
-      }
-      adaptedFilters.push({ ...filter, values });
-    } else {
-      const adaptedFilterGroup = await convertFiltersFrontendFormatContent(context, user, filter, resolvedMap);
-      adaptedFilters.push(adaptedFilterGroup);
-    }
+  const adaptedFilterGroups = [];
+  const { filters } = mainFilterGroup;
+  const { filterGroups } = mainFilterGroup;
+  for (let index = 0; index < filterGroups.length; index += 1) {
+    const group = filterGroups[index];
+    const adaptedGroup = await convertFiltersFrontendFormatContent(context, user, group, resolvedMap);
+    adaptedFilterGroups.push(adaptedGroup);
   }
-  return (baseFiltersObject
+  for (let index = 0; index < filters.length; index += 1) {
+    const filter = filters[index];
+    // Remap the format of specific keys
+    const rawValues = filter.values;
+    const values = [];
+    for (let vIndex = 0; vIndex < rawValues.length; vIndex += 1) {
+      const id = rawValues[vIndex];
+      if (resolvedMap.has(id)) {
+        const stixInstance = resolvedMap.get(id);
+        const isUserHasAccessToElement = await isUserCanAccessStixElement(context, user, stixInstance);
+        const value = extractStixRepresentative(stixInstance);
+        // add id if user has access to the element
+        values.push({ id: isUserHasAccessToElement ? id : '<invalid access>', value });
+        // add standard id if user has access to the element
+        values.push({ id: isUserHasAccessToElement ? stixInstance.id : '<invalid access>', value });
+      } else {
+        values.push({ id, value: 'deprecated' }); // TODO
+      }
+    }
+    adaptedFilters.push({ ...filter, values });
+  }
+  return (mainFilterGroup
     ? {
-      mode: baseFiltersObject.mode,
+      mode: mainFilterGroup.mode,
       filters: adaptedFilters,
+      filterGroups: adaptedFilterGroups,
     }
     : undefined);
 };
 
-export const convertFiltersFrontendFormat = async (context, user, baseFiltersObject) => {
+export const convertFiltersFrontendFormat = async (context, user, filterGroup) => {
   // Grab all values that are internal_id that needs to be converted to standard_ids
   const resolvedMap = await getEntitiesMapFromCache(context, SYSTEM_USER, ENTITY_TYPE_RESOLVED_FILTERS);
-  const adaptedBaseFiltersObject = await convertFiltersFrontendFormatContent(context, user, baseFiltersObject, resolvedMap);
-  return adaptedBaseFiltersObject;
+  const adaptedFilterGroup = await convertFiltersFrontendFormatContent(context, user, filterGroup, resolvedMap);
+  return adaptedFilterGroup;
 };
 
 export const convertFiltersToQueryOptions = async (context, user, filters, opts = {}) => {

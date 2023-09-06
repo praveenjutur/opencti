@@ -847,7 +847,7 @@ class ToolBar extends Component {
     this.setState({ actionsInputs });
     fetchQuery(statusFieldStatusesSearchQuery, {
       first: 10,
-      filters: { mode: 'and', filters: [{ key: 'type', values: [this.props.type] }] },
+      filters: { mode: 'and', filterGroups: [], filters: [{ key: 'type', values: [this.props.type] }] },
       orderBy: 'order',
       orderMode: 'asc',
       search: newValue && newValue.length > 0 ? newValue : '',
@@ -1199,7 +1199,7 @@ class ToolBar extends Component {
       && Object.values(selectedElements).some(({ builtIn }) => Boolean(builtIn));
     // region update
     const notUpdatableTypes = ['Label', 'Vocabulary', 'Case-Template', 'Task'];
-    const entityTypeFilterValues = findFilterFromKey(filters, 'entity_type', 'eq')?.values;
+    const entityTypeFilterValues = findFilterFromKey(filters.filters, 'entity_type', 'eq')?.values;
     const typesAreNotUpdatable = R.includes(
       R.uniq(
         R.map((o) => o.entity_type, R.values(selectedElements || {})),
