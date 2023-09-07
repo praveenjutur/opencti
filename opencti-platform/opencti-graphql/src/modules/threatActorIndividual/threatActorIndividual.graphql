@@ -13,6 +13,8 @@ type ThreatActorIndividual implements BasicObject & StixObject & StixCoreObject 
   # inferences
   x_opencti_inferences: [Inference]
   # StixCoreObject
+  representative: Representative!
+  is_from_relation_inferred: Boolean
   createdBy: Identity
   objectMarking: MarkingDefinitionConnection
   objectOrganization: OrganizationConnection @auth(for: [KNOWLEDGE_KNUPDATE_KNORGARESTRICT])
