@@ -171,7 +171,7 @@ enum GroupingsFilter {
     creator
 }
 input GroupingsGroupFiltering {
-    mode: String!
+    mode: FilterMode!
     filters: [GroupingsFilterFiltering]!
     filterGroups: [GroupingsGroupFiltering]!
 }

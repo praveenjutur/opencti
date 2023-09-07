@@ -6947,7 +6947,7 @@ export type ExternalReferencesFilterFiltering = {
 export type ExternalReferencesGroupFiltering = {
   filterGroups: Array<InputMaybe<ExternalReferencesGroupFiltering>>;
   filters: Array<InputMaybe<ExternalReferencesFilterFiltering>>;
-  mode: Scalars['String']['input'];
+  mode: FilterMode;
 };
 
 export enum ExternalReferencesOrdering {
@@ -7769,7 +7769,7 @@ export type GroupingsFilterFiltering = {
 export type GroupingsGroupFiltering = {
   filterGroups: Array<InputMaybe<GroupingsGroupFiltering>>;
   filters: Array<InputMaybe<GroupingsFilterFiltering>>;
-  mode: Scalars['String']['input'];
+  mode: FilterMode;
 };
 
 export enum GroupingsOrdering {
@@ -11853,7 +11853,7 @@ export type MalwareAnalysesFilterFiltering = {
 export type MalwareAnalysesGroupFiltering = {
   filterGroups: Array<InputMaybe<MalwareAnalysesGroupFiltering>>;
   filters: Array<InputMaybe<MalwareAnalysesFilterFiltering>>;
-  mode: Scalars['String']['input'];
+  mode: FilterMode;
 };
 
 export enum MalwareAnalysesOrdering {
@@ -21051,7 +21051,7 @@ export type ReportsFilterFiltering = {
 export type ReportsGroupFiltering = {
   filterGroups: Array<InputMaybe<ReportsGroupFiltering>>;
   filters: Array<InputMaybe<ReportsFilterFiltering>>;
-  mode: Scalars['String']['input'];
+  mode: FilterMode;
 };
 
 export enum ReportsOrdering {
@@ -23264,7 +23264,7 @@ export type StixDomainObjectsFilterFiltering = {
 export type StixDomainObjectsGroupFiltering = {
   filterGroups: Array<InputMaybe<StixDomainObjectsGroupFiltering>>;
   filters: Array<InputMaybe<StixDomainObjectsFilterFiltering>>;
-  mode: Scalars['String']['input'];
+  mode: FilterMode;
 };
 
 export enum StixDomainObjectsOrdering {

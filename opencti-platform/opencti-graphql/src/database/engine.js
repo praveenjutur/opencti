@@ -1235,7 +1235,7 @@ const BASE_FIELDS = ['_index', 'internal_id', 'standard_id', 'sort', 'base_type'
 const buildLocalMustFilter = async (context, user, validFilter) => {
   const valuesFiltering = [];
   const noValuesFiltering = [];
-  const { key, values, nested, operator = 'eq', filterMode: localFilterMode = 'or' } = validFilter;
+  const { key, values, nested, operator = 'eq', mode: localFilterMode = 'or' } = validFilter;
   const arrayKeys = Array.isArray(key) ? key : [key];
   // in case we want to filter by source reliability (reliability of author)
   // we need to find all authors filtered by reliability and filter on these authors
