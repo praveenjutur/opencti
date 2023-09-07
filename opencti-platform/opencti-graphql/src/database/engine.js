@@ -700,19 +700,17 @@ const elCreateIndexTemplate = async (index) => {
   });
 };
 export const elConfigureAttachmentProcessor = async () => {
-  await engine.ingest.put_pipeline({
+  await engine.ingest.putPipeline({
     id: 'attachment',
-    body: {
-      description: 'Extract attachment information',
-      processors: [
-        {
-          attachment: {
-            field: 'file_data',
-            remove_binary: true
-          }
+    description: 'Extract attachment information',
+    processors: [
+      {
+        attachment: {
+          field: 'file_data',
+          remove_binary: true
         }
-      ]
-    }
+      }
+    ]
   }).catch((e) => {
     throw DatabaseError('[SEARCH] Error configure attachment processor', { error: e });
   });
@@ -1942,12 +1940,13 @@ export const elAttributeValues = async (context, user, field, opts = {}) => {
 // endregion
 
 // index uploaded file
-export const elIndexFile = async (fileContent, documentId = null) => {
+export const elIndexFile = async (fileContent, documentId) => {
   const indexName = INDEX_FILES;
   const documentBody = {
-    file_data: fileContent
+    file_data: fileContent,
+    internal_id: documentId
   };
-  return engine.update({
+  return engine.index({
     id: documentId,
     index: indexName,
     timeout: BULK_TIMEOUT,
