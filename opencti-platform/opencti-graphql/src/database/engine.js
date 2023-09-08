@@ -599,6 +599,9 @@ const elCreateIndexTemplate = async (index) => {
             modified_at: {
               type: 'date',
             },
+            indexed_at: {
+              type: 'date',
+            },
             first_seen: {
               type: 'date',
             },
@@ -1940,11 +1943,13 @@ export const elAttributeValues = async (context, user, field, opts = {}) => {
 // endregion
 
 // index uploaded file
-export const elIndexFile = async (fileContent, documentId) => {
+export const elIndexFile = async (documentId, fileContent, fileId) => {
   const indexName = INDEX_FILES;
   const documentBody = {
+    internal_id: documentId,
+    indexed_at: now(),
+    file_id: fileId,
     file_data: fileContent,
-    internal_id: documentId
   };
   return engine.index({
     id: documentId,
