@@ -20,6 +20,8 @@ const DialogFilters = ({
   filters,
   handleCloseFilters,
   defaultHandleRemoveFilter,
+  handleSwitchGlobalMode,
+  handleSwitchLocalMode,
   handleSearch,
   filterElement,
 }) => {
@@ -48,6 +50,9 @@ const DialogFilters = ({
             <FilterIconButton
               filters={filters}
               handleRemoveFilter={defaultHandleRemoveFilter}
+              handleSwitchGlobalMode={handleSwitchGlobalMode}
+              handleSwitchLocalMode={handleSwitchLocalMode}
+              handleSwitchG
               classNameNumber={4}
               styleNumber={2}
             />

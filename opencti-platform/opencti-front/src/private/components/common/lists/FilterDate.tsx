@@ -25,13 +25,10 @@ const FilterDate: FunctionComponent<FilterDateProps> = ({
 }) => {
   const { t } = useFormatter();
 
-  const findFilterFromKey = (filters: { key: string, values: (string | Date)[], operator?: string }[], key: string, op?: string) => {
+  const findFilterFromKey = (filters: { key: string, values: (string | Date)[], operator?: string }[], key: string, op = 'eq') => {
     for (const filter of filters) {
       if (filter.key === key) {
-        if (op && filter.operator === op) {
-          return filter;
-        }
-        if (!op) {
+        if (filter.operator === op) {
           return filter;
         }
       }

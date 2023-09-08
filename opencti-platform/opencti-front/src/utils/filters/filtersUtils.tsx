@@ -137,6 +137,21 @@ export const findFilterFromKey = (filters: Filter[], key: string, operator?: str
   return null;
 };
 
+export const findFilterIndexFromKey = (filters: Filter[], key: string, operator?: string) => {
+  for (let i = 0; i < filters.length; i += 1) {
+    const filter = filters[i];
+    if (filter.key === key) {
+      if (operator && filter.operator === operator) {
+        return i;
+      }
+      if (!operator) {
+        return i;
+      }
+    }
+  }
+  return null;
+};
+
 export const filtersWithEntityType = (filters: FilterGroup | undefined, type: string) => {
   const entityTypeFilter = {
     key: 'entity_type',

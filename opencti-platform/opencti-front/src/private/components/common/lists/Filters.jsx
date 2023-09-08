@@ -23,6 +23,8 @@ const Filters = ({
   handleAddFilter,
   handleRemoveFilter,
   handleSwitchFilter,
+  handleSwitchGlobalMode,
+  handleSwitchLocalMode,
   searchContext = {},
   type,
 }) => {
@@ -42,7 +44,7 @@ const Filters = ({
     setAnchorEl(null);
   };
   const defaultHandleAddFilter = handleAddFilter
-    || ((key, id, operator = null, event = null) => {
+    || ((key, id, operator = 'eq', event = null) => {
       if (event) {
         event.stopPropagation();
         event.preventDefault();
@@ -52,23 +54,23 @@ const Filters = ({
       const newFilterElement = {
         key,
         values: newValues,
-        operator: operator ?? 'eq',
+        operator: operator,
         mode: 'or',
       };
       const newBaseFilters = {
         mode: filters.mode,
         filterGroups: filters.filterGroups,
         filters: filter
-          ? [...filters.filters.filter((f) => f.key !== key || (operator && f.operator !== operator)), newFilterElement]
+          ? [...filters.filters.filter((f) => f.key !== key || f.operator !== operator), newFilterElement]
           : [...filters.filters, newFilterElement],
       };
       setFilters(newBaseFilters);
     });
-  const defaultHandleRemoveFilter = handleRemoveFilter || ((key, operator = null) => {
+  const defaultHandleRemoveFilter = handleRemoveFilter || ((key, operator = 'eq') => {
     const newBaseFilters = {
       mode: filters.mode,
       filterGroups: filters.filterGroups,
-      filters: filters.filters.filter((f) => f.key !== key || (operator && f.operator !== operator)),
+      filters: filters.filters.filter((f) => f.key !== key || f.operator !== operator),
     };
     setFilters(newBaseFilters);
   });
@@ -111,6 +113,8 @@ const Filters = ({
         filters={filters}
         handleCloseFilters={handleCloseFilters}
         defaultHandleRemoveFilter={defaultHandleRemoveFilter}
+        handleSwitchGlobalMode={handleSwitchGlobalMode}
+        handleSwitchLocalMode={handleSwitchLocalMode}
         handleSearch={handleSearch}
         filterElement={filterElement}
         type={type}

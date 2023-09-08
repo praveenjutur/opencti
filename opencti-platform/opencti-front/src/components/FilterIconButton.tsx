@@ -8,7 +8,7 @@ import { DataColumns } from './list_lines';
 import { useFormatter } from './i18n';
 import { Theme } from './Theme';
 import FilterIconButtonContentWithRedirectionContainer from './FilterIconButtonContentWithRedirectionContainer';
-import { entityFilters, FilterGroup, filterValue } from '../utils/filters/filtersUtils';
+import { entityFilters, Filter, FilterGroup, filterValue } from '../utils/filters/filtersUtils';
 import { TriggerLine_node$data } from '../private/components/profile/triggers/__generated__/TriggerLine_node.graphql';
 
 const useStyles = makeStyles<Theme>((theme) => ({
@@ -93,7 +93,9 @@ const useStyles = makeStyles<Theme>((theme) => ({
 interface FilterIconButtonProps {
   availableFilterKeys?: string[];
   filters: FilterGroup;
-  handleRemoveFilter?: (key: string) => void;
+  handleRemoveFilter?: (key: string, op?: string) => void;
+  handleSwitchGlobalMode?: () => void;
+  handleSwitchLocalMode?: (filter: Filter) => void;
   classNameNumber?: number;
   styleNumber?: number;
   dataColumns?: DataColumns;
@@ -106,6 +108,8 @@ const FilterIconButton: FunctionComponent<FilterIconButtonProps> = ({
   availableFilterKeys,
   filters,
   handleRemoveFilter,
+  handleSwitchGlobalMode,
+  handleSwitchLocalMode,
   classNameNumber,
   styleNumber,
   dataColumns,
@@ -142,6 +146,7 @@ const FilterIconButton: FunctionComponent<FilterIconButtonProps> = ({
     .filter((currentFilter) => !availableFilterKeys
       || availableFilterKeys?.some((k) => currentFilter.key === k));
   const lastKey = last(displayedFilters)?.key;
+  const lastOperator = last(displayedFilters)?.operator;
 
   return (
     <div
@@ -150,7 +155,6 @@ const FilterIconButton: FunctionComponent<FilterIconButtonProps> = ({
     >
       {displayedFilters
         .map((currentFilter) => {
-          console.log('currentFilter', currentFilter);
           const filterKey = currentFilter.key;
           const filterValues = currentFilter.values;
           const negative = currentFilter.operator === 'not_eq';
@@ -159,7 +163,7 @@ const FilterIconButton: FunctionComponent<FilterIconButtonProps> = ({
             ? truncate(t(`filter_${filterKey}_${currentFilter.operator}`), 20)
             : truncate(t(`filter_${filterKey}`), 20);
           const label = `${negative ? `${t('NOT')} ` : ''}${keyLabel}`;
-          const localFilterMode = negative ? t('AND') : t('OR');
+          const isNotLastFilter = lastKey !== filterKey || lastOperator !== currentFilter.operator;
           const values = (
           <>
             {filterValues.map((n) => {
@@ -180,9 +184,11 @@ const FilterIconButton: FunctionComponent<FilterIconButtonProps> = ({
                   </span>
                 )}
                   {last(filterValues) !== n && (
-                    <div className={classes.inlineOperator}>
-                      {localFilterMode}
-                    </div>
+                    <Chip
+                      className={classes.inlineOperator}
+                      label={t(currentFilter.mode.toUpperCase())}
+                      onClick={() => handleSwitchLocalMode?.(currentFilter)}
+                    />
                   )}{' '}
               </span>
               );
@@ -212,13 +218,17 @@ const FilterIconButton: FunctionComponent<FilterIconButtonProps> = ({
                 }
                 onDelete={
                   handleRemoveFilter
-                    ? () => handleRemoveFilter(filterKey)
+                    ? () => handleRemoveFilter(filterKey, currentFilter.operator)
                     : undefined
                 }
               />
             </Tooltip>
-            {lastKey !== filterKey && (
-              <Chip classes={{ root: classOperator }} label={t('AND')} />
+            {isNotLastFilter && (
+              <Chip
+                classes={{ root: classOperator }}
+                label={t(filters.mode.toUpperCase())}
+                onClick={handleSwitchGlobalMode}
+              />
             )}
           </span>
           );
