@@ -5,7 +5,12 @@ import { ADMIN_USER, testContext } from '../../utils/testQuery';
 import { deleteFile, getFileContent, upload } from '../../../src/database/file-storage';
 import { INDEX_FILES } from '../../../src/database/utils';
 
-const testFileIndexing = async (file, documentId) => {
+const testFileIndexing = async (fileName, mimetype, documentId) => {
+  const file = {
+    createReadStream: () => createReadStream(`./tests/data/${fileName}`),
+    filename: fileName,
+    mimetype,
+  };
   // upload file in minio
   const uploadedFile = await upload(testContext, ADMIN_USER, 'import/global', file, {});
 
@@ -29,48 +34,19 @@ const testFileIndexing = async (file, documentId) => {
 
 describe('Indexing file test', () => {
   it('Should index small pdf file', async () => {
-    const file = {
-      createReadStream: () => createReadStream('./tests/data/test-report-to-index.pdf'),
-      filename: 'test-report-to-index.pdf',
-      mimetype: 'application/pdf',
-    };
-    await testFileIndexing(file, 'TEST_FILE_1');
+    await testFileIndexing('test-report-to-index.pdf', 'application/pdf', 'TEST_FILE_1');
   });
   it('Should index large pdf file', async () => {
-    // upload file in minio
-    const file = {
-      createReadStream: () => createReadStream('./tests/data/test-large-report-to-index.pdf'),
-      filename: 'test-large-report-to-index.pdf',
-      mimetype: 'application/pdf',
-    };
-    await testFileIndexing(file, 'TEST_FILE_2');
+    await testFileIndexing('test-large-report-to-index.pdf', 'application/pdf', 'TEST_FILE_2');
   });
   it('Should index txt file', async () => {
-    // upload file in minio
-    const file = {
-      createReadStream: () => createReadStream('./tests/data/test-file-to-index.txt'),
-      filename: 'test-file-to-index.txt',
-      mimetype: 'text/plain',
-    };
-    await testFileIndexing(file, 'TEST_FILE_3');
+    await testFileIndexing('test-file-to-index.txt', 'text/plain', 'TEST_FILE_3');
   });
   it('Should index csv file', async () => {
-    // upload file in minio
-    const file = {
-      createReadStream: () => createReadStream('./tests/data/test-file-to-index.csv'),
-      filename: 'test-file-to-index.csv',
-      mimetype: 'text/plain',
-    };
-    await testFileIndexing(file, 'TEST_FILE_4');
+    await testFileIndexing('test-file-to-index.csv', 'text/plain', 'TEST_FILE_4');
   });
   it('Should index xls file', async () => {
-    // upload file in minio
-    const file = {
-      createReadStream: () => createReadStream('./tests/data/test-file-to-index.xls'),
-      filename: 'test-file-to-index.xls',
-      mimetype: 'application/vnd.ms-excel',
-    };
-    await testFileIndexing(file, 'TEST_FILE_5');
+    await testFileIndexing('test-file-to-index.xls', 'application/vnd.ms-excel', 'TEST_FILE_5');
   });
   it('Should find document by search query', () => {
     // imlement test
