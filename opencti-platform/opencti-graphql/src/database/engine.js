@@ -1829,12 +1829,7 @@ export const elPaginate = async (context, user, indexName, options = {}) => {
   logApp.debug('[SEARCH] paginate', { query });
   return elRawSearch(context, user, types !== null ? types : 'Any', query)
     .then((data) => {
-      const convertedHits = R.map((n) => elDataConverter(n), data.hits.hits);
-      if (connectionFormat) {
-        const nodeHits = R.map((n) => ({ node: n, sort: n.sort }), convertedHits);
-        return buildPagination(first, body.search_after, nodeHits, data.hits.total.value);
-      }
-      return convertedHits;
+      return buildSearchResult(data, first, body.search_after, connectionFormat);
     })
     .catch(
       /* istanbul ignore next */ (err) => {
@@ -1942,7 +1937,7 @@ export const elAttributeValues = async (context, user, field, opts = {}) => {
 };
 // endregion
 
-// index uploaded file
+// index and search files
 export const elIndexFile = async (documentId, fileContent, fileId) => {
   const indexName = INDEX_FILES;
   const documentBody = {
@@ -1962,7 +1957,61 @@ export const elIndexFile = async (documentId, fileContent, fileId) => {
     throw DatabaseError('[SEARCH] Error updating elastic (update)', { error: err, documentId, body: documentBody });
   });
 };
-// end index uploaded file
+
+export const elSearchFiles = async (context, user, options = {}) => {
+  const { search = null, first = 20, after, orderBy = null, orderMode = 'asc', connectionFormat = true } = options;
+  const searchAfter = after ? cursorToOffset(after) : undefined;
+  const must = [];
+  const mustNot = [];
+  if (search) {
+    const fullTextSearch = {
+      multi_match: {
+        query: search,
+        fields: ['attachment.content', 'attachment.title^2']
+      }
+    };
+    must.push(fullTextSearch);
+  }
+  const body = {
+    query: {
+      bool: {
+        must,
+        must_not: mustNot,
+      },
+    },
+    size: first
+  };
+  if (searchAfter) {
+    body.search_after = searchAfter;
+  }
+  const query = {
+    index: INDEX_FILES,
+    ignore_throttled: ES_IGNORE_THROTTLED,
+    track_total_hits: true,
+    _source: true,
+    body,
+  };
+  logApp.debug('[SEARCH] search files', { query });
+  return elRawSearch(context, user, null, query)
+    .then((data) => {
+      return buildSearchResult(data, first, body.search_after, connectionFormat);
+    })
+    .catch((err) => {
+      logApp.error('[SEARCH] search files fail', { error: err, query });
+      throw err;
+    });
+};
+
+// end index and search files
+
+const buildSearchResult = (data, first, searchAfter, connectionFormat = true) => {
+  const convertedHits = R.map((n) => elDataConverter(n), data.hits.hits);
+  if (connectionFormat) {
+    const nodeHits = R.map((n) => ({ node: n, sort: n.sort }), convertedHits);
+    return buildPagination(first, searchAfter, nodeHits, data.hits.total.value);
+  }
+  return convertedHits;
+};
 
 export const elBulk = async (args) => {
   return elRawBulk(args).then((data) => {
