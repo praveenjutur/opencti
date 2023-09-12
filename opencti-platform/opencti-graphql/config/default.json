@@ -147,6 +147,11 @@
     "lock_key": "retention_manager_lock",
     "interval": 60000
   },
+  "file_index_manager": {
+    "enabled": true,
+    "lock_key": "file_index_manager_lock",
+    "interval": 60000
+  },
   "redis": {
     "mode": "single",
     "namespace": "",

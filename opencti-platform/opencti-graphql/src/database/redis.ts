@@ -724,6 +724,14 @@ export const storeActivityEvent = async (event: ActivityStreamEvent) => {
 };
 // endregion
 
+// region file index stream
+export const FILE_INDEX_STREAM_NAME = `${REDIS_PREFIX}stream.fileindex`;
+const fileIndexTrimming = conf.get('redis:file_index_trimming') || 50000; // TODO what does it mean ?
+export const storeFileIndexEvent = async (event: any) => { // TODO create interface FileIndexStreamEvent
+  await getClientBase().call('XADD', FILE_INDEX_STREAM_NAME, 'MAXLEN', '~', fileIndexTrimming, '*', ...mapJSToStream(event));
+};
+// endregion
+
 // region work handling
 export const redisDeleteWorks = async (internalIds: Array<string>) => {
   const ids = Array.isArray(internalIds) ? internalIds : [internalIds];

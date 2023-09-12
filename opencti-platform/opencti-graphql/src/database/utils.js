@@ -32,6 +32,7 @@ export const UPDATE_OPERATION_REMOVE = 'remove';
 
 // Entities
 export const INDEX_FILES = `${ES_INDEX_PREFIX}_files`;
+export const READ_INDEX_FILES = `${INDEX_FILES}*`;
 export const INDEX_HISTORY = `${ES_INDEX_PREFIX}_history`;
 export const READ_INDEX_HISTORY = `${INDEX_HISTORY}*`;
 export const INDEX_INTERNAL_OBJECTS = `${ES_INDEX_PREFIX}_internal_objects`;

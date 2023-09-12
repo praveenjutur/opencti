@@ -2,6 +2,7 @@ import conf, {
   ENABLED_API,
   ENABLED_CONNECTOR_MANAGER,
   ENABLED_EXPIRED_MANAGER,
+  ENABLED_FILE_INDEX_MANAGER,
   ENABLED_HISTORY_MANAGER, ENABLED_INGESTION_MANAGER,
   ENABLED_NOTIFICATION_MANAGER, ENABLED_PLAYBOOK_MANAGER,
   ENABLED_PUBLISHER_MANAGER,
@@ -31,6 +32,7 @@ import publisherManager from './manager/publisherManager';
 import activityListener from './manager/activityListener';
 import activityManager from './manager/activityManager';
 import playbookManager from './manager/playbookManager';
+import fileIndexManager from './manager/fileIndexManager';
 
 // region dynamic modules
 const startModules = async () => {
@@ -113,6 +115,11 @@ const startModules = async () => {
     await playbookManager.start();
   } else {
     logApp.info('[OPENCTI-MODULE] Playbook manager not started (disabled by configuration)');
+  }
+  if (ENABLED_FILE_INDEX_MANAGER) {
+    await fileIndexManager.start();
+  } else {
+    logApp.info('[OPENCTI-MODULE] File index manager not started (disabled by configuration)');
   }
   // endregion
   // region Cluster manager

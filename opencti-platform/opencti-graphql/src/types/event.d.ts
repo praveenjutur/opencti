@@ -45,6 +45,10 @@ interface StreamDataEvent extends BaseEvent {
   data: StixCoreObject
 }
 
+interface StreamFileIndexEvent extends BaseEvent {
+  fileId: string;
+}
+
 interface UpdateEvent extends StreamDataEvent {
   type: 'update';
   commit: CommitContext | undefined;
