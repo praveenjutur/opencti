@@ -718,17 +718,24 @@ export const elConfigureAttachmentProcessor = async () => {
     throw DatabaseError('[SEARCH] Error configure attachment processor', { error: e });
   });
 };
+export const elCreateIndex = async (index) => {
+  await elCreateIndexTemplate(index);
+  const indexName = `${index}${ES_INDEX_PATTERN_SUFFIX}`;
+  const isExist = await engine.indices.exists({ index: indexName }).then((r) => oebp(r));
+  if (!isExist) {
+    const createdIndex = await engine.indices.create({ index: indexName, body: { aliases: { [index]: {} } } });
+    return createdIndex;
+  }
+  return null;
+};
 export const elCreateIndices = async (indexesToCreate = WRITE_PLATFORM_INDICES) => {
   await elCreateCoreSettings();
   await elCreateLifecyclePolicy();
   const createdIndices = [];
   for (let i = 0; i < indexesToCreate.length; i += 1) {
     const index = indexesToCreate[i];
-    await elCreateIndexTemplate(index);
-    const indexName = `${index}${ES_INDEX_PATTERN_SUFFIX}`;
-    const isExist = await engine.indices.exists({ index: indexName }).then((r) => oebp(r));
-    if (!isExist) {
-      const createdIndex = await engine.indices.create({ index: indexName, body: { aliases: { [index]: {} } } });
+    const createdIndex = await elCreateIndex(index);
+    if (createdIndex) {
       createdIndices.push(oebp(createdIndex));
     }
   }
@@ -1938,14 +1945,18 @@ export const elAttributeValues = async (context, user, field, opts = {}) => {
 // endregion
 
 // index and search files
-export const elIndexFile = async (documentId, fileContent, fileId) => {
-  const indexName = INDEX_FILES;
+const buildIndexFileBody = (documentId, fileContent, fileId) => {
   const documentBody = {
     internal_id: documentId,
     indexed_at: now(),
     file_id: fileId,
     file_data: fileContent,
   };
+  return documentBody;
+};
+export const elIndexFile = async (documentId, fileContent, fileId) => {
+  const indexName = INDEX_FILES;
+  const documentBody = buildIndexFileBody(documentId, fileContent, fileId);
   return engine.index({
     id: documentId,
     index: indexName,
@@ -1956,6 +1967,35 @@ export const elIndexFile = async (documentId, fileContent, fileId) => {
   }).catch((err) => {
     throw DatabaseError('[SEARCH] Error updating elastic (update)', { error: err, documentId, body: documentBody });
   });
+};
+export const elBulkIndexFiles = async (files, maxBulkOperations = 10) => {
+  if (!files || files.length === 0) {
+    return;
+  }
+  const bulkOperations = [];
+  for (let index = 0; index < files.length; index += 1) {
+    const file = files[index];
+    const { internal_id, file_data, file_id } = file;
+    const indexQuery = {
+      index: {
+        _index: INDEX_FILES,
+        _id: internal_id,
+        pipeline: 'attachment',
+        retry_on_conflict: ES_RETRY_ON_CONFLICT
+      }
+    };
+    const documentBody = buildIndexFileBody(internal_id, file_data, file_id);
+    bulkOperations.push(...[indexQuery, documentBody]);
+  }
+  let currentProcessing = 0;
+  // TODO compute length of bulk operations to be sure it's less then 100mb (ES limit)
+  const groupsOfOperations = R.splitEvery(maxBulkOperations, bulkOperations);
+  const concurrentUpdate = async (bulk) => {
+    await elBulk({ refresh: true, timeout: BULK_TIMEOUT, body: bulk });
+    currentProcessing += bulk.length;
+    logApp.debug(`[SEARCH] indexing files: ${currentProcessing} / ${bulkOperations.length}`);
+  };
+  await BluePromise.map(groupsOfOperations, concurrentUpdate, { concurrency: ES_MAX_CONCURRENCY });
 };
 
 export const elSearchFiles = async (context, user, options = {}) => {

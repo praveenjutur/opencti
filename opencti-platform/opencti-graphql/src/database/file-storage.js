@@ -153,7 +153,7 @@ export const loadFile = async (context, user, filename) => {
       Bucket: bucketName,
       Key: filename
     }));
-    const metaData = { ...object.Metadata, messages: [], errors: [] };
+    const metaData = { mimetype: object.Metadata.mimetype, ...object.Metadata, messages: [], errors: [] };
     if (metaData.labels_text) {
       metaData.labels = metaData.labels_text.split(';');
     }
