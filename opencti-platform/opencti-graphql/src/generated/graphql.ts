@@ -20199,7 +20199,7 @@ export type QueryThreatActorsGroupArgs = {
 export type QueryThreatActorsIndividualsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<ThreatActorsIndividualFiltering>>;
+  filters?: InputMaybe<ThreatActorsIndividualGroupFiltering>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ThreatActorsIndividualOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -26152,11 +26152,17 @@ export enum ThreatActorsIndividualFilter {
   XOpenctiWorkflowId = 'x_opencti_workflow_id'
 }
 
-export type ThreatActorsIndividualFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
+export type ThreatActorsIndividualFilterFiltering = {
   key: Array<ThreatActorsIndividualFilter>;
+  mode?: InputMaybe<FilterMode>;
   operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  values: Array<InputMaybe<Scalars['String']['input']>>;
+};
+
+export type ThreatActorsIndividualGroupFiltering = {
+  filterGroups: Array<InputMaybe<ThreatActorsIndividualGroupFiltering>>;
+  filters: Array<InputMaybe<ThreatActorsIndividualFilterFiltering>>;
+  mode: FilterMode;
 };
 
 export enum ThreatActorsIndividualOrdering {
@@ -29485,7 +29491,8 @@ export type ResolversTypes = ResolversObject<{
   ThreatActorsFilter: ThreatActorsFilter;
   ThreatActorsFiltering: ThreatActorsFiltering;
   ThreatActorsIndividualFilter: ThreatActorsIndividualFilter;
-  ThreatActorsIndividualFiltering: ThreatActorsIndividualFiltering;
+  ThreatActorsIndividualFilterFiltering: ThreatActorsIndividualFilterFiltering;
+  ThreatActorsIndividualGroupFiltering: ThreatActorsIndividualGroupFiltering;
   ThreatActorsIndividualOrdering: ThreatActorsIndividualOrdering;
   ThreatActorsOrdering: ThreatActorsOrdering;
   TimeSeries: ResolverTypeWrapper<TimeSeries>;
@@ -30180,7 +30187,8 @@ export type ResolversParentTypes = ResolversObject<{
   ThreatActorIndividualConnection: Omit<ThreatActorIndividualConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['ThreatActorIndividualEdge']>>> };
   ThreatActorIndividualEdge: Omit<ThreatActorIndividualEdge, 'node'> & { node: ResolversParentTypes['ThreatActorIndividual'] };
   ThreatActorsFiltering: ThreatActorsFiltering;
-  ThreatActorsIndividualFiltering: ThreatActorsIndividualFiltering;
+  ThreatActorsIndividualFilterFiltering: ThreatActorsIndividualFilterFiltering;
+  ThreatActorsIndividualGroupFiltering: ThreatActorsIndividualGroupFiltering;
   TimeSeries: TimeSeries;
   Tool: Omit<Tool, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, observedData?: Maybe<ResolversParentTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversParentTypes['StixCoreRelationshipConnection']> };
   ToolAddInput: ToolAddInput;

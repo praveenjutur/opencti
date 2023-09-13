@@ -25,7 +25,7 @@ export const threatActorsIndividualCardsPaginationQuery = graphql`
     $cursor: ID
     $orderBy: ThreatActorsIndividualOrdering
     $orderMode: OrderingMode
-    $filters: [ThreatActorsIndividualFiltering!]
+    $filters: ThreatActorsIndividualGroupFiltering
   ) {
     ...ThreatActorsIndividualCards_data
       @arguments(
@@ -47,7 +47,7 @@ export const ThreatActorsIndividualCardsFragment = graphql`
     cursor: { type: "ID" }
     orderBy: { type: "ThreatActorsIndividualOrdering", defaultValue: name }
     orderMode: { type: "OrderingMode", defaultValue: asc }
-    filters: { type: "[ThreatActorsIndividualFiltering!]" }
+    filters: { type: "ThreatActorsIndividualGroupFiltering" }
   )
   @refetchable(queryName: "ThreatActorsIndividualRefetchQuery") {
     threatActorsIndividuals(

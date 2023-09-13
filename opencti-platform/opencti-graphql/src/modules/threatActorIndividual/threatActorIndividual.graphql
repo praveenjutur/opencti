@@ -151,11 +151,16 @@ enum ThreatActorsIndividualFilter {
   source_reliability
   creator
 }
-input ThreatActorsIndividualFiltering {
+input ThreatActorsIndividualGroupFiltering {
+  mode: FilterMode!
+  filters: [ThreatActorsIndividualFilterFiltering]!
+  filterGroups: [ThreatActorsIndividualGroupFiltering]!
+}
+input ThreatActorsIndividualFilterFiltering {
   key: [ThreatActorsIndividualFilter!]!
-  values: [String]
+  values: [String]!
   operator: String
-  filterMode: FilterMode
+  mode: FilterMode
 }
 type ThreatActorIndividualConnection {
   pageInfo: PageInfo!
@@ -205,7 +210,7 @@ type Query {
     after: ID
     orderBy: ThreatActorsIndividualOrdering
     orderMode: OrderingMode
-    filters: [ThreatActorsIndividualFiltering!]
+    filters: ThreatActorsIndividualGroupFiltering
     filterMode: FilterMode
     search: String
     toStix: Boolean

@@ -34,7 +34,7 @@ export const threatActorsIndividualLinesQuery = graphql`
     $cursor: ID
     $orderBy: ThreatActorsIndividualOrdering
     $orderMode: OrderingMode
-    $filters: [ThreatActorsIndividualFiltering!]
+    $filters: ThreatActorsIndividualGroupFiltering
   ) {
     ...ThreatActorsIndividualLines_data
     @arguments(
@@ -56,7 +56,7 @@ const threatActorsIndividualLinesFragment = graphql`
     cursor: { type: "ID" }
     orderBy: { type: "ThreatActorsIndividualOrdering", defaultValue: name }
     orderMode: { type: "OrderingMode", defaultValue: asc }
-    filters: { type: "[ThreatActorsIndividualFiltering!]" }
+    filters: { type: "ThreatActorsIndividualGroupFiltering" }
   )
   @refetchable(queryName: "ThreatActorsIndividualLinesRefetchQuery") {
     threatActorsIndividuals(

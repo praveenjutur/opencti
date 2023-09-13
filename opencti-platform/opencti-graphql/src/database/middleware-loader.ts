@@ -37,6 +37,12 @@ export interface Filter {
   }>;
 }
 
+export interface FilterGroup {
+  mode?: string;
+  filters: Filter[],
+  filterGroups: FilterGroup[],
+}
+
 export interface ListFilter<T extends BasicStoreCommon> {
   indices?: Array<string>;
   search?: InputMaybe<string> | string | undefined;
@@ -47,7 +53,7 @@ export interface ListFilter<T extends BasicStoreCommon> {
   after?: string | undefined | null;
   orderBy?: any,
   orderMode?: InputMaybe<OrderingMode>;
-  filters?: Array<Filter> | null;
+  filters?: FilterGroup | null;
   filterMode?: FilterMode | undefined | null;
   callback?: (result: Array<T>) => Promise<boolean | void>
   types?: string[]
