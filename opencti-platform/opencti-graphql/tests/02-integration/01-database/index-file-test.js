@@ -27,11 +27,12 @@ const testFileIndexing = async (fileName, mimetype, documentId) => {
   expect(document.attachment).not.toBeNull();
   expect(document.attachment.content).not.toBeNull();
   expect(document.attachment.content_type.includes(file.mimetype)).toBeTruthy();
+  expect(document.file_id).toEqual(uploadedFile.id);
 
   // cleanup : delete file in minio
   await deleteFile(testContext, ADMIN_USER, uploadedFile.id);
 
-  // TODO method should return document each test should assert specificly on it
+  //TODO method should return document each test should assert specificly on it
 };
 
 const testFilesSearching = async (search, expectedFilesIds) => {
