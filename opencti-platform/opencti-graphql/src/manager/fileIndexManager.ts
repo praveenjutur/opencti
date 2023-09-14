@@ -1,7 +1,8 @@
 import { clearIntervalAsync, setIntervalAsync, type SetIntervalAsyncTimer } from 'set-interval-async/fixed';
 import { Promise as BluePromise } from 'bluebird';
+import moment from 'moment';
 import type { BasicStoreSettings } from '../types/settings';
-import { isNotEmptyField, READ_INDEX_FILES } from '../database/utils';
+import { isNotEmptyField } from '../database/utils';
 import conf, { logApp } from '../config/conf';
 import {
   lockResource,
@@ -10,7 +11,7 @@ import {
 import { executionContext, SYSTEM_USER } from '../utils/access';
 import { getEntityFromCache } from '../database/cache';
 import { ENTITY_TYPE_SETTINGS } from '../schema/internalObject';
-import { elBulkIndexFiles, elCount } from '../database/engine';
+import { elBulkIndexFiles, elSearchFiles } from '../database/engine';
 import { getFileContent, rawFilesListing } from '../database/file-storage';
 import type { AuthContext } from '../types/user';
 import { generateInternalId } from '../schema/identifier';
@@ -21,25 +22,42 @@ const SCHEDULE_TIME = conf.get('file_index_manager:interval') || 60000;
 // TODO use configuration entity for parameters
 const indexImportedFiles = async (
   context: AuthContext,
+  fromDate: Date | null = null,
+  path = '/import', // or '/import/global'
   // limit = 1000,
   maxFileSize = 5242880, // 5 mb
   mimeTypes = ['application/pdf', 'text/plain', 'text/csv'],
-  path = '/import', // or '/import/global'
-  // fromDate = null,
 ) => {
-  // TODO how can we exclude import/pending bucket ?
-  let files = await rawFilesListing(context, SYSTEM_USER, path, true);
+  const fileListingOpts = { modifiedSince: fromDate, excludePath: 'import/pending/' };
+  let files = await rawFilesListing(context, SYSTEM_USER, path, true, fileListingOpts);
   if (mimeTypes?.length > 0) {
     files = files.filter((file) => {
       return maxFileSize >= (file.size || 0) && file.metaData?.mimetype && mimeTypes.includes(file.metaData.mimetype);
     });
   }
-  const filesToLoad = files.map((file) => ({ id: file.id })); // TODO add data (like entity_id, mimeType) ?
-  // TODO search documents by file id (to update if already indexed)
-  const loadFilesToIndex = async (file: { id: string }) => {
+  if (files.length === 0) {
+    return;
+  }
+  // search documents by file id (to update if already indexed)
+  const searchOptions = {
+    first: files.length, // TODO maybe we should paginate ?
+    connectionFormat: false,
+    fileIds: files.map((f) => f.id),
+    fields: ['internal_id', 'file_id'],
+  };
+  const existingFiles = await elSearchFiles(context, SYSTEM_USER, searchOptions);
+  const filesToLoad = files.map((file) => {
+    const existingFile = existingFiles.find((e: { file_id: string, internal_id: string }) => e.file_id === file.id);
+    const internalId = existingFile ? existingFile.internal_id : generateInternalId();
+    return {
+      id: file.id,
+      internalId,
+    };
+  }); // TODO add data (like entity_id, mimeType) ?
+  const loadFilesToIndex = async (file: { id: string, internalId: string }) => {
     const content = await getFileContent(file.id, 'base64');
     // TODO test content is not null
-    return { internal_id: generateInternalId(), file_id: file.id, file_data: content };
+    return { internal_id: file.internalId, file_id: file.id, file_data: content };
   };
   const filesToIndex = await BluePromise.map(filesToLoad, loadFilesToIndex, { concurrency: 5 });
   await elBulkIndexFiles(filesToIndex);
@@ -60,11 +78,10 @@ const initFileIndexManager = () => {
         lock = await lockResource([FILE_INDEX_MANAGER_KEY], { retryCount: 0 });
         running = true;
         logApp.info('[OPENCTI-MODULE] Running file index manager');
-        const filesCount = await elCount(context, SYSTEM_USER, READ_INDEX_FILES);
-        if (filesCount === 0) {
-          logApp.info('[OPENCTI-MODULE] file index empty, run first indexation');
-          await indexImportedFiles(context);
-        }
+        const lastFiles = await elSearchFiles(context, SYSTEM_USER, { first: 1, connectionFormat: false });
+        const lastIndexedDate = lastFiles?.length > 0 ? moment(lastFiles[0].indexed_at).toDate() : null;
+        logApp.info('[OPENCTI-MODULE] Index imported files since', { lastIndexedDate });
+        await indexImportedFiles(context, lastIndexedDate);
         // TODO handle lock ?
         logApp.info('[OPENCTI-MODULE] End of file index manager processing');
       } finally {

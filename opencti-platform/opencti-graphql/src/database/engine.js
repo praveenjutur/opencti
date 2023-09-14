@@ -1999,10 +1999,13 @@ export const elBulkIndexFiles = async (files, maxBulkOperations = 10) => {
 };
 
 export const elSearchFiles = async (context, user, options = {}) => {
-  const { search = null, first = 20, after, orderBy = null, orderMode = 'asc', connectionFormat = true } = options;
+  const { first = 20, after, orderBy = null, orderMode = 'asc' } = options; // pagination options
+  const { search = null, fileIds = [] } = options; // search options
+  const { fields = [], connectionFormat = true } = options; // return format options
   const searchAfter = after ? cursorToOffset(after) : undefined;
   const must = [];
   const mustNot = [];
+  const sort = [];
   if (search) {
     const fullTextSearch = {
       multi_match: {
@@ -2012,6 +2015,18 @@ export const elSearchFiles = async (context, user, options = {}) => {
     };
     must.push(fullTextSearch);
   }
+  if (fileIds?.length > 0) {
+    const fileIdsSearch = {
+      terms: { 'file_id.keyword': fileIds }
+    };
+    must.push(fileIdsSearch);
+  }
+  if (!orderBy) { // TODO handle orderby param
+    // order by last indexed date by default
+    sort.push({ indexed_at: 'desc' });
+    // add internal_id sort since indexed_at is not unique
+    sort.push({ 'internal_id.keyword': 'desc' });
+  }
   const body = {
     query: {
       bool: {
@@ -2019,7 +2034,8 @@ export const elSearchFiles = async (context, user, options = {}) => {
         must_not: mustNot,
       },
     },
-    size: first
+    size: first,
+    sort,
   };
   if (searchAfter) {
     body.search_after = searchAfter;
@@ -2028,7 +2044,7 @@ export const elSearchFiles = async (context, user, options = {}) => {
     index: INDEX_FILES,
     ignore_throttled: ES_IGNORE_THROTTLED,
     track_total_hits: true,
-    _source: true,
+    _source: (fields?.length > 0) ? fields : true,
     body,
   };
   logApp.debug('[SEARCH] search files', { query });

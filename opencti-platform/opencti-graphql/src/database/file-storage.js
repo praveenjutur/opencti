@@ -180,7 +180,8 @@ export const isFileObjectExcluded = (id) => {
   return excludedFiles.map((e) => e.toLowerCase()).includes(fileName.toLowerCase());
 };
 
-export const rawFilesListing = async (context, user, directory, recursive = false) => {
+export const rawFilesListing = async (context, user, directory, recursive = false, opts = {}) => {
+  const { modifiedSince, excludePath } = opts;
   const storageObjects = [];
   const requestParams = {
     Bucket: bucketName,
@@ -201,7 +202,11 @@ export const rawFilesListing = async (context, user, directory, recursive = fals
       truncated = false;
     }
   }
-  const filteredObjects = storageObjects.filter((obj) => !isFileObjectExcluded(obj.Key));
+  const filteredObjects = storageObjects.filter((obj) => {
+    return !isFileObjectExcluded(obj.Key)
+        && (!modifiedSince || obj.LastModified > modifiedSince)
+        && (!excludePath || !obj.Key.startsWith(excludePath));
+  });
   // Load file metadata with 5 // call maximum
   return BluePromise.map(filteredObjects, (f) => loadFile(context, user, f.Key), { concurrency: 5 });
 };
