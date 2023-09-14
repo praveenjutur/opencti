@@ -16,7 +16,9 @@ import { delEditContext, lockResource, notify, setEditContext, storeUpdateEvent 
 import { BUS_TOPICS } from '../config/conf';
 import { FunctionalError, LockTimeoutError, TYPE_LOCK_ERROR, UnsupportedError } from '../config/errors';
 import { isStixCoreObject, stixCoreObjectOptions } from '../schema/stixCoreObject';
+import { findById as findStatusById } from './status';
 import {
+  ABSTRACT_INTERNAL_OBJECT,
   ABSTRACT_STIX_CORE_OBJECT,
   ABSTRACT_STIX_DOMAIN_OBJECT,
   buildRefRelationKey,
@@ -37,7 +39,9 @@ import {
   ENTITY_TYPE_CONTAINER_NOTE,
   ENTITY_TYPE_CONTAINER_OBSERVED_DATA,
   ENTITY_TYPE_CONTAINER_OPINION,
-  ENTITY_TYPE_CONTAINER_REPORT, isStixDomainObjectContainer,
+  ENTITY_TYPE_CONTAINER_REPORT,
+  ENTITY_TYPE_IDENTITY_INDIVIDUAL,
+  isStixDomainObjectContainer,
 } from '../schema/stixDomainObject';
 import {
   ENTITY_TYPE_EXTERNAL_REFERENCE,
@@ -53,12 +57,7 @@ import { deleteFile, loadFile, storeFileConverter, upload } from '../database/fi
 import { elCount, elUpdateElement } from '../database/engine';
 import { generateStandardId, getInstanceIds } from '../schema/identifier';
 import { askEntityExport, askListExport, exportTransformFilters } from './stix';
-import {
-  isEmptyField,
-  isNotEmptyField,
-  READ_ENTITIES_INDICES,
-  READ_INDEX_INFERRED_ENTITIES
-} from '../database/utils';
+import { isEmptyField, isNotEmptyField, READ_ENTITIES_INDICES, READ_INDEX_INFERRED_ENTITIES } from '../database/utils';
 import { RELATION_RELATED_TO } from '../schema/stixCoreRelationship';
 import { ENTITY_TYPE_CONTAINER_CASE } from '../modules/case/case-types';
 import { getEntitySettingFromCache } from '../modules/entitySetting/entitySetting-utils';
@@ -516,3 +515,119 @@ export const stixCoreObjectEditContext = async (context, user, stixCoreObjectId,
   });
 };
 // endregion
+
+// filters representatives
+const findFilterRepresentative = async (context, user, filter) => {
+  const { key, values } = filter;
+  let data;
+  switch (key) {
+    case 'toSightingId':
+      data = await Promise.all(values.map(async (id) => {
+        const result = await storeLoadById(context, user, id, ENTITY_TYPE_IDENTITY_INDIVIDUAL);
+        return {
+          id,
+          value: result?.name,
+          type: result?.entity_type,
+        };
+      }));
+      return data;
+    case 'members_user':
+    case 'members_group':
+    case 'members_organization':
+    case 'assigneeTo':
+    case 'participant':
+      data = await Promise.all(values.map(async (id) => {
+        const result = await storeLoadById(context, user, id, ABSTRACT_INTERNAL_OBJECT);
+        return {
+          id,
+          value: result?.name,
+          type: result?.entity_type,
+        };
+      }));
+      return data;
+    case 'creator':
+    case 'createdBy':
+    case 'sightedBy':
+    case 'elementId':
+    case 'fromId':
+    case 'toId':
+    case 'targets':
+    case 'objectContains':
+    case 'indicates':
+    case 'containers':
+      data = await Promise.all(values.map(async (id) => {
+        const result = await storeLoadById(context, user, id, ABSTRACT_STIX_CORE_OBJECT);
+        return {
+          id,
+          value: result ? extractEntityRepresentativeName(result) : undefined,
+          type: result?.entity_type,
+        };
+      }));
+      return data;
+    case 'labelledBy':
+      data = await Promise.all(values.map(async (id) => {
+        if (id === null) {
+          return {
+            id,
+            value: 'No label',
+            type: 'Label',
+          };
+        }
+        const result = await storeLoadById(context, user, id, ENTITY_TYPE_LABEL);
+        return {
+          id,
+          value: result?.value,
+          type: 'Label',
+        };
+      }));
+      return data;
+    case 'markedBy':
+      data = await Promise.all(values.map(async (id) => {
+        if (id === null) {
+          return {
+            id,
+            value: 'No marking',
+            type: 'Marking-Definition',
+          };
+        }
+        const result = await storeLoadById(context, user, id, ENTITY_TYPE_MARKING_DEFINITION);
+        return {
+          id,
+          value: result?.definition,
+          type: 'Marking-Definition',
+        };
+      }));
+      return data;
+    case 'killChainPhase':
+      data = await Promise.all(values.map(async (id) => {
+        const result = await storeLoadById(context, user, id, ENTITY_TYPE_KILL_CHAIN_PHASE);
+        return {
+          id,
+          value: result ? `[${result.kill_chain_name}] ${result.phase_name}` : undefined,
+          type: 'Kill-Chain-Phase',
+        };
+      }));
+      return data;
+    case 'x_opencti_workflow_id':
+      data = await Promise.all(values.map(async (id) => {
+        const result = await findStatusById(context, user, id);
+        return {
+          id,
+          value: result?.name,
+          type: 'Vocabulary',
+        };
+      }));
+      return data;
+    default:
+      return null;
+  }
+};
+
+export const findFiltersRepresentatives = async (context, user, filtersList = []) => {
+  const result = [];
+  // eslint-disable-next-line no-restricted-syntax
+  for (const filter of filtersList) {
+    result.push(await findFilterRepresentative(context, user, filter));
+  }
+  return result.flat();
+};

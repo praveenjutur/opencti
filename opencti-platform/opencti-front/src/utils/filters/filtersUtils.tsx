@@ -121,6 +121,44 @@ export const entityFilters = [
   'targets_not_eq',
 ];
 
+export const filtersWithRepresentative = [
+  'toSightingId',
+  'members_user',
+  'members_group',
+  'members_organization',
+  'assigneeTo',
+  'participant',
+  'creator',
+  'createdBy',
+  'sightedBy',
+  'elementId',
+  'fromId',
+  'toId',
+  'targets',
+  'objectContains',
+  'indicates',
+  'containers',
+  'labelledBy',
+  'markedBy',
+  'killChainPhase',
+  'x_opencti_workflow_id',
+];
+
+export const vocabularyFiltersWithTranslation = [
+  'x_opencti_detection',
+  'revoked',
+  'is_read',
+  'x_opencti_reliability',
+  'source_reliability',
+  'indicator_types',
+  'incident_type',
+  'report_types',
+  'channel_types',
+  'event_types',
+  'context',
+  'note_types'
+];
+
 export const isUniqFilter = (key: string) => uniqFilters.includes(key) || dateFilters.includes(key);
 
 export const findFilterFromKey = (filters: Filter[], key: string, operator?: string) => {

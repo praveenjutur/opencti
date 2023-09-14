@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import React, { FunctionComponent } from 'react';
 import makeStyles from '@mui/styles/makeStyles';
 import { useFormatter } from '../../../../components/i18n';
-import { dateFilters, directFilters, FiltersVariant, } from '../../../../utils/filters/filtersUtils';
+import { dateFilters, directFilters, FiltersVariant } from '../../../../utils/filters/filtersUtils';
 import FilterDate from './FilterDate';
 import FilterAutocomplete from './FilterAutocomplete';
 import { Theme } from '../../../../components/Theme';
@@ -82,7 +82,6 @@ const FiltersElement: FunctionComponent<FiltersElementProps> = ({
           .map((filter) => {
             const filterKey = filter.key;
             if (dateFilters.includes(filterKey)) {
-              console.log('inputValues in FiltersElement', inputValues);
               return (
                 <Grid key={filterKey} item={true} xs={6}>
                   <FilterDate

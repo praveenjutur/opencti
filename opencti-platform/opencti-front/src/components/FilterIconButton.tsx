@@ -7,9 +7,12 @@ import { truncate } from '../utils/String';
 import { DataColumns } from './list_lines';
 import { useFormatter } from './i18n';
 import { Theme } from './Theme';
-import FilterIconButtonContentWithRedirectionContainer from './FilterIconButtonContentWithRedirectionContainer';
-import { entityFilters, Filter, FilterGroup, filterValue } from '../utils/filters/filtersUtils';
+import { Filter, FilterGroup, filterValue } from '../utils/filters/filtersUtils';
 import { TriggerLine_node$data } from '../private/components/profile/triggers/__generated__/TriggerLine_node.graphql';
+import FilterIconButtonContent, { filterIconButtonContentQuery } from './FilterIconButtonContent';
+import useQueryLoading from '../utils/hooks/useQueryLoading';
+import Loader from './Loader';
+import { FilterIconButtonContentQuery } from './__generated__/FilterIconButtonContentQuery.graphql';
 
 const useStyles = makeStyles<Theme>((theme) => ({
   filters1: {
@@ -148,6 +151,11 @@ const FilterIconButton: FunctionComponent<FilterIconButtonProps> = ({
   const lastKey = last(displayedFilters)?.key;
   const lastOperator = last(displayedFilters)?.operator;
 
+  const filtersRepresentativesQueryRef = useQueryLoading<FilterIconButtonContentQuery>(
+    filterIconButtonContentQuery,
+    { filters: filters.filters },
+  );
+
   return (
     <div
       className={finalClassName}
@@ -170,19 +178,17 @@ const FilterIconButton: FunctionComponent<FilterIconButtonProps> = ({
               const value = filterValue(n);
               return (
                 <span key={value}>
-                {redirection && entityFilters.includes(filterKey) ? (
-                  <FilterIconButtonContentWithRedirectionContainer
-                    id={n}
-                    value={value}
-                    resolvedInstanceFilters={resolvedInstanceFilters}
-                  />
-                ) : (
-                  <span>
-                    {value && value.length > 0
-                      ? truncate(value, 15)
-                      : t('No label')}{' '}
-                  </span>
-                )}
+                  {filtersRepresentativesQueryRef && (
+                    <React.Suspense fallback={<Loader />}>
+                      <FilterIconButtonContent
+                        redirection={redirection}
+                        filterKey={filterKey}
+                        id={n}
+                        resolvedInstanceFilters={resolvedInstanceFilters}
+                        filtersRepresentativesQueryRef={filtersRepresentativesQueryRef}
+                      ></FilterIconButtonContent>
+                    </React.Suspense>
+                  )}
                   {last(filterValues) !== n && (
                     <Chip
                       className={classes.inlineOperator}

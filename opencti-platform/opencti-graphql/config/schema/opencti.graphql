@@ -80,6 +80,19 @@ enum FilterMode {
   or
 }
 
+input Filter {
+  key: String
+  values: [String]
+  operator: String
+  mode: String
+}
+
+type FilterRepresentative {
+  id: String
+  value: String
+  type: String
+}
+
 ### EDIT
 
 enum EditOperation {
@@ -12274,6 +12287,7 @@ type Query {
     order: String
     distributionParameters: StixCoreObjectsDistributionParameters
   ): [MultiDistribution] @auth(for: [KNOWLEDGE, EXPLORE])
+  filtersRepresentatives(filters: [Filter]): [FilterRepresentative] @auth(for: [KNOWLEDGE])
 
   ######## STIX DOMAIN OBJECT ENTITIES
 

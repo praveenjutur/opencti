@@ -27,8 +27,8 @@ import { elCount } from '../../database/engine';
 import { READ_INDEX_STIX_DOMAIN_OBJECTS } from '../../database/utils';
 import type { DomainFindById } from '../../domain/domainTypes';
 
-export const findById: DomainFindById<BasicStoreEntityGrouping> = (context: AuthContext, user: AuthUser, channelId: string) => {
-  return storeLoadById<BasicStoreEntityGrouping>(context, user, channelId, ENTITY_TYPE_CONTAINER_GROUPING);
+export const findById: DomainFindById<BasicStoreEntityGrouping> = (context: AuthContext, user: AuthUser, groupingId: string) => {
+  return storeLoadById<BasicStoreEntityGrouping>(context, user, groupingId, ENTITY_TYPE_CONTAINER_GROUPING);
 };
 
 export const findAll = (context: AuthContext, user: AuthUser, opts: EntityOptions<BasicStoreEntityGrouping>) => {
