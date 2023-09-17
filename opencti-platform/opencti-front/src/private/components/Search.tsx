@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import { SearchStixCoreObjectLineDummy } from '@components/search/SearchStixCoreObjectLine';
 import {
@@ -9,6 +9,8 @@ import {
   SearchStixCoreObjectsLinesPaginationQuery$variables,
 } from '@components/search/__generated__/SearchStixCoreObjectsLinesPaginationQuery.graphql';
 import { useParams } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import SearchIndexedFilesLines from '@components/search/SearchIndexedFilesLines';
 import TopBar from './nav/TopBar';
 import ListLines from '../../components/list_lines/ListLines';
 import ToolBar from './data/ToolBar';
@@ -20,6 +22,7 @@ import useEntityToggle from '../../utils/hooks/useEntityToggle';
 import useQueryLoading from '../../utils/hooks/useQueryLoading';
 import useAuth from '../../utils/hooks/useAuth';
 import { useFormatter } from '../../components/i18n';
+import useEnterpriseEdition from '../../utils/hooks/useEnterpriseEdition';
 
 const LOCAL_STORAGE_KEY = 'view-search';
 
@@ -35,6 +38,7 @@ const Search = () => {
   } catch (e) {
     // Do nothing
   }
+  const isEnterpriseEdition = useEnterpriseEdition();
   const { viewStorage, helpers: storageHelpers, paginationOptions } = usePaginationLocalStorage<SearchStixCoreObjectsLinesPaginationQuery$variables>(
     LOCAL_STORAGE_KEY,
     {
@@ -65,6 +69,11 @@ const Search = () => {
     searchStixCoreObjectsLinesQuery,
     { ...paginationOptions, search: searchTerm },
   );
+  const [searchOpen, setSearchOpen] = useState(false);
+  const handleSearchIndexFiles = () => {
+    console.log('handleSearchIndexFiles', searchOpen);
+    setSearchOpen(true);
+  };
 
   const renderLines = () => {
     const isRuntimeSort = isRuntimeFieldEnable() ?? false;
@@ -196,6 +205,17 @@ const Search = () => {
             {t('Search for an entity')}
           </Typography>
           {renderLines()}
+          { isEnterpriseEdition
+            ? (<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <Button
+                size="small"
+                onClick={handleSearchIndexFiles}>
+                {t('Extend the search to the indexed files')}
+              </Button>
+            </div>) : (
+              ' '
+            )}
+          { searchOpen ? (<SearchIndexedFilesLines/>) : ('')}
         </div>
       </ExportContextProvider>
   );

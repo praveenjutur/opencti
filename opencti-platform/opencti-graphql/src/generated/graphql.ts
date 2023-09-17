@@ -17796,6 +17796,7 @@ export type Query = {
   incident?: Maybe<Incident>;
   incidents?: Maybe<IncidentConnection>;
   incidentsTimeSeries?: Maybe<Array<Maybe<TimeSeries>>>;
+  indexedFiles?: Maybe<FileConnection>;
   indicator?: Maybe<Indicator>;
   indicators?: Maybe<IndicatorConnection>;
   indicatorsDistribution?: Maybe<Array<Maybe<Distribution>>>;
@@ -18620,6 +18621,12 @@ export type QueryIncidentsTimeSeriesArgs = {
   operation: StatsOperation;
   relationship_type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   startDate: Scalars['DateTime']['input'];
+};
+
+
+export type QueryIndexedFilesArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -35323,6 +35330,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   incident?: Resolver<Maybe<ResolversTypes['Incident']>, ParentType, ContextType, Partial<QueryIncidentArgs>>;
   incidents?: Resolver<Maybe<ResolversTypes['IncidentConnection']>, ParentType, ContextType, Partial<QueryIncidentsArgs>>;
   incidentsTimeSeries?: Resolver<Maybe<Array<Maybe<ResolversTypes['TimeSeries']>>>, ParentType, ContextType, RequireFields<QueryIncidentsTimeSeriesArgs, 'endDate' | 'field' | 'interval' | 'operation' | 'startDate'>>;
+  indexedFiles?: Resolver<Maybe<ResolversTypes['FileConnection']>, ParentType, ContextType, Partial<QueryIndexedFilesArgs>>;
   indicator?: Resolver<Maybe<ResolversTypes['Indicator']>, ParentType, ContextType, RequireFields<QueryIndicatorArgs, 'id'>>;
   indicators?: Resolver<Maybe<ResolversTypes['IndicatorConnection']>, ParentType, ContextType, Partial<QueryIndicatorsArgs>>;
   indicatorsDistribution?: Resolver<Maybe<Array<Maybe<ResolversTypes['Distribution']>>>, ParentType, ContextType, RequireFields<QueryIndicatorsDistributionArgs, 'field' | 'operation'>>;

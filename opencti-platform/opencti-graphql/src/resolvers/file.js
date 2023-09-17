@@ -4,6 +4,7 @@ import { worksForSource } from '../domain/work';
 import { batchLoader } from '../database/middleware';
 import { batchCreator } from '../domain/user';
 import { batchStixDomainObjects } from '../domain/stixDomainObject';
+import { elSearchFiles } from '../database/engine';
 
 const creatorLoader = batchLoader(batchCreator);
 const domainLoader = batchLoader(batchStixDomainObjects);
@@ -13,6 +14,7 @@ const fileResolvers = {
     file: (_, { id }, context) => loadFile(context, context.user, id),
     importFiles: (_, { first }, context) => filesListing(context, context.user, first, 'import/global/'),
     pendingFiles: (_, { first }, context) => filesListing(context, context.user, first, 'import/pending/'),
+    indexedFiles: (_, { first, search }, context) => elSearchFiles(context, context.user, { first, search }),
   },
   File: {
     works: (file, _, context) => worksForSource(context, context.user, file.id),

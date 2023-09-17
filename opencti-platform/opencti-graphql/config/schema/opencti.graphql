@@ -11985,6 +11985,7 @@ type Query {
   file(id: String!): File @auth(for: [KNOWLEDGE_KNASKIMPORT])
   importFiles(first: Int): FileConnection @auth(for: [KNOWLEDGE_KNASKIMPORT])
   pendingFiles(first: Int): FileConnection @auth(for: [KNOWLEDGE_KNASKIMPORT])
+  indexedFiles(first: Int, search: String): FileConnection @auth(for: [KNOWLEDGE_KNASKIMPORT])
 
   ###### ENTITIES
 
