@@ -108,17 +108,12 @@ const uniqFilters = [
 // filters that targets entities instances
 export const entityFilters = [
   'elementId',
-  'elementId_not_eq',
   'fromId',
   'toId',
   'createdBy',
-  'createdBy_not_eq',
   'objectContains',
-  'objectContains_not_eq',
   'indicates',
-  'indicates_not_eq',
   'targets',
-  'targets_not_eq',
 ];
 
 export const filtersWithRepresentative = [

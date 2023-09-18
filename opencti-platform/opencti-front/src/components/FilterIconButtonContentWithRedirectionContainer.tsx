@@ -8,17 +8,14 @@ import { TriggerLine_node$data } from '../private/components/profile/triggers/__
 
 interface FilterIconButtonContentWithRedirectionContainerProps {
   id: string,
-  value: string,
+  displayedValue: string,
   resolvedInstanceFilters?: TriggerLine_node$data['resolved_instance_filters'];
 }
 
 const FilterIconButtonContentWithRedirectionContainer: FunctionComponent<
 FilterIconButtonContentWithRedirectionContainerProps
-> = ({ id, value, resolvedInstanceFilters }) => {
+> = ({ id, displayedValue, resolvedInstanceFilters }) => {
   const { t } = useFormatter();
-  const displayedValue = value && value.length > 0
-    ? truncate(value, 15)
-    : t('No label');
   const redirectionWithResolvedInstances = () => {
     const resolvedInstanceFiltersMap = new Map(
       resolvedInstanceFilters?.map((n) => [n.id, n]),

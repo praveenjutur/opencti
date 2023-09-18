@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { TriggerLine_node$data } from '@components/profile/triggers/__generated__/TriggerLine_node.graphql';
 import { graphql, PreloadedQuery, usePreloadedQuery } from 'react-relay';
 import {
@@ -6,10 +6,10 @@ import {
   filtersWithRepresentative,
   vocabularyFiltersWithTranslation,
 } from '../utils/filters/filtersUtils';
-import FilterIconButtonContentWithRedirectionContainer from './FilterIconButtonContentWithRedirectionContainer';
 import { truncate } from '../utils/String';
 import { useFormatter } from './i18n';
 import { FilterIconButtonContentQuery } from './__generated__/FilterIconButtonContentQuery.graphql';
+import { Link } from 'react-router-dom';
 
 export const filterIconButtonContentQuery = graphql`
     query FilterIconButtonContentQuery(
@@ -37,9 +37,11 @@ const FilterIconButtonContent: FunctionComponent<FilterIconButtonContentProps> =
   filtersRepresentativesQueryRef,
 }) => {
   const { t } = useFormatter();
+  const [deleted, setDeleted] = useState(false);
   const { filtersRepresentatives } = usePreloadedQuery(filterIconButtonContentQuery, filtersRepresentativesQueryRef);
   const filterValue = () => {
     if (filtersWithRepresentative.includes(filterKey)) {
+      setDeleted(true);
       return filtersRepresentatives?.filter((n) => n?.id === id)?.[0]?.value ?? t('deleted');
     }
     if (vocabularyFiltersWithTranslation.includes(filterKey)) {
@@ -62,20 +64,22 @@ const FilterIconButtonContent: FunctionComponent<FilterIconButtonContentProps> =
     }
     return id;
   };
-  const value = filterValue();
+  const displayedValue = truncate(filterValue(), 15);
   return (
     <>
       {redirection && entityFilters.includes(filterKey) ? (
-        <FilterIconButtonContentWithRedirectionContainer
-          id={id}
-          value={value}
-          resolvedInstanceFilters={resolvedInstanceFilters}
-        />
+        <>
+          deleted
+          ? (<Link to={`/dashboard/id/${id}`}>
+            <span color="primary">{displayedValue}</span>
+          </Link>
+          )
+          : (
+          <del>{displayedValue}</del>)
+        </>
       ) : (
         <span>
-          {value && value.length > 0
-            ? truncate(value, 15)
-            : t('No label')}{' '}
+          {displayedValue}{' '}
         </span>
       )}
     </>
