@@ -86,7 +86,6 @@ type Trigger implements InternalObject & BasicObject {
     isDirectAdministrator: Boolean
     currentUserAccessRight: String
     instance_trigger: Boolean
-    resolved_instance_filters: [ResolvedInstanceFilter!]
 }
 type TriggerConnection {
     pageInfo: PageInfo!

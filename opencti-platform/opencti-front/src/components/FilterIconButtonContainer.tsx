@@ -8,7 +8,7 @@ import { truncate } from '../utils/String';
 import { DataColumns } from './list_lines';
 import { useFormatter } from './i18n';
 import { Theme } from './Theme';
-import { Filter, filterValue } from '../utils/filters/filtersUtils';
+import { Filter } from '../utils/filters/filtersUtils';
 import FilterIconButtonContent, { filterIconButtonContentQuery } from './FilterIconButtonContent';
 import { FilterIconButtonContentQuery } from './__generated__/FilterIconButtonContentQuery.graphql';
 
@@ -122,23 +122,22 @@ const FilterIconButtonContainer: FunctionComponent<FilterIconButtonContainerProp
           const values = (
             <>
               {filterValues.map((n) => {
-                const value = filterValue(n);
                 return (
-                  <span key={value}>
-              <FilterIconButtonContent
-                redirection={redirection}
-                filterKey={filterKey}
-                id={n}
-                filtersRepresentatives={filtersRepresentatives}
-              ></FilterIconButtonContent>
-              {last(filterValues) !== n && (
-                <Chip
-                  className={classes.inlineOperator}
-                  label={t(currentFilter.mode.toUpperCase())}
-                  onClick={() => handleSwitchLocalMode?.(currentFilter)}
-                />
-              )}{' '}
-          </span>
+                  <span key={n}>
+                    <FilterIconButtonContent
+                      redirection={redirection}
+                      filterKey={filterKey}
+                      id={n}
+                      filtersRepresentatives={filtersRepresentatives}
+                    ></FilterIconButtonContent>
+                    {last(filterValues) !== n && (
+                      <Chip
+                        className={classes.inlineOperator}
+                        label={t(currentFilter.mode.toUpperCase())}
+                        onClick={() => handleSwitchLocalMode?.(currentFilter)}
+                      />
+                    )}{' '}
+                  </span>
                 );
               })}
             </>

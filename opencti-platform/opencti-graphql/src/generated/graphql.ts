@@ -17814,6 +17814,7 @@ export type Query = {
   feedbacks?: Maybe<FeedbackConnection>;
   feeds?: Maybe<FeedConnection>;
   file?: Maybe<File>;
+  filterRepresentative?: Maybe<FilterRepresentative>;
   filtersRepresentatives?: Maybe<Array<Maybe<FilterRepresentative>>>;
   globalSearch?: Maybe<StixCoreObjectConnection>;
   group?: Maybe<Group>;
@@ -18516,8 +18517,13 @@ export type QueryFileArgs = {
 };
 
 
+export type QueryFilterRepresentativeArgs = {
+  filter: Filter;
+};
+
+
 export type QueryFiltersRepresentativesArgs = {
-  filters?: InputMaybe<Array<InputMaybe<Filter>>>;
+  filters: Array<InputMaybe<Filter>>;
 };
 
 
@@ -26519,7 +26525,6 @@ export type Trigger = BasicObject & InternalObject & {
   parent_types: Array<Maybe<Scalars['String']['output']>>;
   period?: Maybe<DigestPeriod>;
   recipients?: Maybe<Array<Maybe<Member>>>;
-  resolved_instance_filters?: Maybe<Array<ResolvedInstanceFilter>>;
   standard_id: Scalars['String']['output'];
   trigger_ids?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   trigger_time?: Maybe<Scalars['String']['output']>;
@@ -35389,7 +35394,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   feedbacks?: Resolver<Maybe<ResolversTypes['FeedbackConnection']>, ParentType, ContextType, Partial<QueryFeedbacksArgs>>;
   feeds?: Resolver<Maybe<ResolversTypes['FeedConnection']>, ParentType, ContextType, Partial<QueryFeedsArgs>>;
   file?: Resolver<Maybe<ResolversTypes['File']>, ParentType, ContextType, RequireFields<QueryFileArgs, 'id'>>;
-  filtersRepresentatives?: Resolver<Maybe<Array<Maybe<ResolversTypes['FilterRepresentative']>>>, ParentType, ContextType, Partial<QueryFiltersRepresentativesArgs>>;
+  filterRepresentative?: Resolver<Maybe<ResolversTypes['FilterRepresentative']>, ParentType, ContextType, RequireFields<QueryFilterRepresentativeArgs, 'filter'>>;
+  filtersRepresentatives?: Resolver<Maybe<Array<Maybe<ResolversTypes['FilterRepresentative']>>>, ParentType, ContextType, RequireFields<QueryFiltersRepresentativesArgs, 'filters'>>;
   globalSearch?: Resolver<Maybe<ResolversTypes['StixCoreObjectConnection']>, ParentType, ContextType, Partial<QueryGlobalSearchArgs>>;
   group?: Resolver<Maybe<ResolversTypes['Group']>, ParentType, ContextType, RequireFields<QueryGroupArgs, 'id'>>;
   grouping?: Resolver<Maybe<ResolversTypes['Grouping']>, ParentType, ContextType, RequireFields<QueryGroupingArgs, 'id'>>;
@@ -37577,7 +37583,6 @@ export type TriggerResolvers<ContextType = any, ParentType extends ResolversPare
   parent_types?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
   period?: Resolver<Maybe<ResolversTypes['DigestPeriod']>, ParentType, ContextType>;
   recipients?: Resolver<Maybe<Array<Maybe<ResolversTypes['Member']>>>, ParentType, ContextType>;
-  resolved_instance_filters?: Resolver<Maybe<Array<ResolversTypes['ResolvedInstanceFilter']>>, ParentType, ContextType>;
   standard_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   trigger_ids?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   trigger_time?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

@@ -59,11 +59,6 @@ const triggerEditionOverviewFragment = graphql`
       id
       name
     }
-    resolved_instance_filters {
-        id
-        valid
-        value
-    }
   }
 `;
 
@@ -475,7 +470,6 @@ TriggerEditionOverviewProps
                 handleRemoveFilter={handleRemoveFilter}
                 classNameNumber={2}
                 redirection
-                resolvedInstanceFilters={trigger.resolved_instance_filters ?? []}
               />
             </span>
           }

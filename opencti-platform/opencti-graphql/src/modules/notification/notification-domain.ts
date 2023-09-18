@@ -57,24 +57,6 @@ import { ForbiddenAccess, UnsupportedError } from '../../config/errors';
 import { ENTITY_TYPE_GROUP, ENTITY_TYPE_USER } from '../../schema/internalObject';
 import { ENTITY_TYPE_IDENTITY_ORGANIZATION } from '../organization/organization-types';
 
-// Outcomes
-
-export const batchResolvedInstanceFilters = async (context: AuthContext, user: AuthUser, instanceFiltersIds: string[]) => {
-  const instanceIds = instanceFiltersIds.map((u) => (Array.isArray(u) ? u : [u]));
-  const allInstanceIds = instanceIds.flat();
-  const instanceToFinds = R.uniq(allInstanceIds.filter((u) => isNotEmptyField(u)));
-  const instances = await elFindByIds(context, user, instanceToFinds, { toMap: true }) as BasicStoreObject[];
-  return instanceIds
-    .map((ids) => ids
-      .map((id) => [
-        id,
-        Object.keys(instances).includes(id),
-        instances[id] ? extractEntityRepresentativeName(instances[id]) : '',
-      ]));
-};
-
-const resolvedInstanceFiltersLoader = batchLoader(batchResolvedInstanceFilters);
-
 // Triggers
 // Due to engine limitation we restrict the recipient to only one user for now
 const extractUniqRecipient = async (
@@ -242,21 +224,6 @@ export const triggerDelete = async (context: AuthContext, user: AuthUser, trigge
   });
   return triggerId;
 };
-
-export const resolvedInstanceFiltersGet = async (context: AuthContext, user: AuthUser, trigger: BasicStoreEntityLiveTrigger | BasicStoreEntityTrigger) => {
-  if (trigger.trigger_type === 'live') {
-    const filters = trigger.trigger_type === 'live' ? JSON.parse((trigger as BasicStoreEntityLiveTrigger).filters) : {};
-    const instanceFilters = ENTITY_FILTERS.map((n) => filters[n]).filter((el) => el);
-    const instanceFiltersIds = instanceFilters.flat().map((instanceFilter) => instanceFilter.id);
-    const resolvedInstanceFilters = await resolvedInstanceFiltersLoader.load(instanceFiltersIds, context, user) as [string, boolean, string | undefined][];
-    return resolvedInstanceFilters.map((n) => {
-      const [id, valid, value] = n;
-      return { id, valid, value };
-    });
-  }
-  return [];
-};
-
 export const triggersKnowledgeFind = (context: AuthContext, user: AuthUser, opts: QueryTriggersKnowledgeArgs) => {
   // key is a string[] because of the resolver, we have updated the keys
   const finalFilter = [];

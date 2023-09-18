@@ -8214,7 +8214,8 @@ type Query {
   stixCoreObjectsMultiNumber(startDate: DateTime, endDate: DateTime, onlyInferred: Boolean, numberParameters: [StixCoreObjectsNumberParameters]): [Number]
   stixCoreObjectsDistribution(objectId: [String], relationship_type: [String], toTypes: [String], elementWithTargetTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
   stixCoreObjectsMultiDistribution(field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, distributionParameters: StixCoreObjectsDistributionParameters): [MultiDistribution]
-  filtersRepresentatives(filters: [Filter]): [FilterRepresentative]
+  filterRepresentative(filter: Filter!): FilterRepresentative
+  filtersRepresentatives(filters: [Filter]!): [FilterRepresentative]
   stixDomainObject(id: String!): StixDomainObject
   stixDomainObjects(first: Int, after: ID, types: [String], orderBy: StixDomainObjectsOrdering, orderMode: OrderingMode, filters: StixDomainObjectsGroupFiltering, filterMode: FilterMode, search: String, relationship_type: [String], elementId: String): StixDomainObjectConnection
   bookmarks(first: Int, after: ID, types: [String]): StixDomainObjectConnection
@@ -9850,7 +9851,6 @@ type Trigger implements InternalObject & BasicObject {
   isDirectAdministrator: Boolean
   currentUserAccessRight: String
   instance_trigger: Boolean
-  resolved_instance_filters: [ResolvedInstanceFilter!]
 }
 
 type TriggerConnection {

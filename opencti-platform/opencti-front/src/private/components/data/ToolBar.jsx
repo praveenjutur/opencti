@@ -57,6 +57,7 @@ import Alert from '@mui/material/Alert';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
+import ToolBarFilterValueContainer from './ToolBarFilterValueContainer';
 import inject18n from '../../../components/i18n';
 import { truncate } from '../../../utils/String';
 import { commitMutation, fetchQuery, MESSAGING$ } from '../../../relay/environment';
@@ -73,8 +74,10 @@ import { hexToRGB } from '../../../utils/Colors';
 import { externalReferencesQueriesSearchQuery } from '../analyses/external_references/ExternalReferencesQueries';
 import StixDomainObjectCreation from '../common/stix_domain_objects/StixDomainObjectCreation';
 import ItemMarkings from '../../../components/ItemMarkings';
-import { filterValue, findFilterFromKey } from '../../../utils/filters/filtersUtils';
+import { findFilterFromKey } from '../../../utils/filters/filtersUtils';
 import { stixCyberObservableTypes } from '../../../utils/hooks/useAttributes';
+import useQueryLoading from '../../../utils/hooks/useQueryLoading';
+import { filterIconButtonContentQuery } from '../../../components/FilterIconButtonContent';
 
 const styles = (theme) => ({
   bottomNav: {
@@ -1599,60 +1602,9 @@ class ToolBar extends Component {
                                   )}
                                 </span>
                               )}
-                              {filters.filters.map((currentFilter) => {
-                                const label = `${truncate(
-                                  currentFilter.key.startsWith('rel_')
-                                    ? t(
-                                      `relationship_${currentFilter.key
-                                        .replace('rel_', '')
-                                        .replace('.*', '')}`,
-                                    )
-                                    : t(`filter_${currentFilter.key}`),
-                                  20,
-                                )}`;
-                                const localFilterMode = currentFilter.operator === 'or'
-                                  ? t('AND')
-                                  : t('OR');
-                                const values = (
-                                  <span>
-                                    {currentFilter.values.map(
-                                      (o) => (
-                                        <span
-                                          key={o} // TODO resolve o name
-                                        >
-                                          {/* eslint-disable-next-line no-nested-ternary */}
-                                          {filterValue(o) && filterValue(o).length > 0
-                                            ? truncate(o, 15)
-                                            : t('No label')}{' '}
-                                          {R.last(currentFilter.values)
-                                            !== o && (
-                                            <code>{localFilterMode}</code>
-                                          )}{' '}
-                                        </span>
-                                      ),
-                                    )}
-                                  </span>
-                                );
-                                return (
-                                  <span key={currentFilter.key}>
-                                    <Chip
-                                      classes={{ root: classes.filter }}
-                                      label={
-                                        <div>
-                                          <strong>{label}</strong>: {values}
-                                        </div>
-                                      }
-                                    />
-                                    {R.last(filters.filters).key
-                                      !== currentFilter.key && (
-                                      <Chip
-                                        classes={{ root: classes.operator }}
-                                        label={t('AND')}
-                                      />
-                                    )}
-                                  </span>
-                                );
-                              })}
+                              <ToolBarFilterValueContainer
+                                filtersList={filters.filters}
+                              ></ToolBarFilterValueContainer>
                             </div>
                           ) : (
                             <span>

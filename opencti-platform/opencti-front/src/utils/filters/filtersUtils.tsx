@@ -1,4 +1,5 @@
-import { truncate } from '../String';
+import { useFormatter } from '../../components/i18n';
+import { FilterIconButtonContentQuery$data } from '../../components/__generated__/FilterIconButtonContentQuery.graphql';
 
 export const FiltersVariant = {
   list: 'list',
@@ -206,10 +207,35 @@ export const filtersWithEntityType = (filters: FilterGroup | undefined, type: st
     : undefined);
 };
 
-export const filterValue = (id: string) => {
-  return truncate(id, 5); // TODO implement correctly
-};
-
 export const isFilterGroupNotEmpty = (filterGroup: FilterGroup) => {
   return filterGroup.filters.length > 0 || filterGroup.filterGroups.length > 0;
+};
+
+export const filterValue = (filterKey: string, id: string, filtersRepresentatives: FilterIconButtonContentQuery$data['filtersRepresentatives']) => {
+  const { t, nsdt } = useFormatter();
+  if (filtersWithRepresentative.includes(filterKey)) {
+    return filtersRepresentatives?.filter((n) => n?.id === id)?.[0]?.value;
+  }
+  if (vocabularyFiltersWithTranslation.includes(filterKey)) {
+    return t(id);
+  }
+  if (filterKey === 'basedOn') {
+    return id === 'EXISTS' ? t('Yes') : t('No');
+  }
+  if (filterKey === 'x_opencti_negative') {
+    return t(id ? 'False positive' : 'Malicious');
+  }
+  if (entityTypesFilters.includes(filterKey)) {
+    return id === 'all'
+      ? t('entity_All')
+      : t(
+        id.toString()[0] === id.toString()[0].toUpperCase()
+          ? `entity_${id.toString()}`
+          : `relationship_${id.toString()}`,
+      );
+  }
+  if (dateFilters.includes(filterKey)) {
+    return nsdt(id);
+  }
+  return id;
 };

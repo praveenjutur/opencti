@@ -12287,7 +12287,8 @@ type Query {
     order: String
     distributionParameters: StixCoreObjectsDistributionParameters
   ): [MultiDistribution] @auth(for: [KNOWLEDGE, EXPLORE])
-  filtersRepresentatives(filters: [Filter]): [FilterRepresentative] @auth(for: [KNOWLEDGE])
+  filterRepresentative(filter: Filter!): FilterRepresentative @auth(for: [KNOWLEDGE])
+  filtersRepresentatives(filters: [Filter]!): [FilterRepresentative] @auth(for: [KNOWLEDGE])
 
   ######## STIX DOMAIN OBJECT ENTITIES
 

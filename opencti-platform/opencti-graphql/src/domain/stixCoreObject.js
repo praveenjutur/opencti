@@ -517,7 +517,7 @@ export const stixCoreObjectEditContext = async (context, user, stixCoreObjectId,
 // endregion
 
 // filters representatives
-const findFilterRepresentative = async (context, user, filter) => {
+export const findFilterRepresentative = async (context, user, filter) => {
   const { key, values } = filter;
   let data;
   switch (key) {

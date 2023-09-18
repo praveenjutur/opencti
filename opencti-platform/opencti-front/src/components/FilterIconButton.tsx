@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react';
 import makeStyles from '@mui/styles/makeStyles';
 import { DataColumns } from './list_lines';
 import { Filter, FilterGroup } from '../utils/filters/filtersUtils';
-import { TriggerLine_node$data } from '../private/components/profile/triggers/__generated__/TriggerLine_node.graphql';
 import { filterIconButtonContentQuery } from './FilterIconButtonContent';
 import useQueryLoading from '../utils/hooks/useQueryLoading';
 import Loader from './Loader';
@@ -50,7 +49,6 @@ interface FilterIconButtonProps {
   dataColumns?: DataColumns;
   disabledPossible?: boolean;
   redirection?: boolean;
-  resolvedInstanceFilters?: TriggerLine_node$data['resolved_instance_filters'];
 }
 
 const FilterIconButton: FunctionComponent<FilterIconButtonProps> = ({
@@ -64,7 +62,6 @@ const FilterIconButton: FunctionComponent<FilterIconButtonProps> = ({
   dataColumns,
   disabledPossible,
   redirection,
-  resolvedInstanceFilters,
 }) => {
   const classes = useStyles();
 
@@ -97,17 +94,17 @@ const FilterIconButton: FunctionComponent<FilterIconButtonProps> = ({
     >
     {filtersRepresentativesQueryRef && (
       <React.Suspense fallback={<Loader />}>
-      <FilterIconButtonContainer
-        displayedFilters={displayedFilters}
-        globalMode={filters.mode}
-        handleRemoveFilter={handleRemoveFilter}
-        handleSwitchGlobalMode={handleSwitchGlobalMode}
-        handleSwitchLocalMode={handleSwitchLocalMode}
-        styleNumber={styleNumber}
-        disabledPossible={disabledPossible}
-        redirection={redirection}
-        filtersRepresentativesQueryRef={filtersRepresentativesQueryRef}
-      ></FilterIconButtonContainer>
+        <FilterIconButtonContainer
+          displayedFilters={displayedFilters}
+          globalMode={filters.mode}
+          handleRemoveFilter={handleRemoveFilter}
+          handleSwitchGlobalMode={handleSwitchGlobalMode}
+          handleSwitchLocalMode={handleSwitchLocalMode}
+          styleNumber={styleNumber}
+          disabledPossible={disabledPossible}
+          redirection={redirection}
+          filtersRepresentativesQueryRef={filtersRepresentativesQueryRef}
+        ></FilterIconButtonContainer>
       </React.Suspense>)
     }
     </div>

@@ -92,7 +92,7 @@ const localStorageToPaginationOptions = (
     basePagination.orderMode = orderAsc ? OrderMode.asc : OrderMode.desc;
     basePagination.orderBy = sortBy;
   }
-  let convertedFilters = filters.filters as Filter[];
+  let convertedFilters = filters?.filters as Filter[];
   const fromId = R.head(convertedFilters.filter((n) => n.key === 'fromId'))?.values || undefined;
   const toId = R.head(convertedFilters.filter((n) => n.key === 'toId'))?.values || undefined;
   const fromTypes = R.head(convertedFilters.filter((n) => n.key === 'fromTypes'))?.values || undefined;
@@ -102,7 +102,7 @@ const localStorageToPaginationOptions = (
   );
 
   const paginationFilters = {
-    mode: filters.mode ?? 'and',
+    mode: filters?.mode ?? 'and',
     filters: convertedFilters ?? [] as Filter[],
     filterGroups: [] as FilterGroup[],
   };

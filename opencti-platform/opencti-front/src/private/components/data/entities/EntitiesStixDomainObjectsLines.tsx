@@ -42,7 +42,7 @@ export const entitiesStixDomainObjectsLinesQuery = graphql`
         $cursor: ID
         $orderBy: StixDomainObjectsOrdering
         $orderMode: OrderingMode
-        $filters: [StixDomainObjectsFiltering]
+        $filters: StixDomainObjectsGroupFiltering
     ) {
         ...EntitiesStixDomainObjectsLines_data
         @arguments(
@@ -66,7 +66,7 @@ export const entitiesStixDomainObjectsLinesFragment = graphql`
             cursor: { type: "ID" }
             orderBy: { type: "StixDomainObjectsOrdering", defaultValue: name }
             orderMode: { type: "OrderingMode", defaultValue: asc }
-            filters: { type: "[StixDomainObjectsFiltering]" }
+            filters: { type: "StixDomainObjectsGroupFiltering" }
         )
         @refetchable(queryName: "EntitiesStixDomainObjectsLinesRefetchQuery") {
             stixDomainObjects(
