@@ -151,8 +151,10 @@ export const vocabularyFiltersWithTranslation = [
   'channel_types',
   'event_types',
   'context',
-  'note_types'
+  'note_types',
 ];
+
+export const entityTypesFilters = ['entity_type', 'entity_types', 'fromTypes', 'toTypes', 'relationship_types', 'container_type'];
 
 export const isUniqFilter = (key: string) => uniqFilters.includes(key) || dateFilters.includes(key);
 

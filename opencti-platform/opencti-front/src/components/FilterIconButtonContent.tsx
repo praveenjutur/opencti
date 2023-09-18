@@ -1,15 +1,17 @@
 import React, { FunctionComponent, useState } from 'react';
-import { TriggerLine_node$data } from '@components/profile/triggers/__generated__/TriggerLine_node.graphql';
-import { graphql, PreloadedQuery, usePreloadedQuery } from 'react-relay';
+import { graphql } from 'react-relay';
+import { Link } from 'react-router-dom';
 import {
-  entityFilters,
+  dateFilters,
+  entityFilters, entityTypesFilters,
   filtersWithRepresentative,
   vocabularyFiltersWithTranslation,
 } from '../utils/filters/filtersUtils';
 import { truncate } from '../utils/String';
 import { useFormatter } from './i18n';
-import { FilterIconButtonContentQuery } from './__generated__/FilterIconButtonContentQuery.graphql';
-import { Link } from 'react-router-dom';
+import {
+  FilterIconButtonContentQuery$data,
+} from './__generated__/FilterIconButtonContentQuery.graphql';
 
 export const filterIconButtonContentQuery = graphql`
     query FilterIconButtonContentQuery(
@@ -25,24 +27,25 @@ interface FilterIconButtonContentProps {
   redirection?: boolean;
   filterKey: string;
   id: string;
-  resolvedInstanceFilters?: TriggerLine_node$data['resolved_instance_filters'];
-  filtersRepresentativesQueryRef: PreloadedQuery<FilterIconButtonContentQuery>;
+  filtersRepresentatives: FilterIconButtonContentQuery$data['filtersRepresentatives'];
 }
 
 const FilterIconButtonContent: FunctionComponent<FilterIconButtonContentProps> = ({
   redirection,
   filterKey,
   id,
-  resolvedInstanceFilters,
-  filtersRepresentativesQueryRef,
+  filtersRepresentatives,
 }) => {
-  const { t } = useFormatter();
-  const [deleted, setDeleted] = useState(false);
-  const { filtersRepresentatives } = usePreloadedQuery(filterIconButtonContentQuery, filtersRepresentativesQueryRef);
+  const { t, nsdt } = useFormatter();
+  const [isDeleted, setDeleted] = useState(false);
   const filterValue = () => {
     if (filtersWithRepresentative.includes(filterKey)) {
-      setDeleted(true);
-      return filtersRepresentatives?.filter((n) => n?.id === id)?.[0]?.value ?? t('deleted');
+      const value = filtersRepresentatives?.filter((n) => n?.id === id)?.[0]?.value;
+      if (!value) {
+        setDeleted(true);
+        return 'deleted';
+      }
+      return value;
     }
     if (vocabularyFiltersWithTranslation.includes(filterKey)) {
       return t(id);
@@ -53,7 +56,7 @@ const FilterIconButtonContent: FunctionComponent<FilterIconButtonContentProps> =
     if (filterKey === 'x_opencti_negative') {
       return t(id ? 'False positive' : 'Malicious');
     }
-    if (['entity_type', 'entity_types', 'fromTypes', 'toTypes', 'relationship_types', 'container_type'].includes(filterKey)) {
+    if (entityTypesFilters.includes(filterKey)) {
       return id === 'all'
         ? t('entity_All')
         : t(
@@ -62,27 +65,30 @@ const FilterIconButtonContent: FunctionComponent<FilterIconButtonContentProps> =
             : `relationship_${id.toString()}`,
         );
     }
+    if (dateFilters.includes(filterKey)) {
+      return nsdt(id);
+    }
     return id;
   };
   const displayedValue = truncate(filterValue(), 15);
-  return (
-    <>
-      {redirection && entityFilters.includes(filterKey) ? (
-        <>
-          deleted
+  const renderWithRedirection = () => {
+    return (
+      <>
+        {!isDeleted
           ? (<Link to={`/dashboard/id/${id}`}>
             <span color="primary">{displayedValue}</span>
-          </Link>
-          )
-          : (
-          <del>{displayedValue}</del>)
-        </>
-      ) : (
-        <span>
-          {displayedValue}{' '}
-        </span>
-      )}
-    </>
+          </Link>)
+          : (<del>{displayedValue}</del>)}
+      </>
+    );
+  };
+  if (redirection && entityFilters.includes(filterKey)) {
+    return renderWithRedirection();
+  }
+  return (
+    <span>
+      {displayedValue}{' '}
+    </span>
   );
 };
 
