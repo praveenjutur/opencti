@@ -15,6 +15,7 @@ import {
   offsetToCursor,
   pascalize,
   READ_DATA_INDICES,
+  READ_DATA_INDICES_WITHOUT_INTERNAL,
   READ_ENTITIES_INDICES,
   READ_INDEX_INTERNAL_OBJECTS,
   READ_INDEX_STIX_DOMAIN_OBJECTS,
@@ -1945,13 +1946,17 @@ export const elAttributeValues = async (context, user, field, opts = {}) => {
 // endregion
 
 // index and search files
-const buildIndexFileBody = (documentId, fileContent, fileId) => {
+const buildIndexFileBody = (documentId, fileContent, fileId, entity = null) => {
   const documentBody = {
     internal_id: documentId,
     indexed_at: now(),
     file_id: fileId,
     file_data: fileContent,
   };
+  if (entity) {
+    documentBody.entity_id = entity.internal_id;
+    // TODO markings + authorized_members + authorized_authorities
+  }
   return documentBody;
 };
 export const elIndexFile = async (documentId, fileContent, fileId) => {
@@ -1968,24 +1973,33 @@ export const elIndexFile = async (documentId, fileContent, fileId) => {
     throw DatabaseError('[SEARCH] Error updating elastic (update)', { error: err, documentId, body: documentBody });
   });
 };
-export const elBulkIndexFiles = async (files, maxBulkOperations = 10) => {
+export const elBulkIndexFiles = async (context, user, files, maxBulkOperations = 10) => {
   if (!files || files.length === 0) {
     return;
   }
   const bulkOperations = [];
+  const entityIds = files.map((file) => file.entity_id);
+  const opts = { indices: READ_DATA_INDICES_WITHOUT_INTERNAL, toMap: true };
+  const entitiesMap = await elFindByIds(context, user, entityIds, opts);
   for (let index = 0; index < files.length; index += 1) {
     const file = files[index];
-    const { internal_id, file_data, file_id } = file;
-    const indexQuery = {
-      index: {
-        _index: INDEX_FILES,
-        _id: internal_id,
-        pipeline: 'attachment',
-        retry_on_conflict: ES_RETRY_ON_CONFLICT
+    const { internal_id, file_data, file_id, entity_id } = file;
+    if (internal_id && file_id && file_data) {
+      const indexQuery = {
+        index: {
+          _index: INDEX_FILES,
+          _id: internal_id,
+          pipeline: 'attachment',
+          retry_on_conflict: ES_RETRY_ON_CONFLICT
+        }
+      };
+      let entity = null;
+      if (entity_id) {
+        entity = entitiesMap[entity_id];
       }
-    };
-    const documentBody = buildIndexFileBody(internal_id, file_data, file_id);
-    bulkOperations.push(...[indexQuery, documentBody]);
+      const documentBody = buildIndexFileBody(internal_id, file_data, file_id, entity);
+      bulkOperations.push(...[indexQuery, documentBody]);
+    }
   }
   let currentProcessing = 0;
   // TODO compute length of bulk operations to be sure it's less then 100mb (ES limit)
