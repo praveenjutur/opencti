@@ -7413,11 +7413,16 @@ enum StixCyberObservablesFilter {
   x_opencti_additional_names
   creator
 }
-input StixCyberObservablesFiltering {
+input StixCyberObservablesGroupFiltering {
+  mode: FilterMode!
+  filters: [StixCyberObservablesFilterFiltering]!
+  filterGroups: [StixCyberObservablesGroupFiltering]!
+}
+input StixCyberObservablesFilterFiltering {
   key: [StixCyberObservablesFilter!]!
-  values: [String]
+  values: [String]!
   operator: String
-  filterMode: FilterMode
+  mode: FilterMode
 }
 type StixCyberObservableConnection {
   pageInfo: PageInfo!
@@ -12786,7 +12791,7 @@ type Query {
     types: [String]
     orderBy: StixCyberObservablesOrdering
     orderMode: OrderingMode
-    filters: [StixCyberObservablesFiltering]
+    filters: StixCyberObservablesGroupFiltering
     filterMode: FilterMode
     search: String
     toStix: Boolean
@@ -12796,13 +12801,13 @@ type Query {
     types: [String]
     authorId: String
     endDate: DateTime
-    filters: [StixCyberObservablesFiltering]
+    filters: StixCyberObservablesGroupFiltering
     filterMode: FilterMode
     search: String
   ): Number @auth(for: [KNOWLEDGE, EXPLORE])
   stixCyberObservablesTimeSeries(
     types: [String]
-    filters: [StixCyberObservablesFiltering]
+    filters: StixCyberObservablesGroupFiltering
     filterMode: FilterMode
     search: String
   ): [TimeSeries] @auth(for: [KNOWLEDGE, EXPLORE])
@@ -12811,7 +12816,7 @@ type Query {
     field: String!
     dateAttribute: String
     operation: String!
-    filters: [StixCyberObservablesFiltering]
+    filters: StixCyberObservablesGroupFiltering
     filterMode: FilterMode
     search: String
   ): [Distribution] @auth(for: [KNOWLEDGE, EXPLORE])
@@ -13873,7 +13878,7 @@ type Mutation {
     search: String
     orderBy: StixCyberObservablesOrdering
     orderMode: OrderingMode
-    filters: [StixCyberObservablesFiltering]
+    filters: StixCyberObservablesGroupFiltering
     filterMode: FilterMode
     relationship_type: [String]
     elementId: String

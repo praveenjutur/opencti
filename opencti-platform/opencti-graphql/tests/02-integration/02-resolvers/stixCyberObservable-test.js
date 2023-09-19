@@ -8,7 +8,7 @@ const LIST_QUERY = gql`
         $after: ID
         $orderBy: StixCyberObservablesOrdering
         $orderMode: OrderingMode
-        $filters: [StixCyberObservablesFiltering]
+        $filters: StixCyberObservablesGroupFiltering
         $filterMode: FilterMode
         $search: String
     ) {

@@ -164,7 +164,7 @@ export const stixCyberObservablesSearchLinesQuery = graphql`
     $cursor: ID
     $orderBy: StixCyberObservablesOrdering
     $orderMode: OrderingMode
-    $filters: [StixCyberObservablesFiltering]
+    $filters: StixCyberObservablesGroupFiltering
   ) {
     ...StixCyberObservablesSearchLines_data
       @arguments(
@@ -192,7 +192,7 @@ const StixCyberObservablesSearchLines = createPaginationContainer(
           defaultValue: created_at
         }
         orderMode: { type: "OrderingMode", defaultValue: asc }
-        filters: { type: "[StixCyberObservablesFiltering]" }
+        filters: { type: "StixCyberObservablesGroupFiltering" }
       ) {
         stixCyberObservables(
           search: $search

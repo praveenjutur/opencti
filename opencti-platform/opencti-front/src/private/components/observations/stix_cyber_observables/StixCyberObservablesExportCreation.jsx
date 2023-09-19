@@ -70,7 +70,7 @@ export const StixCyberObservablesExportCreationMutation = graphql`
     $search: String
     $orderBy: StixCyberObservablesOrdering
     $orderMode: OrderingMode
-    $filters: [StixCyberObservablesFiltering]
+    $filters: StixCyberObservablesGroupFiltering
     $relationship_type: [String]
     $elementId: String
     $selectedIds: [String]

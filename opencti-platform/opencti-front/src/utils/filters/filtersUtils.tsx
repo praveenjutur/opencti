@@ -188,10 +188,10 @@ export const findFilterIndexFromKey = (filters: Filter[], key: string, operator?
   return null;
 };
 
-export const filtersWithEntityType = (filters: FilterGroup | undefined, type: string) => {
+export const filtersWithEntityType = (filters: FilterGroup | undefined, type: string | string[]) => {
   const entityTypeFilter = {
     key: 'entity_type',
-    values: [type],
+    values: Array.isArray(type) ? type : [type],
     operator: 'eq',
     mode: 'or',
   };
