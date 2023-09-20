@@ -1,5 +1,5 @@
 import React from 'react';
-import { FilterGroup } from '../utils/filters/filtersUtils';
+import { FilterGroup, filtersWithRepresentative } from '../utils/filters/filtersUtils';
 import { filterIconButtonContentQuery } from './FilterIconButtonContent';
 import useQueryLoading from '../utils/hooks/useQueryLoading';
 import TaskFilterValue from './TaskFilterValue';
@@ -11,7 +11,7 @@ const TasksFilterValueContainer = ({ filters }: {
 }) => {
   const queryRef = useQueryLoading<FilterIconButtonContentQuery>(
     filterIconButtonContentQuery,
-    { filters: filters.filters },
+    { filters: filters.filters.filter((f) => filtersWithRepresentative.includes(f.key)) },
   );
 
   return (

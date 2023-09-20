@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import makeStyles from '@mui/styles/makeStyles';
 import { DataColumns } from './list_lines';
-import { Filter, FilterGroup } from '../utils/filters/filtersUtils';
+import { Filter, FilterGroup, filtersWithRepresentative } from '../utils/filters/filtersUtils';
 import { filterIconButtonContentQuery } from './FilterIconButtonContent';
 import useQueryLoading from '../utils/hooks/useQueryLoading';
 import Loader from './Loader';
@@ -84,7 +84,7 @@ const FilterIconButton: FunctionComponent<FilterIconButtonProps> = ({
 
   const filtersRepresentativesQueryRef = useQueryLoading<FilterIconButtonContentQuery>(
     filterIconButtonContentQuery,
-    { filters: displayedFilters },
+    { filters: displayedFilters.filter((f) => filtersWithRepresentative.includes(f.key)) },
   );
 
   return (
