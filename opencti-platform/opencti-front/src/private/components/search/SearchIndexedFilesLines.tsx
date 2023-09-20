@@ -1,55 +1,103 @@
 import React, { FunctionComponent } from 'react';
-import { graphql, usePreloadedQuery } from 'react-relay';
-import { SearchIndexedFilesLinesQuery } from '@components/search/__generated__/SearchIndexedFilesLinesQuery.graphql';
-import useQueryLoading from '../../../utils/hooks/useQueryLoading';
-import Loader, { LoaderVariant } from '../../../components/Loader';
+import {
+  SearchIndexedFilesLinesPaginationQuery,
+  SearchIndexedFilesLinesPaginationQuery$variables,
+} from '@components/search/__generated__/SearchIndexedFilesLinesPaginationQuery.graphql';
+import { SearchIndexedFilesLines_data$key } from '@components/search/__generated__/SearchIndexedFilesLines_data.graphql';
+import { graphql, PreloadedQuery } from 'react-relay';
+import ListLinesContent from '../../../components/list_lines/ListLinesContent';
+import usePreloadedPaginationFragment from '../../../utils/hooks/usePreloadedPaginationFragment';
+import { HandleAddFilter, UseLocalStorageHelpers } from '../../../utils/hooks/useLocalStorage';
+import { DataColumns } from '../../../components/list_lines';
+import SearchIndexedFileLine from './SearchIndexedFileLine';
 
-const searchIndexedFilesLinesQuery = graphql`
-    query SearchIndexedFilesLinesQuery {
-        indexedFiles{
+const nbOfRowsToLoad = 50;
+
+interface SearchIndexedFilesLinesProps {
+  setNumberOfElements: UseLocalStorageHelpers['handleSetNumberOfElements'];
+  dataColumns: DataColumns;
+  paginationOptions: SearchIndexedFilesLinesPaginationQuery$variables;
+  queryRef: PreloadedQuery<SearchIndexedFilesLinesPaginationQuery>;
+  onLabelClick?: HandleAddFilter;
+  redirectionMode?: string;
+}
+
+export const searchIndexedFilesLinesQuery = graphql`
+    query SearchIndexedFilesLinesPaginationQuery(
+        $search: String
+        $first: Int
+        $cursor: ID
+    ) {
+        ...SearchIndexedFilesLines_data
+        @arguments(
+            search: $search
+            first: $first
+            cursor: $cursor
+        )
+    }
+`;
+
+export const searchIndexedFilesLinesFragment = graphql`
+    fragment SearchIndexedFilesLines_data on Query
+    @argumentDefinitions(
+        search: { type: "String" }
+        first: { type: "Int", defaultValue: 25 }
+        cursor: { type: "ID" }
+    )
+    @refetchable(queryName: "SearchIndexedFilesLinesRefetchQuery") {
+        indexedFiles(
+            search: $search
+            first: $first
+            after: $cursor
+        ) @connection(key: "Pagination_indexedFiles") {
             edges {
                 node {
                     id
                 }
             }
+            pageInfo {
+                endCursor
+                hasNextPage
+                globalCount
+            }
         }
     }
 `;
 
-const SearchIndexedFilesLinesComponent : FunctionComponent = ({ queryRef }) => {
-  const data = usePreloadedQuery<SearchIndexedFilesLinesQuery>(
-    searchIndexedFilesLinesQuery,
+const SearchIndexedFilesLines: FunctionComponent<SearchIndexedFilesLinesProps> = ({
+  dataColumns,
+  onLabelClick,
+  paginationOptions,
+  setNumberOfElements,
+  queryRef,
+}) => {
+  const { data, hasMore, loadMore, isLoadingMore } = usePreloadedPaginationFragment <
+  SearchIndexedFilesLinesPaginationQuery,
+  SearchIndexedFilesLines_data$key
+  >({
+    linesQuery: searchIndexedFilesLinesQuery,
+    linesFragment: searchIndexedFilesLinesFragment,
     queryRef,
-  );
-  const indexedFiles = data.indexedFiles?.edges;
+    nodePath: ['indexedFiles', 'pageInfo', 'globalCount'],
+    setNumberOfElements,
+  });
 
   return (
-    <div>
-      { (indexedFiles && indexedFiles.length > 0)
-        ? indexedFiles.map((indexedFile) => (
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <span>{indexedFile.node.id}</span>
-          </div>
-        )) : (
-          'No files found'
-        )
+    <ListLinesContent
+      initialLoading={!data}
+      loadMore={loadMore}
+      hasMore={hasMore}
+      isLoading={isLoadingMore}
+      dataList={data?.indexedFiles?.edges ?? []}
+      globalCount={
+        data?.indexedFiles?.pageInfo?.globalCount ?? nbOfRowsToLoad
       }
-    </div>
-  );
-};
-const SearchIndexedFilesLines: FunctionComponent = () => {
-  const queryRef = useQueryLoading<SearchIndexedFilesLinesQuery>(
-    searchIndexedFilesLinesQuery,
-    {},
-  );
-  return queryRef ? (
-    <React.Suspense fallback={<Loader variant={LoaderVariant.inElement} />}>
-      <SearchIndexedFilesLinesComponent
-        queryRef={queryRef}
-      />
-    </React.Suspense>
-  ) : (
-    <Loader variant={LoaderVariant.inElement} />
+      LineComponent={SearchIndexedFileLine}
+      dataColumns={dataColumns}
+      nbOfRowsToLoad={nbOfRowsToLoad}
+      onLabelClick={onLabelClick}
+      paginationOptions={paginationOptions}
+    />
   );
 };
 

@@ -10,7 +10,7 @@ import {
 } from '@components/search/__generated__/SearchStixCoreObjectsLinesPaginationQuery.graphql';
 import { useParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import SearchIndexedFilesLines from '@components/search/SearchIndexedFilesLines';
+import SearchIndexedFiles from '@components/search/SearchIndexedFiles';
 import TopBar from './nav/TopBar';
 import ListLines from '../../components/list_lines/ListLines';
 import ToolBar from './data/ToolBar';
@@ -215,7 +215,7 @@ const Search = () => {
             </div>) : (
               ' '
             )}
-          { searchOpen ? (<SearchIndexedFilesLines/>) : ('')}
+          { searchOpen ? (<SearchIndexedFiles/>) : ('')}
         </div>
       </ExportContextProvider>
   );

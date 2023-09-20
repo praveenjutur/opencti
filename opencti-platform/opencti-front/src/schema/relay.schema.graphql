@@ -8117,7 +8117,7 @@ type Query {
   file(id: String!): File
   importFiles(first: Int): FileConnection
   pendingFiles(first: Int): FileConnection
-  indexedFiles(first: Int, search: String): FileConnection
+  indexedFiles(first: Int, after: ID, search: String): FileConnection
   settings: Settings!
   group(id: String!): Group
   groups(first: Int, after: ID, orderBy: GroupsOrdering, orderMode: OrderingMode, search: String): GroupConnection
