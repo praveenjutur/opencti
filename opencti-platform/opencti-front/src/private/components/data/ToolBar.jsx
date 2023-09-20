@@ -1601,7 +1601,7 @@ class ToolBar extends Component {
                                 </span>
                               )}
                               <ToolBarFilterValueContainer
-                                filtersList={filters.filters}
+                                filters={filters}
                               ></ToolBarFilterValueContainer>
                             </div>
                           ) : (

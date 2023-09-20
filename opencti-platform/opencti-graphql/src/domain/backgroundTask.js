@@ -39,15 +39,17 @@ export const findAll = (context, user, args) => {
 const buildQueryFilters = async (context, user, rawFilters, search, taskPosition) => {
   const types = [];
   const queryFilters = [];
+  let adaptedFilterGroup;
   const filters = rawFilters ? JSON.parse(rawFilters) : undefined;
   if (filters) {
-    const adaptedFilters = await convertFiltersFrontendFormat(context, user, filters);
+    adaptedFilterGroup = await convertFiltersFrontendFormat(context, user, filters);
+    const adaptedFilters = adaptedFilterGroup.filters;
     const nestedFrom = [];
     const nestedTo = [];
     let nestedFromRole = false;
     let nestedToRole = false;
     for (let index = 0; index < adaptedFilters.length; index += 1) {
-      const { key, operator, values, filterMode } = adaptedFilters[index];
+      const { key, operator, values, mode } = adaptedFilters[index];
       if (key === TYPE_FILTER) {
         // filter types to keep only the ones that can be handled by background tasks
         const filteredTypes = values.filter((v) => isTaskEnabledEntity(v.id)).map((v) => v.id);
@@ -77,7 +79,7 @@ const buildQueryFilters = async (context, user, rawFilters, search, taskPosition
           nestedTo.push({ key: 'role', values: ['*_to'], operator: 'wildcard' });
         }
       } else {
-        queryFilters.push({ key: GlobalFilters[key] || key, values: values.map((v) => v.id), operator, filterMode });
+        queryFilters.push({ key: GlobalFilters[key] || key, values: values.map((v) => v.id), operator, mode });
       }
     }
     if (nestedFrom.length > 0) {
@@ -97,7 +99,11 @@ const buildQueryFilters = async (context, user, rawFilters, search, taskPosition
     orderMode: 'asc',
     orderBy: 'created_at',
     after: taskPosition,
-    filters: queryFilters,
+    filters: {
+      mode: adaptedFilterGroup?.mode ?? 'and',
+      filters: queryFilters,
+      filterGroups: adaptedFilterGroup?.filterGroups ?? [],
+    },
     search: search && search.length > 0 ? search : null,
   };
 };

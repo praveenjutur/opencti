@@ -6,7 +6,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import FilterIconButtonContent, { filterIconButtonContentQuery } from '../../../components/FilterIconButtonContent';
 import { FilterIconButtonContentQuery } from '../../../components/__generated__/FilterIconButtonContentQuery.graphql';
 import { useFormatter } from '../../../components/i18n';
-import { Filter } from '../../../utils/filters/filtersUtils';
+import { FilterGroup } from '../../../utils/filters/filtersUtils';
 import { truncate } from '../../../utils/String';
 import { Theme } from '../../../components/Theme';
 
@@ -21,18 +21,18 @@ const useStyles = makeStyles<Theme>((theme) => ({
   },
 }));
 
-const ToolBarFilterValue = ({ filtersList, queryRef }:
+const ToolBarFilterValue = ({ filters, queryRef }:
 {
-  filtersList: Filter[],
+  filters: FilterGroup,
   queryRef: PreloadedQuery<FilterIconButtonContentQuery>,
 }) => {
   const { t } = useFormatter();
   const classes = useStyles();
   const { filtersRepresentatives } = usePreloadedQuery<FilterIconButtonContentQuery>(filterIconButtonContentQuery, queryRef);
-
+  const globalFilterMode = t(filters.mode.toUpperCase());
   return (
     <>
-      {filtersList.map((currentFilter) => {
+      {filters.filters.map((currentFilter) => {
         const label = `${truncate(
           currentFilter.key.startsWith('rel_')
             ? t(
@@ -51,7 +51,7 @@ const ToolBarFilterValue = ({ filtersList, queryRef }:
                 <div>
                   <strong>{label}</strong>: {currentFilter.values.map(
                     (o) => {
-                      const localFilterMode = t(currentFilter.operator.toUpperCase());
+                      const localFilterMode = t(currentFilter.mode.toUpperCase());
                       return (
                       <span key={o}>
                         <FilterIconButtonContent
@@ -69,11 +69,11 @@ const ToolBarFilterValue = ({ filtersList, queryRef }:
                 </div>
               }
             />
-            {R.last(filtersList)?.key
+            {R.last(filters.filters)?.key
               !== currentFilter.key && (
                 <Chip
                   classes={{ root: classes.operator }}
-                  label={t('AND')}
+                  label={globalFilterMode}
                 />
             )}
           </span>

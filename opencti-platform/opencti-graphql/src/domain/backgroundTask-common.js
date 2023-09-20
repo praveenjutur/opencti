@@ -32,7 +32,8 @@ const areParentTypesKnowledge = (parentTypes) => parentTypes && parentTypes.flat
 export const checkActionValidity = async (context, user, input, scope, taskType) => {
   const { actions, filters: baseFilterObject, ids } = input;
   const filters = JSON.parse(baseFilterObject)?.filters ?? [];
-  const typeFilters = filters.filter((f) => f.type === 'filter' && f.key === 'entity_type');
+  const typeFilters = filters.filter((f) => f.key === 'entity_type');
+  const typeFiltersValues = typeFilters.map((f) => f.values).flat();
   const userCapabilities = R.flatten(user.capabilities.map((c) => c.name.split('_')));
   if (scope === 'SETTINGS') {
     const isAuthorized = userCapabilities.includes(BYPASS) || userCapabilities.includes('SETTINGS');
@@ -55,8 +56,8 @@ export const checkActionValidity = async (context, user, input, scope, taskType)
     }
     // 1.3. Check the modified entities are of type Knowledge
     if (taskType === TASK_TYPE_QUERY) {
-      const parentTypes = typeFilters.map((f) => f.values).flat().map((n) => getParentTypes(n));
-      const isNotKnowledges = !areParentTypesKnowledge(parentTypes) || JSON.parse(filters).entity_type?.some((type) => type === ENTITY_TYPE_VOCABULARY);
+      const parentTypes = typeFiltersValues.map((n) => getParentTypes(n));
+      const isNotKnowledges = !areParentTypesKnowledge(parentTypes) || typeFiltersValues.some((type) => type === ENTITY_TYPE_VOCABULARY);
       if (isNotKnowledges) {
         throw ForbiddenAccess(undefined, 'The targeted ids are not knowledges.');
       }
@@ -77,11 +78,11 @@ export const checkActionValidity = async (context, user, input, scope, taskType)
     if (taskType === TASK_TYPE_QUERY) {
       const isNotifications = typeFilters.length === 1
         && typeFilters[0].values.length === 1
-          && typeFilters[0].values[0] === 'Notification';
+        && typeFilters[0].values[0] === 'Notification';
       if (!isNotifications) {
         throw ForbiddenAccess(undefined, 'The targeted ids are not notifications.');
       }
-      const userFilters = filters.filter((f) => f.type === 'filter' && f.key === 'user_id');
+      const userFilters = filters.filter((f) => f.key === 'user_id');
       const isUserData = userFilters.length > 0
         && userFilters[0].values.length === 1
         && userFilters[0].values[0] === user.id;
