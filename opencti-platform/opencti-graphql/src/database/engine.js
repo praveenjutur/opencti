@@ -1946,12 +1946,14 @@ export const elAttributeValues = async (context, user, field, opts = {}) => {
 // endregion
 
 // index and search files
-const buildIndexFileBody = (documentId, fileContent, fileId, entity = null) => {
+const buildIndexFileBody = (documentId, file, entity = null) => {
   const documentBody = {
     internal_id: documentId,
     indexed_at: now(),
-    file_id: fileId,
-    file_data: fileContent,
+    file_id: file.id,
+    file_data: file.content,
+    name: file.name,
+    uploaded_at: file.uploaded_at,
   };
   if (entity) {
     documentBody.entity_id = entity.internal_id;
@@ -1961,7 +1963,11 @@ const buildIndexFileBody = (documentId, fileContent, fileId, entity = null) => {
 };
 export const elIndexFile = async (documentId, fileContent, fileId) => {
   const indexName = INDEX_FILES;
-  const documentBody = buildIndexFileBody(documentId, fileContent, fileId);
+  const file = {
+    id: fileId,
+    content: fileContent,
+  };
+  const documentBody = buildIndexFileBody(documentId, file);
   return engine.index({
     id: documentId,
     index: indexName,
@@ -1997,7 +2003,13 @@ export const elBulkIndexFiles = async (context, user, files, maxBulkOperations =
       if (entity_id) {
         entity = entitiesMap[entity_id];
       }
-      const documentBody = buildIndexFileBody(internal_id, file_data, file_id, entity);
+      const fileObject = {
+        id: file_id,
+        content: file_data,
+        name: file.name,
+        uploaded_at: file.uploaded_at,
+      };
+      const documentBody = buildIndexFileBody(internal_id, fileObject, entity);
       bulkOperations.push(...[indexQuery, documentBody]);
     }
   }

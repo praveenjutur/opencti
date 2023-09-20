@@ -54,12 +54,21 @@ const indexImportedFiles = async (
       id: file.id,
       internalId,
       entityId,
+      name: file.name,
+      uploaded_at: file.lastModified,
     };
   }); // TODO add data (like entity_id, mimeType) ?
-  const loadFilesToIndex = async (file: { id: string, internalId: string, entityId: string | null }) => {
+  const loadFilesToIndex = async (file: { id: string, internalId: string, entityId: string | null, name: string, uploaded_at: Date | undefined }) => {
     const content = await getFileContent(file.id, 'base64');
     // TODO test content is not null
-    return { internal_id: file.internalId, file_id: file.id, file_data: content, entity_id: file.entityId };
+    return {
+      internal_id: file.internalId,
+      file_id: file.id,
+      file_data: content,
+      entity_id: file.entityId,
+      name: file.name,
+      uploaded_at: file.uploaded_at,
+    };
   };
   const filesToIndex = await BluePromise.map(filesToLoad, loadFilesToIndex, { concurrency: 5 });
   await elBulkIndexFiles(context, SYSTEM_USER, filesToIndex);
