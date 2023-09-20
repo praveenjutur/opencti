@@ -615,10 +615,6 @@ export const findFilterRepresentative = async (context, user, filter) => {
 };
 
 export const findFiltersRepresentatives = async (context, user, filtersList = []) => {
-  const result = [];
-  // eslint-disable-next-line no-restricted-syntax
-  for (const filter of filtersList) {
-    result.push(await findFilterRepresentative(context, user, filter));
-  }
+  const result = await Promise.all(filtersList.map((filter) => findFilterRepresentative(context, user, filter)));
   return result.flat();
 };
