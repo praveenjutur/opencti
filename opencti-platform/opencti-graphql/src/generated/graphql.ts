@@ -7398,7 +7398,6 @@ export enum FilterMode {
 export type FilterRepresentative = {
   __typename?: 'FilterRepresentative';
   id?: Maybe<Scalars['String']['output']>;
-  type?: Maybe<Scalars['String']['output']>;
   value?: Maybe<Scalars['String']['output']>;
 };
 
@@ -32503,7 +32502,6 @@ export type FileMetadataResolvers<ContextType = any, ParentType extends Resolver
 
 export type FilterRepresentativeResolvers<ContextType = any, ParentType extends ResolversParentTypes['FilterRepresentative'] = ResolversParentTypes['FilterRepresentative']> = ResolversObject<{
   id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   value?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;

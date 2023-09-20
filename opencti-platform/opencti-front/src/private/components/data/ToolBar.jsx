@@ -76,8 +76,6 @@ import StixDomainObjectCreation from '../common/stix_domain_objects/StixDomainOb
 import ItemMarkings from '../../../components/ItemMarkings';
 import { findFilterFromKey } from '../../../utils/filters/filtersUtils';
 import { stixCyberObservableTypes } from '../../../utils/hooks/useAttributes';
-import useQueryLoading from '../../../utils/hooks/useQueryLoading';
-import { filterIconButtonContentQuery } from '../../../components/FilterIconButtonContent';
 
 const styles = (theme) => ({
   bottomNav: {

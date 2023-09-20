@@ -85,7 +85,6 @@ input Filter {
 type FilterRepresentative {
   id: String
   value: String
-  type: String
 }
 
 enum EditOperation {
