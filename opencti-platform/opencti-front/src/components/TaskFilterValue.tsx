@@ -3,12 +3,12 @@ import React from 'react';
 import { PreloadedQuery, usePreloadedQuery } from 'react-relay';
 import Chip from '@mui/material/Chip';
 import makeStyles from '@mui/styles/makeStyles';
-import FilterIconButtonContent, { filterIconButtonContentQuery } from '../../../components/FilterIconButtonContent';
-import { FilterIconButtonContentQuery } from '../../../components/__generated__/FilterIconButtonContentQuery.graphql';
-import { useFormatter } from '../../../components/i18n';
-import { FilterGroup } from '../../../utils/filters/filtersUtils';
-import { truncate } from '../../../utils/String';
-import { Theme } from '../../../components/Theme';
+import FilterIconButtonContent, { filterIconButtonContentQuery } from './FilterIconButtonContent';
+import { FilterIconButtonContentQuery } from './__generated__/FilterIconButtonContentQuery.graphql';
+import { useFormatter } from './i18n';
+import { FilterGroup } from '../utils/filters/filtersUtils';
+import { truncate } from '../utils/String';
+import { Theme } from './Theme';
 
 const useStyles = makeStyles<Theme>((theme) => ({
   filter: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles<Theme>((theme) => ({
   },
 }));
 
-const ToolBarFilterValue = ({ filters, queryRef }:
+const TaskFilterValue = ({ filters, queryRef }:
 {
   filters: FilterGroup,
   queryRef: PreloadedQuery<FilterIconButtonContentQuery>,
@@ -83,4 +83,4 @@ const ToolBarFilterValue = ({ filters, queryRef }:
   );
 };
 
-export default ToolBarFilterValue;
+export default TaskFilterValue;

@@ -57,7 +57,7 @@ import Alert from '@mui/material/Alert';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
-import ToolBarFilterValueContainer from './ToolBarFilterValueContainer';
+import TasksFilterValueContainer from '../../../components/TasksFilterValueContainer';
 import inject18n from '../../../components/i18n';
 import { truncate } from '../../../utils/String';
 import { commitMutation, fetchQuery, MESSAGING$ } from '../../../relay/environment';
@@ -1600,9 +1600,9 @@ class ToolBar extends Component {
                                   )}
                                 </span>
                               )}
-                              <ToolBarFilterValueContainer
+                              <TasksFilterValueContainer
                                 filters={filters}
-                              ></ToolBarFilterValueContainer>
+                              ></TasksFilterValueContainer>
                             </div>
                           ) : (
                             <span>
