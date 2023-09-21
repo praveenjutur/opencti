@@ -38,7 +38,8 @@ import {
   RELATION_KILL_CHAIN_PHASE,
   RELATION_OBJECT_ASSIGNEE,
   RELATION_OBJECT_LABEL,
-  RELATION_OBJECT_MARKING, RELATION_OBJECT_PARTICIPANT,
+  RELATION_OBJECT_MARKING,
+  RELATION_OBJECT_PARTICIPANT,
 } from '../schema/stixRefRelationship';
 import {
   ABSTRACT_BASIC_RELATIONSHIP,
@@ -71,13 +72,7 @@ import { isStixObject } from '../schema/stixCoreObject';
 import { isBasicRelationship, isStixRelationshipExceptRef } from '../schema/stixRelationship';
 import { RELATION_INDICATES } from '../schema/stixCoreRelationship';
 import { INTERNAL_FROM_FIELD, INTERNAL_TO_FIELD } from '../schema/identifier';
-import {
-  BYPASS,
-  computeUserMemberAccessIds,
-  INTERNAL_USERS,
-  isBypassUser,
-  MEMBER_ACCESS_ALL,
-} from '../utils/access';
+import { BYPASS, computeUserMemberAccessIds, INTERNAL_USERS, isBypassUser, MEMBER_ACCESS_ALL, } from '../utils/access';
 import { isSingleRelationsRef, } from '../schema/stixEmbeddedRelationship';
 import { now, runtimeFieldObservableValueScript } from '../utils/format';
 import { ENTITY_TYPE_MARKING_DEFINITION } from '../schema/stixMetaObject';
@@ -88,6 +83,7 @@ import { isBooleanAttribute, isDateAttribute, isDateNumericOrBooleanAttribute } 
 import { convertTypeToStixType } from './stix-converter';
 import { extractEntityRepresentativeName } from './entity-representative';
 import { ENTITY_TYPE_IDENTITY_ORGANIZATION } from '../modules/organization/organization-types';
+import { checkFilterKeys } from '../utils/filtering';
 
 const ELK_ENGINE = 'elk';
 const OPENSEARCH_ENGINE = 'opensearch';
@@ -1568,6 +1564,7 @@ const elQueryBodyBuilder = async (context, user, options) => {
   return body;
 };
 export const elCount = async (context, user, indexName, options = {}) => {
+  checkFilterKeys(options.filters, options.types ?? []);
   const body = await elQueryBodyBuilder(context, user, { ...options, noSize: true, noSort: true });
   const query = { index: indexName, body };
   logApp.debug('[SEARCH] elCount', { query });
@@ -1872,6 +1869,7 @@ export const elPaginate = async (context, user, indexName, options = {}) => {
     );
 };
 export const elList = async (context, user, indexName, options = {}) => {
+  checkFilterKeys(options.filters, options.types ?? []);
   const { first = MAX_SEARCH_SIZE, infinite = false } = options;
   let hasNextPage = true;
   let continueProcess = true;

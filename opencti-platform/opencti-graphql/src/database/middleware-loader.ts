@@ -2,7 +2,8 @@ import * as R from 'ramda';
 import {
   buildPagination,
   offsetToCursor,
-  READ_DATA_INDICES, READ_DATA_INDICES_WITHOUT_INFERRED,
+  READ_DATA_INDICES,
+  READ_DATA_INDICES_WITHOUT_INFERRED,
   READ_ENTITIES_INDICES,
   READ_RELATIONSHIPS_INDICES,
 } from './utils';
@@ -19,7 +20,7 @@ import type {
 } from '../types/store';
 import { FunctionalError, UnsupportedError } from '../config/errors';
 import type { FilterMode, InputMaybe, OrderingMode } from '../generated/graphql';
-import { ASSIGNEE_FILTER, CREATOR_FILTER, PARTICIPANT_FILTER } from '../utils/filtering';
+import { ASSIGNEE_FILTER, checkFilterKeys, CREATOR_FILTER, PARTICIPANT_FILTER } from '../utils/filtering';
 import { publishUserAction } from '../listener/UserActionListener';
 import { extractEntityRepresentativeName } from './entity-representative';
 
@@ -434,6 +435,8 @@ export const listAllEntitiesForFilter = async (context: AuthContext, user: AuthU
 
 export const listEntities: InternalListEntities = async (context, user, entityTypes, args = {}) => {
   const { indices = READ_ENTITIES_INDICES } = args;
+  const { filters } = args;
+  checkFilterKeys(filters, entityTypes);
   // TODO Reactivate this test after global migration to typescript
   // if (connectionFormat !== false) {
   //   throw UnsupportedError('List connection require connectionFormat option to false');

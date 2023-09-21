@@ -14,6 +14,9 @@ import { stixRefsExtractor } from '../schema/stixEmbeddedRelationship';
 import { generateStandardId } from '../schema/identifier';
 import { ENTITY_TYPE_RESOLVED_FILTERS } from '../schema/stixDomainObject';
 import { extractStixRepresentative } from '../database/stix-representative';
+import { schemaAttributesDefinition } from '../schema/schema-attributes';
+import { ENTITY_TYPE_ACTIVITY } from '../schema/internalObject';
+import { schemaRelationsRefDefinition } from '../schema/schema-relationsRef';
 
 // Resolutions
 export const MARKING_FILTER = 'markedBy';
@@ -593,4 +596,30 @@ export const addFilter = (filterGroup, newKey, newValues) => {
     ],
     filterGroups: filterGroup.filterGroups,
   };
+};
+
+export const getFilterKeys = (filters) => {
+  const keys = filters.filters?.map((f) => f.key).flat() ?? []; // TODO remove filters.filters can be null when filter format refacto done
+  if (filters.filterGroups && filters.filterGroups.length > 0) {
+    keys.push(getFilterKeys(filters.filterGroups));
+  }
+  return keys;
+};
+
+export const checkFilterKeys = (filters, entityTypes) => {
+  const listActivities = entityTypes.length === 1 && entityTypes.includes(ENTITY_TYPE_ACTIVITY);
+  if (filters && entityTypes.length > 0 && !listActivities) {
+    const keys = getFilterKeys(filters);
+    // check filters keys correspond to the entity types
+    if (keys.length > 0) {
+      entityTypes.forEach((type) => {
+        const availableAttributes = schemaAttributesDefinition.getAttributeNames(type);
+        const availableRelations = schemaRelationsRefDefinition.getInputNames(type);
+        const availableKeys = availableAttributes.concat(availableRelations);
+        if (!keys.every((k) => availableKeys.includes(k))) {
+          throw Error('incorrect filter keys'); // TODO display the keys that are not correct
+        }
+      });
+    }
+  }
 };

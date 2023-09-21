@@ -3,6 +3,8 @@ import * as R from 'ramda';
 import DataLoader from 'dataloader';
 import { Promise } from 'bluebird';
 import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
+import { checkFilterKeys } from '../utils/filtering';
+
 import {
   ALREADY_DELETED_ERROR,
   AlreadyDeletedError,
@@ -539,6 +541,7 @@ export const timeSeriesHistory = async (context, user, types, args) => {
   return fillTimeSeries(startDate, endDate, interval, histogramData);
 };
 export const timeSeriesEntities = async (context, user, types, args) => {
+  checkFilterKeys(args.filters, types);
   const timeSeriesArgs = buildEntityFilters({ types, ...args });
   const { startDate, endDate, interval } = args;
   const histogramData = await elHistogramCount(context, user, args.onlyInferred ? READ_DATA_INDICES_INFERRED : READ_DATA_INDICES, timeSeriesArgs);
@@ -587,6 +590,7 @@ export const distributionHistory = async (context, user, types, args) => {
   return R.take(limit, R.sortWith([orderingFunction(R.prop('value'))])(distributionData));
 };
 export const distributionEntities = async (context, user, types, args) => {
+  checkFilterKeys(args.filters, types);
   const distributionArgs = buildEntityFilters({ types, ...args });
   const { limit = 10, order = 'desc', field } = args;
   if (field.includes('.') && !field.endsWith('internal_id')) {

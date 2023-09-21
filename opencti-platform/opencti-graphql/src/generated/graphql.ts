@@ -7391,8 +7391,8 @@ export type Filter = {
 };
 
 export type FilterGroup = {
-  filterGroups: Array<InputMaybe<FilterGroup>>;
-  filters: Array<InputMaybe<Filter>>;
+  filterGroups: Array<FilterGroup>;
+  filters: Array<Filter>;
   mode: FilterMode;
 };
 
