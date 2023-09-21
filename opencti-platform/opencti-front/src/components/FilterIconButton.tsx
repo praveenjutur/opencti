@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import makeStyles from '@mui/styles/makeStyles';
 import { DataColumns } from './list_lines';
-import { Filter, FilterGroup, filtersWithRepresentative } from '../utils/filters/filtersUtils';
+import { Filter, FilterGroup } from '../utils/filters/filtersUtils';
 import { filterIconButtonContentQuery } from './FilterIconButtonContent';
 import useQueryLoading from '../utils/hooks/useQueryLoading';
 import Loader from './Loader';
@@ -78,13 +78,16 @@ const FilterIconButton: FunctionComponent<FilterIconButtonProps> = ({
     finalClassName = classes.filters6;
   }
 
-  const displayedFilters = filters.filters
-    .filter((currentFilter) => !availableFilterKeys
-      || availableFilterKeys?.some((k) => currentFilter.key === k));
+  const displayedFilters = {
+    ...filters,
+    filters: filters.filters
+      .filter((currentFilter) => !availableFilterKeys
+        || availableFilterKeys?.some((k) => currentFilter.key === k)),
+  };
 
   const filtersRepresentativesQueryRef = useQueryLoading<FilterIconButtonContentQuery>(
     filterIconButtonContentQuery,
-    { filters: displayedFilters.filter((f) => filtersWithRepresentative.includes(f.key)) },
+    { filters: displayedFilters },
   );
 
   return (
@@ -95,7 +98,6 @@ const FilterIconButton: FunctionComponent<FilterIconButtonProps> = ({
     {filtersRepresentativesQueryRef && (
       <React.Suspense fallback={<Loader />}>
         <FilterIconButtonContainer
-          displayedFilters={displayedFilters}
           globalMode={filters.mode}
           handleRemoveFilter={handleRemoveFilter}
           handleSwitchGlobalMode={handleSwitchGlobalMode}

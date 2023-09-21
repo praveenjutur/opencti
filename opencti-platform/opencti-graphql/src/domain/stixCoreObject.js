@@ -2,6 +2,7 @@ import * as R from 'ramda';
 import {
   batchListThroughGetFrom,
   batchListThroughGetTo,
+  batchLoader,
   batchLoadThroughGetTo,
   createEntity,
   createRelationRaw,
@@ -10,7 +11,7 @@ import {
   storeLoadByIdWithRefs,
   timeSeriesEntities,
 } from '../database/middleware';
-import { internalLoadById, listEntities, storeLoadById } from '../database/middleware-loader';
+import { internalLoadById, listEntities, storeLoadById, storeLoadByIds } from '../database/middleware-loader';
 import { findAll as relationFindAll } from './stixCoreRelationship';
 import { delEditContext, lockResource, notify, setEditContext, storeUpdateEvent } from '../database/redis';
 import { BUS_TOPICS } from '../config/conf';
@@ -18,6 +19,7 @@ import { FunctionalError, LockTimeoutError, TYPE_LOCK_ERROR, UnsupportedError } 
 import { isStixCoreObject, stixCoreObjectOptions } from '../schema/stixCoreObject';
 import { findById as findStatusById } from './status';
 import {
+  ABSTRACT_BASIC_OBJECT,
   ABSTRACT_INTERNAL_OBJECT,
   ABSTRACT_STIX_CORE_OBJECT,
   ABSTRACT_STIX_DOMAIN_OBJECT,
@@ -68,6 +70,7 @@ import {
 } from './stixObjectOrStixRelationship';
 import { buildContextDataForFile, publishUserAction } from '../listener/UserActionListener';
 import { extractEntityRepresentativeName } from '../database/entity-representative';
+import { extractFilterIds } from '../utils/filtering';
 
 export const findAll = async (context, user, args) => {
   let types = [];
@@ -614,7 +617,48 @@ export const findFilterRepresentative = async (context, user, filter) => {
   }
 };
 
-export const findFiltersRepresentatives = async (context, user, filtersList = []) => {
-  const result = await Promise.all(filtersList.map((filter) => findFilterRepresentative(context, user, filter)));
-  return result.flat();
+const batchFilters = (context, user, ids) => {
+  return storeLoadByIds(context, user, ids, ABSTRACT_BASIC_OBJECT);
+};
+
+const filtersLoader = batchLoader(batchFilters);
+
+const filtersWithRepresentatives = (inputFilters, representativesMap) => {
+  const { filters, filterGroups } = inputFilters;
+  const newFilters = [];
+  let newFilterGroups = [];
+  for (let i = 0; i < filters.length; i += 1) {
+    const filter = filters[i];
+    const representatives = [];
+    for (let j = 0; j < filter.values.length; j += 1) {
+      const id = filter.values[j];
+      if (representativesMap.has(id)) {
+        representatives.push({ id, value: representativesMap.get(id) });
+      }
+    }
+    newFilters.push({
+      ...filter,
+      representatives,
+    });
+  }
+  if (filterGroups.length > 0) {
+    newFilterGroups = filtersWithRepresentatives(filterGroups, representativesMap);
+  }
+  return {
+    mode: inputFilters.mode,
+    filters: newFilters,
+    filterGroups: newFilterGroups,
+  };
+};
+
+export const findFiltersRepresentatives = async (context, user, inputFilters) => {
+  const ids = extractFilterIds(inputFilters);
+  // TODO keep ids that should be resolved
+  const resolvedEntities = await Promise.all(ids.map((id) => filtersLoader.load(id, context, user)));
+  const representativesMap = new Map(
+    resolvedEntities
+      .filter((e) => e)
+      .map((e) => [e.id, extractEntityRepresentativeName(e)])
+  );
+  return filtersWithRepresentatives(inputFilters, representativesMap);
 };

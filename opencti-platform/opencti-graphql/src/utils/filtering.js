@@ -16,6 +16,7 @@ import { ENTITY_TYPE_RESOLVED_FILTERS } from '../schema/stixDomainObject';
 import { extractStixRepresentative } from '../database/stix-representative';
 import { schemaAttributesDefinition } from '../schema/schema-attributes';
 import { ENTITY_TYPE_ACTIVITY } from '../schema/internalObject';
+import { uniq } from "ramda";
 import { schemaRelationsRefDefinition } from '../schema/schema-relationsRef';
 
 // Resolutions
@@ -598,18 +599,26 @@ export const addFilter = (filterGroup, newKey, newValues) => {
   };
 };
 
-export const getFilterKeys = (filters) => {
-  const keys = filters.filters?.map((f) => f.key).flat() ?? []; // TODO remove filters.filters can be null when filter format refacto done
+export const extractFilterKeys = (filters) => {
+  let keys = filters.filters?.map((f) => f.key).flat() ?? []; // TODO remove filters.filters can be null when filter format refacto done
   if (filters.filterGroups && filters.filterGroups.length > 0) {
-    keys.push(getFilterKeys(filters.filterGroups));
+    keys = keys.concat(filters.filterGroups.map((group) => extractFilterKeys(group)).flat());
   }
   return keys;
+};
+
+export const extractFilterIds = (filters) => {
+  let ids = filters.filters?.map((f) => f.values).flat() ?? [];
+  if (filters.filterGroups && filters.filterGroups.length > 0) {
+    ids = ids.concat(filters.filterGroups.map((group) => extractFilterIds(group)).flat());
+  }
+  return uniq(ids);
 };
 
 export const checkFilterKeys = (filters, entityTypes) => {
   const listActivities = entityTypes.length === 1 && entityTypes.includes(ENTITY_TYPE_ACTIVITY);
   if (filters && entityTypes.length > 0 && !listActivities) {
-    const keys = getFilterKeys(filters);
+    const keys = extractFilterKeys(filters);
     // check filters keys correspond to the entity types
     if (keys.length > 0) {
       entityTypes.forEach((type) => {

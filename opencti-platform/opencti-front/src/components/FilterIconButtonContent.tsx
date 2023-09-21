@@ -4,34 +4,42 @@ import { Link } from 'react-router-dom';
 import { entityFilters, filterValue } from '../utils/filters/filtersUtils';
 import { truncate } from '../utils/String';
 import { useFormatter } from './i18n';
-import { FilterIconButtonContentQuery$data } from './__generated__/FilterIconButtonContentQuery.graphql';
 
 export const filterIconButtonContentQuery = graphql`
     query FilterIconButtonContentQuery(
-        $filters: [Filter!]!
+        $filters: FilterGroup!
     ) {
         filtersRepresentatives(filters: $filters) {
-            id
-            value
+            mode
+            filters {
+                key
+                values
+                operator
+                mode
+                representatives {
+                    id
+                    value
+                }
+            }
         }
     }
 `;
 interface FilterIconButtonContentProps {
   redirection?: boolean;
   filterKey: string;
-  id: string;
-  filtersRepresentatives: FilterIconButtonContentQuery$data['filtersRepresentatives'];
+  id: string | null;
+  value?: string | null;
 }
 
 const FilterIconButtonContent: FunctionComponent<FilterIconButtonContentProps> = ({
   redirection,
   filterKey,
   id,
-  filtersRepresentatives,
+  value,
 }) => {
   const { t } = useFormatter();
 
-  const displayedValue = truncate(filterValue(filterKey, id, filtersRepresentatives), 15);
+  const displayedValue = truncate(filterValue(filterKey, id, value), 15);
 
   if (displayedValue === null) {
     return (
@@ -40,6 +48,7 @@ const FilterIconButtonContent: FunctionComponent<FilterIconButtonContentProps> =
       </>
     );
   }
+  console.log('filterKey', filterKey);
   if (redirection && entityFilters.includes(filterKey)) {
     return (
       <Link to={`/dashboard/id/${id}`}>

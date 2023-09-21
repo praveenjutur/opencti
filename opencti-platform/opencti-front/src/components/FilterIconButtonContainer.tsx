@@ -65,7 +65,6 @@ const useStyles = makeStyles<Theme>((theme) => ({
 }));
 
 interface FilterIconButtonContainerProps {
-  displayedFilters: Filter[];
   globalMode: string;
   handleRemoveFilter?: (key: string, op?: string) => void;
   handleSwitchGlobalMode?: () => void;
@@ -79,7 +78,6 @@ interface FilterIconButtonContainerProps {
 }
 
 const FilterIconButtonContainer: FunctionComponent<FilterIconButtonContainerProps> = ({
-  displayedFilters,
   globalMode,
   handleRemoveFilter,
   handleSwitchGlobalMode,
@@ -93,7 +91,7 @@ const FilterIconButtonContainer: FunctionComponent<FilterIconButtonContainerProp
   const classes = useStyles();
 
   const { filtersRepresentatives } = usePreloadedQuery<FilterIconButtonContentQuery>(filterIconButtonContentQuery, filtersRepresentativesQueryRef);
-
+  const displayedFilters = filtersRepresentatives?.filters.map((f) => ({ ...f, key: f.key[0] })) ?? [];
   let classFilter = classes.filter1;
   let classOperator = classes.operator1;
   if (styleNumber === 2) {
@@ -121,19 +119,22 @@ const FilterIconButtonContainer: FunctionComponent<FilterIconButtonContainerProp
           const isNotLastFilter = lastKey !== filterKey || lastOperator !== currentFilter.operator;
           const values = (
             <>
-              {filterValues.map((n) => {
+              {filterValues.map((id) => {
+                const value = currentFilter.representatives.filter((n) => n?.id === id)[0]?.value;
+                console.log('value', value);
+                console.log('filterKey', filterKey);
                 return (
-                  <span key={n}>
+                  <span key={id}>
                     <FilterIconButtonContent
                       redirection={redirection}
                       filterKey={filterKey}
-                      id={n}
-                      filtersRepresentatives={filtersRepresentatives}
+                      id={id}
+                      value={value}
                     ></FilterIconButtonContent>
-                    {last(filterValues) !== n && (
+                    {last(filterValues) !== id && (
                       <Chip
                         className={classes.inlineOperator}
-                        label={t(currentFilter.mode.toUpperCase())}
+                        label={t((currentFilter.mode ?? 'or').toUpperCase())}
                         onClick={() => handleSwitchLocalMode?.(currentFilter)}
                       />
                     )}{' '}
@@ -165,7 +166,7 @@ const FilterIconButtonContainer: FunctionComponent<FilterIconButtonContainerProp
                   }
                   onDelete={
                     handleRemoveFilter
-                      ? () => handleRemoveFilter(filterKey, currentFilter.operator)
+                      ? () => handleRemoveFilter(filterKey, currentFilter.operator ?? undefined)
                       : undefined
                   }
                 />

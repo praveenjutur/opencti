@@ -1,5 +1,4 @@
 import { useFormatter } from '../../components/i18n';
-import { FilterIconButtonContentQuery$data } from '../../components/__generated__/FilterIconButtonContentQuery.graphql';
 
 export const FiltersVariant = {
   list: 'list',
@@ -211,10 +210,10 @@ export const isFilterGroupNotEmpty = (filterGroup: FilterGroup) => {
   return filterGroup.filters.length > 0 || filterGroup.filterGroups.length > 0;
 };
 
-export const filterValue = (filterKey: string, id: string, filtersRepresentatives: FilterIconButtonContentQuery$data['filtersRepresentatives']) => {
+export const filterValue = (filterKey: string, id: string | null, value?: string | null) => {
   const { t, nsdt } = useFormatter();
-  if (filtersWithRepresentative.includes(filterKey)) {
-    return filtersRepresentatives?.filter((n) => n?.id === id)?.[0]?.value;
+  if (value || value === null) { // resolved value or deleted entity
+    return value;
   }
   if (vocabularyFiltersWithTranslation.includes(filterKey)) {
     return t(id);
@@ -225,7 +224,7 @@ export const filterValue = (filterKey: string, id: string, filtersRepresentative
   if (filterKey === 'x_opencti_negative') {
     return t(id ? 'False positive' : 'Malicious');
   }
-  if (entityTypesFilters.includes(filterKey)) {
+  if (id && entityTypesFilters.includes(filterKey)) {
     return id === 'all'
       ? t('entity_All')
       : t(

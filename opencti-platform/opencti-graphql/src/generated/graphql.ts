@@ -7401,12 +7401,6 @@ export enum FilterMode {
   Or = 'or'
 }
 
-export type FilterRepresentative = {
-  __typename?: 'FilterRepresentative';
-  id?: Maybe<Scalars['String']['output']>;
-  value?: Maybe<Scalars['String']['output']>;
-};
-
 export type GetMetrics = {
   __typename?: 'GetMetrics';
   total?: Maybe<Scalars['String']['output']>;
@@ -17819,8 +17813,7 @@ export type Query = {
   feedbacks?: Maybe<FeedbackConnection>;
   feeds?: Maybe<FeedConnection>;
   file?: Maybe<File>;
-  filterRepresentative?: Maybe<FilterRepresentative>;
-  filtersRepresentatives?: Maybe<Array<Maybe<FilterRepresentative>>>;
+  filtersRepresentatives?: Maybe<ResolvedFilterGroup>;
   globalSearch?: Maybe<StixCoreObjectConnection>;
   group?: Maybe<Group>;
   grouping?: Maybe<Grouping>;
@@ -18522,13 +18515,8 @@ export type QueryFileArgs = {
 };
 
 
-export type QueryFilterRepresentativeArgs = {
-  filter: Filter;
-};
-
-
 export type QueryFiltersRepresentativesArgs = {
-  filters: Array<InputMaybe<Filter>>;
+  filters: FilterGroup;
 };
 
 
@@ -21065,8 +21053,26 @@ export enum ReportsOrdering {
 
 export type Representative = {
   __typename?: 'Representative';
+  id?: Maybe<Scalars['String']['output']>;
   main: Scalars['String']['output'];
   secondary?: Maybe<Scalars['String']['output']>;
+  value?: Maybe<Scalars['String']['output']>;
+};
+
+export type ResolvedFilter = {
+  __typename?: 'ResolvedFilter';
+  key: Array<Scalars['String']['output']>;
+  mode?: Maybe<FilterMode>;
+  operator?: Maybe<Scalars['String']['output']>;
+  representatives: Array<Maybe<Representative>>;
+  values: Array<Maybe<Scalars['String']['output']>>;
+};
+
+export type ResolvedFilterGroup = {
+  __typename?: 'ResolvedFilterGroup';
+  filterGroups: Array<ResolvedFilterGroup>;
+  filters: Array<ResolvedFilter>;
+  mode: FilterMode;
 };
 
 export type ResolvedInstanceFilter = {
@@ -28975,7 +28981,6 @@ export type ResolversTypes = ResolversObject<{
   Filter: Filter;
   FilterGroup: FilterGroup;
   FilterMode: FilterMode;
-  FilterRepresentative: ResolverTypeWrapper<FilterRepresentative>;
   Float: ResolverTypeWrapper<Scalars['Float']['output']>;
   GetMetrics: ResolverTypeWrapper<GetMetrics>;
   Group: ResolverTypeWrapper<Omit<Group, 'default_dashboard' | 'members'> & { default_dashboard?: Maybe<ResolversTypes['Workspace']>, members?: Maybe<ResolversTypes['UserConnection']> }>;
@@ -29284,6 +29289,8 @@ export type ResolversTypes = ResolversObject<{
   ReportEditMutations: ResolverTypeWrapper<Omit<ReportEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversTypes['Report']>, contextPatch?: Maybe<ResolversTypes['Report']>, fieldPatch?: Maybe<ResolversTypes['Report']>, relationAdd?: Maybe<ResolversTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversTypes['Report']> }>;
   ReportsOrdering: ReportsOrdering;
   Representative: ResolverTypeWrapper<Representative>;
+  ResolvedFilter: ResolverTypeWrapper<ResolvedFilter>;
+  ResolvedFilterGroup: ResolverTypeWrapper<ResolvedFilterGroup>;
   ResolvedInstanceFilter: ResolverTypeWrapper<ResolvedInstanceFilter>;
   RetentionRule: ResolverTypeWrapper<RetentionRule>;
   RetentionRuleAddInput: RetentionRuleAddInput;
@@ -29774,7 +29781,6 @@ export type ResolversParentTypes = ResolversObject<{
   FileMetadata: FileMetadata;
   Filter: Filter;
   FilterGroup: FilterGroup;
-  FilterRepresentative: FilterRepresentative;
   Float: Scalars['Float']['output'];
   GetMetrics: GetMetrics;
   Group: Omit<Group, 'default_dashboard' | 'members'> & { default_dashboard?: Maybe<ResolversParentTypes['Workspace']>, members?: Maybe<ResolversParentTypes['UserConnection']> };
@@ -30024,6 +30030,8 @@ export type ResolversParentTypes = ResolversObject<{
   ReportEdge: Omit<ReportEdge, 'node'> & { node: ResolversParentTypes['Report'] };
   ReportEditMutations: Omit<ReportEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversParentTypes['Report']>, contextPatch?: Maybe<ResolversParentTypes['Report']>, fieldPatch?: Maybe<ResolversParentTypes['Report']>, relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['Report']> };
   Representative: Representative;
+  ResolvedFilter: ResolvedFilter;
+  ResolvedFilterGroup: ResolvedFilterGroup;
   ResolvedInstanceFilter: ResolvedInstanceFilter;
   RetentionRule: RetentionRule;
   RetentionRuleAddInput: RetentionRuleAddInput;
@@ -32464,12 +32472,6 @@ export type FileMetadataResolvers<ContextType = any, ParentType extends Resolver
   mimetype?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   order?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   version?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type FilterRepresentativeResolvers<ContextType = any, ParentType extends ResolversParentTypes['FilterRepresentative'] = ResolversParentTypes['FilterRepresentative']> = ResolversObject<{
-  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  value?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -35367,8 +35369,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   feedbacks?: Resolver<Maybe<ResolversTypes['FeedbackConnection']>, ParentType, ContextType, Partial<QueryFeedbacksArgs>>;
   feeds?: Resolver<Maybe<ResolversTypes['FeedConnection']>, ParentType, ContextType, Partial<QueryFeedsArgs>>;
   file?: Resolver<Maybe<ResolversTypes['File']>, ParentType, ContextType, RequireFields<QueryFileArgs, 'id'>>;
-  filterRepresentative?: Resolver<Maybe<ResolversTypes['FilterRepresentative']>, ParentType, ContextType, RequireFields<QueryFilterRepresentativeArgs, 'filter'>>;
-  filtersRepresentatives?: Resolver<Maybe<Array<Maybe<ResolversTypes['FilterRepresentative']>>>, ParentType, ContextType, RequireFields<QueryFiltersRepresentativesArgs, 'filters'>>;
+  filtersRepresentatives?: Resolver<Maybe<ResolversTypes['ResolvedFilterGroup']>, ParentType, ContextType, RequireFields<QueryFiltersRepresentativesArgs, 'filters'>>;
   globalSearch?: Resolver<Maybe<ResolversTypes['StixCoreObjectConnection']>, ParentType, ContextType, Partial<QueryGlobalSearchArgs>>;
   group?: Resolver<Maybe<ResolversTypes['Group']>, ParentType, ContextType, RequireFields<QueryGroupArgs, 'id'>>;
   grouping?: Resolver<Maybe<ResolversTypes['Grouping']>, ParentType, ContextType, RequireFields<QueryGroupingArgs, 'id'>>;
@@ -35811,8 +35812,26 @@ export type ReportEditMutationsResolvers<ContextType = any, ParentType extends R
 }>;
 
 export type RepresentativeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Representative'] = ResolversParentTypes['Representative']> = ResolversObject<{
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   main?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   secondary?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ResolvedFilterResolvers<ContextType = any, ParentType extends ResolversParentTypes['ResolvedFilter'] = ResolversParentTypes['ResolvedFilter']> = ResolversObject<{
+  key?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  mode?: Resolver<Maybe<ResolversTypes['FilterMode']>, ParentType, ContextType>;
+  operator?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  representatives?: Resolver<Array<Maybe<ResolversTypes['Representative']>>, ParentType, ContextType>;
+  values?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ResolvedFilterGroupResolvers<ContextType = any, ParentType extends ResolversParentTypes['ResolvedFilterGroup'] = ResolversParentTypes['ResolvedFilterGroup']> = ResolversObject<{
+  filterGroups?: Resolver<Array<ResolversTypes['ResolvedFilterGroup']>, ParentType, ContextType>;
+  filters?: Resolver<Array<ResolversTypes['ResolvedFilter']>, ParentType, ContextType>;
+  mode?: Resolver<ResolversTypes['FilterMode'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -38330,7 +38349,6 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   FileConnection?: FileConnectionResolvers<ContextType>;
   FileEdge?: FileEdgeResolvers<ContextType>;
   FileMetadata?: FileMetadataResolvers<ContextType>;
-  FilterRepresentative?: FilterRepresentativeResolvers<ContextType>;
   GetMetrics?: GetMetricsResolvers<ContextType>;
   Group?: GroupResolvers<ContextType>;
   GroupConnection?: GroupConnectionResolvers<ContextType>;
@@ -38499,6 +38517,8 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   ReportEdge?: ReportEdgeResolvers<ContextType>;
   ReportEditMutations?: ReportEditMutationsResolvers<ContextType>;
   Representative?: RepresentativeResolvers<ContextType>;
+  ResolvedFilter?: ResolvedFilterResolvers<ContextType>;
+  ResolvedFilterGroup?: ResolvedFilterGroupResolvers<ContextType>;
   ResolvedInstanceFilter?: ResolvedInstanceFilterResolvers<ContextType>;
   RetentionRule?: RetentionRuleResolvers<ContextType>;
   RetentionRuleConnection?: RetentionRuleConnectionResolvers<ContextType>;

@@ -80,21 +80,34 @@ enum FilterMode {
   or
 }
 
-type FilterRepresentative {
-  id: String
-  value: String
-}
-
 input FilterGroup {
-    mode: FilterMode!
-    filters: [Filter!]!
-    filterGroups: [FilterGroup!]!
+  mode: FilterMode!
+  filters: [Filter!]!
+  filterGroups: [FilterGroup!]!
 }
 input Filter {
+  key: [String!]!
+  values: [String]!
+  operator: String
+  mode: FilterMode
+}
+
+type ResolvedFilterGroup {
+    mode: FilterMode!
+    filters: [ResolvedFilter!]!
+    filterGroups: [ResolvedFilterGroup!]!
+}
+type ResolvedFilter {
     key: [String!]!
     values: [String]!
     operator: String
     mode: FilterMode
+    representatives: [Representative]!
+}
+
+type Representative {
+  id: String
+  value: String
 }
 
 ### EDIT
@@ -12263,8 +12276,7 @@ type Query {
     order: String
     distributionParameters: StixCoreObjectsDistributionParameters
   ): [MultiDistribution] @auth(for: [KNOWLEDGE, EXPLORE])
-  filterRepresentative(filter: Filter!): FilterRepresentative @auth(for: [KNOWLEDGE])
-  filtersRepresentatives(filters: [Filter]!): [FilterRepresentative] @auth(for: [KNOWLEDGE])
+  filtersRepresentatives(filters: FilterGroup!): ResolvedFilterGroup @auth(for: [KNOWLEDGE])
 
   ######## STIX DOMAIN OBJECT ENTITIES
 
