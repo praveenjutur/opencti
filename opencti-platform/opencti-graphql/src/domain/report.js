@@ -44,8 +44,8 @@ export const reportContainsStixObjectOrStixRelationship = async (context, user, 
     filters: {
       mode: 'and',
       filters: [
-        { key: 'internal_id', values: [reportId], operator: 'eq', mode: 'or' },
-        { key: buildRefRelationKey(RELATION_OBJECT), values: [resolvedThingId], operator: 'eq', mode: 'or' },
+        { key: 'internal_id', values: [reportId] },
+        { key: buildRefRelationKey(RELATION_OBJECT), values: [resolvedThingId] },
       ],
       filterGroups: [],
     },
@@ -143,8 +143,8 @@ export const addReport = async (context, user, report) => {
 const buildReportDeleteElementsFilter = (reportId) => {
   const refKey = buildRefRelationKey(RELATION_OBJECT);
   const filters = [
-    { key: [refKey], values: [reportId], operator: 'eq', mode: 'or' },
-    { key: [refKey], values: [`doc['${refKey}.keyword'].length == 1`], operator: 'script', mode: 'or' }
+    { key: [refKey], values: [reportId] },
+    { key: [refKey], values: [`doc['${refKey}.keyword'].length == 1`], operator: 'script' }
   ];
   return {
     mode: 'and',

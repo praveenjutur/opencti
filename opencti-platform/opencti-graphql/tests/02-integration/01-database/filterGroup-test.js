@@ -198,9 +198,9 @@ describe('Complex filters combinations, behavior tested on reports', () => {
           filterGroups: [],
         },
       } });
-    // expect(queryResult2.data.reports.edges.length).toEqual(4); TODO uncomment
+    expect(queryResult.data.reports.edges.length).toEqual(4);
     queryResult = await queryAsAdmin({ query: LIST_QUERY });
-    // expect(queryResult2.data.reports.edges.length).toEqual(4); TODO uncomment
+    expect(queryResult.data.reports.edges.length).toEqual(4);
     // --- 03. one filter --- //
     queryResult = await queryAsAdmin({ query: LIST_QUERY,
       variables: {

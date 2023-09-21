@@ -293,8 +293,6 @@ describe('Grouping resolver standard behavior', () => {
             filters: [{
               key: 'type',
               value: 'investigation',
-              operator: 'eq',
-              mode: 'or',
             }],
             filterGroups: [],
           }

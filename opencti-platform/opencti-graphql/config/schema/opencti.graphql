@@ -87,8 +87,8 @@ type FilterRepresentative {
 
 input FilterGroup {
     mode: FilterMode!
-    filters: [Filter]!
-    filterGroups: [FilterGroup]!
+    filters: [Filter!]!
+    filterGroups: [FilterGroup!]!
 }
 input Filter {
     key: [String!]!
