@@ -943,6 +943,16 @@ const buildSessionUser = (origin, impersonate, provider, settings) => {
     session_version: PLATFORM_VERSION
   };
 };
+
+const virtualOrganizationAdminCapability = {
+  id: uuid(),
+  standard_id: `capability--${uuid()}`,
+  name: 'ORGA_ADMIN',
+  entity_type: 'Capability',
+  parent_types: ['Basic-Object', 'Internal-Object'],
+  created_at: Date.now(),
+  updated_at: Date.now()
+};
 export const buildCompleteUser = async (context, client) => {
   if (!client) {
     return undefined;
@@ -961,6 +971,9 @@ export const buildCompleteUser = async (context, client) => {
   const capabilitiesPromise = getCapabilities(context, client.id, roles, isUserPlatform);
   const [capabilities] = await Promise.all([capabilitiesPromise]);
   const marking = await getUserAndGlobalMarkings(context, client.id, groups, capabilities);
+  if (organizations.find((o) => o.authorized_authorities.includes(client.id))) {
+    capabilities.push(virtualOrganizationAdminCapability);
+  }
   const individualId = individuals.length > 0 ? R.head(individuals).id : undefined;
 
   // Default hidden types
@@ -1177,6 +1190,9 @@ export const findDefaultDashboards = async (context, user, currentUser) => {
   const dashboards = await internalFindByIds(context, user, ids, { type: ENTITY_TYPE_WORKSPACE });
   // Sort dashboards the same order as the fetched ids
   return dashboards.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
+};
+export const findAdministratedOrganizationsByUser = async (context, user, currentUser) => {
+  return currentUser.organizations.filter((o) => o.authorized_authorities.includes(currentUser.id));
 };
 
 // region context

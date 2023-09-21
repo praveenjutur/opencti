@@ -45,6 +45,11 @@ const rootPrivateQuery = graphql`
           definition
         }
       }
+      administrated_organizations {
+        id
+        name
+        authorized_authorities
+      }
     }
     settings {
       id
