@@ -13,7 +13,8 @@ import { useFormatter } from '../../../components/i18n';
 import ItemIcon from '../../../components/ItemIcon';
 import { hexToRGB, itemColor } from '../../../utils/Colors';
 import ItemMarkings from '../../../components/ItemMarkings';
-import {getFileUri} from "../../../utils/utils";
+import { getFileUri } from '../../../utils/utils';
+import { resolveLink } from '../../../utils/Entity';
 
 // TODO clean css
 const useStyles = makeStyles<Theme>((theme) => ({
@@ -111,7 +112,11 @@ const SearchIndexedFileLineComponent: FunctionComponent<SearchIndexedFileLineCom
               className={classes.bodyItem}
               style={{ width: dataColumns.entity_name.width }}
             >
-              <span>{node.entity?.representative.main}</span>
+              {node.entity && (
+                <Link to={`${resolveLink(node.entity.entity_type)}/${node.entity.id}/files`}>
+                  <span>{node.entity?.representative.main}</span>
+                </Link>
+              )}
             </div>
             <div
               className={classes.bodyItem}
@@ -141,6 +146,7 @@ const SearchIndexedFileLine = createFragmentContainer(SearchIndexedFileLineCompo
         file_id
         entity {
           ...on StixObject {
+            id
             entity_type
             representative {
               main
