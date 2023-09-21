@@ -12,7 +12,8 @@ import { Theme } from '../../../components/Theme';
 import { useFormatter } from '../../../components/i18n';
 import ItemIcon from '../../../components/ItemIcon';
 import { hexToRGB, itemColor } from '../../../utils/Colors';
-import ItemMarkings from "../../../components/ItemMarkings";
+import ItemMarkings from '../../../components/ItemMarkings';
+import {getFileUri} from "../../../utils/utils";
 
 // TODO clean css
 const useStyles = makeStyles<Theme>((theme) => ({
@@ -69,7 +70,8 @@ const SearchIndexedFileLineComponent: FunctionComponent<SearchIndexedFileLineCom
       classes={{ root: classes.item }}
       divider={true}
       button={true}
-      component={Link}
+      component="a"
+      href={getFileUri(node.file_id)}
     >
       <ListItemIcon classes={{ root: classes.itemIcon }}>
         <ItemIcon type="File" />
