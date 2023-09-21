@@ -71,7 +71,6 @@ const Search = () => {
   );
   const [searchOpen, setSearchOpen] = useState(false);
   const handleSearchIndexFiles = () => {
-    console.log('handleSearchIndexFiles', searchOpen);
     setSearchOpen(true);
   };
 
@@ -215,7 +214,7 @@ const Search = () => {
             </div>) : (
               ' '
             )}
-          { searchOpen ? (<SearchIndexedFiles/>) : ('')}
+          { searchOpen ? (<SearchIndexedFiles search={searchTerm}/>) : ('')}
         </div>
       </ExportContextProvider>
   );

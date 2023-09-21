@@ -15,7 +15,7 @@ import ExportContextProvider from '../../../utils/ExportContextProvider';
 // TODO : filters keys + redirectionMode + Datacolumns
 
 const LOCAL_STORAGE_KEY = 'view-files';
-const SearchIndexedFiles : FunctionComponent = () => {
+const SearchIndexedFiles : FunctionComponent = ({ search }) => {
   const {
     platformModuleHelpers: { isRuntimeFieldEnable },
   } = useAuth();
@@ -43,7 +43,7 @@ const SearchIndexedFiles : FunctionComponent = () => {
 
   const queryRef = useQueryLoading<SearchIndexedFilesLinesPaginationQuery>(
     searchIndexedFilesLinesQuery,
-    {},
+    { ...paginationOptions, search },
   );
 
   const renderLines = () => {
