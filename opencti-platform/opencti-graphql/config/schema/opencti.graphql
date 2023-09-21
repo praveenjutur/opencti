@@ -80,16 +80,21 @@ enum FilterMode {
   or
 }
 
-input Filter {
-  key: String
-  values: [String]
-  operator: String
-  mode: String
-}
-
 type FilterRepresentative {
   id: String
   value: String
+}
+
+input FilterGroup {
+    mode: FilterMode!
+    filters: [Filter]!
+    filterGroups: [FilterGroup]!
+}
+input Filter {
+    key: [String!]!
+    values: [String]!
+    operator: String
+    mode: FilterMode
 }
 
 ### EDIT
@@ -3599,39 +3604,6 @@ enum ReportsOrdering {
   objectMarking
   report_types
   x_opencti_workflow_id
-}
-enum ReportsFilter {
-  name
-  published
-  published_day
-  created
-  modified
-  created_at
-  updated_at
-  report_types
-  confidence
-  objectLabel
-  createdBy
-  markedBy
-  assigneeTo
-  participant
-  labelledBy
-  objectContains
-  x_opencti_workflow_id
-  x_opencti_reliability
-  revoked
-  creator
-}
-input ReportsGroupFiltering {
-  mode: FilterMode!
-  filters: [ReportsFilterFiltering]!
-  filterGroups: [ReportsGroupFiltering]!
-}
-input ReportsFilterFiltering {
-  key: [ReportsFilter!]!
-  values: [String]!
-  operator: String
-  mode: FilterMode
 }
 type ReportConnection {
   pageInfo: PageInfo!
@@ -12496,7 +12468,7 @@ type Query {
     after: ID
     orderBy: ReportsOrdering
     orderMode: OrderingMode
-    filters: ReportsGroupFiltering
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean
@@ -12510,7 +12482,7 @@ type Query {
     startDate: DateTime!
     endDate: DateTime!
     interval: String!
-    filters: ReportsGroupFiltering
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): [TimeSeries] @auth(for: [KNOWLEDGE, EXPLORE])
@@ -12519,7 +12491,7 @@ type Query {
     objectId: String
     authorId: String
     endDate: DateTime
-    filters: ReportsGroupFiltering
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): Number @auth(for: [KNOWLEDGE, EXPLORE])
@@ -12533,7 +12505,7 @@ type Query {
     startDate: DateTime
     endDate: DateTime
     dateAttribute: String
-    filters: ReportsGroupFiltering
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): [Distribution] @auth(for: [KNOWLEDGE, EXPLORE])

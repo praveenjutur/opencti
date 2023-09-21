@@ -578,3 +578,19 @@ export const isStixMatchFilters = async (context, user, stix, adaptedFilters, us
   }
   return true;
 };
+
+export const addFilter = (filterGroup, newKey, newValues) => {
+  return {
+    mode: filterGroup.mode,
+    filters: [
+      {
+        key: Array.isArray(newKey) ? newKey : [newKey],
+        values: Array.isArray(newValues) ? newValues : [newValues],
+        operator: 'eq',
+        mode: 'or'
+      },
+      ...(filterGroup.filters || [])
+    ],
+    filterGroups: filterGroup.filterGroups,
+  };
+};

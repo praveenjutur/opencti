@@ -7384,10 +7384,16 @@ export type FileMetadata = {
 };
 
 export type Filter = {
-  key?: InputMaybe<Scalars['String']['input']>;
-  mode?: InputMaybe<Scalars['String']['input']>;
+  key: Array<Scalars['String']['input']>;
+  mode?: InputMaybe<FilterMode>;
   operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  values: Array<InputMaybe<Scalars['String']['input']>>;
+};
+
+export type FilterGroup = {
+  filterGroups: Array<InputMaybe<FilterGroup>>;
+  filters: Array<InputMaybe<Filter>>;
+  mode: FilterMode;
 };
 
 export enum FilterMode {
@@ -19247,7 +19253,7 @@ export type QueryReportContainsStixObjectOrStixRelationshipArgs = {
 export type QueryReportsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<ReportsGroupFiltering>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ReportsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -19262,7 +19268,7 @@ export type QueryReportsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<ReportsGroupFiltering>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   objectId?: InputMaybe<Scalars['String']['input']>;
   operation: StatsOperation;
@@ -19276,7 +19282,7 @@ export type QueryReportsNumberArgs = {
   authorId?: InputMaybe<Scalars['String']['input']>;
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<ReportsGroupFiltering>;
+  filters?: InputMaybe<FilterGroup>;
   objectId?: InputMaybe<Scalars['String']['input']>;
   reportType?: InputMaybe<Scalars['String']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
@@ -19288,7 +19294,7 @@ export type QueryReportsTimeSeriesArgs = {
   endDate: Scalars['DateTime']['input'];
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<ReportsGroupFiltering>;
+  filters?: InputMaybe<FilterGroup>;
   interval: Scalars['String']['input'];
   objectId?: InputMaybe<Scalars['String']['input']>;
   operation: StatsOperation;
@@ -21041,42 +21047,6 @@ export type ReportEditMutationsRelationAddArgs = {
 export type ReportEditMutationsRelationDeleteArgs = {
   relationship_type: Scalars['String']['input'];
   toId: Scalars['StixRef']['input'];
-};
-
-export enum ReportsFilter {
-  AssigneeTo = 'assigneeTo',
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  LabelledBy = 'labelledBy',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectContains = 'objectContains',
-  ObjectLabel = 'objectLabel',
-  Participant = 'participant',
-  Published = 'published',
-  PublishedDay = 'published_day',
-  ReportTypes = 'report_types',
-  Revoked = 'revoked',
-  UpdatedAt = 'updated_at',
-  XOpenctiReliability = 'x_opencti_reliability',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type ReportsFilterFiltering = {
-  key: Array<ReportsFilter>;
-  mode?: InputMaybe<FilterMode>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values: Array<InputMaybe<Scalars['String']['input']>>;
-};
-
-export type ReportsGroupFiltering = {
-  filterGroups: Array<InputMaybe<ReportsGroupFiltering>>;
-  filters: Array<InputMaybe<ReportsFilterFiltering>>;
-  mode: FilterMode;
 };
 
 export enum ReportsOrdering {
@@ -29003,6 +28973,7 @@ export type ResolversTypes = ResolversObject<{
   FileEdge: ResolverTypeWrapper<FileEdge>;
   FileMetadata: ResolverTypeWrapper<FileMetadata>;
   Filter: Filter;
+  FilterGroup: FilterGroup;
   FilterMode: FilterMode;
   FilterRepresentative: ResolverTypeWrapper<FilterRepresentative>;
   Float: ResolverTypeWrapper<Scalars['Float']['output']>;
@@ -29311,9 +29282,6 @@ export type ResolversTypes = ResolversObject<{
   ReportConnection: ResolverTypeWrapper<Omit<ReportConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['ReportEdge']>>> }>;
   ReportEdge: ResolverTypeWrapper<Omit<ReportEdge, 'node'> & { node: ResolversTypes['Report'] }>;
   ReportEditMutations: ResolverTypeWrapper<Omit<ReportEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversTypes['Report']>, contextPatch?: Maybe<ResolversTypes['Report']>, fieldPatch?: Maybe<ResolversTypes['Report']>, relationAdd?: Maybe<ResolversTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversTypes['Report']> }>;
-  ReportsFilter: ReportsFilter;
-  ReportsFilterFiltering: ReportsFilterFiltering;
-  ReportsGroupFiltering: ReportsGroupFiltering;
   ReportsOrdering: ReportsOrdering;
   Representative: ResolverTypeWrapper<Representative>;
   ResolvedInstanceFilter: ResolverTypeWrapper<ResolvedInstanceFilter>;
@@ -29805,6 +29773,7 @@ export type ResolversParentTypes = ResolversObject<{
   FileEdge: FileEdge;
   FileMetadata: FileMetadata;
   Filter: Filter;
+  FilterGroup: FilterGroup;
   FilterRepresentative: FilterRepresentative;
   Float: Scalars['Float']['output'];
   GetMetrics: GetMetrics;
@@ -30054,8 +30023,6 @@ export type ResolversParentTypes = ResolversObject<{
   ReportConnection: Omit<ReportConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['ReportEdge']>>> };
   ReportEdge: Omit<ReportEdge, 'node'> & { node: ResolversParentTypes['Report'] };
   ReportEditMutations: Omit<ReportEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversParentTypes['Report']>, contextPatch?: Maybe<ResolversParentTypes['Report']>, fieldPatch?: Maybe<ResolversParentTypes['Report']>, relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['Report']> };
-  ReportsFilterFiltering: ReportsFilterFiltering;
-  ReportsGroupFiltering: ReportsGroupFiltering;
   Representative: Representative;
   ResolvedInstanceFilter: ResolvedInstanceFilter;
   RetentionRule: RetentionRule;
