@@ -51,26 +51,26 @@ const SearchIndexedFiles : FunctionComponent = () => {
     const dataColumns = {
       name: {
         label: 'Filename',
-        width: '22%',
+        width: '25%',
         isSortable: true,
       },
       uploaded_at: {
         label: 'Upload date',
-        width: '22%',
+        width: '10%',
         isSortable: false,
       },
       entity_type: {
-        label: 'Type of attached entity',
-        width: '12%',
+        label: 'Attached entity type',
+        width: '20%',
         isSortable: isRuntimeSort,
       },
       entity_name: {
-        label: 'Name of attached entity',
-        width: '22%',
+        label: 'Attached entity name',
+        width: '25%',
         isSortable: isRuntimeSort,
       },
       objectMarking: {
-        label: 'Marking of attached entity',
+        label: 'Attached entity marking',
         width: '10%',
         isSortable: isRuntimeSort,
       },
@@ -90,9 +90,7 @@ const SearchIndexedFiles : FunctionComponent = () => {
           filters={filters}
           paginationOptions={paginationOptions}
           numberOfElements={numberOfElements}
-          availableFilterKeys={[
-            'add filter keys',
-          ]}
+          availableFilterKeys={[]}
         >
           {queryRef && (
             <React.Suspense fallback={<Loader/>}>

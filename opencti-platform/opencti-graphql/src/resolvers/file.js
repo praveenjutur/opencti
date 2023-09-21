@@ -16,6 +16,9 @@ const fileResolvers = {
     pendingFiles: (_, { first }, context) => filesListing(context, context.user, first, 'import/pending/'),
     indexedFiles: (_, args, context) => elSearchFiles(context, context.user, args),
   },
+  IndexedFile: {
+    entity: (file, _, context) => domainLoader.load(file.entity_id, context, context.user),
+  },
   File: {
     works: (file, _, context) => worksForSource(context, context.user, file.id),
   },

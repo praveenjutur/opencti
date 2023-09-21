@@ -52,10 +52,7 @@ export const searchIndexedFilesLinesFragment = graphql`
         ) @connection(key: "Pagination_indexedFiles") {
             edges {
                 node {
-                    id
-                    name
-                    uploaded_at
-                    file_id
+                  ...SearchIndexedFileLine_node
                 }
             }
             pageInfo {
