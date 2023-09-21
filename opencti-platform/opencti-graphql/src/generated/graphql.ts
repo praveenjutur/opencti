@@ -9157,6 +9157,27 @@ export enum IncidentsOrdering {
   XOpenctiWorkflowId = 'x_opencti_workflow_id'
 }
 
+export type IndexedFile = {
+  __typename?: 'IndexedFile';
+  entity?: Maybe<StixObject>;
+  file_id: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  uploaded_at: Scalars['DateTime']['output'];
+};
+
+export type IndexedFileConnection = {
+  __typename?: 'IndexedFileConnection';
+  edges?: Maybe<Array<Maybe<IndexedFileEdge>>>;
+  pageInfo: PageInfo;
+};
+
+export type IndexedFileEdge = {
+  __typename?: 'IndexedFileEdge';
+  cursor: Scalars['String']['output'];
+  node: IndexedFile;
+};
+
 export type IndexingMetrics = {
   __typename?: 'IndexingMetrics';
   delete_total?: Maybe<Scalars['String']['output']>;
@@ -17796,7 +17817,7 @@ export type Query = {
   incident?: Maybe<Incident>;
   incidents?: Maybe<IncidentConnection>;
   incidentsTimeSeries?: Maybe<Array<Maybe<TimeSeries>>>;
-  indexedFiles?: Maybe<FileConnection>;
+  indexedFiles?: Maybe<IndexedFileConnection>;
   indicator?: Maybe<Indicator>;
   indicators?: Maybe<IndicatorConnection>;
   indicatorsDistribution?: Maybe<Array<Maybe<Distribution>>>;
@@ -28985,6 +29006,9 @@ export type ResolversTypes = ResolversObject<{
   IncidentsFilter: IncidentsFilter;
   IncidentsFiltering: IncidentsFiltering;
   IncidentsOrdering: IncidentsOrdering;
+  IndexedFile: ResolverTypeWrapper<IndexedFile>;
+  IndexedFileConnection: ResolverTypeWrapper<IndexedFileConnection>;
+  IndexedFileEdge: ResolverTypeWrapper<IndexedFileEdge>;
   IndexingMetrics: ResolverTypeWrapper<IndexingMetrics>;
   Indicator: ResolverTypeWrapper<Omit<Indicator, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'notes' | 'objectOrganization' | 'observables' | 'observedData' | 'opinions' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversTypes['CaseConnection']>, containers?: Maybe<ResolversTypes['ContainerConnection']>, createdBy?: Maybe<ResolversTypes['Identity']>, groupings?: Maybe<ResolversTypes['GroupingConnection']>, notes?: Maybe<ResolversTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversTypes['OrganizationConnection']>, observables?: Maybe<ResolversTypes['StixCyberObservableConnection']>, observedData?: Maybe<ResolversTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversTypes['OpinionConnection']>, reports?: Maybe<ResolversTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversTypes['StixCoreRelationshipConnection']> }>;
   IndicatorAddInput: IndicatorAddInput;
@@ -29769,6 +29793,9 @@ export type ResolversParentTypes = ResolversObject<{
   IncidentEdge: Omit<IncidentEdge, 'node'> & { node: ResolversParentTypes['Incident'] };
   IncidentEditMutations: Omit<IncidentEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversParentTypes['Incident']>, contextPatch?: Maybe<ResolversParentTypes['Incident']>, fieldPatch?: Maybe<ResolversParentTypes['Incident']>, relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['Incident']> };
   IncidentsFiltering: IncidentsFiltering;
+  IndexedFile: IndexedFile;
+  IndexedFileConnection: IndexedFileConnection;
+  IndexedFileEdge: IndexedFileEdge;
   IndexingMetrics: IndexingMetrics;
   Indicator: Omit<Indicator, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'notes' | 'objectOrganization' | 'observables' | 'observedData' | 'opinions' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, observables?: Maybe<ResolversParentTypes['StixCyberObservableConnection']>, observedData?: Maybe<ResolversParentTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversParentTypes['StixCoreRelationshipConnection']> };
   IndicatorAddInput: IndicatorAddInput;
@@ -32889,6 +32916,27 @@ export type IncidentEditMutationsResolvers<ContextType = any, ParentType extends
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type IndexedFileResolvers<ContextType = any, ParentType extends ResolversParentTypes['IndexedFile'] = ResolversParentTypes['IndexedFile']> = ResolversObject<{
+  entity?: Resolver<Maybe<ResolversTypes['StixObject']>, ParentType, ContextType>;
+  file_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  uploaded_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type IndexedFileConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['IndexedFileConnection'] = ResolversParentTypes['IndexedFileConnection']> = ResolversObject<{
+  edges?: Resolver<Maybe<Array<Maybe<ResolversTypes['IndexedFileEdge']>>>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type IndexedFileEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['IndexedFileEdge'] = ResolversParentTypes['IndexedFileEdge']> = ResolversObject<{
+  cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['IndexedFile'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type IndexingMetricsResolvers<ContextType = any, ParentType extends ResolversParentTypes['IndexingMetrics'] = ResolversParentTypes['IndexingMetrics']> = ResolversObject<{
   delete_total?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   index_total?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -35331,7 +35379,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   incident?: Resolver<Maybe<ResolversTypes['Incident']>, ParentType, ContextType, Partial<QueryIncidentArgs>>;
   incidents?: Resolver<Maybe<ResolversTypes['IncidentConnection']>, ParentType, ContextType, Partial<QueryIncidentsArgs>>;
   incidentsTimeSeries?: Resolver<Maybe<Array<Maybe<ResolversTypes['TimeSeries']>>>, ParentType, ContextType, RequireFields<QueryIncidentsTimeSeriesArgs, 'endDate' | 'field' | 'interval' | 'operation' | 'startDate'>>;
-  indexedFiles?: Resolver<Maybe<ResolversTypes['FileConnection']>, ParentType, ContextType, Partial<QueryIndexedFilesArgs>>;
+  indexedFiles?: Resolver<Maybe<ResolversTypes['IndexedFileConnection']>, ParentType, ContextType, Partial<QueryIndexedFilesArgs>>;
   indicator?: Resolver<Maybe<ResolversTypes['Indicator']>, ParentType, ContextType, RequireFields<QueryIndicatorArgs, 'id'>>;
   indicators?: Resolver<Maybe<ResolversTypes['IndicatorConnection']>, ParentType, ContextType, Partial<QueryIndicatorsArgs>>;
   indicatorsDistribution?: Resolver<Maybe<Array<Maybe<ResolversTypes['Distribution']>>>, ParentType, ContextType, RequireFields<QueryIndicatorsDistributionArgs, 'field' | 'operation'>>;
@@ -38300,6 +38348,9 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   IncidentConnection?: IncidentConnectionResolvers<ContextType>;
   IncidentEdge?: IncidentEdgeResolvers<ContextType>;
   IncidentEditMutations?: IncidentEditMutationsResolvers<ContextType>;
+  IndexedFile?: IndexedFileResolvers<ContextType>;
+  IndexedFileConnection?: IndexedFileConnectionResolvers<ContextType>;
+  IndexedFileEdge?: IndexedFileEdgeResolvers<ContextType>;
   IndexingMetrics?: IndexingMetricsResolvers<ContextType>;
   Indicator?: IndicatorResolvers<ContextType>;
   IndicatorConnection?: IndicatorConnectionResolvers<ContextType>;

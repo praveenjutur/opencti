@@ -29,7 +29,6 @@ const SearchIndexedFiles : FunctionComponent = () => {
     {
       sortBy: '_score',
       orderAsc: true,
-      openExports: false,
       filters: {} as Filters,
     },
   );
@@ -39,7 +38,6 @@ const SearchIndexedFiles : FunctionComponent = () => {
     filters,
     sortBy,
     orderAsc,
-    openExports,
     // redirectionMode,
   } = viewStorage;
 
@@ -51,20 +49,15 @@ const SearchIndexedFiles : FunctionComponent = () => {
   const renderLines = () => {
     const isRuntimeSort = isRuntimeFieldEnable() ?? false;
     const dataColumns = {
-      id: {
+      name: {
         label: 'Filename',
-        width: '10%',
+        width: '22%',
         isSortable: true,
       },
-      upload_date: {
-        label: 'upload date',
+      uploaded_at: {
+        label: 'Upload date',
         width: '22%',
         isSortable: false,
-      },
-      score: {
-        label: 'Occurences',
-        width: '12%',
-        isSortable: isRuntimeSort,
       },
       entity_type: {
         label: 'Type of attached entity',
@@ -73,7 +66,7 @@ const SearchIndexedFiles : FunctionComponent = () => {
       },
       entity_name: {
         label: 'Name of attached entity',
-        width: '12%',
+        width: '22%',
         isSortable: isRuntimeSort,
       },
       objectMarking: {
@@ -93,14 +86,10 @@ const SearchIndexedFiles : FunctionComponent = () => {
           handleAddFilter={storageHelpers.handleAddFilter}
           handleRemoveFilter={storageHelpers.handleRemoveFilter}
           handleChangeView={storageHelpers.handleChangeView}
-          handleToggleExports={storageHelpers.handleToggleExports}
-          openExports={openExports}
-          exportEntityType="Stix-Core-Object"
           disableCards={true}
           filters={filters}
           paginationOptions={paginationOptions}
           numberOfElements={numberOfElements}
-          iconExtension={true}
           availableFilterKeys={[
             'add filter keys',
           ]}

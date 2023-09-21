@@ -14,7 +14,7 @@ const fileResolvers = {
     file: (_, { id }, context) => loadFile(context, context.user, id),
     importFiles: (_, { first }, context) => filesListing(context, context.user, first, 'import/global/'),
     pendingFiles: (_, { first }, context) => filesListing(context, context.user, first, 'import/pending/'),
-    indexedFiles: (_, { first, search }, context) => elSearchFiles(context, context.user, { first, search }),
+    indexedFiles: (_, args, context) => elSearchFiles(context, context.user, args),
   },
   File: {
     works: (file, _, context) => worksForSource(context, context.user, file.id),

@@ -40,7 +40,8 @@ import {
   RELATION_KILL_CHAIN_PHASE,
   RELATION_OBJECT_ASSIGNEE,
   RELATION_OBJECT_LABEL,
-  RELATION_OBJECT_MARKING, RELATION_OBJECT_PARTICIPANT,
+  RELATION_OBJECT_MARKING,
+  RELATION_OBJECT_PARTICIPANT,
 } from '../schema/stixRefRelationship';
 import {
   ABSTRACT_BASIC_RELATIONSHIP,
@@ -73,13 +74,7 @@ import { isStixObject } from '../schema/stixCoreObject';
 import { isBasicRelationship, isStixRelationshipExceptRef } from '../schema/stixRelationship';
 import { RELATION_INDICATES } from '../schema/stixCoreRelationship';
 import { INTERNAL_FROM_FIELD, INTERNAL_TO_FIELD } from '../schema/identifier';
-import {
-  BYPASS,
-  computeUserMemberAccessIds,
-  INTERNAL_USERS,
-  isBypassUser,
-  MEMBER_ACCESS_ALL,
-} from '../utils/access';
+import { BYPASS, computeUserMemberAccessIds, INTERNAL_USERS, isBypassUser, MEMBER_ACCESS_ALL, } from '../utils/access';
 import { isSingleRelationsRef, } from '../schema/stixEmbeddedRelationship';
 import { now, runtimeFieldObservableValueScript } from '../utils/format';
 import { ENTITY_TYPE_MARKING_DEFINITION } from '../schema/stixMetaObject';
@@ -1984,7 +1979,7 @@ export const elBulkIndexFiles = async (context, user, files, maxBulkOperations =
     return;
   }
   const bulkOperations = [];
-  const entityIds = files.map((file) => file.entity_id);
+  const entityIds = files.filter((file) => !!file.entity_id).map((file) => file.entity_id);
   const opts = { indices: READ_DATA_INDICES_WITHOUT_INTERNAL, toMap: true };
   const entitiesMap = await elFindByIds(context, user, entityIds, opts);
   for (let index = 0; index < files.length; index += 1) {
@@ -2024,6 +2019,25 @@ export const elBulkIndexFiles = async (context, user, files, maxBulkOperations =
   await BluePromise.map(groupsOfOperations, concurrentUpdate, { concurrency: ES_MAX_CONCURRENCY });
 };
 
+const buildFilesSearchResult = (data, first, searchAfter, connectionFormat = true) => {
+  const convertedHits = data.hits.hits.map((hit) => {
+    const elementData = hit._source;
+    return {
+      _index: hit._index,
+      id: elementData.internal_id,
+      name: elementData.name,
+      sort: hit.sort,
+      uploaded_at: elementData.uploaded_at,
+      entity_id: elementData.entity_id,
+      file_id: elementData.file_id,
+    };
+  });
+  if (connectionFormat) {
+    const nodeHits = R.map((n) => ({ node: n, sort: n.sort }), convertedHits);
+    return buildPagination(first, searchAfter, nodeHits, data.hits.total.value);
+  }
+  return convertedHits;
+};
 export const elSearchFiles = async (context, user, options = {}) => {
   const { first = 20, after, orderBy = null, orderMode = 'asc' } = options; // pagination options
   const { search = null, fileIds = [] } = options; // search options
@@ -2076,7 +2090,7 @@ export const elSearchFiles = async (context, user, options = {}) => {
   logApp.debug('[SEARCH] search files', { query });
   return elRawSearch(context, user, null, query)
     .then((data) => {
-      return buildSearchResult(data, first, body.search_after, connectionFormat);
+      return buildFilesSearchResult(data, first, body.search_after, connectionFormat);
     })
     .catch((err) => {
       logApp.error('[SEARCH] search files fail', { error: err, query });

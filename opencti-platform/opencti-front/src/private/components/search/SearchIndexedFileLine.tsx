@@ -7,6 +7,9 @@ import makeStyles from '@mui/styles/makeStyles';
 import { SearchIndexedFileLine_node$data } from '@components/search/__generated__/SearchIndexedFileLine_node.graphql';
 import { DataColumns } from '../../../components/list_lines';
 import { Theme } from '../../../components/Theme';
+import { useFormatter } from '../../../components/i18n';
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ItemIcon from "../../../components/ItemIcon";
 
 // TODO clean css
 const useStyles = makeStyles<Theme>((theme) => ({
@@ -56,7 +59,7 @@ const SearchIndexedFileLineComponent: FunctionComponent<SearchIndexedFileLineCom
   dataColumns,
 }) => {
   const classes = useStyles();
-  // const { fd, t } = useFormatter();
+  const { fd, t } = useFormatter();
   // TODO redirection (open the file and redirection to Entity) + translation
   return (
     <ListItem
@@ -70,25 +73,24 @@ const SearchIndexedFileLineComponent: FunctionComponent<SearchIndexedFileLineCom
           <div>
             <div
               className={classes.bodyItem}
-              style={{ width: dataColumns.id.width }}
+              style={{ width: dataColumns.name.width }}
             >
-              {node.id}
-            </div>
-     {/*       <div
-              className={classes.bodyItem}
-              style={{ width: dataColumns.upload_date.width }}
-            >
-              <span>{'upload_date'}</span>
+              {node.name}
             </div>
             <div
               className={classes.bodyItem}
-              style={{ width: dataColumns.occurences.width }}
+              style={{ width: dataColumns.uploaded_at.width }}
             >
-              <span>{'occurences'}</span>
+              {fd(node.uploaded_at)}
             </div>
-            <ListItemIcon classes={{ root: classes.itemIcon }}>
-              <ItemIcon type="Report" />
-            </ListItemIcon>
+            <div
+                className={classes.bodyItem}
+                style={{ width: dataColumns.entity_type.width }}
+            >
+              <ListItemIcon classes={{ root: classes.itemIcon }}>
+                <ItemIcon type="Report" />
+              </ListItemIcon>
+            </div>
             <div
               className={classes.bodyItem}
               style={{ width: dataColumns.entity_name.width }}
@@ -100,7 +102,7 @@ const SearchIndexedFileLineComponent: FunctionComponent<SearchIndexedFileLineCom
               style={{ width: dataColumns.objectMarking.width }}
             >
               <span>{'marking'}</span>
-            </div> */}
+            </div>
           </div>
         }
       />
@@ -110,8 +112,11 @@ const SearchIndexedFileLineComponent: FunctionComponent<SearchIndexedFileLineCom
 
 const SearchIndexedFileLine = createFragmentContainer(SearchIndexedFileLineComponent, {
   node: graphql`
-      fragment SearchIndexedFileLine_node on File {
-          id
+      fragment SearchIndexedFileLine_node on IndexedFile {
+        id
+        name
+        uploaded_at
+        file_id
       }
   `,
 });

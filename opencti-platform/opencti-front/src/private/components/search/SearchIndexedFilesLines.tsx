@@ -53,6 +53,9 @@ export const searchIndexedFilesLinesFragment = graphql`
             edges {
                 node {
                     id
+                    name
+                    uploaded_at
+                    file_id
                 }
             }
             pageInfo {
