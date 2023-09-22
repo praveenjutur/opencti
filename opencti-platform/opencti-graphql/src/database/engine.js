@@ -2026,10 +2026,11 @@ const buildFilesSearchResult = (data, first, searchAfter, connectionFormat = tru
       _index: hit._index,
       id: elementData.internal_id,
       name: elementData.name,
-      sort: hit.sort,
+      indexed_at: elementData.indexed_at,
       uploaded_at: elementData.uploaded_at,
       entity_id: elementData.entity_id,
       file_id: elementData.file_id,
+      sort: hit.sort,
     };
   });
   if (connectionFormat) {
