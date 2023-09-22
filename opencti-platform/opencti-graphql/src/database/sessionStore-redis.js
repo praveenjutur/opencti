@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import session from 'express-session';
-import LRU from 'lru-cache';
+import { LRUCache } from 'lru-cache';
 import AsyncLock from 'async-lock';
 import {
   clearSessions,
@@ -15,7 +15,8 @@ import {
 
 const { Store } = session;
 
-const noop = () => {};
+const noop = () => {
+};
 
 class RedisStore extends Store {
   constructor(options = {}) {
@@ -24,8 +25,8 @@ class RedisStore extends Store {
     this.prefix = options.prefix == null ? 'sess:' : options.prefix;
     this.scanCount = Number(options.scanCount) || 100;
     this.serializer = options.serializer || JSON;
-    this.cache = new LRU({ ttl: 2500, max: 1000 }); // Force refresh the session every 2.5 sec
-    this.touchCache = new LRU({ ttl: 120000, max: 1000 }); // Touch the session every 2 minutes
+    this.cache = new LRUCache({ ttl: 2500, max: 1000 }); // Force refresh the session every 2.5 sec
+    this.touchCache = new LRUCache({ ttl: 120000, max: 1000 }); // Touch the session every 2 minutes
     this.locker = new AsyncLock();
   }
 

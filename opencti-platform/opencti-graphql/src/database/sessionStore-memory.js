@@ -1,4 +1,4 @@
-import LRU from 'lru-cache';
+import { LRUCache } from 'lru-cache';
 import session from 'express-session';
 
 const ONE_DAY = 86400000;
@@ -33,7 +33,7 @@ class SessionStoreMemory extends Store {
     this.options.noDisposeOnSet = options.noDisposeOnSet;
 
     this.serializer = options.serializer || JSON;
-    this.store = new LRU(this.options);
+    this.store = new LRUCache(this.options);
     this.startInterval();
   }
 
@@ -120,6 +120,7 @@ class SessionStoreMemory extends Store {
     const { store } = this;
     return fn && fn(null, store.itemCount);
   }
+
   // endregion
 
   startInterval() {

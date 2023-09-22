@@ -1,7 +1,7 @@
 import * as R from 'ramda';
 import * as jsonpatch from 'fast-json-patch';
 import { Promise } from 'bluebird';
-import LRU from 'lru-cache';
+import { LRUCache } from 'lru-cache';
 import conf, { basePath, logApp } from '../config/conf';
 import { authenticateUserFromRequest, batchGroups, STREAMAPI } from '../domain/user';
 import { createStreamProcessor, EVENT_CURRENT_VERSION } from '../database/redis';
@@ -31,7 +31,8 @@ import {
   ABSTRACT_STIX_CORE_RELATIONSHIP,
   buildRefRelationKey,
   ENTITY_TYPE_CONTAINER,
-  STIX_TYPE_RELATION, STIX_TYPE_SIGHTING
+  STIX_TYPE_RELATION,
+  STIX_TYPE_SIGHTING
 } from '../schema/general';
 import { convertStoreToStix } from '../database/stix-converter';
 import { UnsupportedError } from '../config/errors';
@@ -132,7 +133,10 @@ const computeUserAndCollection = async (res, { context, user, id }) => {
         if (!collectionGroupIds.some((c) => userGroupIds.includes(c))) {
           res.statusMessage = 'You need to have access granted for this live stream';
           res.status(401).end();
-          logApp.warn('You need to have access granted for this live stream', { streamCollectionId: id, userId: user.id });
+          logApp.warn('You need to have access granted for this live stream', {
+            streamCollectionId: id,
+            userId: user.id
+          });
           return { error: 'You need to have access granted for this live stream' };
         }
       }
@@ -251,7 +255,9 @@ const createSseMiddleware = () => {
       setDelay: (d) => {
         channel.delay = d;
       },
-      setLastEventId: (id) => { lastEventId = id; },
+      setLastEventId: (id) => {
+        lastEventId = id;
+      },
       connected: () => !req.finished,
       sendEvent: (eventId, topic, data) => {
         if (req.finished) {
@@ -355,7 +361,10 @@ const createSseMiddleware = () => {
     const refs = stixRefsExtractor(stixData, generateStandardId);
     const missingElements = await resolveMissingReferences(context, req, refs, cache);
     const missingInstances = await storeLoadByIdsWithRefs(context, req.user, missingElements);
-    const missingAllPerIds = missingInstances.map((m) => [m.internal_id, m.standard_id, ...(m.x_opencti_stix_ids ?? [])].map((id) => ({ id, value: m }))).flat();
+    const missingAllPerIds = missingInstances.map((m) => [m.internal_id, m.standard_id, ...(m.x_opencti_stix_ids ?? [])].map((id) => ({
+      id,
+      value: m
+    }))).flat();
     const missingMap = new Map(missingAllPerIds.map((m) => [m.id, m.value]));
     if (stixData.type === STIX_TYPE_RELATION || stixData.type === STIX_TYPE_SIGHTING) {
       // Check for a relation that the from and the to is correctly accessible.
@@ -521,7 +530,7 @@ const createSseMiddleware = () => {
   const liveStreamHandler = async (req, res) => {
     const { id } = req.params;
     try {
-      const cache = new LRU({ max: MAX_CACHE_SIZE, ttl: MAX_CACHE_TIME });
+      const cache = new LRUCache({ max: MAX_CACHE_SIZE, ttl: MAX_CACHE_TIME });
       const context = executionContext('live_stream');
       const { user } = req;
       // If stream is starting after, we need to use the main database to catchup
