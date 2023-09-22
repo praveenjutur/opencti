@@ -1390,13 +1390,13 @@ const buildSubQueryForFilterGroup = async (context, user, filterGroup) => {
   const filters = filterGroup.filters ?? filterGroup; // TODO remove support both filterGroup and filters as entry
   const subFilterGroups = filterGroup.filterGroups ?? [];
   const localMustFilters = [];
-  // eslint-disable-next-line no-restricted-syntax
-  for (const group of subFilterGroups) {
+  for (let index = 0; index < subFilterGroups.length; index += 1) {
+    const group = subFilterGroups[index];
     const subQuery = await buildSubQueryForFilterGroup(context, user, group);
     localMustFilters.push(subQuery);
   }
-  // eslint-disable-next-line no-restricted-syntax
-  for (const filter of filters) {
+  for (let index = 0; index < filters.length; index += 1) {
+    const filter = filters[index];
     const isValidFilter = filter?.values?.length > 0 || filter?.nested?.length > 0;
     if (isValidFilter) {
       const localMustFilter = await buildLocalMustFilter(context, user, filter);
