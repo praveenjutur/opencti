@@ -13,9 +13,11 @@ import ListLines from '../../../components/list_lines/ListLines';
 import ExportContextProvider from '../../../utils/ExportContextProvider';
 
 // TODO : filters keys + redirectionMode + Datacolumns
-
+interface SearchIndexedFilesProps {
+  search: string;
+}
 const LOCAL_STORAGE_KEY = 'view-files';
-const SearchIndexedFiles : FunctionComponent = ({ search }) => {
+const SearchIndexedFiles : FunctionComponent<SearchIndexedFilesProps> = ({ search }) => {
   const {
     platformModuleHelpers: { isRuntimeFieldEnable },
   } = useAuth();

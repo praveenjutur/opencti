@@ -2040,7 +2040,7 @@ const buildFilesSearchResult = (data, first, searchAfter, connectionFormat = tru
   return convertedHits;
 };
 export const elSearchFiles = async (context, user, options = {}) => {
-  const { first = 20, after, orderBy = null, orderMode = 'asc' } = options; // pagination options
+  const { first = 20, after, orderBy = null } = options; // pagination options // TODO orderMode = 'asc'
   const { search = null, fileIds = [] } = options; // search options
   const { fields = [], connectionFormat = true } = options; // return format options
   const searchAfter = after ? cursorToOffset(after) : undefined;

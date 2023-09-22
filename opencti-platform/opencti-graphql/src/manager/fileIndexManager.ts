@@ -6,7 +6,6 @@ import { isNotEmptyField } from '../database/utils';
 import conf, { logApp } from '../config/conf';
 import {
   lockResource,
-  type StreamProcessor
 } from '../database/redis';
 import { executionContext, SYSTEM_USER } from '../utils/access';
 import { getEntityFromCache } from '../database/cache';
@@ -76,7 +75,7 @@ const indexImportedFiles = async (
 
 const initFileIndexManager = () => {
   let scheduler: SetIntervalAsyncTimer<[]>;
-  let streamProcessor: StreamProcessor;
+  // let streamProcessor: StreamProcessor;
   let running = false;
   const context = executionContext('file_index_manager');
   const fileIndexHandler = async () => {
@@ -97,7 +96,7 @@ const initFileIndexManager = () => {
         logApp.info('[OPENCTI-MODULE] End of file index manager processing');
       } finally {
         running = false;
-        if (streamProcessor) await streamProcessor.shutdown();
+        // if (streamProcessor) await streamProcessor.shutdown();
         if (lock) await lock.unlock();
       }
     }
