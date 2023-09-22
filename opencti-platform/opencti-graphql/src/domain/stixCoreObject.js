@@ -564,7 +564,7 @@ export const findFilterRepresentative = async (context, user, filter) => {
         };
       }));
       return data;
-    case 'labelledBy':
+    case 'objectLabel':
       data = await Promise.all(values.map(async (id) => {
         if (id === null) {
           return {

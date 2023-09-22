@@ -2003,7 +2003,7 @@ enum StixCoreObjectsFilter {
   markedBy
   assigneeTo
   participant
-  labelledBy
+  objectLabel
   killChainPhase
   hasExternalReference
   objectContains
@@ -2208,7 +2208,7 @@ enum StixDomainObjectsFilter {
   markedBy
   assigneeTo
   participant
-  labelledBy
+  objectLabel
   killChainPhase
   hasExternalReference
   objectContains
@@ -2410,7 +2410,7 @@ enum AttackPatternsFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   mitigatedBy
   revoked
   source_reliability
@@ -2604,7 +2604,7 @@ enum CampaignsFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   x_opencti_workflow_id
   revoked
   confidence
@@ -2797,7 +2797,7 @@ enum ContainersFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   objectContains
   x_opencti_workflow_id
   revoked
@@ -2967,7 +2967,7 @@ enum NotesFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   objectContains
   x_opencti_workflow_id
   revoked
@@ -3199,7 +3199,7 @@ enum ObservedDatasFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   objectContains
   x_opencti_workflow_id
   revoked
@@ -3404,7 +3404,7 @@ enum OpinionsFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   objectContains
   x_opencti_workflow_id
   revoked
@@ -3817,7 +3817,7 @@ enum CoursesOfActionFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   mitigatedBy
   x_opencti_workflow_id
   x_mitre_id
@@ -4002,7 +4002,7 @@ enum IdentitiesFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   x_opencti_workflow_id
   revoked
 }
@@ -4184,7 +4184,7 @@ enum IndividualsFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   x_opencti_workflow_id
   description
   contact_information
@@ -4376,7 +4376,7 @@ enum SectorsFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   partOf
   x_opencti_workflow_id
   revoked
@@ -4560,7 +4560,7 @@ enum SystemsFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   x_opencti_workflow_id
   x_opencti_reliability
   revoked
@@ -4766,7 +4766,7 @@ enum IndicatorsFilter {
   objectContains
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   basedOn
   indicates
   x_opencti_workflow_id
@@ -4976,7 +4976,7 @@ enum InfrastructuresFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   x_opencti_workflow_id
   revoked
   confidence
@@ -5160,7 +5160,7 @@ enum IntrusionSetsFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   x_opencti_workflow_id
   revoked
   confidence
@@ -5355,7 +5355,7 @@ enum LocationsFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   x_opencti_workflow_id
   revoked
 }
@@ -5532,7 +5532,7 @@ enum PositionsFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   x_opencti_workflow_id
   revoked
 }
@@ -5719,7 +5719,7 @@ enum CitiesFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   x_opencti_workflow_id
   revoked
   creator
@@ -5901,7 +5901,7 @@ enum CountriesFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   x_opencti_workflow_id
   revoked
   creator
@@ -6081,7 +6081,7 @@ enum RegionsFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   x_opencti_workflow_id
 }
 input RegionsFiltering {
@@ -6272,7 +6272,7 @@ enum MalwaresFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   x_opencti_workflow_id
   confidence
   source_reliability
@@ -6465,7 +6465,7 @@ enum ThreatActorsFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   x_opencti_workflow_id
   revoked
   confidence
@@ -6804,7 +6804,7 @@ enum ToolsFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   x_opencti_workflow_id
   confidence
   source_reliability
@@ -6990,7 +6990,7 @@ enum VulnerabilitiesFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   x_opencti_workflow_id
   creator
   confidence
@@ -7189,7 +7189,7 @@ enum IncidentsFilter {
   markedBy
   assigneeTo
   participant
-  labelledBy
+  objectLabel
   x_opencti_workflow_id
   confidence
   source_reliability
@@ -7381,7 +7381,7 @@ enum StixCyberObservablesFilter {
   updated_at
   createdBy
   markedBy
-  labelledBy
+  objectLabel
   relatedTo
   objectContains
   hasExternalReference
@@ -11155,7 +11155,7 @@ enum StixObjectOrStixRelationshipsFilter {
   updated_at
   createdBy
   markedBy
-  labelledBy
+  objectLabel
   entity_type
   relationship_type
   x_opencti_score
@@ -11459,7 +11459,7 @@ enum StixRelationshipsFilter {
   createdBy
   creator
   markedBy
-  labelledBy
+  objectLabel
   killChainPhase
   fromName
   toName
@@ -11553,7 +11553,7 @@ enum StixCoreRelationshipsFilter {
   createdBy
   creator
   markedBy
-  labelledBy
+  objectLabel
   killChainPhase
   fromName
   toName
@@ -11716,7 +11716,7 @@ enum StixSightingRelationshipsFilter {
   confidence
   createdBy
   markedBy
-  labelledBy
+  objectLabel
   toPatternType
   toMainObservableType
   x_opencti_workflow_id

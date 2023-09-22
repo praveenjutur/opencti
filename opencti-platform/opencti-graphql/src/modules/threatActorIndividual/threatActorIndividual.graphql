@@ -144,7 +144,7 @@ enum ThreatActorsIndividualFilter {
   createdBy
   markedBy
   assigneeTo
-  labelledBy
+  objectLabel
   x_opencti_workflow_id
   revoked
   confidence

@@ -547,7 +547,7 @@ const FeedCreation = (props) => {
                               'assigneeTo',
                               'objectContains',
                               'markedBy',
-                              'labelledBy',
+                              'objectLabel',
                               'creator',
                               'createdBy',
                               'priority',

@@ -177,7 +177,7 @@ class EntityStixSightingRelationships extends Component {
         filters={filters}
         availableFilterKeys={[
           'toTypes',
-          'labelledBy',
+          'objectLabel',
           'markedBy',
           'x_opencti_workflow_id',
           'created_start_date',

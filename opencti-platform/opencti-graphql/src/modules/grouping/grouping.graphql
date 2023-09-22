@@ -161,10 +161,9 @@ enum GroupingsFilter {
     created_at
     confidence
     source_reliability
-    objectLabel
     createdBy
     markedBy
-    labelledBy
+    objectLabel
     objectContains
     x_opencti_workflow_id
     revoked

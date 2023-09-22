@@ -172,7 +172,7 @@ enum CaseRftsFilter {
   creator
   createdBy
   markedBy
-  labelledBy
+  objectLabel
   assigneeTo
   participant
   x_opencti_workflow_id

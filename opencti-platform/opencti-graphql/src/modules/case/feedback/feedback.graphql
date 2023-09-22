@@ -168,7 +168,7 @@ enum FeedbacksFilter {
   creator
   createdBy
   markedBy
-  labelledBy
+  objectLabel
   assigneeTo
   x_opencti_workflow_id
   rating

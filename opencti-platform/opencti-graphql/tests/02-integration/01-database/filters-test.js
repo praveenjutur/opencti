@@ -79,11 +79,11 @@ describe('Filters testing', () => {
 
   it('Should labels filters correctly applied', async () => {
     // With eq on marking
-    const filters = { labelledBy: [{ id: 'attack-pattern', value: 'attack-pattern' }] };
+    const filters = { objectLabel: [{ id: 'attack-pattern', value: 'attack-pattern' }] };
     const filteredObjects = await applyFilters(filters);
     expect(filteredObjects.length).toBe(2);
     // With _not_eq
-    const filtersNot = { labelledBy_not_eq: [{ id: 'attack-pattern', value: 'attack-pattern' }] };
+    const filtersNot = { objectLabel_not_eq: [{ id: 'attack-pattern', value: 'attack-pattern' }] };
     const filteredObjectsNot = await applyFilters(filtersNot);
     expect(data.objects.length - filteredObjects.length).toBe(filteredObjectsNot.length);
   });

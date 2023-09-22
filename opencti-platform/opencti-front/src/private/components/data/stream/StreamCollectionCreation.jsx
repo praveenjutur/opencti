@@ -264,7 +264,7 @@ const StreamCollectionCreation = (props) => {
                       'assigneeTo',
                       'objectContains',
                       'markedBy',
-                      'labelledBy',
+                      'objectLabel',
                       'creator',
                       'createdBy',
                       'priority',

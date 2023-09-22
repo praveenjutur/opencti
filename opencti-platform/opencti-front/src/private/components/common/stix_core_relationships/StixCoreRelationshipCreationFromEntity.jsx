@@ -542,7 +542,7 @@ const StixCoreRelationshipCreationFromEntity = (props) => {
                   availableFilterKeys={[
                     'entity_type',
                     'markedBy',
-                    'labelledBy',
+                    'objectLabel',
                     'createdBy',
                     'confidence',
                     'x_opencti_organization_type',

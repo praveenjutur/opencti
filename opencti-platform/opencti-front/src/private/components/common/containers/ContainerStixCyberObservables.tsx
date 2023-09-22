@@ -252,7 +252,7 @@ ContainerStixCyberObservablesComponentProps
               exportContext={`of-container-${container.id}`}
               filters={filters}
               availableFilterKeys={[
-                'labelledBy',
+                'objectLabel',
                 'markedBy',
                 'created_at_start_date',
                 'created_at_end_date',

@@ -497,7 +497,7 @@ class StixDomainObjectThreatKnowledge extends Component {
                 'entity_type',
                 'markedBy',
                 'createdBy',
-                'labelledBy',
+                'objectLabel',
                 'created_start_date',
                 'created_end_date',
               ]}

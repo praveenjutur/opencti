@@ -231,7 +231,7 @@ const TaxiiCollectionEditionContainer = (props) => {
                     'assigneeTo',
                     'objectContains',
                     'markedBy',
-                    'labelledBy',
+                    'objectLabel',
                     'creator',
                     'createdBy',
                     'priority',

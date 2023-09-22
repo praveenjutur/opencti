@@ -51,7 +51,7 @@ const EntityStixCoreRelationshipsIndicatorsEntitiesView: FunctionComponent<Entit
   } = viewStorage;
 
   const availableFilterKeys = [
-    'labelledBy',
+    'objectLabel',
     'markedBy',
     'created_start_date',
     'created_end_date',

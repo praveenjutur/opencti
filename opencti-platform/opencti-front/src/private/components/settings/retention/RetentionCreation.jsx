@@ -259,7 +259,7 @@ const RetentionCreation = (props) => {
                     availableFilterKeys={[
                       'entity_type',
                       'markedBy',
-                      'labelledBy',
+                      'objectLabel',
                       'createdBy',
                       'x_opencti_score',
                       'x_opencti_detection',

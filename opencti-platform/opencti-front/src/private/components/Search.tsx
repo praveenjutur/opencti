@@ -133,7 +133,7 @@ const Search = () => {
               iconExtension={true}
               availableFilterKeys={[
                 'entity_type',
-                'labelledBy',
+                'objectLabel',
                 'markedBy',
                 'createdBy',
                 'source_reliability',

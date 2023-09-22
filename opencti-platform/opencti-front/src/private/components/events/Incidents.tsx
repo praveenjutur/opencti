@@ -134,7 +134,7 @@ const Incidents: FunctionComponent = () => {
           iconExtension={true}
           availableFilterKeys={[
             'incident_type',
-            'labelledBy',
+            'objectLabel',
             'markedBy',
             'createdBy',
             'source_reliability',

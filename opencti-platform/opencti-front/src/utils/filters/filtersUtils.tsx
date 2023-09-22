@@ -56,7 +56,7 @@ export const inlineFilters = [
 ];
 // filters that can have 'eq' or 'not_eq' operator
 export const EqFilters = [
-  'labelledBy',
+  'objectLabel',
   'createdBy',
   'markedBy',
   'entity_type',
@@ -133,7 +133,7 @@ export const filtersWithRepresentative = [
   'objectContains',
   'indicates',
   'containers',
-  'labelledBy',
+  'objectLabel',
   'markedBy',
   'killChainPhase',
   'x_opencti_workflow_id',

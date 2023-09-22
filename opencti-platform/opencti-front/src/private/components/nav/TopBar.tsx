@@ -362,7 +362,7 @@ const TopBarComponent: FunctionComponent<TopBarProps> = ({
                   variant="dialog"
                   availableFilterKeys={[
                     'entity_type',
-                    'labelledBy',
+                    'objectLabel',
                     'markedBy',
                     'createdBy',
                     'source_reliability',

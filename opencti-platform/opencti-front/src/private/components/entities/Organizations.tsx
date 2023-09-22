@@ -83,7 +83,7 @@ const Organizations = () => {
         numberOfElements={numberOfElements}
         availableFilterKeys={[
           'x_opencti_organization_type',
-          'labelledBy',
+          'objectLabel',
           'markedBy',
           'createdBy',
           'created_start_date',

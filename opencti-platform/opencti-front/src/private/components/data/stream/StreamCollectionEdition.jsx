@@ -209,7 +209,7 @@ const StreamCollectionEditionContainer = ({ handleClose, streamCollection }) => 
                     'assigneeTo',
                     'objectContains',
                     'markedBy',
-                    'labelledBy',
+                    'objectLabel',
                     'creator',
                     'createdBy',
                     'priority',

@@ -73,7 +73,7 @@ const ThreatActorsGroup = () => {
         numberOfElements={numberOfElements}
         availableFilterKeys={[
           'x_opencti_workflow_id',
-          'labelledBy',
+          'objectLabel',
           'markedBy',
           'createdBy',
           'source_reliability',

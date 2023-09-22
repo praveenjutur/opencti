@@ -83,7 +83,7 @@ const Tasks = () => {
           'assigneeTo',
           'participant',
           'markedBy',
-          'labelledBy',
+          'objectLabel',
           'createdBy',
           'creator',
         ]}

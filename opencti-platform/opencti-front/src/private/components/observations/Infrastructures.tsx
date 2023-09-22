@@ -127,7 +127,7 @@ const Infrastructures = () => {
         numberOfElements={numberOfElements}
         iconExtension={true}
         availableFilterKeys={[
-          'labelledBy',
+          'objectLabel',
           'markedBy',
           'created_start_date',
           'created_end_date',

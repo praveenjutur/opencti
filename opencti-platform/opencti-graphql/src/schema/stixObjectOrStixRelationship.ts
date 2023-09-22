@@ -11,7 +11,7 @@ export const stixObjectOrStixRelationshipOptions = {
   StixObjectOrStixRelationshipsFilter: {
     createdBy: buildRefRelationKey(RELATION_CREATED_BY),
     markedBy: buildRefRelationKey(RELATION_OBJECT_MARKING),
-    labelledBy: buildRefRelationKey(RELATION_OBJECT_LABEL),
+    objectLabel: buildRefRelationKey(RELATION_OBJECT_LABEL),
     relatedTo: buildRefRelationKey(RELATION_RELATED_TO),
     objectContains: buildRefRelationKey(RELATION_OBJECT),
     hasExternalReference: buildRefRelationKey(RELATION_EXTERNAL_REFERENCE),

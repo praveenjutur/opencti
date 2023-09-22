@@ -77,7 +77,7 @@ EntityStixCoreRelationshipsEntitiesViewProps
     'entity_type',
     'markedBy',
     'confidence',
-    'labelledBy',
+    'objectLabel',
     'createdBy',
     'creator',
     'created_start_date',

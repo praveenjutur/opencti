@@ -80,7 +80,7 @@ class StixCoreObjectLabels extends Component {
                       typeof onClick === 'function'
                         ? onClick.bind(
                           this,
-                          'labelledBy',
+                          'objectLabel',
                           label.id,
                           'eq',
                         )
@@ -103,7 +103,7 @@ class StixCoreObjectLabels extends Component {
               }}
               onClick={
                 typeof onClick === 'function'
-                  ? onClick.bind(this, 'labelledBy', null, 'eq')
+                  ? onClick.bind(this, 'objectLabel', null, 'eq')
                   : null
               }
             />
@@ -122,7 +122,7 @@ class StixCoreObjectLabels extends Component {
               }}
               onClick={
                 typeof onClick === 'function'
-                  ? onClick.bind(this, 'labelledBy', null, 'eq')
+                  ? onClick.bind(this, 'objectLabel', null, 'eq')
                   : null
               }
             />

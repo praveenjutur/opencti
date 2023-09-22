@@ -269,7 +269,7 @@ class StixCoreObjectOrStixCoreRelationshipContainers extends Component {
               'container_type',
               'confidence',
               'x_opencti_workflow_id',
-              'labelledBy',
+              'objectLabel',
               'createdBy',
               'markedBy',
               'created_start_date',
@@ -302,7 +302,7 @@ class StixCoreObjectOrStixCoreRelationshipContainers extends Component {
     const { stixDomainObjectOrStixCoreRelationship, classes } = this.props;
     const { searchTerm, filters } = this.state;
     const availableFilterKeys = [
-      'labelledBy',
+      'objectLabel',
       'createdBy',
       'markedBy',
       'created_start_date',

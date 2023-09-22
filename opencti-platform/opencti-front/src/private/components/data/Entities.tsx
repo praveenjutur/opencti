@@ -149,7 +149,7 @@ const Entities = () => {
               iconExtension={true}
               secondaryAction={true}
               availableFilterKeys={[
-                'labelledBy',
+                'objectLabel',
                 'markedBy',
                 'createdBy',
                 'source_reliability',

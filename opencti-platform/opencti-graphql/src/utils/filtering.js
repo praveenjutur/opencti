@@ -1,4 +1,5 @@
-import { buildRefRelationKey, STIX_TYPE_RELATION, STIX_TYPE_SIGHTING } from '../schema/general';
+import { uniq } from 'ramda';
+import { buildRefRelationKey, INPUT_LABELS, STIX_TYPE_RELATION, STIX_TYPE_SIGHTING } from '../schema/general';
 import {
   RELATION_CREATED_BY,
   RELATION_OBJECT,
@@ -48,7 +49,7 @@ export const ENTITY_FILTERS = [
   OBJECT_CONTAINS_FILTER,
 ];
 // Values
-export const LABEL_FILTER = 'labelledBy';
+export const LABEL_FILTER = INPUT_LABELS;
 export const TYPE_FILTER = 'entity_type';
 export const INDICATOR_FILTER = 'indicator_types';
 export const SCORE_FILTER = 'x_opencti_score';
@@ -64,7 +65,7 @@ export const RELATION_TO_TYPES = 'toTypes';
 export const GlobalFilters = {
   createdBy: buildRefRelationKey(RELATION_CREATED_BY),
   markedBy: buildRefRelationKey(RELATION_OBJECT_MARKING),
-  labelledBy: buildRefRelationKey(RELATION_OBJECT_LABEL),
+  objectLabel: buildRefRelationKey(RELATION_OBJECT_LABEL),
   indicates: buildRefRelationKey(RELATION_INDICATES),
   objectContains: buildRefRelationKey(RELATION_OBJECT),
   creator: 'creator_id',

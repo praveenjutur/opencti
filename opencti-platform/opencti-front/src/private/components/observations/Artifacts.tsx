@@ -134,7 +134,7 @@ const Artifacts: FunctionComponent = () => {
               paginationOptions={paginationOptions}
               numberOfElements={numberOfElements}
               availableFilterKeys={[
-                'labelledBy',
+                'objectLabel',
                 'markedBy',
                 'created_at',
                 'createdBy',

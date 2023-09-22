@@ -38,7 +38,7 @@ const incidentResolvers = {
     markedBy: buildRefRelationKey(RELATION_OBJECT_MARKING),
     assigneeTo: buildRefRelationKey(RELATION_OBJECT_ASSIGNEE),
     participant: buildRefRelationKey(RELATION_OBJECT_PARTICIPANT),
-    labelledBy: buildRefRelationKey(RELATION_OBJECT_LABEL),
+    objectLabel: buildRefRelationKey(RELATION_OBJECT_LABEL),
     targets: buildRefRelationKey(RELATION_TARGETS),
     creator: 'creator_id',
   },

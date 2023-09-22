@@ -672,14 +672,14 @@ const useSearchEntities = ({
             unionSetEntities('killChainPhase', killChainPhaseEntities);
           });
         break;
-      case 'labelledBy':
+      case 'objectLabel':
         fetchQuery(labelsSearchQuery, {
           search: event.target.value !== 0 ? event.target.value : '',
           first: 10,
         })
           .toPromise()
           .then((data) => {
-            const labelledByEntities = (
+            const objectLabelEntities = (
               (data as LabelsQuerySearchQuery$data)?.labels?.edges ?? []
             ).map((n) => ({
               label: n?.node.value,
@@ -687,14 +687,14 @@ const useSearchEntities = ({
               type: 'Label',
               color: n?.node.color,
             }));
-            unionSetEntities('labelledBy', [
+            unionSetEntities('objectLabel', [
               {
                 label: t('No label'),
                 value: null,
                 type: 'Label',
                 color: theme.palette.mode === 'dark' ? '#ffffff' : '#000000',
               },
-              ...labelledByEntities,
+              ...objectLabelEntities,
             ]);
           });
         break;

@@ -140,7 +140,7 @@ enum ChannelsFilter {
     createdBy
     markedBy
     assigneeTo
-    labelledBy
+    objectLabel
     x_opencti_workflow_id
     confidence
     source_reliability

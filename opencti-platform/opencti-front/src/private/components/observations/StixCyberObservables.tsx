@@ -188,7 +188,7 @@ const StixCyberObservables: FunctionComponent = () => {
           paginationOptions={paginationOptions}
           numberOfElements={numberOfElements}
           availableFilterKeys={[
-            'labelledBy',
+            'objectLabel',
             'markedBy',
             'created_at',
             'x_opencti_score',

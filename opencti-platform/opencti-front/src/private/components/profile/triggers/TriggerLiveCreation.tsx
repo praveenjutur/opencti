@@ -274,7 +274,7 @@ const TriggerLiveCreation: FunctionComponent<TriggerLiveCreationProps> = ({
                     'assigneeTo',
                     'objectContains',
                     'markedBy',
-                    'labelledBy',
+                    'objectLabel',
                     'creator',
                     'createdBy',
                     'priority',

@@ -138,7 +138,7 @@ enum DataSourcesFilter {
     updated_at
     createdBy
     markedBy
-    labelledBy
+    objectLabel
     revoked
     x_opencti_workflow_id
     confidence

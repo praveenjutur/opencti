@@ -140,7 +140,7 @@ const ContentKnowledgeTimeLineBar = ({
                 availableFilterKeys={[
                   'entity_type',
                   'markedBy',
-                  'labelledBy',
+                  'objectLabel',
                   'createdBy',
                   'relationship_type',
                 ]}

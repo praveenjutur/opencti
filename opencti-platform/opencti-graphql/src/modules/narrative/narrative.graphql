@@ -141,7 +141,7 @@ enum NarrativesFilter {
     updated_at
     createdBy
     markedBy
-    labelledBy
+    objectLabel
     x_opencti_workflow_id
 }
 input NarrativesFiltering {
