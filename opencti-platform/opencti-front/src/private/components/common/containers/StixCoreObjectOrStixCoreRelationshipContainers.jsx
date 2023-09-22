@@ -418,7 +418,7 @@ class StixCoreObjectOrStixCoreRelationshipContainers extends Component {
       && stixDomainObjectOrStixCoreRelationship.id
     ) {
       finalFilters.push({
-        key: 'objectContains',
+        key: 'objects',
         values: [stixDomainObjectOrStixCoreRelationship.id],
       });
     }

@@ -96,7 +96,7 @@ const FilterAutocomplete: FunctionComponent<FilterAutocompleteProps> = ({
     'elementId',
     'fromId',
     'toId',
-    'objectContains',
+    'objects',
     'targets',
     'elementId',
     'indicates',

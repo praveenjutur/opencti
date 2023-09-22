@@ -59,7 +59,7 @@ const CaseRftComponent: FunctionComponent<CaseRftProps> = ({ data }) => {
   const tasksFilters = {
     filters: [
       {
-        key: ['objectContains' as TasksFilter],
+        key: ['objects' as TasksFilter],
         values: [caseRftData.id],
       },
     ],

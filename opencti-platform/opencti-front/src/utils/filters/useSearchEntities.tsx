@@ -572,9 +572,9 @@ const useSearchEntities = ({
             unionSetEntities('targets', toIdEntities);
           });
         break;
-      case 'objectContains':
+      case 'objects':
         fetchQuery(filtersStixCoreObjectsSearchQuery, {
-          types: (searchScope && searchScope.objectContains) || [
+          types: (searchScope && searchScope.objects) || [
             'Stix-Core-Object',
           ],
           search: event.target.value !== 0 ? event.target.value : '',
@@ -582,7 +582,7 @@ const useSearchEntities = ({
         })
           .toPromise()
           .then((data) => {
-            const objectContainsEntities = (
+            const objectsEntities = (
               (data as useSearchEntitiesStixCoreObjectsSearchQuery$data)
                 ?.stixCoreObjects?.edges ?? []
             ).map((n) => ({
@@ -591,7 +591,7 @@ const useSearchEntities = ({
               type: n?.node.entity_type,
               parentTypes: n?.node.parent_types,
             }));
-            unionSetEntities('objectContains', objectContainsEntities);
+            unionSetEntities('objects', objectsEntities);
           });
         break;
       case 'indicates':
@@ -618,7 +618,7 @@ const useSearchEntities = ({
         fetchQuery(filtersStixCoreObjectsContainersSearchQuery, {
           search: event.target.value !== 0 ? event.target.value : '',
           count: 50,
-          filters: [{ key: 'objectContains', values: searchContext?.elementId ?? [] }],
+          filters: [{ key: 'objects', values: searchContext?.elementId ?? [] }],
         })
           .toPromise()
           .then((data) => {

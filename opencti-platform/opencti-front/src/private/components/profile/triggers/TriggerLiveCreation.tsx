@@ -272,7 +272,7 @@ const TriggerLiveCreation: FunctionComponent<TriggerLiveCreationProps> = ({
                     'entity_type',
                     'x_opencti_workflow_id',
                     'assigneeTo',
-                    'objectContains',
+                    'objects',
                     'markedBy',
                     'objectLabel',
                     'creator',

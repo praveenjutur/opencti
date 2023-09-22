@@ -37,7 +37,7 @@ const taskResolvers: Resolvers = {
     participant: buildRefRelationKey(RELATION_OBJECT_PARTICIPANT),
     markedBy: buildRefRelationKey(RELATION_OBJECT_MARKING),
     objectLabel: buildRefRelationKey(RELATION_OBJECT_LABEL),
-    objectContains: buildRefRelationKey(RELATION_OBJECT)
+    objects: buildRefRelationKey(RELATION_OBJECT)
   },
   Mutation: {
     taskAdd: (_, { input }, context) => taskAdd(context, context.user, input),

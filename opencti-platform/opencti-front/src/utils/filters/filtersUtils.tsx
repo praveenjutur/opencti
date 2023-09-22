@@ -75,7 +75,7 @@ export const EqFilters = [
   'creator',
   'x_opencti_negative',
   'source',
-  'objectContains',
+  'objects',
   'indicates',
   'targets',
 ];
@@ -111,7 +111,7 @@ export const entityFilters = [
   'fromId',
   'toId',
   'createdBy',
-  'objectContains',
+  'objects',
   'indicates',
   'targets',
 ];
@@ -130,7 +130,7 @@ export const filtersWithRepresentative = [
   'fromId',
   'toId',
   'targets',
-  'objectContains',
+  'objects',
   'indicates',
   'containers',
   'objectLabel',

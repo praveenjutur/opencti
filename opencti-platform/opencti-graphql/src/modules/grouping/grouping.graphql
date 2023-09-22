@@ -164,7 +164,7 @@ enum GroupingsFilter {
     createdBy
     markedBy
     objectLabel
-    objectContains
+    objects
     x_opencti_workflow_id
     revoked
     creator

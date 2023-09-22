@@ -334,7 +334,7 @@ class StixCoreObjectOrStixRelationshipLastContainers extends Component {
     if (authorId) filters.push({ key: 'createdBy', values: [authorId] });
     if (stixCoreObjectOrStixRelationshipId) {
       filters.push({
-        key: 'objectContains',
+        key: 'objects',
         values: [stixCoreObjectOrStixRelationshipId],
       });
     }

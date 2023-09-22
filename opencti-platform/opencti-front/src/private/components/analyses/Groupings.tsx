@@ -47,7 +47,7 @@ const Groupings: FunctionComponent<GroupingsProps> = ({
   }
   if (objectId) {
     additionnalFilters.push({
-      key: 'objectContains',
+      key: 'objects',
       values: [objectId],
       operator: 'eq',
       mode: 'or',

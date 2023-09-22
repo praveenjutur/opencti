@@ -127,7 +127,7 @@ ContainerStixCyberObservablesComponentProps
   );
   // Format filters Front (object)
   const toolbarFilters = {
-    objectContains: [{ id: container.id, value: defaultValue(container) }],
+    objects: [{ id: container.id, value: defaultValue(container) }],
     entity_type:
       types && types.length > 0
         ? types.map((n) => ({ id: n, value: n }))

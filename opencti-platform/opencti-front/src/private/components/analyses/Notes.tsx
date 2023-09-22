@@ -41,7 +41,7 @@ const Notes: FunctionComponent<NotesProps> = ({ objectId, authorId, onChangeOpen
   }
   if (objectId) {
     additionnalFilters.push({
-      key: 'objectContains',
+      key: 'objects',
       values: [objectId],
       operator: 'eq',
       filterMode: 'or',

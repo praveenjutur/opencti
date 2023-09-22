@@ -38,7 +38,7 @@ StixCoreObjectOrStixCoreRelationshipNotesProps
     orderMode: 'desc' as OrderingMode,
     filters: [
       {
-        key: ['objectContains' as NotesFilter],
+        key: ['objects' as NotesFilter],
         values: [stixCoreObjectOrStixCoreRelationshipId],
       },
     ],

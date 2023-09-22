@@ -45,7 +45,7 @@ const Reports: FunctionComponent<ReportsProps> = ({
   }
   if (objectId) {
     additionnalFilters.push({
-      key: 'objectContains',
+      key: 'objects',
       values: [objectId],
       operator: 'eq',
       mode: 'or',
@@ -180,7 +180,7 @@ const Reports: FunctionComponent<ReportsProps> = ({
             'creator',
             'published',
             'created_at',
-            'objectContains',
+            'objects',
           ]}
         >
           {queryRef && (

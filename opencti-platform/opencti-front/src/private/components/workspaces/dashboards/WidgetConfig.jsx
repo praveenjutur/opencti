@@ -154,7 +154,7 @@ const entitiesFilters = [
   'x_opencti_workflow_id',
   'assigneeTo',
   'participant',
-  'objectContains',
+  'objects',
   'x_opencti_score',
   'x_opencti_detection',
   'revoked',

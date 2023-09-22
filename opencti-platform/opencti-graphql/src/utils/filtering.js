@@ -17,7 +17,6 @@ import { ENTITY_TYPE_RESOLVED_FILTERS } from '../schema/stixDomainObject';
 import { extractStixRepresentative } from '../database/stix-representative';
 import { schemaAttributesDefinition } from '../schema/schema-attributes';
 import { ENTITY_TYPE_ACTIVITY } from '../schema/internalObject';
-import { uniq } from "ramda";
 import { schemaRelationsRefDefinition } from '../schema/schema-relationsRef';
 
 // Resolutions
@@ -26,7 +25,7 @@ export const CREATED_BY_FILTER = 'createdBy';
 export const CREATOR_FILTER = 'creator';
 export const ASSIGNEE_FILTER = 'assigneeTo';
 export const PARTICIPANT_FILTER = 'participant';
-export const OBJECT_CONTAINS_FILTER = 'objectContains';
+export const OBJECT_CONTAINS_FILTER = 'objects';
 export const RELATION_FROM = 'fromId';
 export const RELATION_TO = 'toId';
 export const INSTANCE_FILTER = 'elementId';
@@ -67,7 +66,7 @@ export const GlobalFilters = {
   markedBy: buildRefRelationKey(RELATION_OBJECT_MARKING),
   objectLabel: buildRefRelationKey(RELATION_OBJECT_LABEL),
   indicates: buildRefRelationKey(RELATION_INDICATES),
-  objectContains: buildRefRelationKey(RELATION_OBJECT),
+  objects: buildRefRelationKey(RELATION_OBJECT),
   creator: 'creator_id',
 };
 
@@ -247,7 +246,7 @@ const testRefsFilter = (stix, extractedIds, operator) => {
   return true;
 };
 
-const testObjectContainsFilter = (stix, extractedIds, operator) => {
+const testObjectsFilter = (stix, extractedIds, operator) => {
   const instanceObjects = [...(stix.object_refs ?? []), ...(stix.extensions?.[STIX_EXT_OCTI]?.object_refs_inferred ?? [])];
   const isRefFound = extractedIds.some((r) => instanceObjects.includes(r));
   // If ref is available but must not be
@@ -341,7 +340,7 @@ export const isStixMatchFilters = async (context, user, stix, adaptedFilters, us
             return false; // no application
           }
           // If entity is not available but must be
-          // test on relationships target/source and on objectContains
+          // test on relationships target/source and on objects
           if (operator === 'eq'
             && !testRelationFromFilter(stix, extractedIds, operator)
             && !testRelationToFilter(stix, extractedIds, operator)
@@ -505,7 +504,7 @@ export const isStixMatchFilters = async (context, user, stix, adaptedFilters, us
       }
       // object Refs filtering
       if (key === OBJECT_CONTAINS_FILTER) {
-        if (!testObjectContainsFilter(stix, values.map((v) => v.id), operator)) {
+        if (!testObjectsFilter(stix, values.map((v) => v.id), operator)) {
           return false;
         }
       }

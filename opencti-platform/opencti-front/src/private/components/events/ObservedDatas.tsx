@@ -43,7 +43,7 @@ const ObservedDatas: FunctionComponent<ObservedDatasProps> = ({
   }
   if (objectId) {
     additionnalFilters.push({
-      key: 'objectContains',
+      key: 'objects',
       values: [objectId],
       operator: 'eq',
       filterMode: 'or',

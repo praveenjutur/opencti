@@ -59,7 +59,7 @@ const CaseRfiComponent: FunctionComponent<CaseRfiProps> = ({ data }) => {
   const tasksFilters = {
     filters: [
       {
-        key: ['objectContains' as TasksFilter],
+        key: ['objects' as TasksFilter],
         values: [caseRfiData.id],
       },
     ],

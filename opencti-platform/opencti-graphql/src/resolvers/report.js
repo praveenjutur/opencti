@@ -78,7 +78,7 @@ const reportResolvers = {
     assigneeTo: buildRefRelationKey(RELATION_OBJECT_ASSIGNEE),
     participant: buildRefRelationKey(RELATION_OBJECT_PARTICIPANT),
     objectLabel: buildRefRelationKey(RELATION_OBJECT_LABEL),
-    objectContains: buildRefRelationKey(RELATION_OBJECT, '*'),
+    objects: buildRefRelationKey(RELATION_OBJECT, '*'),
     creator: 'creator_id',
   },
   Mutation: {

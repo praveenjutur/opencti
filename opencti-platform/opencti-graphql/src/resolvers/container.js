@@ -36,7 +36,7 @@ const containerResolvers = {
     createdBy: buildRefRelationKey(RELATION_CREATED_BY),
     markedBy: buildRefRelationKey(RELATION_OBJECT_MARKING),
     objectLabel: buildRefRelationKey(RELATION_OBJECT_LABEL),
-    objectContains: buildRefRelationKey(RELATION_OBJECT, '*'),
+    objects: buildRefRelationKey(RELATION_OBJECT, '*'),
     creator: 'creator_id',
   },
   Mutation: {

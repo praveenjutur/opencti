@@ -59,7 +59,7 @@ const EntityStixCoreRelationshipsIndicatorsEntitiesView: FunctionComponent<Entit
     'valid_until_end_date',
     'x_opencti_score',
     'createdBy',
-    'objectContains',
+    'objects',
     'sightedBy',
     'x_opencti_detection',
     'basedOn',

@@ -61,7 +61,7 @@ const CaseIncidentComponent: FunctionComponent<CaseIncidentProps> = ({
   const tasksFilters = {
     filters: [
       {
-        key: ['objectContains' as TasksFilter],
+        key: ['objects' as TasksFilter],
         values: [caseIncidentData.id],
       },
     ],

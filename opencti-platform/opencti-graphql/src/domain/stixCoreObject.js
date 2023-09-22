@@ -553,7 +553,7 @@ export const findFilterRepresentative = async (context, user, filter) => {
     case 'fromId':
     case 'toId':
     case 'targets':
-    case 'objectContains':
+    case 'objects':
     case 'indicates':
     case 'containers':
       data = await Promise.all(values.map(async (id) => {

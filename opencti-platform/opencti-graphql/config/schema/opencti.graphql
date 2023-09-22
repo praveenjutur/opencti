@@ -2006,7 +2006,7 @@ enum StixCoreObjectsFilter {
   objectLabel
   killChainPhase
   hasExternalReference
-  objectContains
+  objects
   indicates
   confidence
   source_reliability
@@ -2211,7 +2211,7 @@ enum StixDomainObjectsFilter {
   objectLabel
   killChainPhase
   hasExternalReference
-  objectContains
+  objects
   indicates
   confidence
   source_reliability
@@ -2798,7 +2798,7 @@ enum ContainersFilter {
   markedBy
   assigneeTo
   objectLabel
-  objectContains
+  objects
   x_opencti_workflow_id
   revoked
   creator
@@ -2968,7 +2968,7 @@ enum NotesFilter {
   markedBy
   assigneeTo
   objectLabel
-  objectContains
+  objects
   x_opencti_workflow_id
   revoked
   confidence
@@ -3200,7 +3200,7 @@ enum ObservedDatasFilter {
   markedBy
   assigneeTo
   objectLabel
-  objectContains
+  objects
   x_opencti_workflow_id
   revoked
   confidence
@@ -3405,7 +3405,7 @@ enum OpinionsFilter {
   markedBy
   assigneeTo
   objectLabel
-  objectContains
+  objects
   x_opencti_workflow_id
   revoked
   confidence
@@ -4763,7 +4763,7 @@ enum IndicatorsFilter {
   created_at
   updated_at
   createdBy
-  objectContains
+  objects
   markedBy
   assigneeTo
   objectLabel
@@ -7383,7 +7383,7 @@ enum StixCyberObservablesFilter {
   markedBy
   objectLabel
   relatedTo
-  objectContains
+  objects
   hasExternalReference
   sightedBy
   value
@@ -11163,7 +11163,7 @@ enum StixObjectOrStixRelationshipsFilter {
   created
   modified
   relatedTo
-  objectContains
+  objects
   hasExternalReference
   sightedBy
   value

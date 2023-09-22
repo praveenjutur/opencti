@@ -207,7 +207,7 @@ const StreamCollectionEditionContainer = ({ handleClose, streamCollection }) => 
                     'entity_type',
                     'x_opencti_workflow_id',
                     'assigneeTo',
-                    'objectContains',
+                    'objects',
                     'markedBy',
                     'objectLabel',
                     'creator',

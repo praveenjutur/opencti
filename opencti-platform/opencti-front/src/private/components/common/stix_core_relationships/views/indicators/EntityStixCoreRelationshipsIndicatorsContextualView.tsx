@@ -136,7 +136,7 @@ const EntityStixCoreRelationshipsIndicatorsContextualViewComponent: FunctionComp
     'valid_until_end_date',
     'x_opencti_score',
     'createdBy',
-    'objectContains',
+    'objects',
     'sightedBy',
     'x_opencti_detection',
     'basedOn',
@@ -231,7 +231,7 @@ const EntityStixCoreRelationshipsIndicatorsContextualViewComponent: FunctionComp
 
   const finalFilters = {
     ...R.omit(['entity_type', 'containers'], cleanedFilters),
-    objectContains: handleFilterOnContainers(containers, cleanedFilters),
+    objects: handleFilterOnContainers(containers, cleanedFilters),
   };
 
   const paginationOptions = {

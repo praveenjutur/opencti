@@ -58,7 +58,7 @@ const indicatorResolvers = {
   },
   IndicatorsFilter: {
     createdBy: buildRefRelationKey(RELATION_CREATED_BY),
-    objectContains: buildRefRelationKey(RELATION_OBJECT),
+    objects: buildRefRelationKey(RELATION_OBJECT),
     markedBy: buildRefRelationKey(RELATION_OBJECT_MARKING),
     objectLabel: buildRefRelationKey(RELATION_OBJECT_LABEL),
     basedOn: buildRefRelationKey(RELATION_BASED_ON),

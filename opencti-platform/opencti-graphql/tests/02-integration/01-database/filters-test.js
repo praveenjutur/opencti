@@ -114,11 +114,11 @@ describe('Filters testing', () => {
 
   it('Should objects filters correctly applied', async () => {
     // With eq on marking
-    const filters = { objectContains: [{ id: 'note--573f623c-bf68-4f19-9500-d618f0d00af0' }] };
+    const filters = { objects: [{ id: 'note--573f623c-bf68-4f19-9500-d618f0d00af0' }] };
     const filteredObjects = await applyFilters(filters);
     expect(filteredObjects.length).toBe(1);
     // With _not_eq
-    const filtersNot = { objectContains_not_eq: [{ id: 'note--573f623c-bf68-4f19-9500-d618f0d00af0' }] };
+    const filtersNot = { objects_not_eq: [{ id: 'note--573f623c-bf68-4f19-9500-d618f0d00af0' }] };
     const filteredObjectsNot = await applyFilters(filtersNot);
     expect(data.objects.length - filteredObjects.length).toBe(filteredObjectsNot.length);
   });

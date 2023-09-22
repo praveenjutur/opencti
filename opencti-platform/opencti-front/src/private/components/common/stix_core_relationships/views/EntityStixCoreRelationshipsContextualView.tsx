@@ -246,7 +246,7 @@ const EntityStixCoreRelationshipsContextualViewComponent: FunctionComponent<Enti
 
   const finalFilters = {
     ...R.omit(['entity_type', 'containers'], cleanedFilters),
-    objectContains: handleFilterOnContainers(containers, cleanedFilters),
+    objects: handleFilterOnContainers(containers, cleanedFilters),
   };
 
   const paginationOptions = {

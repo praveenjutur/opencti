@@ -166,7 +166,7 @@ enum TasksFilter {
   objectLabel
   assigneeTo
   participant
-  objectContains
+  objects
   x_opencti_workflow_id
   due_date
 }

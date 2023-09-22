@@ -360,7 +360,7 @@ describe('Complex filters combinations, behavior tested on reports', () => {
       } });
     expect(queryResult.data.reports.edges.length).toEqual(1);
     expect(queryResult.data.reports.edges[0].node.name).toEqual('Report2');
-    //  (published before 30/12/2021) AND (report_types = internal-report OR objectContains malwareXX)
+    //  (published before 30/12/2021) AND (report_types = internal-report OR objects malwareXX)
     queryResult = await queryAsAdmin({ query: LIST_QUERY,
       variables: {
         first: 10,
@@ -385,7 +385,7 @@ describe('Complex filters combinations, behavior tested on reports', () => {
                   mode: 'or',
                 },
                 {
-                  key: 'objectContains',
+                  key: 'objects',
                   operator: 'eq',
                   values: ['malware--21c45dbe-54ec-5bb7-b8cd-9f27cc518714'],
                   mode: 'or',
