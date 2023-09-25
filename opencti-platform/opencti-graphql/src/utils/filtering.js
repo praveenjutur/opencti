@@ -627,9 +627,13 @@ export const checkFilterKeys = (filters, entityTypes) => {
       entityTypes.forEach((type) => {
         const availableAttributes = schemaAttributesDefinition.getAttributeNames(type);
         const availableRelations = schemaRelationsRefDefinition.getInputNames(type);
-        const availableKeys = availableAttributes.concat(availableRelations);
+        const availableKeys = availableAttributes.concat(availableRelations).concat(['rel_object.internal_id', 'rel_object.*']);
+        console.log('availableKeys', availableKeys);
         if (!keys.every((k) => availableKeys.includes(k))) {
-          throw Error('incorrect filter keys'); // TODO display/filter the keys that are not correct
+          const incorrectKeys = keys
+            .map((k) => (!availableKeys.includes(k) ? k : null))
+            .filter((k) => k);
+          throw Error(`incorrect filter keys: ${incorrectKeys}`); // TODO display/filter the keys that are not correct
         }
       });
     }
