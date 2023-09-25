@@ -80,7 +80,7 @@ const Tasks = () => {
         iconExtension={true}
         availableFilterKeys={[
           'x_opencti_workflow_id',
-          'assigneeTo',
+          'objectAssignee',
           'participant',
           'markedBy',
           'objectLabel',

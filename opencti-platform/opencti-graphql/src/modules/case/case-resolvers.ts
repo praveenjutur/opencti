@@ -29,7 +29,7 @@ const caseResolvers: Resolvers = {
   },
   CasesFilter: {
     createdBy: buildRefRelationKey(RELATION_CREATED_BY),
-    assigneeTo: buildRefRelationKey(RELATION_OBJECT_ASSIGNEE),
+    objectAssignee: buildRefRelationKey(RELATION_OBJECT_ASSIGNEE),
     markedBy: buildRefRelationKey(RELATION_OBJECT_MARKING),
     objectLabel: buildRefRelationKey(RELATION_OBJECT_LABEL),
     creator: 'creator_id',

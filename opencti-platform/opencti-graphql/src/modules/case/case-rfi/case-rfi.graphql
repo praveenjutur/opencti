@@ -171,7 +171,7 @@ enum CaseRfisFilter {
   createdBy
   markedBy
   objectLabel
-  assigneeTo
+  objectAssignee
   participant
   x_opencti_workflow_id
   confidence

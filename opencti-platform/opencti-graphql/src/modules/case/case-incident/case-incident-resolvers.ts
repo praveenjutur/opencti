@@ -25,7 +25,7 @@ const caseIncidentResolvers: Resolvers = {
   },
   CaseIncidentsFilter: {
     createdBy: buildRefRelationKey(RELATION_CREATED_BY),
-    assigneeTo: buildRefRelationKey(RELATION_OBJECT_ASSIGNEE),
+    objectAssignee: buildRefRelationKey(RELATION_OBJECT_ASSIGNEE),
     participant: buildRefRelationKey(RELATION_OBJECT_PARTICIPANT),
     markedBy: buildRefRelationKey(RELATION_OBJECT_MARKING),
     objectLabel: buildRefRelationKey(RELATION_OBJECT_LABEL),

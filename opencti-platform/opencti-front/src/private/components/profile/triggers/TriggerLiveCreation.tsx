@@ -271,7 +271,7 @@ const TriggerLiveCreation: FunctionComponent<TriggerLiveCreationProps> = ({
                   availableFilterKeys={[
                     'entity_type',
                     'x_opencti_workflow_id',
-                    'assigneeTo',
+                    'objectAssignee',
                     'objects',
                     'markedBy',
                     'objectLabel',

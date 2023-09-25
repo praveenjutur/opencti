@@ -174,7 +174,7 @@ enum CaseIncidentsFilter {
   createdBy
   markedBy
   objectLabel
-  assigneeTo
+  objectAssignee
   participant
   x_opencti_workflow_id
   severity

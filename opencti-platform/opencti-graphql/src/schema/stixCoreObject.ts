@@ -21,7 +21,7 @@ export const stixCoreObjectOptions = {
   StixCoreObjectsFilter: {
     createdBy: buildRefRelationKey(RELATION_CREATED_BY),
     markedBy: buildRefRelationKey(RELATION_OBJECT_MARKING),
-    assigneeTo: buildRefRelationKey(RELATION_OBJECT_ASSIGNEE),
+    objectAssignee: buildRefRelationKey(RELATION_OBJECT_ASSIGNEE),
     participant: buildRefRelationKey(RELATION_OBJECT_PARTICIPANT),
     objectLabel: buildRefRelationKey(RELATION_OBJECT_LABEL),
     objects: buildRefRelationKey(RELATION_OBJECT),

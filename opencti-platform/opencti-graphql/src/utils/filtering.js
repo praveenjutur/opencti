@@ -23,7 +23,7 @@ import { schemaRelationsRefDefinition } from '../schema/schema-relationsRef';
 export const MARKING_FILTER = 'markedBy';
 export const CREATED_BY_FILTER = 'createdBy';
 export const CREATOR_FILTER = 'creator';
-export const ASSIGNEE_FILTER = 'assigneeTo';
+export const ASSIGNEE_FILTER = 'objectAssignee';
 export const PARTICIPANT_FILTER = 'participant';
 export const OBJECT_CONTAINS_FILTER = 'objects';
 export const RELATION_FROM = 'fromId';

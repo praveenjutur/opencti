@@ -123,7 +123,7 @@ export const tasksDataColumns: DataColumns = {
       );
     },
   },
-  assigneeTo: {
+  objectAssignee: {
     label: 'Assignees',
     width: '25%',
     isSortable: true,

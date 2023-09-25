@@ -2070,7 +2070,7 @@ enum StixCoreObjectsFilter {
   stop_time
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   participant
   objectLabel
   killChainPhase
@@ -2219,7 +2219,7 @@ enum StixDomainObjectsFilter {
   created_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   participant
   objectLabel
   killChainPhase
@@ -2367,7 +2367,7 @@ enum AttackPatternsFilter {
   killChainPhase
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   mitigatedBy
   revoked
@@ -2503,7 +2503,7 @@ enum CampaignsFilter {
   updated_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   x_opencti_workflow_id
   revoked
@@ -2638,7 +2638,7 @@ enum ContainersFilter {
   updated_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   objects
   x_opencti_workflow_id
@@ -2730,7 +2730,7 @@ enum NotesFilter {
   updated_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   objects
   x_opencti_workflow_id
@@ -2886,7 +2886,7 @@ enum ObservedDatasFilter {
   updated_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   objects
   x_opencti_workflow_id
@@ -3012,7 +3012,7 @@ enum OpinionsFilter {
   updated_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   objects
   x_opencti_workflow_id
@@ -3266,7 +3266,7 @@ enum CoursesOfActionFilter {
   created_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   mitigatedBy
   x_opencti_workflow_id
@@ -3393,7 +3393,7 @@ enum IdentitiesFilter {
   updated_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   x_opencti_workflow_id
   revoked
@@ -3519,7 +3519,7 @@ enum IndividualsFilter {
   updated_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   x_opencti_workflow_id
   description
@@ -3652,7 +3652,7 @@ enum SectorsFilter {
   updated_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   partOf
   x_opencti_workflow_id
@@ -3777,7 +3777,7 @@ enum SystemsFilter {
   updated_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   x_opencti_workflow_id
   x_opencti_reliability
@@ -3924,7 +3924,7 @@ enum IndicatorsFilter {
   createdBy
   objects
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   basedOn
   indicates
@@ -4076,7 +4076,7 @@ enum InfrastructuresFilter {
   updated_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   x_opencti_workflow_id
   revoked
@@ -4202,7 +4202,7 @@ enum IntrusionSetsFilter {
   updated_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   x_opencti_workflow_id
   revoked
@@ -4339,7 +4339,7 @@ enum LocationsFilter {
   updated_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   x_opencti_workflow_id
   revoked
@@ -4459,7 +4459,7 @@ enum PositionsFilter {
   updated_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   x_opencti_workflow_id
   revoked
@@ -4587,7 +4587,7 @@ enum CitiesFilter {
   updated_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   x_opencti_workflow_id
   revoked
@@ -4710,7 +4710,7 @@ enum CountriesFilter {
   updated_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   x_opencti_workflow_id
   revoked
@@ -4831,7 +4831,7 @@ enum RegionsFilter {
   created_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   x_opencti_workflow_id
 }
@@ -4963,7 +4963,7 @@ enum MalwaresFilter {
   updated_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   x_opencti_workflow_id
   confidence
@@ -5098,7 +5098,7 @@ enum ThreatActorsFilter {
   updated_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   x_opencti_workflow_id
   revoked
@@ -5313,7 +5313,7 @@ enum ToolsFilter {
   created_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   x_opencti_workflow_id
   confidence
@@ -5441,7 +5441,7 @@ enum VulnerabilitiesFilter {
   created_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   x_opencti_workflow_id
   creator
@@ -5581,7 +5581,7 @@ enum IncidentsFilter {
   created_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   participant
   objectLabel
   x_opencti_workflow_id
@@ -9202,7 +9202,7 @@ enum ChannelsFilter {
   updated_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   x_opencti_workflow_id
   confidence
@@ -10497,7 +10497,7 @@ enum TasksOrdering {
   x_opencti_workflow_id
   confidence
   due_date
-  assigneeTo
+  objectAssignee
 }
 
 enum TasksFilter {
@@ -10511,7 +10511,7 @@ enum TasksFilter {
   createdBy
   markedBy
   objectLabel
-  assigneeTo
+  objectAssignee
   participant
   objects
   x_opencti_workflow_id
@@ -10686,7 +10686,7 @@ enum CasesFilter {
   createdBy
   markedBy
   objectLabel
-  assigneeTo
+  objectAssignee
   participant
   x_opencti_workflow_id
   confidence
@@ -10834,7 +10834,7 @@ enum CaseIncidentsFilter {
   createdBy
   markedBy
   objectLabel
-  assigneeTo
+  objectAssignee
   participant
   x_opencti_workflow_id
   severity
@@ -10976,7 +10976,7 @@ enum CaseRfisFilter {
   createdBy
   markedBy
   objectLabel
-  assigneeTo
+  objectAssignee
   participant
   x_opencti_workflow_id
   confidence
@@ -11119,7 +11119,7 @@ enum CaseRftsFilter {
   createdBy
   markedBy
   objectLabel
-  assigneeTo
+  objectAssignee
   participant
   x_opencti_workflow_id
   confidence
@@ -11258,7 +11258,7 @@ enum FeedbacksFilter {
   createdBy
   markedBy
   objectLabel
-  assigneeTo
+  objectAssignee
   x_opencti_workflow_id
   rating
   confidence
@@ -11752,7 +11752,7 @@ enum ThreatActorsIndividualFilter {
   updated_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   x_opencti_workflow_id
   revoked
@@ -12140,7 +12140,7 @@ enum OrganizationsFilter {
   updated_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   x_opencti_workflow_id
   description

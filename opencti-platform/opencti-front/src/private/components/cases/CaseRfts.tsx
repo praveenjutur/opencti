@@ -143,7 +143,7 @@ const CaseRfts: FunctionComponent<CaseRftsProps> = () => {
           'createdBy',
           'source_reliability',
           'confidence',
-          'assigneeTo',
+          'objectAssignee',
           'participant',
           'severity',
           'priority',

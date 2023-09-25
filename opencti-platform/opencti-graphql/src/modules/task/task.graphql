@@ -150,7 +150,7 @@ enum TasksOrdering {
   x_opencti_workflow_id
   confidence
   due_date
-  assigneeTo
+  objectAssignee
 }
 # Filtering
 enum TasksFilter {
@@ -164,7 +164,7 @@ enum TasksFilter {
   createdBy
   markedBy
   objectLabel
-  assigneeTo
+  objectAssignee
   participant
   objects
   x_opencti_workflow_id

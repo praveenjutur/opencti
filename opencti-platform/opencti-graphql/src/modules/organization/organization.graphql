@@ -155,7 +155,7 @@ enum OrganizationsFilter {
   updated_at
   createdBy
   markedBy
-  assigneeTo
+  objectAssignee
   objectLabel
   x_opencti_workflow_id
   description

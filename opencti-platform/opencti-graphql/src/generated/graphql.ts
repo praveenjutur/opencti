@@ -849,7 +849,6 @@ export type AttackPatternEditMutationsRelationDeleteArgs = {
 
 export enum AttackPatternsFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   Created = 'created',
   CreatedBy = 'createdBy',
   CreatedAt = 'created_at',
@@ -859,6 +858,7 @@ export enum AttackPatternsFilter {
   MitigatedBy = 'mitigatedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Revoked = 'revoked',
   SourceReliability = 'source_reliability',
@@ -1702,7 +1702,6 @@ export type CampaignEditMutationsRelationDeleteArgs = {
 
 export enum CampaignsFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   Confidence = 'confidence',
   Created = 'created',
   CreatedBy = 'createdBy',
@@ -1711,6 +1710,7 @@ export enum CampaignsFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Revoked = 'revoked',
   SourceReliability = 'source_reliability',
@@ -2282,7 +2282,6 @@ export type CaseIncidentEdge = {
 };
 
 export enum CaseIncidentsFilter {
-  AssigneeTo = 'assigneeTo',
   Confidence = 'confidence',
   Context = 'context',
   Created = 'created',
@@ -2292,6 +2291,7 @@ export enum CaseIncidentsFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Participant = 'participant',
   Priority = 'priority',
@@ -2588,7 +2588,6 @@ export type CaseRfiEdge = {
 };
 
 export enum CaseRfisFilter {
-  AssigneeTo = 'assigneeTo',
   Confidence = 'confidence',
   Created = 'created',
   CreatedBy = 'createdBy',
@@ -2597,6 +2596,7 @@ export enum CaseRfisFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Participant = 'participant',
   Priority = 'priority',
@@ -2892,7 +2892,6 @@ export type CaseRftEdge = {
 };
 
 export enum CaseRftsFilter {
-  AssigneeTo = 'assigneeTo',
   Confidence = 'confidence',
   Context = 'context',
   Created = 'created',
@@ -2902,6 +2901,7 @@ export enum CaseRftsFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Participant = 'participant',
   Priority = 'priority',
@@ -2974,7 +2974,6 @@ export enum CaseTemplatesOrdering {
 }
 
 export enum CasesFilter {
-  AssigneeTo = 'assigneeTo',
   Confidence = 'confidence',
   Context = 'context',
   Created = 'created',
@@ -2984,6 +2983,7 @@ export enum CasesFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Participant = 'participant',
   SourceReliability = 'source_reliability',
@@ -3236,7 +3236,6 @@ export type ChannelEdge = {
 
 export enum ChannelsFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   ChannelTypes = 'channel_types',
   Confidence = 'confidence',
   Created = 'created',
@@ -3245,6 +3244,7 @@ export enum ChannelsFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   SourceReliability = 'source_reliability',
   UpdatedAt = 'updated_at',
@@ -3273,7 +3273,6 @@ export enum ChannelsOrdering {
 
 export enum CitiesFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   Created = 'created',
   CreatedBy = 'createdBy',
   CreatedAt = 'created_at',
@@ -3281,6 +3280,7 @@ export enum CitiesFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Revoked = 'revoked',
   UpdatedAt = 'updated_at',
@@ -3844,7 +3844,6 @@ export type ContainerEditMutationsRelationDeleteArgs = {
 };
 
 export enum ContainersFilter {
-  AssigneeTo = 'assigneeTo',
   AttributeAbstract = 'attribute_abstract',
   Authors = 'authors',
   Confidence = 'confidence',
@@ -3858,6 +3857,7 @@ export enum ContainersFilter {
   EntityType = 'entity_type',
   MarkedBy = 'markedBy',
   Modified = 'modified',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Objects = 'objects',
   ReportTypes = 'report_types',
@@ -3901,7 +3901,6 @@ export type ContextData = {
 
 export enum CountriesFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   Created = 'created',
   CreatedBy = 'createdBy',
   CreatedAt = 'created_at',
@@ -3909,6 +3908,7 @@ export enum CountriesFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Revoked = 'revoked',
   UpdatedAt = 'updated_at',
@@ -4451,7 +4451,6 @@ export type CourseOfActionEditMutationsRelationDeleteArgs = {
 
 export enum CoursesOfActionFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   Created = 'created',
   CreatedBy = 'createdBy',
   CreatedAt = 'created_at',
@@ -4460,6 +4459,7 @@ export enum CoursesOfActionFilter {
   MitigatedBy = 'mitigatedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Revoked = 'revoked',
   SourceReliability = 'source_reliability',
@@ -7300,7 +7300,6 @@ export type FeedbackEdge = {
 };
 
 export enum FeedbacksFilter {
-  AssigneeTo = 'assigneeTo',
   Confidence = 'confidence',
   Context = 'context',
   Created = 'created',
@@ -7310,6 +7309,7 @@ export enum FeedbacksFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Rating = 'rating',
   SourceReliability = 'source_reliability',
@@ -8571,7 +8571,6 @@ export type IPv6AddrAddInput = {
 
 export enum IdentitiesFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   Confidence = 'confidence',
   Created = 'created',
   CreatedBy = 'createdBy',
@@ -8581,6 +8580,7 @@ export enum IdentitiesFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Revoked = 'revoked',
   UpdatedAt = 'updated_at',
@@ -9137,7 +9137,6 @@ export type IncidentEditMutationsRelationDeleteArgs = {
 
 export enum IncidentsFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   Confidence = 'confidence',
   Created = 'created',
   CreatedBy = 'createdBy',
@@ -9147,6 +9146,7 @@ export enum IncidentsFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Participant = 'participant',
   Severity = 'severity',
@@ -9468,7 +9468,6 @@ export type IndicatorEditMutationsRelationDeleteArgs = {
 };
 
 export enum IndicatorsFilter {
-  AssigneeTo = 'assigneeTo',
   BasedOn = 'basedOn',
   Confidence = 'confidence',
   Created = 'created',
@@ -9480,6 +9479,7 @@ export enum IndicatorsFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Objects = 'objects',
   Pattern = 'pattern',
@@ -9792,7 +9792,6 @@ export type IndividualEditMutationsRelationDeleteArgs = {
 
 export enum IndividualsFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   ContactInformation = 'contact_information',
   Created = 'created',
   CreatedBy = 'createdBy',
@@ -9802,6 +9801,7 @@ export enum IndividualsFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   UpdatedAt = 'updated_at',
   XOpenctiFirstname = 'x_opencti_firstname',
@@ -10103,7 +10103,6 @@ export type InfrastructureEditMutationsRelationDeleteArgs = {
 
 export enum InfrastructuresFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   Confidence = 'confidence',
   Created = 'created',
   CreatedBy = 'createdBy',
@@ -10115,6 +10114,7 @@ export enum InfrastructuresFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Revoked = 'revoked',
   SourceReliability = 'source_reliability',
@@ -10568,7 +10568,6 @@ export type IntrusionSetEditMutationsRelationDeleteArgs = {
 
 export enum IntrusionSetsFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   Confidence = 'confidence',
   Created = 'created',
   CreatedBy = 'createdBy',
@@ -10577,6 +10576,7 @@ export enum IntrusionSetsFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Revoked = 'revoked',
   SourceReliability = 'source_reliability',
@@ -11316,7 +11316,6 @@ export type LocationEditMutationsRelationDeleteArgs = {
 
 export enum LocationsFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   Confidence = 'confidence',
   Created = 'created',
   CreatedBy = 'createdBy',
@@ -11325,6 +11324,7 @@ export enum LocationsFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Revoked = 'revoked',
   UpdatedAt = 'updated_at',
@@ -12174,7 +12174,6 @@ export type MalwareEditMutationsRelationDeleteArgs = {
 
 export enum MalwaresFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   Confidence = 'confidence',
   Created = 'created',
   CreatedBy = 'createdBy',
@@ -12186,6 +12185,7 @@ export enum MalwaresFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Revoked = 'revoked',
   SourceReliability = 'source_reliability',
@@ -15517,7 +15517,6 @@ export type NoteUserAddInput = {
 };
 
 export enum NotesFilter {
-  AssigneeTo = 'assigneeTo',
   AttributeAbstract = 'attribute_abstract',
   Authors = 'authors',
   Confidence = 'confidence',
@@ -15530,6 +15529,7 @@ export enum NotesFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   NoteTypes = 'note_types',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Objects = 'objects',
   Revoked = 'revoked',
@@ -15994,7 +15994,6 @@ export type ObservedDataEditMutationsRelationDeleteArgs = {
 };
 
 export enum ObservedDatasFilter {
-  AssigneeTo = 'assigneeTo',
   Confidence = 'confidence',
   Created = 'created',
   CreatedBy = 'createdBy',
@@ -16004,6 +16003,7 @@ export enum ObservedDatasFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   NumberObserved = 'number_observed',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Objects = 'objects',
   Revoked = 'revoked',
@@ -16346,7 +16346,6 @@ export type OpinionUserAddInput = {
 };
 
 export enum OpinionsFilter {
-  AssigneeTo = 'assigneeTo',
   Authors = 'authors',
   Confidence = 'confidence',
   Created = 'created',
@@ -16356,6 +16355,7 @@ export enum OpinionsFilter {
   Explanation = 'explanation',
   MarkedBy = 'markedBy',
   Modified = 'modified',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Objects = 'objects',
   Opinion = 'opinion',
@@ -16637,7 +16637,6 @@ export type OrganizationOrIndividual = Individual | Organization;
 
 export enum OrganizationsFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   ContactInformation = 'contact_information',
   Created = 'created',
   CreatedBy = 'createdBy',
@@ -16646,6 +16645,7 @@ export enum OrganizationsFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Revoked = 'revoked',
   UpdatedAt = 'updated_at',
@@ -17471,13 +17471,13 @@ export type PositionInput = {
 
 export enum PositionsFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   Created = 'created',
   CreatedBy = 'createdBy',
   CreatedAt = 'created_at',
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Revoked = 'revoked',
   UpdatedAt = 'updated_at',
@@ -20690,13 +20690,13 @@ export type RegionEditMutationsRelationDeleteArgs = {
 
 export enum RegionsFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   Created = 'created',
   CreatedBy = 'createdBy',
   CreatedAt = 'created_at',
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   XOpenctiWorkflowId = 'x_opencti_workflow_id'
 }
@@ -21507,13 +21507,13 @@ export type SectorEditMutationsRelationDeleteArgs = {
 
 export enum SectorsFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   Created = 'created',
   CreatedBy = 'createdBy',
   CreatedAt = 'created_at',
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   PartOf = 'partOf',
   Revoked = 'revoked',
@@ -22220,7 +22220,6 @@ export type StixCoreObjectsDistributionParameters = {
 export enum StixCoreObjectsFilter {
   Abstract = 'abstract',
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   Confidence = 'confidence',
   Context = 'context',
   Created = 'created',
@@ -22242,6 +22241,7 @@ export enum StixCoreObjectsFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectId = 'objectId',
   ObjectLabel = 'objectLabel',
   Objects = 'objects',
@@ -23218,7 +23218,6 @@ export type StixDomainObjectFileEditInput = {
 
 export enum StixDomainObjectsFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   Confidence = 'confidence',
   Context = 'context',
   Created = 'created',
@@ -23235,6 +23234,7 @@ export enum StixDomainObjectsFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Objects = 'objects',
   OperatingSystem = 'operatingSystem',
@@ -24752,13 +24752,13 @@ export type SystemEditMutationsRelationDeleteArgs = {
 
 export enum SystemsFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   Created = 'created',
   CreatedBy = 'createdBy',
   CreatedAt = 'created_at',
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Revoked = 'revoked',
   UpdatedAt = 'updated_at',
@@ -25084,7 +25084,6 @@ export enum TaskTemplatesOrdering {
 }
 
 export enum TasksFilter {
-  AssigneeTo = 'assigneeTo',
   Context = 'context',
   Created = 'created',
   CreatedBy = 'createdBy',
@@ -25094,6 +25093,7 @@ export enum TasksFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Objects = 'objects',
   Participant = 'participant',
@@ -25109,7 +25109,6 @@ export type TasksFiltering = {
 };
 
 export enum TasksOrdering {
-  AssigneeTo = 'assigneeTo',
   Confidence = 'confidence',
   Context = 'context',
   Created = 'created',
@@ -25120,6 +25119,7 @@ export enum TasksOrdering {
   DueDate = 'due_date',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   UpdatedAt = 'updated_at',
   XOpenctiWorkflowId = 'x_opencti_workflow_id'
 }
@@ -26115,7 +26115,6 @@ export type ThreatActorIndividualEdge = {
 
 export enum ThreatActorsFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   Confidence = 'confidence',
   Created = 'created',
   CreatedBy = 'createdBy',
@@ -26124,6 +26123,7 @@ export enum ThreatActorsFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Revoked = 'revoked',
   SourceReliability = 'source_reliability',
@@ -26141,7 +26141,6 @@ export type ThreatActorsFiltering = {
 
 export enum ThreatActorsIndividualFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   Confidence = 'confidence',
   Created = 'created',
   CreatedBy = 'createdBy',
@@ -26150,6 +26149,7 @@ export enum ThreatActorsIndividualFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   Revoked = 'revoked',
   SourceReliability = 'source_reliability',
@@ -26457,7 +26457,6 @@ export type ToolEditMutationsRelationDeleteArgs = {
 
 export enum ToolsFilter {
   Aliases = 'aliases',
-  AssigneeTo = 'assigneeTo',
   Confidence = 'confidence',
   Created = 'created',
   CreatedBy = 'createdBy',
@@ -26465,6 +26464,7 @@ export enum ToolsFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   SourceReliability = 'source_reliability',
   XOpenctiWorkflowId = 'x_opencti_workflow_id'
@@ -27528,7 +27528,6 @@ export enum VocabularyOrdering {
 }
 
 export enum VulnerabilitiesFilter {
-  AssigneeTo = 'assigneeTo',
   Confidence = 'confidence',
   Created = 'created',
   CreatedBy = 'createdBy',
@@ -27537,6 +27536,7 @@ export enum VulnerabilitiesFilter {
   MarkedBy = 'markedBy',
   Modified = 'modified',
   Name = 'name',
+  ObjectAssignee = 'objectAssignee',
   ObjectLabel = 'objectLabel',
   SourceReliability = 'source_reliability',
   XOpenctiAliases = 'x_opencti_aliases',

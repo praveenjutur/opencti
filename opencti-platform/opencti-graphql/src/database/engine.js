@@ -811,8 +811,8 @@ export const RUNTIME_ATTRIBUTES = {
       return R.mergeAll(identities.map((i) => ({ [i.internal_id]: i.definition })));
     },
   },
-  assigneeTo: {
-    field: 'assigneeTo.keyword',
+  objectAssignee: {
+    field: 'objectAssignee.keyword',
     type: 'keyword',
     getSource: async () => `
         if (doc.containsKey('rel_object-assignee.internal_id')) {

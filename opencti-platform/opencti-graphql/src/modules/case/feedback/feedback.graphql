@@ -169,7 +169,7 @@ enum FeedbacksFilter {
   createdBy
   markedBy
   objectLabel
-  assigneeTo
+  objectAssignee
   x_opencti_workflow_id
   rating
   confidence

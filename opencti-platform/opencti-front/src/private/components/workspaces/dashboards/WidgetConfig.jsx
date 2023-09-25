@@ -152,7 +152,7 @@ const entitiesFilters = [
   'createdBy',
   'creator',
   'x_opencti_workflow_id',
-  'assigneeTo',
+  'objectAssignee',
   'participant',
   'objects',
   'x_opencti_score',

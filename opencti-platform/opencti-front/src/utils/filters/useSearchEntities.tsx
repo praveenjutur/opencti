@@ -400,14 +400,14 @@ const useSearchEntities = ({
             });
         }
         break;
-      case 'assigneeTo': // only used
+      case 'objectAssignee': // only used
         if (!cacheEntities[filterKey]) {
           fetchQuery(objectAssigneeFieldAssigneesSearchQuery, {
             entityTypes: searchContext?.entityTypes ?? [],
           })
             .toPromise()
             .then((data) => {
-              const assigneeToEntities = (
+              const objectAssigneeEntities = (
                 (data as ObjectAssigneeFieldAssigneesSearchQuery$data)
                   ?.assignees?.edges ?? []
               ).map((n) => ({
@@ -417,9 +417,9 @@ const useSearchEntities = ({
               }));
               setCacheEntities({
                 ...cacheEntities,
-                [filterKey]: assigneeToEntities,
+                [filterKey]: objectAssigneeEntities,
               });
-              unionSetEntities('assigneeTo', assigneeToEntities);
+              unionSetEntities('objectAssignee', objectAssigneeEntities);
             });
         }
         break;

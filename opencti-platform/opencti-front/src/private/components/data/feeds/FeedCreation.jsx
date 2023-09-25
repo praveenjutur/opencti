@@ -544,7 +544,7 @@ const FeedCreation = (props) => {
                             availableFilterKeys={[
                               'entity_type',
                               'x_opencti_workflow_id',
-                              'assigneeTo',
+                              'objectAssignee',
                               'objects',
                               'markedBy',
                               'objectLabel',

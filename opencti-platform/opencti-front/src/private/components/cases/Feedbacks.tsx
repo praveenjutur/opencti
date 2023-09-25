@@ -137,7 +137,7 @@ const Feedbacks: FunctionComponent<FeedbacksProps> = () => {
           'createdBy',
           'source_reliability',
           'confidence',
-          'assigneeTo',
+          'objectAssignee',
           'creator',
           'created_start_date',
           'created_end_date',
