@@ -78,7 +78,7 @@ enum FilterMode {
 input FilterGroup {
   mode: FilterMode!
   filters: [Filter!]!
-  filterGroups: [FilterGroup!]!
+  filterGroups: [FilterGroup]!
 }
 
 input Filter {
@@ -99,14 +99,12 @@ type ResolvedFilter {
   values: [String]!
   operator: String
   mode: FilterMode
-  representatives: [Representative]!
+  representatives: [FilterRepresentative]!
 }
 
-type Representative {
+type FilterRepresentative {
   id: String
   value: String
-  main: String!
-  secondary: String
 }
 
 enum EditOperation {
@@ -2007,6 +2005,11 @@ input KillChainPhaseAddInput {
   update: Boolean
 }
 
+type Representative {
+  main: String!
+  secondary: String
+}
+
 enum StixCoreObjectsOrdering {
   name
   entity_type
@@ -2639,35 +2642,6 @@ enum NotesOrdering {
   objectMarking
   note_types
   creator
-}
-
-enum NotesFilter {
-  attribute_abstract
-  content
-  authors
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  objects
-  x_opencti_workflow_id
-  revoked
-  confidence
-  source_reliability
-  note_types
-  likelihood
-  creator
-}
-
-input NotesFiltering {
-  key: [NotesFilter!]!
-  values: [String]!
-  operator: String
-  filterMode: FilterMode
 }
 
 type NoteConnection {
@@ -3827,43 +3801,6 @@ enum IndicatorsOrdering {
   createdBy
 }
 
-enum IndicatorsFilter {
-  name
-  pattern_type
-  indicator_types
-  pattern_version
-  pattern
-  x_opencti_main_observable_type
-  x_opencti_score
-  x_opencti_detection
-  valid_from
-  valid_until
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  objects
-  markedBy
-  objectAssignee
-  objectLabel
-  basedOn
-  indicates
-  x_opencti_workflow_id
-  sightedBy
-  revoked
-  creator
-  confidence
-  source_reliability
-}
-
-input IndicatorsFiltering {
-  key: [IndicatorsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
-
 type IndicatorConnection {
   pageInfo: PageInfo!
   edges: [IndicatorEdge]
@@ -3983,34 +3920,6 @@ enum InfrastructuresOrdering {
   createdBy
   objectMarking
   creator
-}
-
-enum InfrastructuresFilter {
-  name
-  aliases
-  infrastructure_types
-  first_seen
-  last_seen
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  revoked
-  confidence
-  source_reliability
-  creator
-}
-
-input InfrastructuresFiltering {
-  key: [InfrastructuresFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 
 type InfrastructureConnection {
@@ -8098,7 +8007,7 @@ type Query {
   containers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: [ContainersFiltering], filterMode: FilterMode, search: String, toStix: Boolean): ContainerConnection
   containersObjectsOfObject(id: String!, types: [String], filters: [ContainersFiltering], filterMode: FilterMode, search: String): StixObjectOrStixRelationshipConnection
   note(id: String): Note
-  notes(first: Int, after: ID, orderBy: NotesOrdering, orderMode: OrderingMode, filters: [NotesFiltering], filterMode: FilterMode, search: String, toStix: Boolean): NoteConnection
+  notes(first: Int, after: ID, orderBy: NotesOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): NoteConnection
   notesNumber(objectId: String, endDate: DateTime): Number
   notesTimeSeries(objectId: String, authorId: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime!, interval: String!): [TimeSeries]
   notesDistribution(objectId: String, field: String!, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String): [Distribution]
@@ -8133,12 +8042,12 @@ type Query {
   system(id: String): System
   systems(first: Int, after: ID, orderBy: SystemsOrdering, orderMode: OrderingMode, filters: [SystemsFiltering], filterMode: FilterMode, search: String, toStix: Boolean): SystemConnection
   indicator(id: String!): Indicator
-  indicators(first: Int, after: ID, orderBy: IndicatorsOrdering, orderMode: OrderingMode, filters: [IndicatorsFiltering], filterMode: FilterMode, search: String): IndicatorConnection
-  indicatorsTimeSeries(objectId: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime!, interval: String!, filters: [IndicatorsFiltering], filterMode: FilterMode): [TimeSeries]
+  indicators(first: Int, after: ID, orderBy: IndicatorsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String): IndicatorConnection
+  indicatorsTimeSeries(objectId: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime!, interval: String!, filters: FilterGroup, filterMode: FilterMode): [TimeSeries]
   indicatorsNumber(pattern_type: String, objectId: String, endDate: DateTime): Number
   indicatorsDistribution(objectId: String, field: String!, operation: StatsOperation!, limit: Int, order: String, startDate: DateTime, endDate: DateTime, dateAttribute: String): [Distribution]
   infrastructure(id: String!): Infrastructure
-  infrastructures(first: Int, after: ID, orderBy: InfrastructuresOrdering, orderMode: OrderingMode, filters: [InfrastructuresFiltering], filterMode: FilterMode, search: String): InfrastructureConnection
+  infrastructures(first: Int, after: ID, orderBy: InfrastructuresOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String): InfrastructureConnection
   intrusionSet(id: String): IntrusionSet
   intrusionSets(first: Int, after: ID, orderBy: IntrusionSetsOrdering, orderMode: OrderingMode, filters: [IntrusionSetsFiltering], filterMode: FilterMode, search: String, toStix: Boolean): IntrusionSetConnection
   location(id: String!): Location

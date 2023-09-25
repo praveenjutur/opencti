@@ -121,8 +121,6 @@ const FilterIconButtonContainer: FunctionComponent<FilterIconButtonContainerProp
             <>
               {filterValues.map((id) => {
                 const value = currentFilter.representatives.filter((n) => n?.id === id)[0]?.value;
-                console.log('value', value);
-                console.log('filterKey', filterKey);
                 return (
                   <span key={id}>
                     <FilterIconButtonContent

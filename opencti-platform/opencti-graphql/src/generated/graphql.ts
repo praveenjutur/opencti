@@ -7368,7 +7368,7 @@ export type Filter = {
 };
 
 export type FilterGroup = {
-  filterGroups: Array<FilterGroup>;
+  filterGroups: Array<InputMaybe<FilterGroup>>;
   filters: Array<Filter>;
   mode: FilterMode;
 };
@@ -7377,6 +7377,12 @@ export enum FilterMode {
   And = 'and',
   Or = 'or'
 }
+
+export type FilterRepresentative = {
+  __typename?: 'FilterRepresentative';
+  id?: Maybe<Scalars['String']['output']>;
+  value?: Maybe<Scalars['String']['output']>;
+};
 
 export type GetMetrics = {
   __typename?: 'GetMetrics';
@@ -9415,43 +9421,6 @@ export type IndicatorEditMutationsRelationDeleteArgs = {
   toId: Scalars['StixRef']['input'];
 };
 
-export enum IndicatorsFilter {
-  BasedOn = 'basedOn',
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  Indicates = 'indicates',
-  IndicatorTypes = 'indicator_types',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Objects = 'objects',
-  Pattern = 'pattern',
-  PatternType = 'pattern_type',
-  PatternVersion = 'pattern_version',
-  Revoked = 'revoked',
-  SightedBy = 'sightedBy',
-  SourceReliability = 'source_reliability',
-  UpdatedAt = 'updated_at',
-  ValidFrom = 'valid_from',
-  ValidUntil = 'valid_until',
-  XOpenctiDetection = 'x_opencti_detection',
-  XOpenctiMainObservableType = 'x_opencti_main_observable_type',
-  XOpenctiScore = 'x_opencti_score',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type IndicatorsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<IndicatorsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum IndicatorsOrdering {
   Confidence = 'confidence',
   Created = 'created',
@@ -10047,34 +10016,6 @@ export type InfrastructureEditMutationsRelationAddArgs = {
 export type InfrastructureEditMutationsRelationDeleteArgs = {
   relationship_type: Scalars['String']['input'];
   toId: Scalars['StixRef']['input'];
-};
-
-export enum InfrastructuresFilter {
-  Aliases = 'aliases',
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  FirstSeen = 'first_seen',
-  InfrastructureTypes = 'infrastructure_types',
-  LastSeen = 'last_seen',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Revoked = 'revoked',
-  SourceReliability = 'source_reliability',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type InfrastructuresFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<InfrastructuresFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export enum InfrastructuresOrdering {
@@ -15428,35 +15369,6 @@ export type NoteUserAddInput = {
   x_opencti_stix_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export enum NotesFilter {
-  AttributeAbstract = 'attribute_abstract',
-  Authors = 'authors',
-  Confidence = 'confidence',
-  Content = 'content',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  Likelihood = 'likelihood',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  NoteTypes = 'note_types',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Objects = 'objects',
-  Revoked = 'revoked',
-  SourceReliability = 'source_reliability',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type NotesFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<NotesFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values: Array<InputMaybe<Scalars['String']['input']>>;
-};
-
 export enum NotesOrdering {
   AttributeAbstract = 'attribute_abstract',
   Created = 'created',
@@ -18579,7 +18491,7 @@ export type QueryIndicatorArgs = {
 export type QueryIndicatorsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<IndicatorsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<IndicatorsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -18610,7 +18522,7 @@ export type QueryIndicatorsTimeSeriesArgs = {
   endDate: Scalars['DateTime']['input'];
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<IndicatorsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   interval: Scalars['String']['input'];
   objectId?: InputMaybe<Scalars['String']['input']>;
   operation: StatsOperation;
@@ -18643,7 +18555,7 @@ export type QueryInfrastructureArgs = {
 export type QueryInfrastructuresArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<InfrastructuresFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<InfrastructuresOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -18882,7 +18794,7 @@ export type QueryNoteContainsStixObjectOrStixRelationshipArgs = {
 export type QueryNotesArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<NotesFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<NotesOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -20963,10 +20875,8 @@ export enum ReportsOrdering {
 
 export type Representative = {
   __typename?: 'Representative';
-  id?: Maybe<Scalars['String']['output']>;
   main: Scalars['String']['output'];
   secondary?: Maybe<Scalars['String']['output']>;
-  value?: Maybe<Scalars['String']['output']>;
 };
 
 export type ResolvedFilter = {
@@ -20974,7 +20884,7 @@ export type ResolvedFilter = {
   key: Array<Scalars['String']['output']>;
   mode?: Maybe<FilterMode>;
   operator?: Maybe<Scalars['String']['output']>;
-  representatives: Array<Maybe<Representative>>;
+  representatives: Array<Maybe<FilterRepresentative>>;
   values: Array<Maybe<Scalars['String']['output']>>;
 };
 
@@ -28761,6 +28671,7 @@ export type ResolversTypes = ResolversObject<{
   Filter: Filter;
   FilterGroup: FilterGroup;
   FilterMode: FilterMode;
+  FilterRepresentative: ResolverTypeWrapper<FilterRepresentative>;
   Float: ResolverTypeWrapper<Scalars['Float']['output']>;
   GetMetrics: ResolverTypeWrapper<GetMetrics>;
   Group: ResolverTypeWrapper<Omit<Group, 'default_dashboard' | 'members'> & { default_dashboard?: Maybe<ResolversTypes['Workspace']>, members?: Maybe<ResolversTypes['UserConnection']> }>;
@@ -28807,8 +28718,6 @@ export type ResolversTypes = ResolversObject<{
   IndicatorConnection: ResolverTypeWrapper<Omit<IndicatorConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['IndicatorEdge']>>> }>;
   IndicatorEdge: ResolverTypeWrapper<Omit<IndicatorEdge, 'node'> & { node: ResolversTypes['Indicator'] }>;
   IndicatorEditMutations: ResolverTypeWrapper<Omit<IndicatorEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversTypes['Indicator']>, contextPatch?: Maybe<ResolversTypes['Indicator']>, fieldPatch?: Maybe<ResolversTypes['Indicator']>, relationAdd?: Maybe<ResolversTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversTypes['Indicator']> }>;
-  IndicatorsFilter: IndicatorsFilter;
-  IndicatorsFiltering: IndicatorsFiltering;
   IndicatorsOrdering: IndicatorsOrdering;
   Individual: ResolverTypeWrapper<Omit<Individual, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'organizations' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversTypes['CaseConnection']>, containers?: Maybe<ResolversTypes['ContainerConnection']>, createdBy?: Maybe<ResolversTypes['Identity']>, groupings?: Maybe<ResolversTypes['GroupingConnection']>, notes?: Maybe<ResolversTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversTypes['OrganizationConnection']>, observedData?: Maybe<ResolversTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversTypes['OpinionConnection']>, organizations?: Maybe<ResolversTypes['OrganizationConnection']>, reports?: Maybe<ResolversTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversTypes['StixCoreRelationshipConnection']> }>;
   IndividualAddInput: IndividualAddInput;
@@ -28825,8 +28734,6 @@ export type ResolversTypes = ResolversObject<{
   InfrastructureConnection: ResolverTypeWrapper<Omit<InfrastructureConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['InfrastructureEdge']>>> }>;
   InfrastructureEdge: ResolverTypeWrapper<Omit<InfrastructureEdge, 'node'> & { node: ResolversTypes['Infrastructure'] }>;
   InfrastructureEditMutations: ResolverTypeWrapper<Omit<InfrastructureEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversTypes['Infrastructure']>, contextPatch?: Maybe<ResolversTypes['Infrastructure']>, fieldPatch?: Maybe<ResolversTypes['Infrastructure']>, relationAdd?: Maybe<ResolversTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversTypes['Infrastructure']> }>;
-  InfrastructuresFilter: InfrastructuresFilter;
-  InfrastructuresFiltering: InfrastructuresFiltering;
   InfrastructuresOrdering: InfrastructuresOrdering;
   IngestionRss: ResolverTypeWrapper<BasicStoreEntityIngestionRss>;
   IngestionRssAddInput: IngestionRssAddInput;
@@ -28951,8 +28858,6 @@ export type ResolversTypes = ResolversObject<{
   NoteEdge: ResolverTypeWrapper<Omit<NoteEdge, 'node'> & { node: ResolversTypes['Note'] }>;
   NoteEditMutations: ResolverTypeWrapper<Omit<NoteEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversTypes['Note']>, contextPatch?: Maybe<ResolversTypes['Note']>, fieldPatch?: Maybe<ResolversTypes['Note']>, relationAdd?: Maybe<ResolversTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversTypes['Note']> }>;
   NoteUserAddInput: NoteUserAddInput;
-  NotesFilter: NotesFilter;
-  NotesFiltering: NotesFiltering;
   NotesOrdering: NotesOrdering;
   Notification: ResolverTypeWrapper<BasicStoreEntityNotification>;
   NotificationConnection: ResolverTypeWrapper<Omit<NotificationConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['NotificationEdge']>>> }>;
@@ -29544,6 +29449,7 @@ export type ResolversParentTypes = ResolversObject<{
   FileMetadata: FileMetadata;
   Filter: Filter;
   FilterGroup: FilterGroup;
+  FilterRepresentative: FilterRepresentative;
   Float: Scalars['Float']['output'];
   GetMetrics: GetMetrics;
   Group: Omit<Group, 'default_dashboard' | 'members'> & { default_dashboard?: Maybe<ResolversParentTypes['Workspace']>, members?: Maybe<ResolversParentTypes['UserConnection']> };
@@ -29583,7 +29489,6 @@ export type ResolversParentTypes = ResolversObject<{
   IndicatorConnection: Omit<IndicatorConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['IndicatorEdge']>>> };
   IndicatorEdge: Omit<IndicatorEdge, 'node'> & { node: ResolversParentTypes['Indicator'] };
   IndicatorEditMutations: Omit<IndicatorEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversParentTypes['Indicator']>, contextPatch?: Maybe<ResolversParentTypes['Indicator']>, fieldPatch?: Maybe<ResolversParentTypes['Indicator']>, relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['Indicator']> };
-  IndicatorsFiltering: IndicatorsFiltering;
   Individual: Omit<Individual, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'organizations' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, observedData?: Maybe<ResolversParentTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, organizations?: Maybe<ResolversParentTypes['OrganizationConnection']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversParentTypes['StixCoreRelationshipConnection']> };
   IndividualAddInput: IndividualAddInput;
   IndividualConnection: Omit<IndividualConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['IndividualEdge']>>> };
@@ -29597,7 +29502,6 @@ export type ResolversParentTypes = ResolversObject<{
   InfrastructureConnection: Omit<InfrastructureConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['InfrastructureEdge']>>> };
   InfrastructureEdge: Omit<InfrastructureEdge, 'node'> & { node: ResolversParentTypes['Infrastructure'] };
   InfrastructureEditMutations: Omit<InfrastructureEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversParentTypes['Infrastructure']>, contextPatch?: Maybe<ResolversParentTypes['Infrastructure']>, fieldPatch?: Maybe<ResolversParentTypes['Infrastructure']>, relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['Infrastructure']> };
-  InfrastructuresFiltering: InfrastructuresFiltering;
   IngestionRss: BasicStoreEntityIngestionRss;
   IngestionRssAddInput: IngestionRssAddInput;
   IngestionRssConnection: Omit<IngestionRssConnection, 'edges'> & { edges: Array<ResolversParentTypes['IngestionRssEdge']> };
@@ -29697,7 +29601,6 @@ export type ResolversParentTypes = ResolversObject<{
   NoteEdge: Omit<NoteEdge, 'node'> & { node: ResolversParentTypes['Note'] };
   NoteEditMutations: Omit<NoteEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversParentTypes['Note']>, contextPatch?: Maybe<ResolversParentTypes['Note']>, fieldPatch?: Maybe<ResolversParentTypes['Note']>, relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['Note']> };
   NoteUserAddInput: NoteUserAddInput;
-  NotesFiltering: NotesFiltering;
   Notification: BasicStoreEntityNotification;
   NotificationConnection: Omit<NotificationConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['NotificationEdge']>>> };
   NotificationContent: NotificationContent;
@@ -32225,6 +32128,12 @@ export type FileMetadataResolvers<ContextType = any, ParentType extends Resolver
   mimetype?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   order?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   version?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type FilterRepresentativeResolvers<ContextType = any, ParentType extends ResolversParentTypes['FilterRepresentative'] = ResolversParentTypes['FilterRepresentative']> = ResolversObject<{
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -35565,10 +35474,8 @@ export type ReportEditMutationsResolvers<ContextType = any, ParentType extends R
 }>;
 
 export type RepresentativeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Representative'] = ResolversParentTypes['Representative']> = ResolversObject<{
-  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   main?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   secondary?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  value?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -35576,7 +35483,7 @@ export type ResolvedFilterResolvers<ContextType = any, ParentType extends Resolv
   key?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   mode?: Resolver<Maybe<ResolversTypes['FilterMode']>, ParentType, ContextType>;
   operator?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  representatives?: Resolver<Array<Maybe<ResolversTypes['Representative']>>, ParentType, ContextType>;
+  representatives?: Resolver<Array<Maybe<ResolversTypes['FilterRepresentative']>>, ParentType, ContextType>;
   values?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -38102,6 +38009,7 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   FileConnection?: FileConnectionResolvers<ContextType>;
   FileEdge?: FileEdgeResolvers<ContextType>;
   FileMetadata?: FileMetadataResolvers<ContextType>;
+  FilterRepresentative?: FilterRepresentativeResolvers<ContextType>;
   GetMetrics?: GetMetricsResolvers<ContextType>;
   Group?: GroupResolvers<ContextType>;
   GroupConnection?: GroupConnectionResolvers<ContextType>;

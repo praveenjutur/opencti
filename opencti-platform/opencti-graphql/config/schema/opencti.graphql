@@ -2883,33 +2883,6 @@ enum NotesOrdering {
   note_types
   creator
 }
-enum NotesFilter {
-  attribute_abstract
-  content
-  authors
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  objects
-  x_opencti_workflow_id
-  revoked
-  confidence
-  source_reliability
-  note_types
-  likelihood
-  creator
-}
-input NotesFiltering {
-  key: [NotesFilter!]!
-  values: [String]!
-  operator: String
-  filterMode: FilterMode
-}
 type NoteConnection {
   pageInfo: PageInfo!
   edges: [NoteEdge!]!
@@ -4674,41 +4647,6 @@ enum IndicatorsOrdering {
   creator
   createdBy
 }
-enum IndicatorsFilter {
-  name
-  pattern_type
-  indicator_types
-  pattern_version
-  pattern
-  x_opencti_main_observable_type
-  x_opencti_score
-  x_opencti_detection
-  valid_from
-  valid_until
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  objects
-  markedBy
-  objectAssignee
-  objectLabel
-  basedOn
-  indicates
-  x_opencti_workflow_id
-  sightedBy
-  revoked
-  creator
-  confidence
-  source_reliability
-}
-input IndicatorsFiltering {
-  key: [IndicatorsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
 type IndicatorConnection {
   pageInfo: PageInfo!
   edges: [IndicatorEdge]
@@ -4889,32 +4827,6 @@ enum InfrastructuresOrdering {
   createdBy
   objectMarking
   creator
-}
-enum InfrastructuresFilter {
-  name
-  aliases
-  infrastructure_types
-  first_seen
-  last_seen
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  revoked
-  confidence
-  source_reliability
-  creator
-}
-input InfrastructuresFiltering {
-  key: [InfrastructuresFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 type InfrastructureConnection {
   pageInfo: PageInfo!
@@ -12276,7 +12188,7 @@ type Query {
     after: ID
     orderBy: NotesOrdering
     orderMode: OrderingMode
-    filters: [NotesFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean
@@ -12476,7 +12388,7 @@ type Query {
     after: ID
     orderBy: IndicatorsOrdering
     orderMode: OrderingMode
-    filters: [IndicatorsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): IndicatorConnection @auth(for: [KNOWLEDGE])
@@ -12487,7 +12399,7 @@ type Query {
     startDate: DateTime!
     endDate: DateTime!
     interval: String!
-    filters: [IndicatorsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
   ): [TimeSeries] @auth(for: [KNOWLEDGE])
   indicatorsNumber(pattern_type: String, objectId: String, endDate: DateTime): Number @auth(for: [KNOWLEDGE])
@@ -12507,7 +12419,7 @@ type Query {
     after: ID
     orderBy: InfrastructuresOrdering
     orderMode: OrderingMode
-    filters: [InfrastructuresFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): InfrastructureConnection @auth(for: [KNOWLEDGE])
