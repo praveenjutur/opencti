@@ -26,6 +26,7 @@ import {
   ENTITY_TYPE_CONTAINER,
   ENTITY_TYPE_IDENTITY,
   INPUT_EXTERNAL_REFS,
+  INPUT_LABELS,
   REL_INDEX_PREFIX,
 } from '../schema/general';
 import {
@@ -533,7 +534,9 @@ const filtersWithRepresentatives = (inputFilters, representativesMap) => {
     const representatives = [];
     for (let j = 0; j < filter.values.length; j += 1) {
       const id = filter.values[j];
-      if (representativesMap.has(id)) {
+      if (id === null && filter.key.includes(INPUT_LABELS)) {
+        representatives.push({ id: null, value: 'No label' });
+      } else if (representativesMap.has(id)) {
         representatives.push({ id, value: representativesMap.get(id) });
       }
     }

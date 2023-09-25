@@ -628,7 +628,6 @@ export const checkFilterKeys = (filters, entityTypes) => {
         const availableAttributes = schemaAttributesDefinition.getAttributeNames(type);
         const availableRelations = schemaRelationsRefDefinition.getInputNames(type);
         const availableKeys = availableAttributes.concat(availableRelations).concat(['rel_object.internal_id', 'rel_object.*']);
-        console.log('availableKeys', availableKeys);
         if (!keys.every((k) => availableKeys.includes(k))) {
           const incorrectKeys = keys
             .map((k) => (!availableKeys.includes(k) ? k : null))
