@@ -883,6 +883,7 @@ type IndexedFile {
   file_id: String!
   uploaded_at: DateTime!
   entity: StixObject
+  searchOccurrences: Int
 }
 
 type IndexedFileEdge {

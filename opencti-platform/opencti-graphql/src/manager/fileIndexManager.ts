@@ -41,6 +41,7 @@ const indexImportedFiles = async (
   const searchOptions = {
     first: files.length, // TODO maybe we should paginate ?
     connectionFormat: false,
+    highlight: false,
     fileIds: files.map((f) => f.id),
     fields: ['internal_id', 'file_id'],
   };

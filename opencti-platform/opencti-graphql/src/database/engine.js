@@ -2022,6 +2022,8 @@ export const elBulkIndexFiles = async (context, user, files, maxBulkOperations =
 const buildFilesSearchResult = (data, first, searchAfter, connectionFormat = true) => {
   const convertedHits = data.hits.hits.map((hit) => {
     const elementData = hit._source;
+    const searchOccurrences = (hit.highlight && hit.highlight['attachment.content'])
+      ? hit.highlight['attachment.content'].length : 0;
     return {
       _index: hit._index,
       id: elementData.internal_id,
@@ -2030,6 +2032,7 @@ const buildFilesSearchResult = (data, first, searchAfter, connectionFormat = tru
       uploaded_at: elementData.uploaded_at,
       entity_id: elementData.entity_id,
       file_id: elementData.file_id,
+      searchOccurrences,
       sort: hit.sort,
     };
   });
@@ -2042,7 +2045,7 @@ const buildFilesSearchResult = (data, first, searchAfter, connectionFormat = tru
 export const elSearchFiles = async (context, user, options = {}) => {
   const { first = 20, after, orderBy = null } = options; // pagination options // TODO orderMode = 'asc'
   const { search = null, fileIds = [] } = options; // search options
-  const { fields = [], connectionFormat = true } = options; // return format options
+  const { fields = [], connectionFormat = true, highlight = true } = options; // return format options
   const searchAfter = after ? cursorToOffset(after) : undefined;
   const must = [];
   const mustNot = [];
@@ -2080,6 +2083,13 @@ export const elSearchFiles = async (context, user, options = {}) => {
   };
   if (searchAfter) {
     body.search_after = searchAfter;
+  }
+  if (highlight) {
+    body.highlight = {
+      fields: {
+        'attachment.content': { type: 'unified', boundary_scanner: 'word', number_of_fragments: 100 }
+      }
+    };
   }
   const query = {
     index: INDEX_FILES,

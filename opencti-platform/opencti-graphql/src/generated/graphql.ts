@@ -9163,6 +9163,7 @@ export type IndexedFile = {
   file_id: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
+  searchOccurrences?: Maybe<Scalars['Int']['output']>;
   uploaded_at: Scalars['DateTime']['output'];
 };
 
@@ -32921,6 +32922,7 @@ export type IndexedFileResolvers<ContextType = any, ParentType extends Resolvers
   file_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  searchOccurrences?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   uploaded_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;

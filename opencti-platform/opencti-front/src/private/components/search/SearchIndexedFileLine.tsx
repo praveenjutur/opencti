@@ -73,6 +73,7 @@ const SearchIndexedFileLineComponent: FunctionComponent<SearchIndexedFileLineCom
       button={true}
       component="a"
       href={getFileUri(node.file_id)}
+      target="_blank"
     >
       <ListItemIcon classes={{ root: classes.itemIcon }}>
         <ItemIcon type="File" />
@@ -91,6 +92,12 @@ const SearchIndexedFileLineComponent: FunctionComponent<SearchIndexedFileLineCom
               style={{ width: dataColumns.uploaded_at.width }}
             >
               {fd(node.uploaded_at)}
+            </div>
+            <div
+                className={classes.bodyItem}
+                style={{ width: dataColumns.occurrences.width }}
+            >
+              {node.searchOccurrences}
             </div>
             <div
                 className={classes.bodyItem}
@@ -144,6 +151,7 @@ const SearchIndexedFileLine = createFragmentContainer(SearchIndexedFileLineCompo
         name
         uploaded_at
         file_id
+        searchOccurrences
         entity {
           ...on StixObject {
             id

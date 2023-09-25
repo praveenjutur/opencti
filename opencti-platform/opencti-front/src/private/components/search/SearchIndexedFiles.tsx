@@ -61,9 +61,14 @@ const SearchIndexedFiles : FunctionComponent<SearchIndexedFilesProps> = ({ searc
         width: '10%',
         isSortable: false,
       },
+      occurrences: {
+        label: 'Occurrences',
+        width: '10%',
+        isSortable: false,
+      },
       entity_type: {
         label: 'Attached entity type',
-        width: '20%',
+        width: '18%',
         isSortable: isRuntimeSort,
       },
       entity_name: {
