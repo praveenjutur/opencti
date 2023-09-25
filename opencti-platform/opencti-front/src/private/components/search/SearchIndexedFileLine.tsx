@@ -16,7 +16,6 @@ import ItemMarkings from '../../../components/ItemMarkings';
 import { getFileUri } from '../../../utils/utils';
 import { resolveLink } from '../../../utils/Entity';
 
-// TODO clean css
 const useStyles = makeStyles<Theme>((theme) => ({
   item: {
     paddingLeft: 10,
@@ -33,18 +32,6 @@ const useStyles = makeStyles<Theme>((theme) => ({
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     paddingRight: 10,
-  },
-  goIcon: {
-    position: 'absolute',
-    right: -10,
-  },
-  itemIconDisabled: {
-    color: theme.palette.grey?.[700],
-  },
-  placeholder: {
-    display: 'inline-block',
-    height: '1em',
-    backgroundColor: theme.palette.grey?.[700],
   },
   chipInList: {
     fontSize: 12,
@@ -65,7 +52,6 @@ const SearchIndexedFileLineComponent: FunctionComponent<SearchIndexedFileLineCom
 }) => {
   const classes = useStyles();
   const { fd, t } = useFormatter();
-  // TODO redirection (open the file and redirection to Entity) + translation
   return (
     <ListItem
       classes={{ root: classes.item }}
