@@ -8,7 +8,7 @@ const LIST_QUERY = gql`
     $after: ID
     $orderBy: StixDomainObjectsOrdering
     $orderMode: OrderingMode
-    $filters: StixDomainObjectsGroupFiltering
+    $filters: FilterGroup
     $filterMode: FilterMode
     $search: String
   ) {

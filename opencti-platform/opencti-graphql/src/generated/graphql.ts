@@ -6927,29 +6927,6 @@ export type ExternalReferenceEditMutationsRelationDeleteArgs = {
   relationship_type: Scalars['String']['input'];
 };
 
-export enum ExternalReferencesFilter {
-  Created = 'created',
-  Creator = 'creator',
-  ExternalId = 'external_id',
-  FileId = 'fileId',
-  SourceName = 'source_name',
-  Url = 'url',
-  UsedBy = 'usedBy'
-}
-
-export type ExternalReferencesFilterFiltering = {
-  key: Array<ExternalReferencesFilter>;
-  mode?: InputMaybe<FilterMode>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values: Array<InputMaybe<Scalars['String']['input']>>;
-};
-
-export type ExternalReferencesGroupFiltering = {
-  filterGroups: Array<InputMaybe<ExternalReferencesGroupFiltering>>;
-  filters: Array<InputMaybe<ExternalReferencesFilterFiltering>>;
-  mode: FilterMode;
-};
-
 export enum ExternalReferencesOrdering {
   Created = 'created',
   CreatedAt = 'created_at',
@@ -7753,35 +7730,6 @@ export type GroupingEdge = {
   __typename?: 'GroupingEdge';
   cursor: Scalars['String']['output'];
   node: Grouping;
-};
-
-export enum GroupingsFilter {
-  Confidence = 'confidence',
-  Context = 'context',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  MarkedBy = 'markedBy',
-  Name = 'name',
-  ObjectLabel = 'objectLabel',
-  Objects = 'objects',
-  Revoked = 'revoked',
-  SourceReliability = 'source_reliability',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type GroupingsFilterFiltering = {
-  key: Array<GroupingsFilter>;
-  mode?: InputMaybe<FilterMode>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values: Array<InputMaybe<Scalars['String']['input']>>;
-};
-
-export type GroupingsGroupFiltering = {
-  filterGroups: Array<InputMaybe<GroupingsGroupFiltering>>;
-  filters: Array<InputMaybe<GroupingsFilterFiltering>>;
-  mode: FilterMode;
 };
 
 export enum GroupingsOrdering {
@@ -11831,42 +11779,6 @@ export type MalwareAddInput = {
   x_opencti_stix_ids?: InputMaybe<Array<InputMaybe<Scalars['StixId']['input']>>>;
 };
 
-export enum MalwareAnalysesFilter {
-  AnalysisSco = 'analysisSco',
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  HostVm = 'hostVm',
-  InstalledSoftware = 'installedSoftware',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  ObjectLabel = 'objectLabel',
-  ObjectMarking = 'objectMarking',
-  OperatingSystem = 'operatingSystem',
-  Product = 'product',
-  ResultName = 'result_name',
-  Sample = 'sample',
-  SourceReliability = 'source_reliability',
-  Submitted = 'submitted',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type MalwareAnalysesFilterFiltering = {
-  key: Array<MalwareAnalysesFilter>;
-  mode?: InputMaybe<FilterMode>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values: Array<InputMaybe<Scalars['String']['input']>>;
-};
-
-export type MalwareAnalysesGroupFiltering = {
-  filterGroups: Array<InputMaybe<MalwareAnalysesGroupFiltering>>;
-  filters: Array<InputMaybe<MalwareAnalysesFilterFiltering>>;
-  mode: FilterMode;
-};
-
 export enum MalwareAnalysesOrdering {
   Confidence = 'confidence',
   CreatedBy = 'createdBy',
@@ -14137,7 +14049,7 @@ export type MutationStixCyberObservablesExportAskArgs = {
   elementId?: InputMaybe<Scalars['String']['input']>;
   exportType: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<StixCyberObservablesGroupFiltering>;
+  filters?: InputMaybe<FilterGroup>;
   format: Scalars['String']['input'];
   maxMarkingDefinition?: InputMaybe<Scalars['String']['input']>;
   orderBy?: InputMaybe<StixCyberObservablesOrdering>;
@@ -14175,7 +14087,7 @@ export type MutationStixDomainObjectsExportAskArgs = {
   elementId?: InputMaybe<Scalars['String']['input']>;
   exportType: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<StixDomainObjectsGroupFiltering>;
+  filters?: InputMaybe<FilterGroup>;
   format: Scalars['String']['input'];
   maxMarkingDefinition?: InputMaybe<Scalars['String']['input']>;
   orderBy?: InputMaybe<StixDomainObjectsOrdering>;
@@ -18462,7 +18374,7 @@ export type QueryExternalReferenceArgs = {
 export type QueryExternalReferencesArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<ExternalReferencesGroupFiltering>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ExternalReferencesOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -18549,7 +18461,7 @@ export type QueryGroupingContainsStixObjectOrStixRelationshipArgs = {
 export type QueryGroupingsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<GroupingsGroupFiltering>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<GroupingsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -18564,7 +18476,7 @@ export type QueryGroupingsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<GroupingsGroupFiltering>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   objectId?: InputMaybe<Scalars['String']['input']>;
   operation: StatsOperation;
@@ -18578,7 +18490,7 @@ export type QueryGroupingsNumberArgs = {
   authorId?: InputMaybe<Scalars['String']['input']>;
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<GroupingsGroupFiltering>;
+  filters?: InputMaybe<FilterGroup>;
   groupingContext?: InputMaybe<Scalars['String']['input']>;
   objectId?: InputMaybe<Scalars['String']['input']>;
 };
@@ -18589,7 +18501,7 @@ export type QueryGroupingsTimeSeriesArgs = {
   endDate: Scalars['DateTime']['input'];
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<GroupingsGroupFiltering>;
+  filters?: InputMaybe<FilterGroup>;
   groupingType?: InputMaybe<Scalars['String']['input']>;
   interval: Scalars['String']['input'];
   objectId?: InputMaybe<Scalars['String']['input']>;
@@ -18875,7 +18787,7 @@ export type QueryMalwareArgs = {
 export type QueryMalwareAnalysesArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<MalwareAnalysesGroupFiltering>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<MalwareAnalysesOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -19636,7 +19548,7 @@ export type QueryStixCyberObservableArgs = {
 export type QueryStixCyberObservablesArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<StixCyberObservablesGroupFiltering>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<StixCyberObservablesOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -19650,7 +19562,7 @@ export type QueryStixCyberObservablesDistributionArgs = {
   dateAttribute?: InputMaybe<Scalars['String']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<StixCyberObservablesGroupFiltering>;
+  filters?: InputMaybe<FilterGroup>;
   objectId?: InputMaybe<Scalars['String']['input']>;
   operation: Scalars['String']['input'];
   search?: InputMaybe<Scalars['String']['input']>;
@@ -19667,7 +19579,7 @@ export type QueryStixCyberObservablesNumberArgs = {
   authorId?: InputMaybe<Scalars['String']['input']>;
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<StixCyberObservablesGroupFiltering>;
+  filters?: InputMaybe<FilterGroup>;
   search?: InputMaybe<Scalars['String']['input']>;
   types?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
@@ -19675,7 +19587,7 @@ export type QueryStixCyberObservablesNumberArgs = {
 
 export type QueryStixCyberObservablesTimeSeriesArgs = {
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<StixCyberObservablesGroupFiltering>;
+  filters?: InputMaybe<FilterGroup>;
   search?: InputMaybe<Scalars['String']['input']>;
   types?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
@@ -19690,7 +19602,7 @@ export type QueryStixDomainObjectsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   elementId?: InputMaybe<Scalars['String']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<StixDomainObjectsGroupFiltering>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<StixDomainObjectsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -19705,7 +19617,7 @@ export type QueryStixDomainObjectsDistributionArgs = {
   elementWithTargetTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<StixDomainObjectsGroupFiltering>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   objectId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   operation: StatsOperation;
@@ -19726,7 +19638,7 @@ export type QueryStixDomainObjectsExportFilesArgs = {
 export type QueryStixDomainObjectsNumberArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<StixDomainObjectsGroupFiltering>;
+  filters?: InputMaybe<FilterGroup>;
   onlyInferred?: InputMaybe<Scalars['Boolean']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   types?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -19738,7 +19650,7 @@ export type QueryStixDomainObjectsTimeSeriesArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<StixDomainObjectsGroupFiltering>;
+  filters?: InputMaybe<FilterGroup>;
   interval: Scalars['String']['input'];
   onlyInferred?: InputMaybe<Scalars['Boolean']['input']>;
   operation: StatsOperation;
@@ -20216,7 +20128,7 @@ export type QueryThreatActorsGroupArgs = {
 export type QueryThreatActorsIndividualsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<ThreatActorsIndividualGroupFiltering>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ThreatActorsIndividualOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -22869,46 +22781,6 @@ export type StixCyberObservableEditMutationsRelationsAddArgs = {
   input: StixRefRelationshipsAddInput;
 };
 
-export enum StixCyberObservablesFilter {
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  EntityType = 'entity_type',
-  HasExternalReference = 'hasExternalReference',
-  HashesMd5 = 'hashes_MD5',
-  HashesSha1 = 'hashes_SHA1',
-  HashesSha256 = 'hashes_SHA256',
-  HashesSha512 = 'hashes_SHA512',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectLabel = 'objectLabel',
-  Objects = 'objects',
-  RelatedTo = 'relatedTo',
-  SightedBy = 'sightedBy',
-  Subject = 'subject',
-  UpdatedAt = 'updated_at',
-  Value = 'value',
-  XOpenctiAdditionalNames = 'x_opencti_additional_names',
-  XOpenctiOrganizationType = 'x_opencti_organization_type',
-  XOpenctiScore = 'x_opencti_score'
-}
-
-export type StixCyberObservablesFilterFiltering = {
-  key: Array<StixCyberObservablesFilter>;
-  mode?: InputMaybe<FilterMode>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values: Array<InputMaybe<Scalars['String']['input']>>;
-};
-
-export type StixCyberObservablesGroupFiltering = {
-  filterGroups: Array<InputMaybe<StixCyberObservablesGroupFiltering>>;
-  filters: Array<InputMaybe<StixCyberObservablesFilterFiltering>>;
-  mode: FilterMode;
-};
-
 export enum StixCyberObservablesOrdering {
   CreatedBy = 'createdBy',
   CreatedAt = 'created_at',
@@ -23214,62 +23086,6 @@ export type StixDomainObjectFileEditInput = {
   id: Scalars['String']['input'];
   inCarousel?: InputMaybe<Scalars['Boolean']['input']>;
   order?: InputMaybe<Scalars['Int']['input']>;
-};
-
-export enum StixDomainObjectsFilter {
-  Aliases = 'aliases',
-  Confidence = 'confidence',
-  Context = 'context',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  EntityType = 'entity_type',
-  FromId = 'fromId',
-  HasExternalReference = 'hasExternalReference',
-  IncidentType = 'incident_type',
-  Indicates = 'indicates',
-  IndicatorTypes = 'indicator_types',
-  KillChainPhase = 'killChainPhase',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Objects = 'objects',
-  OperatingSystem = 'operatingSystem',
-  Participant = 'participant',
-  PatternType = 'pattern_type',
-  Priority = 'priority',
-  Product = 'product',
-  Published = 'published',
-  ReportTypes = 'report_types',
-  ResultName = 'result_name',
-  Revoked = 'revoked',
-  Severity = 'severity',
-  SourceReliability = 'source_reliability',
-  Submitted = 'submitted',
-  ValidFrom = 'valid_from',
-  ValidUntil = 'valid_until',
-  XMitreId = 'x_mitre_id',
-  XOpenctiAliases = 'x_opencti_aliases',
-  XOpenctiMainObservableType = 'x_opencti_main_observable_type',
-  XOpenctiOrganizationType = 'x_opencti_organization_type',
-  XOpenctiReliability = 'x_opencti_reliability',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type StixDomainObjectsFilterFiltering = {
-  key: Array<StixDomainObjectsFilter>;
-  mode?: InputMaybe<FilterMode>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values: Array<InputMaybe<Scalars['String']['input']>>;
-};
-
-export type StixDomainObjectsGroupFiltering = {
-  filterGroups: Array<InputMaybe<StixDomainObjectsGroupFiltering>>;
-  filters: Array<InputMaybe<StixDomainObjectsFilterFiltering>>;
-  mode: FilterMode;
 };
 
 export enum StixDomainObjectsOrdering {
@@ -26139,37 +25955,6 @@ export type ThreatActorsFiltering = {
   values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export enum ThreatActorsIndividualFilter {
-  Aliases = 'aliases',
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Revoked = 'revoked',
-  SourceReliability = 'source_reliability',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type ThreatActorsIndividualFilterFiltering = {
-  key: Array<ThreatActorsIndividualFilter>;
-  mode?: InputMaybe<FilterMode>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values: Array<InputMaybe<Scalars['String']['input']>>;
-};
-
-export type ThreatActorsIndividualGroupFiltering = {
-  filterGroups: Array<InputMaybe<ThreatActorsIndividualGroupFiltering>>;
-  filters: Array<InputMaybe<ThreatActorsIndividualFilterFiltering>>;
-  mode: FilterMode;
-};
-
 export enum ThreatActorsIndividualOrdering {
   Confidence = 'confidence',
   Created = 'created',
@@ -28950,9 +28735,6 @@ export type ResolversTypes = ResolversObject<{
   ExternalReferenceConnection: ResolverTypeWrapper<ExternalReferenceConnection>;
   ExternalReferenceEdge: ResolverTypeWrapper<ExternalReferenceEdge>;
   ExternalReferenceEditMutations: ResolverTypeWrapper<Omit<ExternalReferenceEditMutations, 'relationAdd'> & { relationAdd?: Maybe<ResolversTypes['StixRefRelationship']> }>;
-  ExternalReferencesFilter: ExternalReferencesFilter;
-  ExternalReferencesFilterFiltering: ExternalReferencesFilterFiltering;
-  ExternalReferencesGroupFiltering: ExternalReferencesGroupFiltering;
   ExternalReferencesOrdering: ExternalReferencesOrdering;
   Feed: ResolverTypeWrapper<BasicStoreEntityFeed>;
   FeedAddInput: FeedAddInput;
@@ -28990,9 +28772,6 @@ export type ResolversTypes = ResolversObject<{
   GroupingAddInput: GroupingAddInput;
   GroupingConnection: ResolverTypeWrapper<Omit<GroupingConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['GroupingEdge']>>> }>;
   GroupingEdge: ResolverTypeWrapper<Omit<GroupingEdge, 'node'> & { node: ResolversTypes['Grouping'] }>;
-  GroupingsFilter: GroupingsFilter;
-  GroupingsFilterFiltering: GroupingsFilterFiltering;
-  GroupingsGroupFiltering: GroupingsGroupFiltering;
   GroupingsOrdering: GroupingsOrdering;
   GroupsOrdering: GroupsOrdering;
   Hash: ResolverTypeWrapper<Hash>;
@@ -29119,9 +28898,6 @@ export type ResolversTypes = ResolversObject<{
   MacAddrAddInput: MacAddrAddInput;
   Malware: ResolverTypeWrapper<Omit<Malware, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversTypes['CaseConnection']>, containers?: Maybe<ResolversTypes['ContainerConnection']>, createdBy?: Maybe<ResolversTypes['Identity']>, groupings?: Maybe<ResolversTypes['GroupingConnection']>, notes?: Maybe<ResolversTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversTypes['OrganizationConnection']>, observedData?: Maybe<ResolversTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversTypes['OpinionConnection']>, reports?: Maybe<ResolversTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversTypes['StixCoreRelationshipConnection']> }>;
   MalwareAddInput: MalwareAddInput;
-  MalwareAnalysesFilter: MalwareAnalysesFilter;
-  MalwareAnalysesFilterFiltering: MalwareAnalysesFilterFiltering;
-  MalwareAnalysesGroupFiltering: MalwareAnalysesGroupFiltering;
   MalwareAnalysesOrdering: MalwareAnalysesOrdering;
   MalwareAnalysis: ResolverTypeWrapper<BasicStoreEntityMalwareAnalysis>;
   MalwareAnalysisAddInput: MalwareAnalysisAddInput;
@@ -29363,9 +29139,6 @@ export type ResolversTypes = ResolversObject<{
   StixCyberObservableConnection: ResolverTypeWrapper<Omit<StixCyberObservableConnection, 'edges'> & { edges: Array<ResolversTypes['StixCyberObservableEdge']> }>;
   StixCyberObservableEdge: ResolverTypeWrapper<Omit<StixCyberObservableEdge, 'node'> & { node: ResolversTypes['StixCyberObservable'] }>;
   StixCyberObservableEditMutations: ResolverTypeWrapper<Omit<StixCyberObservableEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'promote' | 'relationAdd' | 'relationDelete' | 'relationsAdd'> & { contextClean?: Maybe<ResolversTypes['StixCyberObservable']>, contextPatch?: Maybe<ResolversTypes['StixCyberObservable']>, fieldPatch?: Maybe<ResolversTypes['StixCyberObservable']>, promote?: Maybe<ResolversTypes['StixCyberObservable']>, relationAdd?: Maybe<ResolversTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversTypes['StixCyberObservable']>, relationsAdd?: Maybe<ResolversTypes['StixCyberObservable']> }>;
-  StixCyberObservablesFilter: StixCyberObservablesFilter;
-  StixCyberObservablesFilterFiltering: StixCyberObservablesFilterFiltering;
-  StixCyberObservablesGroupFiltering: StixCyberObservablesGroupFiltering;
   StixCyberObservablesOrdering: StixCyberObservablesOrdering;
   StixDomainObject: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['StixDomainObject']>;
   StixDomainObjectAddInput: StixDomainObjectAddInput;
@@ -29373,9 +29146,6 @@ export type ResolversTypes = ResolversObject<{
   StixDomainObjectEdge: ResolverTypeWrapper<Omit<StixDomainObjectEdge, 'node'> & { node: ResolversTypes['StixDomainObject'] }>;
   StixDomainObjectEditMutations: ResolverTypeWrapper<Omit<StixDomainObjectEditMutations, 'changeType' | 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete' | 'relationsAdd' | 'stixDomainObjectFileEdit'> & { changeType?: Maybe<ResolversTypes['StixDomainObject']>, contextClean?: Maybe<ResolversTypes['StixDomainObject']>, contextPatch?: Maybe<ResolversTypes['StixDomainObject']>, fieldPatch?: Maybe<ResolversTypes['StixDomainObject']>, relationAdd?: Maybe<ResolversTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversTypes['StixDomainObject']>, relationsAdd?: Maybe<ResolversTypes['StixDomainObject']>, stixDomainObjectFileEdit?: Maybe<ResolversTypes['StixDomainObject']> }>;
   StixDomainObjectFileEditInput: StixDomainObjectFileEditInput;
-  StixDomainObjectsFilter: StixDomainObjectsFilter;
-  StixDomainObjectsFilterFiltering: StixDomainObjectsFilterFiltering;
-  StixDomainObjectsGroupFiltering: StixDomainObjectsGroupFiltering;
   StixDomainObjectsOrdering: StixDomainObjectsOrdering;
   StixEditMutations: ResolverTypeWrapper<StixEditMutations>;
   StixFile: ResolverTypeWrapper<Omit<StixFile, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'indicators' | 'notes' | 'objectOrganization' | 'obsContent' | 'observedData' | 'opinions' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversTypes['CaseConnection']>, containers?: Maybe<ResolversTypes['ContainerConnection']>, createdBy?: Maybe<ResolversTypes['Identity']>, groupings?: Maybe<ResolversTypes['GroupingConnection']>, indicators?: Maybe<ResolversTypes['IndicatorConnection']>, notes?: Maybe<ResolversTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversTypes['OrganizationConnection']>, obsContent?: Maybe<ResolversTypes['Artifact']>, observedData?: Maybe<ResolversTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversTypes['OpinionConnection']>, reports?: Maybe<ResolversTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversTypes['StixCoreRelationshipConnection']> }>;
@@ -29496,9 +29266,6 @@ export type ResolversTypes = ResolversObject<{
   ThreatActorIndividualEdge: ResolverTypeWrapper<Omit<ThreatActorIndividualEdge, 'node'> & { node: ResolversTypes['ThreatActorIndividual'] }>;
   ThreatActorsFilter: ThreatActorsFilter;
   ThreatActorsFiltering: ThreatActorsFiltering;
-  ThreatActorsIndividualFilter: ThreatActorsIndividualFilter;
-  ThreatActorsIndividualFilterFiltering: ThreatActorsIndividualFilterFiltering;
-  ThreatActorsIndividualGroupFiltering: ThreatActorsIndividualGroupFiltering;
   ThreatActorsIndividualOrdering: ThreatActorsIndividualOrdering;
   ThreatActorsOrdering: ThreatActorsOrdering;
   TimeSeries: ResolverTypeWrapper<TimeSeries>;
@@ -29757,8 +29524,6 @@ export type ResolversParentTypes = ResolversObject<{
   ExternalReferenceConnection: ExternalReferenceConnection;
   ExternalReferenceEdge: ExternalReferenceEdge;
   ExternalReferenceEditMutations: Omit<ExternalReferenceEditMutations, 'relationAdd'> & { relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']> };
-  ExternalReferencesFilterFiltering: ExternalReferencesFilterFiltering;
-  ExternalReferencesGroupFiltering: ExternalReferencesGroupFiltering;
   Feed: BasicStoreEntityFeed;
   FeedAddInput: FeedAddInput;
   FeedAttribute: FeedAttribute;
@@ -29790,8 +29555,6 @@ export type ResolversParentTypes = ResolversObject<{
   GroupingAddInput: GroupingAddInput;
   GroupingConnection: Omit<GroupingConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['GroupingEdge']>>> };
   GroupingEdge: Omit<GroupingEdge, 'node'> & { node: ResolversParentTypes['Grouping'] };
-  GroupingsFilterFiltering: GroupingsFilterFiltering;
-  GroupingsGroupFiltering: GroupingsGroupFiltering;
   Hash: Hash;
   HashInput: HashInput;
   HashedObservable: ResolversInterfaceTypes<ResolversParentTypes>['HashedObservable'];
@@ -29889,8 +29652,6 @@ export type ResolversParentTypes = ResolversObject<{
   MacAddrAddInput: MacAddrAddInput;
   Malware: Omit<Malware, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, observedData?: Maybe<ResolversParentTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversParentTypes['StixCoreRelationshipConnection']> };
   MalwareAddInput: MalwareAddInput;
-  MalwareAnalysesFilterFiltering: MalwareAnalysesFilterFiltering;
-  MalwareAnalysesGroupFiltering: MalwareAnalysesGroupFiltering;
   MalwareAnalysis: BasicStoreEntityMalwareAnalysis;
   MalwareAnalysisAddInput: MalwareAnalysisAddInput;
   MalwareAnalysisConnection: Omit<MalwareAnalysisConnection, 'edges'> & { edges?: Maybe<Array<ResolversParentTypes['MalwareAnalysisEdge']>> };
@@ -30092,16 +29853,12 @@ export type ResolversParentTypes = ResolversObject<{
   StixCyberObservableConnection: Omit<StixCyberObservableConnection, 'edges'> & { edges: Array<ResolversParentTypes['StixCyberObservableEdge']> };
   StixCyberObservableEdge: Omit<StixCyberObservableEdge, 'node'> & { node: ResolversParentTypes['StixCyberObservable'] };
   StixCyberObservableEditMutations: Omit<StixCyberObservableEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'promote' | 'relationAdd' | 'relationDelete' | 'relationsAdd'> & { contextClean?: Maybe<ResolversParentTypes['StixCyberObservable']>, contextPatch?: Maybe<ResolversParentTypes['StixCyberObservable']>, fieldPatch?: Maybe<ResolversParentTypes['StixCyberObservable']>, promote?: Maybe<ResolversParentTypes['StixCyberObservable']>, relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['StixCyberObservable']>, relationsAdd?: Maybe<ResolversParentTypes['StixCyberObservable']> };
-  StixCyberObservablesFilterFiltering: StixCyberObservablesFilterFiltering;
-  StixCyberObservablesGroupFiltering: StixCyberObservablesGroupFiltering;
   StixDomainObject: ResolversInterfaceTypes<ResolversParentTypes>['StixDomainObject'];
   StixDomainObjectAddInput: StixDomainObjectAddInput;
   StixDomainObjectConnection: Omit<StixDomainObjectConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['StixDomainObjectEdge']>>> };
   StixDomainObjectEdge: Omit<StixDomainObjectEdge, 'node'> & { node: ResolversParentTypes['StixDomainObject'] };
   StixDomainObjectEditMutations: Omit<StixDomainObjectEditMutations, 'changeType' | 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete' | 'relationsAdd' | 'stixDomainObjectFileEdit'> & { changeType?: Maybe<ResolversParentTypes['StixDomainObject']>, contextClean?: Maybe<ResolversParentTypes['StixDomainObject']>, contextPatch?: Maybe<ResolversParentTypes['StixDomainObject']>, fieldPatch?: Maybe<ResolversParentTypes['StixDomainObject']>, relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['StixDomainObject']>, relationsAdd?: Maybe<ResolversParentTypes['StixDomainObject']>, stixDomainObjectFileEdit?: Maybe<ResolversParentTypes['StixDomainObject']> };
   StixDomainObjectFileEditInput: StixDomainObjectFileEditInput;
-  StixDomainObjectsFilterFiltering: StixDomainObjectsFilterFiltering;
-  StixDomainObjectsGroupFiltering: StixDomainObjectsGroupFiltering;
   StixEditMutations: StixEditMutations;
   StixFile: Omit<StixFile, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'indicators' | 'notes' | 'objectOrganization' | 'obsContent' | 'observedData' | 'opinions' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, indicators?: Maybe<ResolversParentTypes['IndicatorConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, obsContent?: Maybe<ResolversParentTypes['Artifact']>, observedData?: Maybe<ResolversParentTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversParentTypes['StixCoreRelationshipConnection']> };
   StixFileAddInput: StixFileAddInput;
@@ -30196,8 +29953,6 @@ export type ResolversParentTypes = ResolversObject<{
   ThreatActorIndividualConnection: Omit<ThreatActorIndividualConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['ThreatActorIndividualEdge']>>> };
   ThreatActorIndividualEdge: Omit<ThreatActorIndividualEdge, 'node'> & { node: ResolversParentTypes['ThreatActorIndividual'] };
   ThreatActorsFiltering: ThreatActorsFiltering;
-  ThreatActorsIndividualFilterFiltering: ThreatActorsIndividualFilterFiltering;
-  ThreatActorsIndividualGroupFiltering: ThreatActorsIndividualGroupFiltering;
   TimeSeries: TimeSeries;
   Tool: Omit<Tool, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, observedData?: Maybe<ResolversParentTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversParentTypes['StixCoreRelationshipConnection']> };
   ToolAddInput: ToolAddInput;

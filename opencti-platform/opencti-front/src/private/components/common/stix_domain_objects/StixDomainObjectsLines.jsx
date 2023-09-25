@@ -235,7 +235,7 @@ export const stixDomainObjectsLinesQuery = graphql`
     $cursor: ID
     $orderBy: StixDomainObjectsOrdering
     $orderMode: OrderingMode
-    $filters: StixDomainObjectsGroupFiltering
+    $filters: FilterGroup
   ) {
     ...StixDomainObjectsLines_data
       @arguments(
@@ -254,7 +254,7 @@ export const stixDomainObjectsLinesSearchQuery = graphql`
     $search: String
     $types: [String]
     $count: Int
-    $filters: StixDomainObjectsGroupFiltering
+    $filters: FilterGroup
   ) {
     stixDomainObjects(
       search: $search
@@ -418,7 +418,7 @@ const StixDomainObjectsLines = createPaginationContainer(
         cursor: { type: "ID" }
         orderBy: { type: "StixDomainObjectsOrdering", defaultValue: name }
         orderMode: { type: "OrderingMode", defaultValue: asc }
-        filters: { type: "StixDomainObjectsGroupFiltering" }
+        filters: { type: "FilterGroup" }
       ) {
         stixDomainObjects(
           search: $search

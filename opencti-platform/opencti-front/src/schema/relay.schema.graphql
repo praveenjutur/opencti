@@ -1885,29 +1885,6 @@ enum ExternalReferencesOrdering {
   creator
 }
 
-enum ExternalReferencesFilter {
-  url
-  usedBy
-  source_name
-  external_id
-  fileId
-  creator
-  created
-}
-
-input ExternalReferencesGroupFiltering {
-  mode: FilterMode!
-  filters: [ExternalReferencesFilterFiltering]!
-  filterGroups: [ExternalReferencesGroupFiltering]!
-}
-
-input ExternalReferencesFilterFiltering {
-  key: [ExternalReferencesFilter!]!
-  values: [String]!
-  operator: String
-  mode: FilterMode
-}
-
 type ExternalReferenceConnection {
   pageInfo: PageInfo!
   edges: [ExternalReferenceEdge!]!
@@ -2206,62 +2183,6 @@ enum StixDomainObjectsOrdering {
   product
   result_name
   operatingSystem
-}
-
-enum StixDomainObjectsFilter {
-  name
-  entity_type
-  aliases
-  x_opencti_aliases
-  x_mitre_id
-  created
-  modified
-  created_at
-  createdBy
-  markedBy
-  objectAssignee
-  participant
-  objectLabel
-  killChainPhase
-  hasExternalReference
-  objects
-  indicates
-  confidence
-  source_reliability
-  x_opencti_reliability
-  valid_from
-  valid_until
-  pattern_type
-  indicator_types
-  x_opencti_main_observable_type
-  report_types
-  incident_type
-  context
-  x_opencti_organization_type
-  published
-  creator
-  x_opencti_workflow_id
-  fromId
-  severity
-  priority
-  revoked
-  submitted
-  product
-  result_name
-  operatingSystem
-}
-
-input StixDomainObjectsGroupFiltering {
-  mode: FilterMode!
-  filters: [StixDomainObjectsFilterFiltering]!
-  filterGroups: [StixDomainObjectsGroupFiltering]!
-}
-
-input StixDomainObjectsFilterFiltering {
-  key: [StixDomainObjectsFilter!]!
-  values: [String]!
-  operator: String
-  mode: FilterMode
 }
 
 type StixDomainObjectConnection {
@@ -5706,46 +5627,6 @@ enum StixCyberObservablesOrdering {
   creator
 }
 
-enum StixCyberObservablesFilter {
-  entity_type
-  x_opencti_score
-  x_opencti_organization_type
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectLabel
-  relatedTo
-  objects
-  hasExternalReference
-  sightedBy
-  value
-  name
-  subject
-  confidence
-  hashes_MD5
-  hashes_SHA1
-  hashes_SHA256
-  hashes_SHA512
-  x_opencti_additional_names
-  creator
-}
-
-input StixCyberObservablesGroupFiltering {
-  mode: FilterMode!
-  filters: [StixCyberObservablesFilterFiltering]!
-  filterGroups: [StixCyberObservablesGroupFiltering]!
-}
-
-input StixCyberObservablesFilterFiltering {
-  key: [StixCyberObservablesFilter!]!
-  values: [String]!
-  operator: String
-  mode: FilterMode
-}
-
 type StixCyberObservableConnection {
   pageInfo: PageInfo!
   edges: [StixCyberObservableEdge!]!
@@ -8186,7 +8067,7 @@ type Query {
   label(id: String!): Label
   labels(first: Int, after: ID, orderBy: LabelsOrdering, orderMode: OrderingMode, filters: [LabelsFiltering], filterMode: FilterMode, search: String): LabelConnection
   externalReference(id: String!): ExternalReference
-  externalReferences(first: Int, after: ID, orderBy: ExternalReferencesOrdering, orderMode: OrderingMode, filters: ExternalReferencesGroupFiltering, filterMode: FilterMode, search: String): ExternalReferenceConnection
+  externalReferences(first: Int, after: ID, orderBy: ExternalReferencesOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String): ExternalReferenceConnection
   killChainPhase(id: String!): KillChainPhase
   killChainPhases(first: Int, after: ID, orderBy: KillChainPhasesOrdering, orderMode: OrderingMode, filters: [KillChainPhasesFiltering], filterMode: FilterMode, search: String): KillChainPhaseConnection
   stixCoreObjectRaw(id: String!): String
@@ -8202,12 +8083,12 @@ type Query {
   stixCoreObjectsMultiDistribution(field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, distributionParameters: StixCoreObjectsDistributionParameters): [MultiDistribution]
   filtersRepresentatives(filters: FilterGroup!): ResolvedFilterGroup
   stixDomainObject(id: String!): StixDomainObject
-  stixDomainObjects(first: Int, after: ID, types: [String], orderBy: StixDomainObjectsOrdering, orderMode: OrderingMode, filters: StixDomainObjectsGroupFiltering, filterMode: FilterMode, search: String, relationship_type: [String], elementId: String): StixDomainObjectConnection
+  stixDomainObjects(first: Int, after: ID, types: [String], orderBy: StixDomainObjectsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, relationship_type: [String], elementId: String): StixDomainObjectConnection
   bookmarks(first: Int, after: ID, types: [String]): StixDomainObjectConnection
   stixDomainObjectsExportFiles(first: Int, type: String!): FileConnection
-  stixDomainObjectsTimeSeries(authorId: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime, interval: String!, types: [String], onlyInferred: Boolean, filters: StixDomainObjectsGroupFiltering, filterMode: FilterMode, search: String): [TimeSeries]
-  stixDomainObjectsNumber(types: [String], endDate: DateTime, onlyInferred: Boolean, filters: StixDomainObjectsGroupFiltering, filterMode: FilterMode, search: String): Number
-  stixDomainObjectsDistribution(objectId: [String], relationship_type: [String], toTypes: [String], elementWithTargetTypes: [String], field: String!, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: StixDomainObjectsGroupFiltering, filterMode: FilterMode, search: String): [Distribution]
+  stixDomainObjectsTimeSeries(authorId: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime, interval: String!, types: [String], onlyInferred: Boolean, filters: FilterGroup, filterMode: FilterMode, search: String): [TimeSeries]
+  stixDomainObjectsNumber(types: [String], endDate: DateTime, onlyInferred: Boolean, filters: FilterGroup, filterMode: FilterMode, search: String): Number
+  stixDomainObjectsDistribution(objectId: [String], relationship_type: [String], toTypes: [String], elementWithTargetTypes: [String], field: String!, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   attackPattern(id: String): AttackPattern
   attackPatterns(first: Int, after: ID, orderBy: AttackPatternsOrdering, orderMode: OrderingMode, filters: [AttackPatternsFiltering], filterMode: FilterMode, search: String, toStix: Boolean): AttackPatternConnection
   campaign(id: String): Campaign
@@ -8284,11 +8165,11 @@ type Query {
   incidents(first: Int, after: ID, orderBy: IncidentsOrdering, orderMode: OrderingMode, filters: [IncidentsFiltering], filterMode: FilterMode, search: String, toStix: Boolean): IncidentConnection
   incidentsTimeSeries(objectId: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime!, interval: String!, relationship_type: [String]): [TimeSeries]
   stixCyberObservable(id: String!): StixCyberObservable
-  stixCyberObservables(first: Int, after: ID, types: [String], orderBy: StixCyberObservablesOrdering, orderMode: OrderingMode, filters: StixCyberObservablesGroupFiltering, filterMode: FilterMode, search: String, toStix: Boolean): StixCyberObservableConnection
+  stixCyberObservables(first: Int, after: ID, types: [String], orderBy: StixCyberObservablesOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): StixCyberObservableConnection
   stixCyberObservablesExportFiles(first: Int, context: String): FileConnection
-  stixCyberObservablesNumber(types: [String], authorId: String, endDate: DateTime, filters: StixCyberObservablesGroupFiltering, filterMode: FilterMode, search: String): Number
-  stixCyberObservablesTimeSeries(types: [String], filters: StixCyberObservablesGroupFiltering, filterMode: FilterMode, search: String): [TimeSeries]
-  stixCyberObservablesDistribution(objectId: String, field: String!, dateAttribute: String, operation: String!, filters: StixCyberObservablesGroupFiltering, filterMode: FilterMode, search: String): [Distribution]
+  stixCyberObservablesNumber(types: [String], authorId: String, endDate: DateTime, filters: FilterGroup, filterMode: FilterMode, search: String): Number
+  stixCyberObservablesTimeSeries(types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [TimeSeries]
+  stixCyberObservablesDistribution(objectId: String, field: String!, dateAttribute: String, operation: String!, filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixRelationship(id: String): StixRelationship
   stixRelationships(first: Int, after: ID, orderBy: StixRelationshipsOrdering, orderMode: OrderingMode, elementId: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, startDate: DateTime, endDate: DateTime, confidences: [Int], search: String, filters: [StixRelationshipsFiltering], filterMode: FilterMode, dynamicFrom: [StixCoreObjectsFiltering], dynamicTo: [StixCoreObjectsFiltering], stix: Boolean): StixRelationshipConnection
   stixRelationshipsTimeSeries(field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime, interval: String!, onlyInferred: Boolean, elementId: [String], elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: [StixRelationshipsFiltering], filterMode: FilterMode, dynamicFrom: [StixCoreObjectsFiltering], dynamicTo: [StixCoreObjectsFiltering]): [TimeSeries]
@@ -8323,10 +8204,10 @@ type Query {
   event(id: String!): Event
   events(first: Int, after: ID, orderBy: EventsOrdering, orderMode: OrderingMode, filters: [EventsFiltering!], filterMode: FilterMode, search: String): EventConnection
   grouping(id: String!): Grouping
-  groupings(first: Int, after: ID, orderBy: GroupingsOrdering, orderMode: OrderingMode, filters: GroupingsGroupFiltering, filterMode: FilterMode, search: String, toStix: Boolean): GroupingConnection
-  groupingsTimeSeries(objectId: String, authorId: String, groupingType: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime!, interval: String!, filters: GroupingsGroupFiltering, filterMode: FilterMode, search: String): [TimeSeries]
-  groupingsNumber(groupingContext: String, objectId: String, authorId: String, endDate: DateTime, filters: GroupingsGroupFiltering, filterMode: FilterMode): Number
-  groupingsDistribution(objectId: String, authorId: String, field: String!, operation: StatsOperation!, limit: Int, order: String, startDate: DateTime, endDate: DateTime, dateAttribute: String, filters: GroupingsGroupFiltering, filterMode: FilterMode, search: String): [Distribution]
+  groupings(first: Int, after: ID, orderBy: GroupingsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): GroupingConnection
+  groupingsTimeSeries(objectId: String, authorId: String, groupingType: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime!, interval: String!, filters: FilterGroup, filterMode: FilterMode, search: String): [TimeSeries]
+  groupingsNumber(groupingContext: String, objectId: String, authorId: String, endDate: DateTime, filters: FilterGroup, filterMode: FilterMode): Number
+  groupingsDistribution(objectId: String, authorId: String, field: String!, operation: StatsOperation!, limit: Int, order: String, startDate: DateTime, endDate: DateTime, dateAttribute: String, filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   groupingContainsStixObjectOrStixRelationship(id: String!, stixObjectOrStixRelationshipId: String!): Boolean
   narrative(id: String!): Narrative
   narratives(first: Int, after: ID, orderBy: NarrativesOrdering, orderMode: OrderingMode, filters: [NarrativesFiltering!], filterMode: FilterMode, search: String): NarrativeConnection
@@ -8374,13 +8255,13 @@ type Query {
   workspace(id: String!): Workspace
   workspaces(first: Int, after: ID, orderBy: WorkspacesOrdering, orderMode: OrderingMode, filters: [WorkspacesFiltering!], filterMode: FilterMode, includeAuthorities: Boolean, search: String): WorkspaceConnection
   malwareAnalysis(id: String!): MalwareAnalysis
-  malwareAnalyses(first: Int, after: ID, orderBy: MalwareAnalysesOrdering, orderMode: OrderingMode, filters: MalwareAnalysesGroupFiltering, filterMode: FilterMode, search: String): MalwareAnalysisConnection
+  malwareAnalyses(first: Int, after: ID, orderBy: MalwareAnalysesOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String): MalwareAnalysisConnection
   notificationNotifiers: [Notifier!]!
   notifier(id: String!): Notifier
   notifierTest(input: NotifierTestInput!): String
   notifiers(first: Int, after: ID, orderBy: NotifierOrdering, orderMode: OrderingMode, filters: [NotifierFiltering!], filterMode: FilterMode, search: String): NotifierConnection
   threatActorIndividual(id: String!): ThreatActorIndividual
-  threatActorsIndividuals(first: Int, after: ID, orderBy: ThreatActorsIndividualOrdering, orderMode: OrderingMode, filters: ThreatActorsIndividualGroupFiltering, filterMode: FilterMode, search: String, toStix: Boolean): ThreatActorIndividualConnection
+  threatActorsIndividuals(first: Int, after: ID, orderBy: ThreatActorsIndividualOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): ThreatActorIndividualConnection
   threatActorIndividualContainsStixObjectOrStixRelationship(id: String!, stixObjectOrStixRelationshipId: String!): Boolean
   playbook(id: String!): Playbook
   playbooks(first: Int, after: ID, orderBy: PlaybooksOrdering, orderMode: OrderingMode, filters: [PlaybooksFiltering!], filterMode: FilterMode, search: String): PlaybookConnection
@@ -8913,7 +8794,7 @@ type Mutation {
   stixCoreObjectsExportPush(type: String!, file: Upload!, listFilters: String): Boolean
   stixDomainObjectAdd(input: StixDomainObjectAddInput!): StixDomainObject
   stixDomainObjectEdit(id: ID!): StixDomainObjectEditMutations
-  stixDomainObjectsExportAsk(type: String!, format: String!, exportType: String!, maxMarkingDefinition: String, context: String, search: String, relationship_type: [String], elementId: String, orderBy: StixDomainObjectsOrdering, orderMode: OrderingMode, filters: StixDomainObjectsGroupFiltering, filterMode: FilterMode, selectedIds: [String]): [File!]
+  stixDomainObjectsExportAsk(type: String!, format: String!, exportType: String!, maxMarkingDefinition: String, context: String, search: String, relationship_type: [String], elementId: String, orderBy: StixDomainObjectsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, selectedIds: [String]): [File!]
   stixDomainObjectsDelete(id: [ID]!): [ID]!
   stixDomainObjectsExportPush(type: String!, file: Upload!, listFilters: String): Boolean
   attackPatternAdd(input: AttackPatternAddInput!): AttackPattern
@@ -8969,7 +8850,7 @@ type Mutation {
   incidentEdit(id: ID!): IncidentEditMutations
   stixCyberObservableAdd(type: String!, stix_id: StixId, x_opencti_score: Int, x_opencti_description: String, createIndicator: Boolean, createdBy: String, objectMarking: [String], objectLabel: [String], objectOrganization: [String], externalReferences: [String], clientMutationId: String, update: Boolean, AutonomousSystem: AutonomousSystemAddInput, Directory: DirectoryAddInput, DomainName: DomainNameAddInput, EmailAddr: EmailAddrAddInput, EmailMessage: EmailMessageAddInput, EmailMimePartType: EmailMimePartTypeAddInput, Artifact: ArtifactAddInput, StixFile: StixFileAddInput, X509Certificate: X509CertificateAddInput, IPv4Addr: IPv4AddrAddInput, IPv6Addr: IPv6AddrAddInput, MacAddr: MacAddrAddInput, Mutex: MutexAddInput, NetworkTraffic: NetworkTrafficAddInput, Process: ProcessAddInput, Software: SoftwareAddInput, Url: UrlAddInput, UserAccount: UserAccountAddInput, WindowsRegistryKey: WindowsRegistryKeyAddInput, WindowsRegistryValueType: WindowsRegistryValueTypeAddInput, CryptographicKey: CryptographicKeyAddInput, CryptocurrencyWallet: CryptocurrencyWalletAddInput, Hostname: HostnameAddInput, Text: TextAddInput, UserAgent: UserAgentAddInput, BankAccount: BankAccountAddInput, PhoneNumber: PhoneNumberAddInput, PaymentCard: PaymentCardAddInput, MediaContent: MediaContentAddInput): StixCyberObservable
   stixCyberObservableEdit(id: ID!): StixCyberObservableEditMutations
-  stixCyberObservablesExportAsk(format: String!, exportType: String!, maxMarkingDefinition: String, context: String, types: [String], search: String, orderBy: StixCyberObservablesOrdering, orderMode: OrderingMode, filters: StixCyberObservablesGroupFiltering, filterMode: FilterMode, relationship_type: [String], elementId: String, selectedIds: [String]): [File!]
+  stixCyberObservablesExportAsk(format: String!, exportType: String!, maxMarkingDefinition: String, context: String, types: [String], search: String, orderBy: StixCyberObservablesOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, relationship_type: [String], elementId: String, selectedIds: [String]): [File!]
   stixCyberObservablesExportPush(file: Upload!, listFilters: String): Boolean
   artifactImport(file: Upload!, x_opencti_description: String, createdBy: String, objectMarking: [String], objectLabel: [String]): Artifact
   stixRelationshipEdit(id: ID!): StixRelationshipEditMutations
@@ -9553,35 +9434,6 @@ enum GroupingsOrdering {
   objectMarking
   x_opencti_workflow_id
   creator
-}
-
-enum GroupingsFilter {
-  name
-  context
-  created
-  created_at
-  confidence
-  source_reliability
-  createdBy
-  markedBy
-  objectLabel
-  objects
-  x_opencti_workflow_id
-  revoked
-  creator
-}
-
-input GroupingsGroupFiltering {
-  mode: FilterMode!
-  filters: [GroupingsFilterFiltering]!
-  filterGroups: [GroupingsGroupFiltering]!
-}
-
-input GroupingsFilterFiltering {
-  key: [GroupingsFilter!]!
-  values: [String]!
-  operator: String
-  mode: FilterMode
 }
 
 type GroupingConnection {
@@ -11518,42 +11370,6 @@ enum MalwareAnalysesOrdering {
   confidence
 }
 
-enum MalwareAnalysesFilter {
-  createdBy
-  created
-  modified
-  created_at
-  updated_at
-  objectMarking
-  objectLabel
-  markedBy
-  x_opencti_workflow_id
-  confidence
-  source_reliability
-  result_name
-  product
-  submitted
-  creator
-  sample
-  operatingSystem
-  analysisSco
-  hostVm
-  installedSoftware
-}
-
-input MalwareAnalysesGroupFiltering {
-  mode: FilterMode!
-  filters: [MalwareAnalysesFilterFiltering]!
-  filterGroups: [MalwareAnalysesGroupFiltering]!
-}
-
-input MalwareAnalysesFilterFiltering {
-  key: [MalwareAnalysesFilter!]!
-  values: [String]!
-  operator: String
-  mode: FilterMode
-}
-
 type MalwareAnalysisConnection {
   pageInfo: PageInfo!
   edges: [MalwareAnalysisEdge!]
@@ -11741,37 +11557,6 @@ enum ThreatActorsIndividualOrdering {
   updated_at
   x_opencti_workflow_id
   confidence
-}
-
-enum ThreatActorsIndividualFilter {
-  name
-  aliases
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  revoked
-  confidence
-  source_reliability
-  creator
-}
-
-input ThreatActorsIndividualGroupFiltering {
-  mode: FilterMode!
-  filters: [ThreatActorsIndividualFilterFiltering]!
-  filterGroups: [ThreatActorsIndividualGroupFiltering]!
-}
-
-input ThreatActorsIndividualFilterFiltering {
-  key: [ThreatActorsIndividualFilter!]!
-  values: [String]!
-  operator: String
-  mode: FilterMode
 }
 
 type ThreatActorIndividualConnection {

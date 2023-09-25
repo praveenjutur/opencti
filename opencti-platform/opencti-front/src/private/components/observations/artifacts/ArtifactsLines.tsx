@@ -37,7 +37,7 @@ export const artifactsLinesQuery = graphql`
         $cursor: ID
         $orderBy: StixCyberObservablesOrdering
         $orderMode: OrderingMode
-        $filters: StixCyberObservablesGroupFiltering
+        $filters: FilterGroup
     ) {
         ...ArtifactsLines_data
         @arguments(
@@ -64,7 +64,7 @@ const artifactsLinesFragment = graphql`
                 defaultValue: created_at
             }
             orderMode: { type: "OrderingMode", defaultValue: asc }
-            filters: { type: "StixCyberObservablesGroupFiltering" }
+            filters: { type: "FilterGroup" }
         )
         @refetchable(queryName: "ArtifactsLinesRefetchQuery") {
             stixCyberObservables(

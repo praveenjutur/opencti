@@ -83,7 +83,7 @@ enum FilterMode {
 input FilterGroup {
   mode: FilterMode!
   filters: [Filter!]!
-  filterGroups: [FilterGroup!]!
+  filterGroups: [FilterGroup]!
 }
 input Filter {
   key: [String!]!
@@ -102,10 +102,10 @@ type ResolvedFilter {
     values: [String]!
     operator: String
     mode: FilterMode
-    representatives: [Representative]!
+    representatives: [FilterRepresentative]!
 }
 
-type Representative {
+type FilterRepresentative {
   id: String
   value: String
 }
@@ -1813,26 +1813,6 @@ enum ExternalReferencesOrdering {
   updated_at
   creator
 }
-enum ExternalReferencesFilter {
-  url
-  usedBy
-  source_name
-  external_id
-  fileId
-  creator
-  created
-}
-input ExternalReferencesGroupFiltering {
-  mode: FilterMode!
-  filters: [ExternalReferencesFilterFiltering]!
-  filterGroups: [ExternalReferencesGroupFiltering]!
-}
-input ExternalReferencesFilterFiltering {
-  key: [ExternalReferencesFilter!]!
-  values: [String]!
-  operator: String
-  mode: FilterMode
-}
 type ExternalReferenceConnection {
   pageInfo: PageInfo!
   edges: [ExternalReferenceEdge!]!
@@ -2194,59 +2174,6 @@ enum StixDomainObjectsOrdering {
   product
   result_name
   operatingSystem
-}
-enum StixDomainObjectsFilter {
-  name
-  entity_type
-  aliases
-  x_opencti_aliases
-  x_mitre_id
-  created
-  modified
-  created_at
-  createdBy
-  markedBy
-  objectAssignee
-  participant
-  objectLabel
-  killChainPhase
-  hasExternalReference
-  objects
-  indicates
-  confidence
-  source_reliability
-  x_opencti_reliability
-  valid_from
-  valid_until
-  pattern_type
-  indicator_types
-  x_opencti_main_observable_type
-  report_types
-  incident_type
-  context
-  x_opencti_organization_type
-  published
-  creator
-  x_opencti_workflow_id
-  fromId
-  severity
-  priority
-  revoked
-  submitted
-  product
-  result_name
-  operatingSystem
-}
-input StixDomainObjectsGroupFiltering {
-  mode: FilterMode!
-  filters: [StixDomainObjectsFilterFiltering]!
-  filterGroups: [StixDomainObjectsGroupFiltering]!
-}
-input StixDomainObjectsFilterFiltering {
-  key: [StixDomainObjectsFilter!]!
-  values: [String]!
-  operator: String
-  mode: FilterMode
 }
 type StixDomainObjectConnection {
   pageInfo: PageInfo!
@@ -7371,43 +7298,6 @@ enum StixCyberObservablesOrdering {
   createdBy
   creator
 }
-enum StixCyberObservablesFilter {
-  entity_type
-  x_opencti_score
-  x_opencti_organization_type
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectLabel
-  relatedTo
-  objects
-  hasExternalReference
-  sightedBy
-  value
-  name
-  subject
-  confidence
-  hashes_MD5
-  hashes_SHA1
-  hashes_SHA256
-  hashes_SHA512
-  x_opencti_additional_names
-  creator
-}
-input StixCyberObservablesGroupFiltering {
-  mode: FilterMode!
-  filters: [StixCyberObservablesFilterFiltering]!
-  filterGroups: [StixCyberObservablesGroupFiltering]!
-}
-input StixCyberObservablesFilterFiltering {
-  key: [StixCyberObservablesFilter!]!
-  values: [String]!
-  operator: String
-  mode: FilterMode
-}
 type StixCyberObservableConnection {
   pageInfo: PageInfo!
   edges: [StixCyberObservableEdge!]!
@@ -12167,7 +12057,7 @@ type Query {
     after: ID
     orderBy: ExternalReferencesOrdering
     orderMode: OrderingMode
-    filters: ExternalReferencesGroupFiltering
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): ExternalReferenceConnection @auth(for: [KNOWLEDGE])
@@ -12287,7 +12177,7 @@ type Query {
     types: [String]
     orderBy: StixDomainObjectsOrdering
     orderMode: OrderingMode
-    filters: StixDomainObjectsGroupFiltering
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     relationship_type: [String]
@@ -12304,7 +12194,7 @@ type Query {
     interval: String!
     types: [String]
     onlyInferred: Boolean
-    filters: StixDomainObjectsGroupFiltering
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): [TimeSeries] @auth(for: [KNOWLEDGE, EXPLORE])
@@ -12312,7 +12202,7 @@ type Query {
     types: [String]
     endDate: DateTime
     onlyInferred: Boolean
-    filters: StixDomainObjectsGroupFiltering
+    filters: FilterGroup
     filterMode: FilterMode
     search: String): Number @auth(for: [KNOWLEDGE, EXPLORE])
   stixDomainObjectsDistribution(
@@ -12326,7 +12216,7 @@ type Query {
     limit: Int
     order: String
     types: [String]
-    filters: StixDomainObjectsGroupFiltering
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): [Distribution] @auth(for: [KNOWLEDGE, EXPLORE])
@@ -12774,7 +12664,7 @@ type Query {
     types: [String]
     orderBy: StixCyberObservablesOrdering
     orderMode: OrderingMode
-    filters: StixCyberObservablesGroupFiltering
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean
@@ -12784,13 +12674,13 @@ type Query {
     types: [String]
     authorId: String
     endDate: DateTime
-    filters: StixCyberObservablesGroupFiltering
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): Number @auth(for: [KNOWLEDGE, EXPLORE])
   stixCyberObservablesTimeSeries(
     types: [String]
-    filters: StixCyberObservablesGroupFiltering
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): [TimeSeries] @auth(for: [KNOWLEDGE, EXPLORE])
@@ -12799,7 +12689,7 @@ type Query {
     field: String!
     dateAttribute: String
     operation: String!
-    filters: StixCyberObservablesGroupFiltering
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): [Distribution] @auth(for: [KNOWLEDGE, EXPLORE])
@@ -13746,7 +13636,7 @@ type Mutation {
     elementId: String
     orderBy: StixDomainObjectsOrdering
     orderMode: OrderingMode
-    filters: StixDomainObjectsGroupFiltering
+    filters: FilterGroup
     filterMode: FilterMode
     selectedIds: [String]
   ): [File!] @auth(for: [KNOWLEDGE_KNGETEXPORT_KNASKEXPORT])
@@ -13861,7 +13751,7 @@ type Mutation {
     search: String
     orderBy: StixCyberObservablesOrdering
     orderMode: OrderingMode
-    filters: StixCyberObservablesGroupFiltering
+    filters: FilterGroup
     filterMode: FilterMode
     relationship_type: [String]
     elementId: String

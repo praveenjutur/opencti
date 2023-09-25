@@ -134,34 +134,6 @@ enum ThreatActorsIndividualOrdering {
   x_opencti_workflow_id
   confidence
 }
-enum ThreatActorsIndividualFilter {
-  name
-  aliases
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  revoked
-  confidence
-  source_reliability
-  creator
-}
-input ThreatActorsIndividualGroupFiltering {
-  mode: FilterMode!
-  filters: [ThreatActorsIndividualFilterFiltering]!
-  filterGroups: [ThreatActorsIndividualGroupFiltering]!
-}
-input ThreatActorsIndividualFilterFiltering {
-  key: [ThreatActorsIndividualFilter!]!
-  values: [String]!
-  operator: String
-  mode: FilterMode
-}
 type ThreatActorIndividualConnection {
   pageInfo: PageInfo!
   edges: [ThreatActorIndividualEdge]
@@ -210,7 +182,7 @@ type Query {
     after: ID
     orderBy: ThreatActorsIndividualOrdering
     orderMode: OrderingMode
-    filters: ThreatActorsIndividualGroupFiltering
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean

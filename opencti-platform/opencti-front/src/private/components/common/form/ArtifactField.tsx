@@ -12,7 +12,7 @@ interface ArtifactFieldProps {
 }
 
 export const artifactQuery = graphql`
-  query ArtifactFieldGetQuery($filters: StixCyberObservablesGroupFiltering) {
+  query ArtifactFieldGetQuery($filters: FilterGroup) {
     stixCyberObservables(filters: $filters) {
       edges {
         node {
@@ -69,7 +69,7 @@ const ArtifactField: FunctionComponent<ArtifactFieldProps> = ({
   const filters = [
     { key: ['entity_type'], values: ['Artifact'] },
     search ? { key: ['name'], values: [search] } : undefined,
-  ].filter((f) => Boolean(f)) as StixCyberObservablesGroupFiltering;
+  ].filter((f) => Boolean(f)) as FilterGroup;
   const queryRef = useQueryLoading<ArtifactFieldGetQuery>(artifactQuery, {
     filters,
   });
