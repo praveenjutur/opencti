@@ -20,7 +20,6 @@ import { isStixCoreObject, stixCoreObjectOptions } from '../schema/stixCoreObjec
 import { findById as findStatusById } from './status';
 import {
   ABSTRACT_BASIC_OBJECT,
-  ABSTRACT_INTERNAL_OBJECT,
   ABSTRACT_STIX_CORE_OBJECT,
   ABSTRACT_STIX_DOMAIN_OBJECT,
   buildRefRelationKey,
@@ -42,7 +41,6 @@ import {
   ENTITY_TYPE_CONTAINER_OBSERVED_DATA,
   ENTITY_TYPE_CONTAINER_OPINION,
   ENTITY_TYPE_CONTAINER_REPORT,
-  ENTITY_TYPE_IDENTITY_INDIVIDUAL,
   isStixDomainObjectContainer,
 } from '../schema/stixDomainObject';
 import {
@@ -70,7 +68,7 @@ import {
 } from './stixObjectOrStixRelationship';
 import { buildContextDataForFile, publishUserAction } from '../listener/UserActionListener';
 import { extractEntityRepresentativeName } from '../database/entity-representative';
-import { extractFilterIds } from '../utils/filtering';
+import { extractFilterIds, WORKFLOW_FILTER } from '../utils/filtering';
 
 export const findAll = async (context, user, args) => {
   let types = [];
@@ -519,104 +517,7 @@ export const stixCoreObjectEditContext = async (context, user, stixCoreObjectId,
 };
 // endregion
 
-// filters representatives
-export const findFilterRepresentative = async (context, user, filter) => {
-  const { key, values } = filter;
-  let data;
-  switch (key) {
-    case 'toSightingId':
-      data = await Promise.all(values.map(async (id) => {
-        const result = await storeLoadById(context, user, id, ENTITY_TYPE_IDENTITY_INDIVIDUAL);
-        return {
-          id,
-          value: result?.name,
-        };
-      }));
-      return data;
-    case 'members_user':
-    case 'members_group':
-    case 'members_organization':
-    case 'assigneeTo':
-    case 'participant':
-    case 'creator':
-      data = await Promise.all(values.map(async (id) => {
-        const result = await storeLoadById(context, user, id, ABSTRACT_INTERNAL_OBJECT);
-        return {
-          id,
-          value: result?.name,
-        };
-      }));
-      return data;
-    case 'createdBy':
-    case 'sightedBy':
-    case 'elementId':
-    case 'fromId':
-    case 'toId':
-    case 'targets':
-    case 'objects':
-    case 'indicates':
-    case 'containers':
-      data = await Promise.all(values.map(async (id) => {
-        const result = await storeLoadById(context, user, id, ABSTRACT_STIX_CORE_OBJECT);
-        return {
-          id,
-          value: result ? extractEntityRepresentativeName(result) : undefined,
-        };
-      }));
-      return data;
-    case 'objectLabel':
-      data = await Promise.all(values.map(async (id) => {
-        if (id === null) {
-          return {
-            id,
-            value: 'No label',
-          };
-        }
-        const result = await storeLoadById(context, user, id, ENTITY_TYPE_LABEL);
-        return {
-          id,
-          value: result?.value,
-        };
-      }));
-      return data;
-    case 'markedBy':
-      data = await Promise.all(values.map(async (id) => {
-        if (id === null) {
-          return {
-            id,
-            value: 'No marking',
-          };
-        }
-        const result = await storeLoadById(context, user, id, ENTITY_TYPE_MARKING_DEFINITION);
-        return {
-          id,
-          value: result?.definition,
-        };
-      }));
-      return data;
-    case 'killChainPhase':
-      data = await Promise.all(values.map(async (id) => {
-        const result = await storeLoadById(context, user, id, ENTITY_TYPE_KILL_CHAIN_PHASE);
-        return {
-          id,
-          value: result ? `[${result.kill_chain_name}] ${result.phase_name}` : undefined,
-        };
-      }));
-      return data;
-    case 'x_opencti_workflow_id':
-      data = await Promise.all(values.map(async (id) => {
-        const result = await findStatusById(context, user, id);
-        return {
-          id,
-          value: result?.name,
-        };
-      }));
-      return data;
-    default:
-      return null;
-  }
-};
-
+// region filters representatives
 const batchFilters = (context, user, ids) => {
   return storeLoadByIds(context, user, ids, ABSTRACT_BASIC_OBJECT);
 };
@@ -652,13 +553,22 @@ const filtersWithRepresentatives = (inputFilters, representativesMap) => {
 };
 
 export const findFiltersRepresentatives = async (context, user, inputFilters) => {
+  // extract the ids from inputFilters
   const ids = extractFilterIds(inputFilters);
-  // TODO keep ids that should be resolved
-  const resolvedEntities = await Promise.all(ids.map((id) => filtersLoader.load(id, context, user)));
+  const statusIds = extractFilterIds(inputFilters, WORKFLOW_FILTER);
+  // keep ids that should be resolved
+  const idsToResolve = ids.filter((id) => !statusIds.includes(id)); // TODO to complete: keep only the ids to resolve
+  const resolvedEntities = await Promise.all(idsToResolve.map((id) => filtersLoader.load(id, context, user)));
+  // resolve status ids differently
+  const resolvedStatuses = await Promise.all(statusIds.map((id) => findStatusById(context, user, id)));
+  // create the representative map
   const representativesMap = new Map(
-    resolvedEntities
+    resolvedEntities.concat(resolvedStatuses)
       .filter((e) => e)
       .map((e) => [e.id, extractEntityRepresentativeName(e)])
   );
+  // return the filters with the representatives
   return filtersWithRepresentatives(inputFilters, representativesMap);
 };
+
+// endregion

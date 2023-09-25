@@ -607,10 +607,13 @@ export const extractFilterKeys = (filters) => {
   return keys;
 };
 
-export const extractFilterIds = (filters) => {
-  let ids = filters.filters?.map((f) => f.values).flat() ?? [];
+// extract all the ids from a filter group / all the ids corresponding to a specific key if key is specified
+export const extractFilterIds = (filters, key = null) => {
+  let ids = key
+    ? filters.filters?.filter((f) => f.key.includes(key)).map((f) => f.values).flat() ?? []
+    : filters.filters?.map((f) => f.values).flat() ?? [];
   if (filters.filterGroups && filters.filterGroups.length > 0) {
-    ids = ids.concat(filters.filterGroups.map((group) => extractFilterIds(group)).flat());
+    ids = ids.concat(filters.filterGroups.map((group) => extractFilterIds(group, key)).flat());
   }
   return uniq(ids);
 };
@@ -626,7 +629,7 @@ export const checkFilterKeys = (filters, entityTypes) => {
         const availableRelations = schemaRelationsRefDefinition.getInputNames(type);
         const availableKeys = availableAttributes.concat(availableRelations);
         if (!keys.every((k) => availableKeys.includes(k))) {
-          throw Error('incorrect filter keys'); // TODO display the keys that are not correct
+          throw Error('incorrect filter keys'); // TODO display/filter the keys that are not correct
         }
       });
     }
