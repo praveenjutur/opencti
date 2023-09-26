@@ -3088,30 +3088,6 @@ enum ObservedDatasOrdering {
   objectMarking
   confidence
 }
-enum ObservedDatasFilter {
-  first_observed
-  last_observed
-  number_observed
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  objects
-  x_opencti_workflow_id
-  revoked
-  confidence
-  source_reliability
-}
-input ObservedDatasFiltering {
-  key: [ObservedDatasFilter!]!
-  values: [String]!
-  operator: String
-  filterMode: FilterMode
-}
 type ObservedDataConnection {
   pageInfo: PageInfo!
   edges: [ObservedDataEdge]
@@ -7014,32 +6990,6 @@ enum IncidentsOrdering {
   confidence
   objectAssignee
   creator
-}
-enum IncidentsFilter {
-  name
-  incident_type
-  severity
-  source
-  aliases
-  created
-  modified
-  created_at
-  createdBy
-  markedBy
-  objectAssignee
-  participant
-  objectLabel
-  x_opencti_workflow_id
-  confidence
-  source_reliability
-  creator
-  targets
-}
-input IncidentsFiltering {
-  key: [IncidentsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 type IncidentConnection {
   pageInfo: PageInfo!
@@ -12219,7 +12169,7 @@ type Query {
     after: ID
     orderBy: ObservedDatasOrdering
     orderMode: OrderingMode
-    filters: [ObservedDatasFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean
@@ -12552,7 +12502,7 @@ type Query {
     after: ID
     orderBy: IncidentsOrdering
     orderMode: OrderingMode
-    filters: [IncidentsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean

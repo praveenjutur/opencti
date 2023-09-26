@@ -2771,32 +2771,6 @@ enum ObservedDatasOrdering {
   confidence
 }
 
-enum ObservedDatasFilter {
-  first_observed
-  last_observed
-  number_observed
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  objects
-  x_opencti_workflow_id
-  revoked
-  confidence
-  source_reliability
-}
-
-input ObservedDatasFiltering {
-  key: [ObservedDatasFilter!]!
-  values: [String]!
-  operator: String
-  filterMode: FilterMode
-}
-
 type ObservedDataConnection {
   pageInfo: PageInfo!
   edges: [ObservedDataEdge]
@@ -5400,34 +5374,6 @@ enum IncidentsOrdering {
   creator
 }
 
-enum IncidentsFilter {
-  name
-  incident_type
-  severity
-  source
-  aliases
-  created
-  modified
-  created_at
-  createdBy
-  markedBy
-  objectAssignee
-  participant
-  objectLabel
-  x_opencti_workflow_id
-  confidence
-  source_reliability
-  creator
-  targets
-}
-
-input IncidentsFiltering {
-  key: [IncidentsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
-
 type IncidentConnection {
   pageInfo: PageInfo!
   edges: [IncidentEdge]
@@ -8013,7 +7959,7 @@ type Query {
   notesDistribution(objectId: String, field: String!, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String): [Distribution]
   noteContainsStixObjectOrStixRelationship(id: String!, stixObjectOrStixRelationshipId: String!): Boolean
   observedData(id: String): ObservedData
-  observedDatas(first: Int, after: ID, orderBy: ObservedDatasOrdering, orderMode: OrderingMode, filters: [ObservedDatasFiltering], filterMode: FilterMode, search: String, toStix: Boolean): ObservedDataConnection
+  observedDatas(first: Int, after: ID, orderBy: ObservedDatasOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): ObservedDataConnection
   observedDatasTimeSeries(objectId: String, authorId: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime!, interval: String!): [TimeSeries]
   observedDatasNumber(objectId: String, endDate: DateTime): Number
   observedDatasDistribution(objectId: String, field: String!, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String): [Distribution]
@@ -8071,7 +8017,7 @@ type Query {
   vulnerability(id: String): Vulnerability
   vulnerabilities(first: Int, after: ID, orderBy: VulnerabilitiesOrdering, orderMode: OrderingMode, filters: [VulnerabilitiesFiltering], filterMode: FilterMode, search: String, toStix: Boolean): VulnerabilityConnection
   incident(id: String): Incident
-  incidents(first: Int, after: ID, orderBy: IncidentsOrdering, orderMode: OrderingMode, filters: [IncidentsFiltering], filterMode: FilterMode, search: String, toStix: Boolean): IncidentConnection
+  incidents(first: Int, after: ID, orderBy: IncidentsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): IncidentConnection
   incidentsTimeSeries(objectId: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime!, interval: String!, relationship_type: [String]): [TimeSeries]
   stixCyberObservable(id: String!): StixCyberObservable
   stixCyberObservables(first: Int, after: ID, types: [String], orderBy: StixCyberObservablesOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): StixCyberObservableConnection
