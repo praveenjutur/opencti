@@ -128,30 +128,6 @@ enum ChannelsOrdering {
     confidence
 }
 
-# Filtering
-enum ChannelsFilter {
-    name
-    aliases
-    channel_types
-    created
-    modified
-    created_at
-    updated_at
-    createdBy
-    markedBy
-    objectAssignee
-    objectLabel
-    x_opencti_workflow_id
-    confidence
-    source_reliability
-}
-input ChannelsFiltering {
-    key: [ChannelsFilter!]!
-    values: [String]
-    operator: String
-    filterMode: FilterMode
-}
-
 # Relay connections
 type ChannelConnection {
     pageInfo: PageInfo!
@@ -170,7 +146,7 @@ type Query {
         after: ID
         orderBy: ChannelsOrdering
         orderMode: OrderingMode
-        filters: [ChannelsFiltering!]
+        filters: FilterGroup
         filterMode: FilterMode
         search: String
     ): ChannelConnection @auth(for: [KNOWLEDGE])

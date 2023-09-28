@@ -4703,35 +4703,6 @@ enum MalwaresOrdering {
   confidence
 }
 
-enum MalwaresFilter {
-  name
-  aliases
-  malware_types
-  first_seen
-  last_seen
-  is_family
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  confidence
-  source_reliability
-  revoked
-  targets
-}
-
-input MalwaresFiltering {
-  key: [MalwaresFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
-
 type MalwareConnection {
   pageInfo: PageInfo!
   edges: [MalwareEdge]
@@ -7930,7 +7901,7 @@ type Query {
   position(id: String!): Position
   positions(first: Int, after: ID, orderBy: PositionsOrdering, orderMode: OrderingMode, filters: [PositionsFiltering], filterMode: FilterMode, search: String, toStix: Boolean): PositionConnection
   malware(id: String): Malware
-  malwares(first: Int, after: ID, orderBy: MalwaresOrdering, orderMode: OrderingMode, filters: [MalwaresFiltering], filterMode: FilterMode, search: String, toStix: Boolean): MalwareConnection
+  malwares(first: Int, after: ID, orderBy: MalwaresOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): MalwareConnection
   threatActor(id: String): ThreatActor
   threatActors(first: Int, after: ID, orderBy: ThreatActorsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): ThreatActorConnection
   threatActorGroup(id: String): ThreatActorGroup
@@ -7976,7 +7947,7 @@ type Query {
   stixObjectOrStixRelationship(id: String!): StixObjectOrStixRelationship
   stixCoreObjectOrStixCoreRelationship(id: String!): StixCoreObjectOrStixCoreRelationship
   channel(id: String!): Channel
-  channels(first: Int, after: ID, orderBy: ChannelsOrdering, orderMode: OrderingMode, filters: [ChannelsFiltering!], filterMode: FilterMode, search: String): ChannelConnection
+  channels(first: Int, after: ID, orderBy: ChannelsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String): ChannelConnection
   language(id: String!): Language
   languages(first: Int, after: ID, orderBy: LanguagesOrdering, orderMode: OrderingMode, filters: [LanguagesFiltering!], filterMode: FilterMode, search: String): LanguageConnection
   event(id: String!): Event
@@ -8849,30 +8820,6 @@ enum ChannelsOrdering {
   objectLabel
   x_opencti_workflow_id
   confidence
-}
-
-enum ChannelsFilter {
-  name
-  aliases
-  channel_types
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  confidence
-  source_reliability
-}
-
-input ChannelsFiltering {
-  key: [ChannelsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 
 type ChannelConnection {

@@ -6026,33 +6026,6 @@ enum MalwaresOrdering {
   x_opencti_workflow_id
   confidence
 }
-enum MalwaresFilter {
-  name
-  aliases
-  malware_types
-  first_seen
-  last_seen
-  is_family
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  confidence
-  source_reliability
-  revoked
-  targets
-}
-input MalwaresFiltering {
-  key: [MalwaresFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
 type MalwareConnection {
   pageInfo: PageInfo!
   edges: [MalwareEdge]
@@ -12376,7 +12349,7 @@ type Query {
     after: ID
     orderBy: MalwaresOrdering
     orderMode: OrderingMode
-    filters: [MalwaresFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean

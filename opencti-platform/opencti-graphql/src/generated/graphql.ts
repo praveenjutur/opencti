@@ -3129,30 +3129,6 @@ export type ChannelEdge = {
   node: Channel;
 };
 
-export enum ChannelsFilter {
-  Aliases = 'aliases',
-  ChannelTypes = 'channel_types',
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  SourceReliability = 'source_reliability',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type ChannelsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<ChannelsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum ChannelsOrdering {
   ChannelTypes = 'channel_types',
   Confidence = 'confidence',
@@ -11841,35 +11817,6 @@ export type MalwareEditMutationsRelationDeleteArgs = {
   toId: Scalars['StixRef']['input'];
 };
 
-export enum MalwaresFilter {
-  Aliases = 'aliases',
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  FirstSeen = 'first_seen',
-  IsFamily = 'is_family',
-  LastSeen = 'last_seen',
-  MalwareTypes = 'malware_types',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Revoked = 'revoked',
-  SourceReliability = 'source_reliability',
-  Targets = 'targets',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type MalwaresFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<MalwaresFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum MalwaresOrdering {
   Confidence = 'confidence',
   Created = 'created',
@@ -17899,7 +17846,7 @@ export type QueryChannelArgs = {
 export type QueryChannelsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<ChannelsFiltering>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ChannelsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -18505,7 +18452,7 @@ export type QueryMalwareAnalysisArgs = {
 export type QueryMalwaresArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<MalwaresFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<MalwaresOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -28267,8 +28214,6 @@ export type ResolversTypes = ResolversObject<{
   ChannelAddInput: ChannelAddInput;
   ChannelConnection: ResolverTypeWrapper<Omit<ChannelConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['ChannelEdge']>>> }>;
   ChannelEdge: ResolverTypeWrapper<Omit<ChannelEdge, 'node'> & { node: ResolversTypes['Channel'] }>;
-  ChannelsFilter: ChannelsFilter;
-  ChannelsFiltering: ChannelsFiltering;
   ChannelsOrdering: ChannelsOrdering;
   CitiesFilter: CitiesFilter;
   CitiesFiltering: CitiesFiltering;
@@ -28538,8 +28483,6 @@ export type ResolversTypes = ResolversObject<{
   MalwareConnection: ResolverTypeWrapper<Omit<MalwareConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['MalwareEdge']>>> }>;
   MalwareEdge: ResolverTypeWrapper<Omit<MalwareEdge, 'node'> & { node: ResolversTypes['Malware'] }>;
   MalwareEditMutations: ResolverTypeWrapper<Omit<MalwareEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversTypes['Malware']>, contextPatch?: Maybe<ResolversTypes['Malware']>, fieldPatch?: Maybe<ResolversTypes['Malware']>, relationAdd?: Maybe<ResolversTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversTypes['Malware']> }>;
-  MalwaresFilter: MalwaresFilter;
-  MalwaresFiltering: MalwaresFiltering;
   MalwaresOrdering: MalwaresOrdering;
   MarkingDefinition: ResolverTypeWrapper<MarkingDefinition>;
   MarkingDefinitionAddInput: MarkingDefinitionAddInput;
@@ -29056,7 +28999,6 @@ export type ResolversParentTypes = ResolversObject<{
   ChannelAddInput: ChannelAddInput;
   ChannelConnection: Omit<ChannelConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['ChannelEdge']>>> };
   ChannelEdge: Omit<ChannelEdge, 'node'> & { node: ResolversParentTypes['Channel'] };
-  ChannelsFiltering: ChannelsFiltering;
   CitiesFiltering: CitiesFiltering;
   City: Omit<City, 'administrativeArea' | 'cases' | 'containers' | 'country' | 'createdBy' | 'groupings' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'stixCoreRelationships'> & { administrativeArea?: Maybe<ResolversParentTypes['AdministrativeArea']>, cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, country?: Maybe<ResolversParentTypes['Country']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, observedData?: Maybe<ResolversParentTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversParentTypes['StixCoreRelationshipConnection']> };
   CityAddInput: CityAddInput;
@@ -29275,7 +29217,6 @@ export type ResolversParentTypes = ResolversObject<{
   MalwareConnection: Omit<MalwareConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['MalwareEdge']>>> };
   MalwareEdge: Omit<MalwareEdge, 'node'> & { node: ResolversParentTypes['Malware'] };
   MalwareEditMutations: Omit<MalwareEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversParentTypes['Malware']>, contextPatch?: Maybe<ResolversParentTypes['Malware']>, fieldPatch?: Maybe<ResolversParentTypes['Malware']>, relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['Malware']> };
-  MalwaresFiltering: MalwaresFiltering;
   MarkingDefinition: MarkingDefinition;
   MarkingDefinitionAddInput: MarkingDefinitionAddInput;
   MarkingDefinitionConnection: MarkingDefinitionConnection;
