@@ -130,27 +130,6 @@ enum NarrativesOrdering {
     x_opencti_workflow_id
 }
 
-# Filtering
-enum NarrativesFilter {
-    name
-    aliases
-    narrative_types
-    created
-    modified
-    created_at
-    updated_at
-    createdBy
-    markedBy
-    objectLabel
-    x_opencti_workflow_id
-}
-input NarrativesFiltering {
-    key: [NarrativesFilter!]!
-    values: [String]
-    operator: String
-    filterMode: FilterMode
-}
-
 # Relay connections
 type NarrativeConnection {
     pageInfo: PageInfo!
@@ -169,7 +148,7 @@ type Query {
         after: ID
         orderBy: NarrativesOrdering
         orderMode: OrderingMode
-        filters: [NarrativesFiltering!]
+        filters: FilterGroup
         filterMode: FilterMode
         search: String
     ): NarrativeConnection @auth(for: [KNOWLEDGE])

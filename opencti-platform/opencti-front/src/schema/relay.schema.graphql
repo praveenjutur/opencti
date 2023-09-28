@@ -7959,7 +7959,7 @@ type Query {
   groupingsDistribution(objectId: String, authorId: String, field: String!, operation: StatsOperation!, limit: Int, order: String, startDate: DateTime, endDate: DateTime, dateAttribute: String, filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   groupingContainsStixObjectOrStixRelationship(id: String!, stixObjectOrStixRelationshipId: String!): Boolean
   narrative(id: String!): Narrative
-  narratives(first: Int, after: ID, orderBy: NarrativesOrdering, orderMode: OrderingMode, filters: [NarrativesFiltering!], filterMode: FilterMode, search: String): NarrativeConnection
+  narratives(first: Int, after: ID, orderBy: NarrativesOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String): NarrativeConnection
   triggerKnowledge(id: String!): Trigger
   triggersKnowledge(first: Int, after: ID, orderBy: TriggersOrdering, orderMode: OrderingMode, filters: [TriggersFiltering!], filterMode: FilterMode, includeAuthorities: Boolean, search: String): TriggerConnection
   triggerActivity(id: String!): Trigger
@@ -9264,27 +9264,6 @@ enum NarrativesOrdering {
   objectMarking
   objectLabel
   x_opencti_workflow_id
-}
-
-enum NarrativesFilter {
-  name
-  aliases
-  narrative_types
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectLabel
-  x_opencti_workflow_id
-}
-
-input NarrativesFiltering {
-  key: [NarrativesFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 
 type NarrativeConnection {
