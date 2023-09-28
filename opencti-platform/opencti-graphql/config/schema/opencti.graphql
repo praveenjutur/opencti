@@ -908,17 +908,6 @@ enum BackgroundTasksOrdering {
   created_at
   last_execution_date
 }
-enum BackgroundTasksFilter {
-  type
-  initiator
-  completed
-}
-input BackgroundTasksFiltering {
-  key: [BackgroundTasksFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
 type BackgroundTaskContext {
   field: String
   type: BackgroundTaskContextType
@@ -1241,19 +1230,6 @@ enum UsersOrdering {
   external
   created_at
   updated_at
-}
-enum UsersFilter {
-  name
-  user_email
-  external
-  entity_type
-  created_at
-}
-input UsersFiltering {
-  key: [UsersFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 type UserConnection {
   pageInfo: PageInfo!
@@ -1678,17 +1654,6 @@ enum MarkingDefinitionsOrdering {
   modified
   created_at
   updated_at
-}
-enum MarkingDefinitionsFilter {
-  definition
-  definition_type
-  markedBy
-}
-input MarkingDefinitionsFiltering {
-  key: [MarkingDefinitionsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 type MarkingDefinitionConnection {
   pageInfo: PageInfo!
@@ -11532,7 +11497,7 @@ type Query {
     after: ID
     orderBy: UsersOrdering
     orderMode: OrderingMode
-    filters: [UsersFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean
@@ -11617,7 +11582,7 @@ type Query {
     orderBy: BackgroundTasksOrdering
     orderMode: OrderingMode
     includeAuthorities: Boolean
-    filters: [BackgroundTasksFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): BackgroundTaskConnection @auth(for: [KNOWLEDGE])
@@ -11653,7 +11618,7 @@ type Query {
     after: ID
     orderBy: MarkingDefinitionsOrdering
     orderMode: OrderingMode
-    filters: [MarkingDefinitionsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean

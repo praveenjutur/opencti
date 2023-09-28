@@ -963,19 +963,6 @@ enum BackgroundTasksOrdering {
   last_execution_date
 }
 
-enum BackgroundTasksFilter {
-  type
-  initiator
-  completed
-}
-
-input BackgroundTasksFiltering {
-  key: [BackgroundTasksFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
-
 type BackgroundTaskContext {
   field: String
   type: BackgroundTaskContextType
@@ -1297,21 +1284,6 @@ enum UsersOrdering {
   external
   created_at
   updated_at
-}
-
-enum UsersFilter {
-  name
-  user_email
-  external
-  entity_type
-  created_at
-}
-
-input UsersFiltering {
-  key: [UsersFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 
 type UserConnection {
@@ -1747,19 +1719,6 @@ enum MarkingDefinitionsOrdering {
   modified
   created_at
   updated_at
-}
-
-enum MarkingDefinitionsFilter {
-  definition
-  definition_type
-  markedBy
-}
-
-input MarkingDefinitionsFiltering {
-  key: [MarkingDefinitionsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 
 type MarkingDefinitionConnection {
@@ -7614,7 +7573,7 @@ type Query {
   assignees(entityTypes: [String!]): AssigneeConnection
   participants(entityTypes: [String!]): ParticipantConnection
   members(first: Int, search: String, entityTypes: [MemberType!]): MemberConnection
-  users(first: Int, after: ID, orderBy: UsersOrdering, orderMode: OrderingMode, filters: [UsersFiltering], filterMode: FilterMode, search: String, toStix: Boolean): UserConnection
+  users(first: Int, after: ID, orderBy: UsersOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): UserConnection
   sessions: [UserSession]
   role(id: String!): Role
   capabilities(first: Int): CapabilityConnection
@@ -7641,7 +7600,7 @@ type Query {
   status(id: String!): Status
   statuses(first: Int, after: ID, orderBy: StatusOrdering, orderMode: OrderingMode, filters: [StatusesFiltering!], filterMode: FilterMode, search: String): StatusConnection
   backgroundTask(id: String!): BackgroundTask
-  backgroundTasks(first: Int, after: ID, orderBy: BackgroundTasksOrdering, orderMode: OrderingMode, includeAuthorities: Boolean, filters: [BackgroundTasksFiltering], filterMode: FilterMode, search: String): BackgroundTaskConnection
+  backgroundTasks(first: Int, after: ID, orderBy: BackgroundTasksOrdering, orderMode: OrderingMode, includeAuthorities: Boolean, filters: FilterGroup, filterMode: FilterMode, search: String): BackgroundTaskConnection
   rule(id: String!): Rule
   rules: [Rule]
   ruleManagerInfo: RuleManager
@@ -7651,7 +7610,7 @@ type Query {
   stixMetaObject(id: String!): StixMetaObject
   stixMetaObjects(first: Int, after: ID, types: [String], orderBy: StixMetaObjectsOrdering, orderMode: OrderingMode, filters: [StixMetaObjectsFiltering], filterMode: FilterMode, search: String): StixMetaObjectConnection
   markingDefinition(id: String!): MarkingDefinition
-  markingDefinitions(first: Int, after: ID, orderBy: MarkingDefinitionsOrdering, orderMode: OrderingMode, filters: [MarkingDefinitionsFiltering], filterMode: FilterMode, search: String, toStix: Boolean): MarkingDefinitionConnection
+  markingDefinitions(first: Int, after: ID, orderBy: MarkingDefinitionsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): MarkingDefinitionConnection
   label(id: String!): Label
   labels(first: Int, after: ID, orderBy: LabelsOrdering, orderMode: OrderingMode, filters: [LabelsFiltering], filterMode: FilterMode, search: String): LabelConnection
   externalReference(id: String!): ExternalReference
@@ -7847,7 +7806,7 @@ type Query {
   notificationNotifiers: [Notifier!]!
   notifier(id: String!): Notifier
   notifierTest(input: NotifierTestInput!): String
-  notifiers(first: Int, after: ID, orderBy: NotifierOrdering, orderMode: OrderingMode, filters: [NotifierFiltering!], filterMode: FilterMode, search: String): NotifierConnection
+  notifiers(first: Int, after: ID, orderBy: NotifierOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String): NotifierConnection
   threatActorIndividual(id: String!): ThreatActorIndividual
   threatActorsIndividuals(first: Int, after: ID, orderBy: ThreatActorsIndividualOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): ThreatActorIndividualConnection
   threatActorIndividualContainsStixObjectOrStixRelationship(id: String!, stixObjectOrStixRelationshipId: String!): Boolean
@@ -10737,17 +10696,6 @@ input MalwareAnalysisAddInput {
   clientMutationId: String
   update: Boolean
   file: Upload
-}
-
-enum NotifierFilter {
-  created
-}
-
-input NotifierFiltering {
-  key: [NotifierFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 
 enum NotifierOrdering {

@@ -496,7 +496,7 @@ export const tasksListQuery = graphql`
     $orderBy: BackgroundTasksOrdering
     $orderMode: OrderingMode
     $includeAuthorities: Boolean
-    $filters: [BackgroundTasksFiltering]
+    $filters: FilterGroup
   ) {
     ...TasksList_data
       @arguments(
@@ -519,7 +519,7 @@ const TasksList = createRefetchContainer(
         orderBy: { type: "BackgroundTasksOrdering", defaultValue: created_at }
         orderMode: { type: "OrderingMode", defaultValue: desc }
         includeAuthorities: { type: "Boolean", defaultValue: true }
-        filters: { type: "[BackgroundTasksFiltering]" }
+        filters: { type: "FilterGroup" }
       ) {
         backgroundTasks(
           first: $count

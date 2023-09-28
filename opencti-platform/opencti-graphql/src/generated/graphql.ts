@@ -1186,19 +1186,6 @@ export enum BackgroundTaskType {
   Rule = 'RULE'
 }
 
-export enum BackgroundTasksFilter {
-  Completed = 'completed',
-  Initiator = 'initiator',
-  Type = 'type'
-}
-
-export type BackgroundTasksFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<BackgroundTasksFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum BackgroundTasksOrdering {
   Completed = 'completed',
   CreatedAt = 'created_at',
@@ -11737,19 +11724,6 @@ export type MarkingDefinitionEditMutationsFieldPatchArgs = {
   input: Array<InputMaybe<EditInput>>;
 };
 
-export enum MarkingDefinitionsFilter {
-  Definition = 'definition',
-  DefinitionType = 'definition_type',
-  MarkedBy = 'markedBy'
-}
-
-export type MarkingDefinitionsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<MarkingDefinitionsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum MarkingDefinitionsOrdering {
   Created = 'created',
   CreatedAt = 'created_at',
@@ -15072,17 +15046,6 @@ export type NotifierEdge = {
   node: Notifier;
 };
 
-export enum NotifierFilter {
-  Created = 'created'
-}
-
-export type NotifierFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<NotifierFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum NotifierOrdering {
   Connector = 'connector',
   Created = 'created',
@@ -17458,7 +17421,7 @@ export type QueryBackgroundTaskArgs = {
 export type QueryBackgroundTasksArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<BackgroundTasksFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   includeAuthorities?: InputMaybe<Scalars['Boolean']['input']>;
   orderBy?: InputMaybe<BackgroundTasksOrdering>;
@@ -18238,7 +18201,7 @@ export type QueryMarkingDefinitionArgs = {
 export type QueryMarkingDefinitionsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<MarkingDefinitionsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<MarkingDefinitionsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -18365,7 +18328,7 @@ export type QueryNotifierTestArgs = {
 export type QueryNotifiersArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<NotifierFiltering>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<NotifierOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -19613,7 +19576,7 @@ export type QueryUserArgs = {
 export type QueryUsersArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<UsersFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<UsersOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -26456,21 +26419,6 @@ export type UserStatus = {
   status: Scalars['String']['output'];
 };
 
-export enum UsersFilter {
-  CreatedAt = 'created_at',
-  EntityType = 'entity_type',
-  External = 'external',
-  Name = 'name',
-  UserEmail = 'user_email'
-}
-
-export type UsersFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<UsersFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum UsersOrdering {
   CreatedAt = 'created_at',
   External = 'external',
@@ -27867,8 +27815,6 @@ export type ResolversTypes = ResolversObject<{
   BackgroundTaskError: ResolverTypeWrapper<BackgroundTaskError>;
   BackgroundTaskScope: BackgroundTaskScope;
   BackgroundTaskType: BackgroundTaskType;
-  BackgroundTasksFilter: BackgroundTasksFilter;
-  BackgroundTasksFiltering: BackgroundTasksFiltering;
   BackgroundTasksOrdering: BackgroundTasksOrdering;
   BankAccount: ResolverTypeWrapper<Omit<BankAccount, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'indicators' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversTypes['CaseConnection']>, containers?: Maybe<ResolversTypes['ContainerConnection']>, createdBy?: Maybe<ResolversTypes['Identity']>, groupings?: Maybe<ResolversTypes['GroupingConnection']>, indicators?: Maybe<ResolversTypes['IndicatorConnection']>, notes?: Maybe<ResolversTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversTypes['OrganizationConnection']>, observedData?: Maybe<ResolversTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversTypes['OpinionConnection']>, reports?: Maybe<ResolversTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversTypes['StixCoreRelationshipConnection']> }>;
   BankAccountAddInput: BankAccountAddInput;
@@ -28178,8 +28124,6 @@ export type ResolversTypes = ResolversObject<{
   MarkingDefinitionConnection: ResolverTypeWrapper<MarkingDefinitionConnection>;
   MarkingDefinitionEdge: ResolverTypeWrapper<MarkingDefinitionEdge>;
   MarkingDefinitionEditMutations: ResolverTypeWrapper<MarkingDefinitionEditMutations>;
-  MarkingDefinitionsFilter: MarkingDefinitionsFilter;
-  MarkingDefinitionsFiltering: MarkingDefinitionsFiltering;
   MarkingDefinitionsOrdering: MarkingDefinitionsOrdering;
   MeOrganization: ResolverTypeWrapper<MeOrganization>;
   MeOrganizationConnection: ResolverTypeWrapper<MeOrganizationConnection>;
@@ -28228,8 +28172,6 @@ export type ResolversTypes = ResolversObject<{
   NotifierConnection: ResolverTypeWrapper<Omit<NotifierConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['NotifierEdge']>>> }>;
   NotifierConnector: ResolverTypeWrapper<NotifierConnector>;
   NotifierEdge: ResolverTypeWrapper<Omit<NotifierEdge, 'node'> & { node: ResolversTypes['Notifier'] }>;
-  NotifierFilter: NotifierFilter;
-  NotifierFiltering: NotifierFiltering;
   NotifierOrdering: NotifierOrdering;
   NotifierParameter: ResolverTypeWrapper<NotifierParameter>;
   NotifierTestInput: NotifierTestInput;
@@ -28554,8 +28496,6 @@ export type ResolversTypes = ResolversObject<{
   UserOTPLoginInput: UserOtpLoginInput;
   UserSession: ResolverTypeWrapper<UserSession>;
   UserStatus: ResolverTypeWrapper<UserStatus>;
-  UsersFilter: UsersFilter;
-  UsersFiltering: UsersFiltering;
   UsersOrdering: UsersOrdering;
   Vocabulary: ResolverTypeWrapper<BasicStoreEntityVocabulary>;
   VocabularyAddInput: VocabularyAddInput;
@@ -28637,7 +28577,6 @@ export type ResolversParentTypes = ResolversObject<{
   BackgroundTaskContext: BackgroundTaskContext;
   BackgroundTaskContextInput: BackgroundTaskContextInput;
   BackgroundTaskError: BackgroundTaskError;
-  BackgroundTasksFiltering: BackgroundTasksFiltering;
   BankAccount: Omit<BankAccount, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'indicators' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, indicators?: Maybe<ResolversParentTypes['IndicatorConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, observedData?: Maybe<ResolversParentTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversParentTypes['StixCoreRelationshipConnection']> };
   BankAccountAddInput: BankAccountAddInput;
   BasicObject: ResolversInterfaceTypes<ResolversParentTypes>['BasicObject'];
@@ -28892,7 +28831,6 @@ export type ResolversParentTypes = ResolversObject<{
   MarkingDefinitionConnection: MarkingDefinitionConnection;
   MarkingDefinitionEdge: MarkingDefinitionEdge;
   MarkingDefinitionEditMutations: MarkingDefinitionEditMutations;
-  MarkingDefinitionsFiltering: MarkingDefinitionsFiltering;
   MeOrganization: MeOrganization;
   MeOrganizationConnection: MeOrganizationConnection;
   MeOrganizationEdge: MeOrganizationEdge;
@@ -28935,7 +28873,6 @@ export type ResolversParentTypes = ResolversObject<{
   NotifierConnection: Omit<NotifierConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['NotifierEdge']>>> };
   NotifierConnector: NotifierConnector;
   NotifierEdge: Omit<NotifierEdge, 'node'> & { node: ResolversParentTypes['Notifier'] };
-  NotifierFiltering: NotifierFiltering;
   NotifierParameter: NotifierParameter;
   NotifierTestInput: NotifierTestInput;
   Number: Number;
@@ -29204,7 +29141,6 @@ export type ResolversParentTypes = ResolversObject<{
   UserOTPLoginInput: UserOtpLoginInput;
   UserSession: UserSession;
   UserStatus: UserStatus;
-  UsersFiltering: UsersFiltering;
   Vocabulary: BasicStoreEntityVocabulary;
   VocabularyAddInput: VocabularyAddInput;
   VocabularyConnection: Omit<VocabularyConnection, 'edges'> & { edges: Array<ResolversParentTypes['VocabularyEdge']> };
