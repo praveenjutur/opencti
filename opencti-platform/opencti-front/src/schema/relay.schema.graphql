@@ -1776,18 +1776,6 @@ enum LabelsOrdering {
   updated_at
 }
 
-enum LabelsFilter {
-  value
-  markedBy
-}
-
-input LabelsFiltering {
-  key: [LabelsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
-
 type LabelConnection {
   pageInfo: PageInfo!
   edges: [LabelEdge!]!
@@ -1907,18 +1895,6 @@ enum KillChainPhasesOrdering {
   modified
   created_at
   updated_at
-}
-
-enum KillChainPhasesFilter {
-  kill_chain_name
-  phase_name
-}
-
-input KillChainPhasesFiltering {
-  key: [KillChainPhasesFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 
 type KillChainPhaseConnection {
@@ -7612,11 +7588,11 @@ type Query {
   markingDefinition(id: String!): MarkingDefinition
   markingDefinitions(first: Int, after: ID, orderBy: MarkingDefinitionsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): MarkingDefinitionConnection
   label(id: String!): Label
-  labels(first: Int, after: ID, orderBy: LabelsOrdering, orderMode: OrderingMode, filters: [LabelsFiltering], filterMode: FilterMode, search: String): LabelConnection
+  labels(first: Int, after: ID, orderBy: LabelsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String): LabelConnection
   externalReference(id: String!): ExternalReference
   externalReferences(first: Int, after: ID, orderBy: ExternalReferencesOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String): ExternalReferenceConnection
   killChainPhase(id: String!): KillChainPhase
-  killChainPhases(first: Int, after: ID, orderBy: KillChainPhasesOrdering, orderMode: OrderingMode, filters: [KillChainPhasesFiltering], filterMode: FilterMode, search: String): KillChainPhaseConnection
+  killChainPhases(first: Int, after: ID, orderBy: KillChainPhasesOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String): KillChainPhaseConnection
   stixCoreObjectRaw(id: String!): String
   stixCoreObject(id: String!): StixCoreObject
   stixCoreObjects(first: Int, after: ID, types: [String], orderBy: StixCoreObjectsOrdering, orderMode: OrderingMode, filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String, relationship_type: [String], elementId: [String]): StixCoreObjectConnection

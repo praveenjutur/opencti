@@ -10185,18 +10185,6 @@ export type KillChainPhaseEditMutationsRelationDeleteArgs = {
   toId: Scalars['StixRef']['input'];
 };
 
-export enum KillChainPhasesFilter {
-  KillChainName = 'kill_chain_name',
-  PhaseName = 'phase_name'
-}
-
-export type KillChainPhasesFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<KillChainPhasesFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum KillChainPhasesOrdering {
   Created = 'created',
   CreatedAt = 'created_at',
@@ -10268,18 +10256,6 @@ export type LabelEditMutationsContextPatchArgs = {
 
 export type LabelEditMutationsFieldPatchArgs = {
   input: Array<InputMaybe<EditInput>>;
-};
-
-export enum LabelsFilter {
-  MarkedBy = 'markedBy',
-  Value = 'value'
-}
-
-export type LabelsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<LabelsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export enum LabelsOrdering {
@@ -18091,7 +18067,7 @@ export type QueryKillChainPhaseArgs = {
 export type QueryKillChainPhasesArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<KillChainPhasesFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<KillChainPhasesOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -18107,7 +18083,7 @@ export type QueryLabelArgs = {
 export type QueryLabelsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<LabelsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<LabelsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -28071,16 +28047,12 @@ export type ResolversTypes = ResolversObject<{
   KillChainPhaseConnection: ResolverTypeWrapper<KillChainPhaseConnection>;
   KillChainPhaseEdge: ResolverTypeWrapper<KillChainPhaseEdge>;
   KillChainPhaseEditMutations: ResolverTypeWrapper<Omit<KillChainPhaseEditMutations, 'relationAdd'> & { relationAdd?: Maybe<ResolversTypes['StixRefRelationship']> }>;
-  KillChainPhasesFilter: KillChainPhasesFilter;
-  KillChainPhasesFiltering: KillChainPhasesFiltering;
   KillChainPhasesOrdering: KillChainPhasesOrdering;
   Label: ResolverTypeWrapper<Label>;
   LabelAddInput: LabelAddInput;
   LabelConnection: ResolverTypeWrapper<LabelConnection>;
   LabelEdge: ResolverTypeWrapper<LabelEdge>;
   LabelEditMutations: ResolverTypeWrapper<LabelEditMutations>;
-  LabelsFilter: LabelsFilter;
-  LabelsFiltering: LabelsFiltering;
   LabelsOrdering: LabelsOrdering;
   Language: ResolverTypeWrapper<BasicStoreEntityLanguage>;
   LanguageAddInput: LanguageAddInput;
@@ -28790,13 +28762,11 @@ export type ResolversParentTypes = ResolversObject<{
   KillChainPhaseConnection: KillChainPhaseConnection;
   KillChainPhaseEdge: KillChainPhaseEdge;
   KillChainPhaseEditMutations: Omit<KillChainPhaseEditMutations, 'relationAdd'> & { relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']> };
-  KillChainPhasesFiltering: KillChainPhasesFiltering;
   Label: Label;
   LabelAddInput: LabelAddInput;
   LabelConnection: LabelConnection;
   LabelEdge: LabelEdge;
   LabelEditMutations: LabelEditMutations;
-  LabelsFiltering: LabelsFiltering;
   Language: BasicStoreEntityLanguage;
   LanguageAddInput: LanguageAddInput;
   LanguageConnection: Omit<LanguageConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['LanguageEdge']>>> };

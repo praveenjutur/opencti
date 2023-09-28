@@ -1712,16 +1712,6 @@ enum LabelsOrdering {
   created_at
   updated_at
 }
-enum LabelsFilter {
-  value
-  markedBy
-}
-input LabelsFiltering {
-  key: [LabelsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
 type LabelConnection {
   pageInfo: PageInfo!
   edges: [LabelEdge!]!
@@ -1844,16 +1834,6 @@ enum KillChainPhasesOrdering {
   modified
   created_at
   updated_at
-}
-enum KillChainPhasesFilter {
-  kill_chain_name
-  phase_name
-}
-input KillChainPhasesFiltering {
-  key: [KillChainPhasesFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 type KillChainPhaseConnection {
   pageInfo: PageInfo!
@@ -11629,7 +11609,7 @@ type Query {
     after: ID
     orderBy: LabelsOrdering
     orderMode: OrderingMode
-    filters: [LabelsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): LabelConnection @auth(for: [KNOWLEDGE])
@@ -11649,7 +11629,7 @@ type Query {
     after: ID
     orderBy: KillChainPhasesOrdering
     orderMode: OrderingMode
-    filters: [KillChainPhasesFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): KillChainPhaseConnection @auth(for: [KNOWLEDGE])

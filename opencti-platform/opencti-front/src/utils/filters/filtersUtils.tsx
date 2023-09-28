@@ -194,16 +194,16 @@ export const filtersWithEntityType = (filters: FilterGroup | undefined, type: st
     operator: 'eq',
     mode: 'or',
   };
-  return (filters
-    ? {
-      mode: filters.mode,
-      filterGroups: filters.filterGroups,
-      filters: [
+  return {
+    mode: filters?.mode ?? 'and',
+    filterGroups: filters?.filterGroups ?? [],
+    filters: filters
+      ? [
         ...filters.filters,
         entityTypeFilter,
-      ],
-    }
-    : undefined);
+      ]
+      : [entityTypeFilter],
+  };
 };
 
 export const isFilterGroupNotEmpty = (filterGroup: FilterGroup) => {
