@@ -201,7 +201,7 @@ export type AdministrativeAreaStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -229,7 +229,7 @@ export type AdministrativeAreaStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -485,7 +485,7 @@ export type ArtifactStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -513,7 +513,7 @@ export type ArtifactStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -712,7 +712,7 @@ export type AttackPatternStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -740,7 +740,7 @@ export type AttackPatternStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -1048,7 +1048,7 @@ export type AutonomousSystemStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1076,7 +1076,7 @@ export type AutonomousSystemStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -1349,7 +1349,7 @@ export type BankAccountStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1378,7 +1378,7 @@ export type BankAccountStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -1566,7 +1566,7 @@ export type CampaignStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1594,7 +1594,7 @@ export type CampaignStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -1916,7 +1916,7 @@ export type CaseStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1944,7 +1944,7 @@ export type CaseStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -2150,7 +2150,7 @@ export type CaseIncidentStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -2178,7 +2178,7 @@ export type CaseIncidentStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -2430,7 +2430,7 @@ export type CaseRfiStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -2458,7 +2458,7 @@ export type CaseRfiStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -2708,7 +2708,7 @@ export type CaseRftStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -2736,7 +2736,7 @@ export type CaseRftStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -3031,7 +3031,7 @@ export type ChannelStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -3059,7 +3059,7 @@ export type ChannelStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -3283,7 +3283,7 @@ export type CityStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -3311,7 +3311,7 @@ export type CityStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -3581,7 +3581,7 @@ export type ContainerStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -3609,7 +3609,7 @@ export type ContainerStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -3884,7 +3884,7 @@ export type CountryStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -3912,7 +3912,7 @@ export type CountryStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -4143,7 +4143,7 @@ export type CourseOfActionStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -4171,7 +4171,7 @@ export type CourseOfActionStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -4450,7 +4450,7 @@ export type CryptocurrencyWalletStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -4478,7 +4478,7 @@ export type CryptocurrencyWalletStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -4639,7 +4639,7 @@ export type CryptographicKeyStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -4667,7 +4667,7 @@ export type CryptographicKeyStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -4833,7 +4833,7 @@ export type DataComponentStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -4861,7 +4861,7 @@ export type DataComponentStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -5067,7 +5067,7 @@ export type DataSourceStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -5095,7 +5095,7 @@ export type DataSourceStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -5357,7 +5357,7 @@ export type DirectoryStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -5385,7 +5385,7 @@ export type DirectoryStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -5580,7 +5580,7 @@ export type DomainNameStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -5608,7 +5608,7 @@ export type DomainNameStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -5800,7 +5800,7 @@ export type EmailAddrStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -5828,7 +5828,7 @@ export type EmailAddrStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -5996,7 +5996,7 @@ export type EmailMessageStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -6024,7 +6024,7 @@ export type EmailMessageStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -6193,7 +6193,7 @@ export type EmailMimePartTypeStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -6221,7 +6221,7 @@ export type EmailMimePartTypeStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -6437,7 +6437,7 @@ export type EventStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -6465,7 +6465,7 @@ export type EventStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -6931,7 +6931,7 @@ export type FeedbackStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -6959,7 +6959,7 @@ export type FeedbackStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -7368,7 +7368,7 @@ export type GroupingStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -7396,7 +7396,7 @@ export type GroupingStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -7619,7 +7619,7 @@ export type HashedObservableStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -7647,7 +7647,7 @@ export type HashedObservableStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -7803,7 +7803,7 @@ export type HostnameStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -7831,7 +7831,7 @@ export type HostnameStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -7993,7 +7993,7 @@ export type IPv4AddrStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -8021,7 +8021,7 @@ export type IPv4AddrStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -8185,7 +8185,7 @@ export type IPv6AddrStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -8213,7 +8213,7 @@ export type IPv6AddrStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -8414,7 +8414,7 @@ export type IdentityStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -8442,7 +8442,7 @@ export type IdentityStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -8682,7 +8682,7 @@ export type IncidentStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -8710,7 +8710,7 @@ export type IncidentStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -8983,7 +8983,7 @@ export type IndicatorStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -9011,7 +9011,7 @@ export type IndicatorStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -9276,7 +9276,7 @@ export type IndividualStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -9304,7 +9304,7 @@ export type IndividualStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -9560,7 +9560,7 @@ export type InfrastructureStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -9588,7 +9588,7 @@ export type InfrastructureStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -9994,7 +9994,7 @@ export type IntrusionSetStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -10022,7 +10022,7 @@ export type IntrusionSetStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -10446,7 +10446,7 @@ export type LanguageStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -10474,7 +10474,7 @@ export type LanguageStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -10721,7 +10721,7 @@ export type LocationStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -10749,7 +10749,7 @@ export type LocationStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -11076,7 +11076,7 @@ export type MacAddrStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -11104,7 +11104,7 @@ export type MacAddrStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -11276,7 +11276,7 @@ export type MalwareStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -11304,7 +11304,7 @@ export type MalwareStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -11519,7 +11519,7 @@ export type MalwareAnalysisStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -11547,7 +11547,7 @@ export type MalwareAnalysisStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -11962,7 +11962,7 @@ export type MediaContentStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -11990,7 +11990,7 @@ export type MediaContentStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -13518,7 +13518,7 @@ export type MutationStixCoreRelationshipsExportAskArgs = {
   context?: InputMaybe<Scalars['String']['input']>;
   exportType: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   format: Scalars['String']['input'];
   maxMarkingDefinition?: InputMaybe<Scalars['String']['input']>;
   orderBy?: InputMaybe<StixCoreRelationshipsOrdering>;
@@ -14148,7 +14148,7 @@ export type MutexStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -14176,7 +14176,7 @@ export type MutexStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -14344,7 +14344,7 @@ export type NarrativeStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -14372,7 +14372,7 @@ export type NarrativeStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -14584,7 +14584,7 @@ export type NetworkTrafficStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -14612,7 +14612,7 @@ export type NetworkTrafficStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -14815,7 +14815,7 @@ export type NoteStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -14843,7 +14843,7 @@ export type NoteStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -15286,7 +15286,7 @@ export type ObservedDataStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -15314,7 +15314,7 @@ export type ObservedDataStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -15592,7 +15592,7 @@ export type OpinionStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -15620,7 +15620,7 @@ export type OpinionStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -15931,7 +15931,7 @@ export type OrganizationStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -15959,7 +15959,7 @@ export type OrganizationStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -16209,7 +16209,7 @@ export type PaymentCardStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -16237,7 +16237,7 @@ export type PaymentCardStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -16401,7 +16401,7 @@ export type PhoneNumberStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -16429,7 +16429,7 @@ export type PhoneNumberStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -16702,7 +16702,7 @@ export type PositionStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -16730,7 +16730,7 @@ export type PositionStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -16993,7 +16993,7 @@ export type ProcessStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -17021,7 +17021,7 @@ export type ProcessStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -18842,7 +18842,7 @@ export type QueryStixCoreRelationshipsArgs = {
   elementWithTargetTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -18877,7 +18877,7 @@ export type QueryStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -18919,7 +18919,7 @@ export type QueryStixCoreRelationshipsNumberArgs = {
   elementWithTargetTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -18942,7 +18942,7 @@ export type QueryStixCoreRelationshipsTimeSeriesArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -19906,7 +19906,7 @@ export type RegionStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -19934,7 +19934,7 @@ export type RegionStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -20223,7 +20223,7 @@ export type ReportStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -20251,7 +20251,7 @@ export type ReportStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -20702,7 +20702,7 @@ export type SectorStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -20730,7 +20730,7 @@ export type SectorStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -21088,7 +21088,7 @@ export type SoftwareStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -21116,7 +21116,7 @@ export type SoftwareStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -21367,7 +21367,7 @@ export type StixCoreObjectStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -21395,7 +21395,7 @@ export type StixCoreObjectStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -21698,7 +21698,7 @@ export type StixCoreRelationshipStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -21815,7 +21815,7 @@ export type StixCoreRelationshipsDistributionParameters = {
   elementWithTargetTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -21889,7 +21889,7 @@ export type StixCoreRelationshipsTimeSeriesParameters = {
   elementWithTargetTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -22037,7 +22037,7 @@ export type StixCyberObservableStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -22065,7 +22065,7 @@ export type StixCyberObservableStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -22302,7 +22302,7 @@ export type StixDomainObjectStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -22330,7 +22330,7 @@ export type StixDomainObjectStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -22667,7 +22667,7 @@ export type StixFileStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -22695,7 +22695,7 @@ export type StixFileStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -23825,7 +23825,7 @@ export type SystemStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -23853,7 +23853,7 @@ export type SystemStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -24121,7 +24121,7 @@ export type TaskStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -24149,7 +24149,7 @@ export type TaskStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -24476,7 +24476,7 @@ export type TextStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -24504,7 +24504,7 @@ export type TextStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -24679,7 +24679,7 @@ export type ThreatActorStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -24707,7 +24707,7 @@ export type ThreatActorStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -24890,7 +24890,7 @@ export type ThreatActorGroupStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -24918,7 +24918,7 @@ export type ThreatActorGroupStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -25166,7 +25166,7 @@ export type ThreatActorIndividualStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -25194,7 +25194,7 @@ export type ThreatActorIndividualStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -25426,7 +25426,7 @@ export type ToolStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -25454,7 +25454,7 @@ export type ToolStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -25855,7 +25855,7 @@ export type UrlStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -25883,7 +25883,7 @@ export type UrlStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -26109,7 +26109,7 @@ export type UserAccountStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -26137,7 +26137,7 @@ export type UserAccountStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -26325,7 +26325,7 @@ export type UserAgentStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -26353,7 +26353,7 @@ export type UserAgentStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -26801,7 +26801,7 @@ export type VulnerabilityStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -26829,7 +26829,7 @@ export type VulnerabilityStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -27059,7 +27059,7 @@ export type WindowsRegistryKeyStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -27087,7 +27087,7 @@ export type WindowsRegistryKeyStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -27252,7 +27252,7 @@ export type WindowsRegistryValueTypeStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -27280,7 +27280,7 @@ export type WindowsRegistryValueTypeStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -27650,7 +27650,7 @@ export type X509CertificateStixCoreRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -27678,7 +27678,7 @@ export type X509CertificateStixCoreRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;

@@ -65,7 +65,7 @@ const stixRelationshipsMultiHorizontalBarsWithRelationshipsDistributionQuery = g
     $subDistributionRelationshipType: [String]
     $subDistributionConfidences: [Int]
     $subDistributionSearch: String
-    $subDistributionFilters: [StixCoreRelationshipsFiltering]
+    $subDistributionFilters: FilterGroup
     $subDistributionFilterMode: FilterMode
   ) {
     stixRelationshipsDistribution(

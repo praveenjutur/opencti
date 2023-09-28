@@ -48,7 +48,7 @@ type DataComponent implements BasicObject & StixObject & StixCoreObject & StixDo
         lastSeenStop: DateTime
         confidences: [Int]
         search: String
-        filters: [StixCoreRelationshipsFiltering]
+        filters: FilterGroup
         filterMode: FilterMode
     ): StixCoreRelationshipConnection
     stixCoreObjectsDistribution(
@@ -85,7 +85,7 @@ type DataComponent implements BasicObject & StixObject & StixCoreObject & StixDo
         relationship_type: [String]
         confidences: [Int]
         search: String
-        filters: [StixCoreRelationshipsFiltering]
+        filters: FilterGroup
         filterMode: FilterMode
     ): [Distribution] @auth(for: [KNOWLEDGE, EXPLORE])
     # Stix Domain Object

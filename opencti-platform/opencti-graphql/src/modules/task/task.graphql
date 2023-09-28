@@ -46,7 +46,7 @@ type Task implements Container & StixDomainObject & StixCoreObject & StixObject 
     lastSeenStop: DateTime
     confidences: [Int]
     search: String
-    filters: [StixCoreRelationshipsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
   ): StixCoreRelationshipConnection
   stixCoreObjectsDistribution(
@@ -83,7 +83,7 @@ type Task implements Container & StixDomainObject & StixCoreObject & StixObject 
     relationship_type: [String]
     confidences: [Int]
     search: String
-    filters: [StixCoreRelationshipsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
   ): [Distribution] @auth(for: [KNOWLEDGE, EXPLORE])
   # StixDomainObject

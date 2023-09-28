@@ -47,7 +47,7 @@ type CaseIncident implements BasicObject & StixObject & StixCoreObject & StixDom
     lastSeenStop: DateTime
     confidences: [Int]
     search: String
-    filters: [StixCoreRelationshipsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
   ): StixCoreRelationshipConnection
   stixCoreObjectsDistribution(
@@ -84,7 +84,7 @@ type CaseIncident implements BasicObject & StixObject & StixCoreObject & StixDom
     relationship_type: [String]
     confidences: [Int]
     search: String
-    filters: [StixCoreRelationshipsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
   ): [Distribution] @auth(for: [KNOWLEDGE, EXPLORE])
   # Stix Domain Object

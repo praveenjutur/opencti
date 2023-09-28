@@ -59,7 +59,7 @@ export const StixCoreRelationshipsExportCreationMutation = graphql`
     $search: String
     $orderBy: StixCoreRelationshipsOrdering
     $orderMode: OrderingMode
-    $filters: [StixCoreRelationshipsFiltering]
+    $filters: FilterGroup
     $selectedIds: [String]
   ) {
     stixCoreRelationshipsExportAsk(

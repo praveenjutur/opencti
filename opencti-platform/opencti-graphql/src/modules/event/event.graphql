@@ -47,7 +47,7 @@ type Event implements BasicObject & StixCoreObject & StixDomainObject & StixObje
         lastSeenStop: DateTime
         confidences: [Int]
         search: String
-        filters: [StixCoreRelationshipsFiltering]
+        filters: FilterGroup
         filterMode: FilterMode
     ): StixCoreRelationshipConnection
     stixCoreObjectsDistribution(
@@ -84,7 +84,7 @@ type Event implements BasicObject & StixCoreObject & StixDomainObject & StixObje
         relationship_type: [String]
         confidences: [Int]
         search: String
-        filters: [StixCoreRelationshipsFiltering]
+        filters: FilterGroup
         filterMode: FilterMode
     ): [Distribution] @auth(for: [KNOWLEDGE, EXPLORE])
     # StixDomainObject

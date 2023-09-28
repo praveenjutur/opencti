@@ -46,7 +46,7 @@ type AdministrativeArea implements BasicObject & StixCoreObject & StixDomainObje
         lastSeenStop: DateTime
         confidences: [Int]
         search: String
-        filters: [StixCoreRelationshipsFiltering]
+        filters: FilterGroup
         filterMode: FilterMode
     ): StixCoreRelationshipConnection
     stixCoreObjectsDistribution(
@@ -83,7 +83,7 @@ type AdministrativeArea implements BasicObject & StixCoreObject & StixDomainObje
         relationship_type: [String]
         confidences: [Int]
         search: String
-        filters: [StixCoreRelationshipsFiltering]
+        filters: FilterGroup
         filterMode: FilterMode
     ): [Distribution] @auth(for: [KNOWLEDGE, EXPLORE])
     # StixDomainObject

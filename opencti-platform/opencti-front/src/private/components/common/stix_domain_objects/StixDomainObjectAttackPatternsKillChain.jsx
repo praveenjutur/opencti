@@ -347,7 +347,7 @@ export const stixDomainObjectAttackPatternsKillChainStixCoreRelationshipsQuery =
     $elementId: [String]
     $elementWithTargetTypes: [String]
     $first: Int
-    $filters: [StixCoreRelationshipsFiltering]
+    $filters: FilterGroup
   ) {
     ...StixDomainObjectAttackPatternsKillChain_data
   }
