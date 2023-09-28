@@ -7839,7 +7839,7 @@ type Query {
   stixDomainObjectsNumber(types: [String], endDate: DateTime, onlyInferred: Boolean, filters: FilterGroup, filterMode: FilterMode, search: String): Number
   stixDomainObjectsDistribution(objectId: [String], relationship_type: [String], toTypes: [String], elementWithTargetTypes: [String], field: String!, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   attackPattern(id: String): AttackPattern
-  attackPatterns(first: Int, after: ID, orderBy: AttackPatternsOrdering, orderMode: OrderingMode, filters: [AttackPatternsFiltering], filterMode: FilterMode, search: String, toStix: Boolean): AttackPatternConnection
+  attackPatterns(first: Int, after: ID, orderBy: AttackPatternsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): AttackPatternConnection
   campaign(id: String): Campaign
   campaigns(first: Int, after: ID, orderBy: CampaignsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): CampaignConnection
   campaignsTimeSeries(objectId: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime!, interval: String!, relationship_type: [String]): [TimeSeries]
@@ -7872,7 +7872,7 @@ type Query {
   reportsDistribution(objectId: String, authorId: String, field: String!, operation: StatsOperation!, limit: Int, order: String, startDate: DateTime, endDate: DateTime, dateAttribute: String, filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   reportContainsStixObjectOrStixRelationship(id: String!, stixObjectOrStixRelationshipId: String!): Boolean
   courseOfAction(id: String): CourseOfAction
-  coursesOfAction(first: Int, after: ID, orderBy: CoursesOfActionOrdering, orderMode: OrderingMode, filters: [CoursesOfActionFiltering], filterMode: FilterMode, search: String, toStix: Boolean): CourseOfActionConnection
+  coursesOfAction(first: Int, after: ID, orderBy: CoursesOfActionOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): CourseOfActionConnection
   identity(id: String!): Identity
   identities(first: Int, after: ID, types: [String], orderBy: IdentitiesOrdering, orderMode: OrderingMode, search: String, filters: [IdentitiesFiltering], filterMode: FilterMode, toStix: Boolean): IdentityConnection
   individual(id: String!): Individual
@@ -7969,9 +7969,9 @@ type Query {
   myNotifications(first: Int, after: ID, orderBy: NotificationsOrdering, orderMode: OrderingMode, filters: [NotificationsFiltering!], filterMode: FilterMode, search: String): NotificationConnection
   myUnreadNotificationsCount: Int
   dataComponent(id: String!): DataComponent
-  dataComponents(first: Int, after: ID, orderBy: DataComponentsOrdering, orderMode: OrderingMode, filters: [DataComponentsFiltering!], filterMode: FilterMode, search: String): DataComponentConnection
+  dataComponents(first: Int, after: ID, orderBy: DataComponentsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String): DataComponentConnection
   dataSource(id: String!): DataSource
-  dataSources(first: Int, after: ID, orderBy: DataSourcesOrdering, orderMode: OrderingMode, filters: [DataSourcesFiltering!], filterMode: FilterMode, search: String): DataSourceConnection
+  dataSources(first: Int, after: ID, orderBy: DataSourcesOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String): DataSourceConnection
   vocabulary(id: String!): Vocabulary
   vocabularyCategories: [VocabularyDefinition!]!
   vocabularies(category: VocabularyCategory, first: Int, after: ID, orderBy: VocabularyOrdering, orderMode: OrderingMode, filters: [VocabularyFiltering!], filterMode: FilterMode, search: String): VocabularyConnection
@@ -9585,29 +9585,6 @@ enum DataComponentsOrdering {
   confidence
 }
 
-enum DataComponentsFilter {
-  name
-  aliases
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectLabel
-  revoked
-  x_opencti_workflow_id
-  confidence
-  source_reliability
-}
-
-input DataComponentsFiltering {
-  key: [DataComponentsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
-
 type DataComponentConnection {
   pageInfo: PageInfo!
   edges: [DataComponentEdge]
@@ -9703,29 +9680,6 @@ enum DataSourcesOrdering {
   updated_at
   x_opencti_workflow_id
   confidence
-}
-
-enum DataSourcesFilter {
-  name
-  aliases
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectLabel
-  revoked
-  x_opencti_workflow_id
-  confidence
-  source_reliability
-}
-
-input DataSourcesFiltering {
-  key: [DataSourcesFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 
 type DataSourceConnection {

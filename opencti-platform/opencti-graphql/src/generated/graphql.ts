@@ -4977,29 +4977,6 @@ export type DataComponentEdge = {
   node: DataComponent;
 };
 
-export enum DataComponentsFilter {
-  Aliases = 'aliases',
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectLabel = 'objectLabel',
-  Revoked = 'revoked',
-  SourceReliability = 'source_reliability',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type DataComponentsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<DataComponentsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum DataComponentsOrdering {
   Confidence = 'confidence',
   Created = 'created',
@@ -5234,29 +5211,6 @@ export type DataSourceEdge = {
   __typename?: 'DataSourceEdge';
   cursor: Scalars['String']['output'];
   node: DataSource;
-};
-
-export enum DataSourcesFilter {
-  Aliases = 'aliases',
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectLabel = 'objectLabel',
-  Revoked = 'revoked',
-  SourceReliability = 'source_reliability',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type DataSourcesFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<DataSourcesFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export enum DataSourcesOrdering {
@@ -17611,7 +17565,7 @@ export type QueryAttackPatternArgs = {
 export type QueryAttackPatternsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<AttackPatternsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<AttackPatternsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -17927,7 +17881,7 @@ export type QueryCourseOfActionArgs = {
 export type QueryCoursesOfActionArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<CoursesOfActionFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<CoursesOfActionOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -17949,7 +17903,7 @@ export type QueryDataComponentArgs = {
 export type QueryDataComponentsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<DataComponentsFiltering>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<DataComponentsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -17965,7 +17919,7 @@ export type QueryDataSourceArgs = {
 export type QueryDataSourcesArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<DataSourcesFiltering>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<DataSourcesOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -28264,15 +28218,11 @@ export type ResolversTypes = ResolversObject<{
   DataComponentAddInput: DataComponentAddInput;
   DataComponentConnection: ResolverTypeWrapper<Omit<DataComponentConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['DataComponentEdge']>>> }>;
   DataComponentEdge: ResolverTypeWrapper<Omit<DataComponentEdge, 'node'> & { node: ResolversTypes['DataComponent'] }>;
-  DataComponentsFilter: DataComponentsFilter;
-  DataComponentsFiltering: DataComponentsFiltering;
   DataComponentsOrdering: DataComponentsOrdering;
   DataSource: ResolverTypeWrapper<BasicStoreEntityDataSource>;
   DataSourceAddInput: DataSourceAddInput;
   DataSourceConnection: ResolverTypeWrapper<Omit<DataSourceConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['DataSourceEdge']>>> }>;
   DataSourceEdge: ResolverTypeWrapper<Omit<DataSourceEdge, 'node'> & { node: ResolversTypes['DataSource'] }>;
-  DataSourcesFilter: DataSourcesFilter;
-  DataSourcesFiltering: DataSourcesFiltering;
   DataSourcesOrdering: DataSourcesOrdering;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']['output']>;
   DefaultMarking: ResolverTypeWrapper<DefaultMarking>;
@@ -29039,12 +28989,10 @@ export type ResolversParentTypes = ResolversObject<{
   DataComponentAddInput: DataComponentAddInput;
   DataComponentConnection: Omit<DataComponentConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['DataComponentEdge']>>> };
   DataComponentEdge: Omit<DataComponentEdge, 'node'> & { node: ResolversParentTypes['DataComponent'] };
-  DataComponentsFiltering: DataComponentsFiltering;
   DataSource: BasicStoreEntityDataSource;
   DataSourceAddInput: DataSourceAddInput;
   DataSourceConnection: Omit<DataSourceConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['DataSourceEdge']>>> };
   DataSourceEdge: Omit<DataSourceEdge, 'node'> & { node: ResolversParentTypes['DataSource'] };
-  DataSourcesFiltering: DataSourcesFiltering;
   DateTime: Scalars['DateTime']['output'];
   DefaultMarking: DefaultMarking;
   DefaultMarkingInput: DefaultMarkingInput;

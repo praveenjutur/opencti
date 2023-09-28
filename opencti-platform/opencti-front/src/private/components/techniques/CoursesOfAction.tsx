@@ -10,8 +10,8 @@ import CoursesOfActionLines, { coursesOfActionLinesQuery } from './courses_of_ac
 import Security from '../../../utils/Security';
 import { KNOWLEDGE_KNUPDATE } from '../../../utils/hooks/useGranted';
 import { usePaginationLocalStorage } from '../../../utils/hooks/useLocalStorage';
-import { Filters } from '../../../components/list_lines';
 import useQueryLoading from '../../../utils/hooks/useQueryLoading';
+import { initialFilterGroup } from '../../../utils/filters/filtersUtils';
 
 const LOCAL_STORAGE_KEY = 'view-coursesOfAction';
 
@@ -23,7 +23,7 @@ const CoursesOfAction = () => {
       sortBy: 'name',
       orderAsc: true,
       openExports: false,
-      filters: {} as Filters,
+      filters: initialFilterGroup,
     },
   );
   const renderLines = () => {
@@ -70,6 +70,8 @@ const CoursesOfAction = () => {
         handleSearch={helpers.handleSearch}
         handleAddFilter={helpers.handleAddFilter}
         handleRemoveFilter={helpers.handleRemoveFilter}
+        handleSwitchGlobalMode={helpers.handleSwitchGlobalMode}
+        handleSwitchLocalMode={helpers.handleSwitchLocalMode}
         handleToggleExports={helpers.handleToggleExports}
         openExports={openExports}
         exportEntityType="Course-Of-Action"
@@ -84,8 +86,7 @@ const CoursesOfAction = () => {
           'createdBy',
           'source_reliability',
           'creator',
-          'created_start_date',
-          'created_end_date',
+          'created',
           'revoked',
         ]}
       >
