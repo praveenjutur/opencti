@@ -132,29 +132,6 @@ enum EventsOrdering {
     stop_time
 }
 
-# Filtering
-enum EventsFilter {
-    name
-    aliases
-    event_types
-    created
-    modified
-    created_at
-    updated_at
-    createdBy
-    markedBy
-    objectLabel
-    x_opencti_workflow_id
-    start_time
-    stop_time
-}
-input EventsFiltering {
-    key: [EventsFilter!]!
-    values: [String]
-    operator: String
-    filterMode: FilterMode
-}
-
 # Relay connections
 type EventConnection {
     pageInfo: PageInfo!
@@ -173,7 +150,7 @@ type Query {
         after: ID
         orderBy: EventsOrdering
         orderMode: OrderingMode
-        filters: [EventsFiltering!]
+        filters: FilterGroup
         filterMode: FilterMode
         search: String
     ): EventConnection @auth(for: [KNOWLEDGE])

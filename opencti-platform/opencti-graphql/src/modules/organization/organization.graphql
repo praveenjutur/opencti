@@ -143,32 +143,6 @@ enum OrganizationsOrdering {
   x_opencti_workflow_id
 }
 
-# Filtering
-enum OrganizationsFilter {
-  name
-  aliases
-  x_opencti_organization_type
-  x_opencti_reliability
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  description
-  contact_information
-  revoked
-}
-input OrganizationsFiltering {
-  key: [OrganizationsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
-
 # Relay connections
 type OrganizationConnection {
   pageInfo: PageInfo!
@@ -187,7 +161,7 @@ type Query {
     after: ID
     orderBy: OrganizationsOrdering
     orderMode: OrderingMode
-    filters: [OrganizationsFiltering!]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean

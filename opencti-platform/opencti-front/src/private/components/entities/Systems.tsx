@@ -10,8 +10,8 @@ import SystemCreation from './systems/SystemCreation';
 import Security from '../../../utils/Security';
 import { KNOWLEDGE_KNUPDATE } from '../../../utils/hooks/useGranted';
 import { usePaginationLocalStorage } from '../../../utils/hooks/useLocalStorage';
-import { Filters } from '../../../components/list_lines';
 import useQueryLoading from '../../../utils/hooks/useQueryLoading';
+import { initialFilterGroup } from '../../../utils/filters/filtersUtils';
 
 const LOCAL_STORAGE_KEY = 'view-systems';
 
@@ -23,7 +23,7 @@ const Systems = () => {
       sortBy: 'name',
       orderAsc: true,
       openExports: false,
-      filters: {} as Filters,
+      filters: initialFilterGroup,
     },
   );
 
@@ -71,6 +71,8 @@ const Systems = () => {
         handleSearch={helpers.handleSearch}
         handleAddFilter={helpers.handleAddFilter}
         handleRemoveFilter={helpers.handleRemoveFilter}
+        handleSwitchGlobalMode={helpers.handleSwitchGlobalMode}
+        handleSwitchLocalMode={helpers.handleSwitchLocalMode}
         handleToggleExports={helpers.handleToggleExports}
         openExports={openExports}
         exportEntityType="System"
@@ -81,8 +83,7 @@ const Systems = () => {
         availableFilterKeys={[
           'objectLabel',
           'markedBy',
-          'created_start_date',
-          'created_end_date',
+          'created',
           'createdBy',
           'x_opencti_reliability',
         ]}

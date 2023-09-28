@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-  OrganizationsLinesPaginationQuery, OrganizationsLinesPaginationQuery$variables,
+  OrganizationsLinesPaginationQuery,
+  OrganizationsLinesPaginationQuery$variables,
 } from '@components/entities/organizations/__generated__/OrganizationsLinesPaginationQuery.graphql';
 import { OrganizationLineDummy } from '@components/entities/organizations/OrganizationLine';
 import ListLines from '../../../components/list_lines/ListLines';
@@ -9,8 +10,8 @@ import OrganizationCreation from './organizations/OrganizationCreation';
 import Security from '../../../utils/Security';
 import { KNOWLEDGE_KNUPDATE } from '../../../utils/hooks/useGranted';
 import { usePaginationLocalStorage } from '../../../utils/hooks/useLocalStorage';
-import { Filters } from '../../../components/list_lines';
 import useQueryLoading from '../../../utils/hooks/useQueryLoading';
+import { initialFilterGroup } from '../../../utils/filters/filtersUtils';
 
 const LOCAL_STORAGE_KEY = 'view-organizations';
 
@@ -22,7 +23,7 @@ const Organizations = () => {
       sortBy: 'name',
       orderAsc: true,
       openExports: false,
-      filters: {} as Filters,
+      filters: initialFilterGroup,
     },
   );
   const renderLines = () => {
@@ -74,6 +75,8 @@ const Organizations = () => {
         handleSearch={helpers.handleSearch}
         handleAddFilter={helpers.handleAddFilter}
         handleRemoveFilter={helpers.handleRemoveFilter}
+        handleSwitchGlobalMode={helpers.handleSwitchGlobalMode}
+        handleSwitchLocalMode={helpers.handleSwitchLocalMode}
         handleToggleExports={helpers.handleToggleExports}
         openExports={openExports}
         exportEntityType="Organization"
@@ -86,8 +89,7 @@ const Organizations = () => {
           'objectLabel',
           'markedBy',
           'createdBy',
-          'created_start_date',
-          'created_end_date',
+          'created',
           'x_opencti_reliability',
         ]}
       >

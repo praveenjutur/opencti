@@ -6582,29 +6582,6 @@ export type EventEdge = {
   node: Event;
 };
 
-export enum EventsFilter {
-  Aliases = 'aliases',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  EventTypes = 'event_types',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectLabel = 'objectLabel',
-  StartTime = 'start_time',
-  StopTime = 'stop_time',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type EventsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<EventsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum EventsOrdering {
   Created = 'created',
   CreatedAt = 'created_at',
@@ -9477,33 +9454,6 @@ export type IndividualEditMutationsRelationAddArgs = {
 export type IndividualEditMutationsRelationDeleteArgs = {
   relationship_type: Scalars['String']['input'];
   toId: Scalars['StixRef']['input'];
-};
-
-export enum IndividualsFilter {
-  Aliases = 'aliases',
-  ContactInformation = 'contact_information',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  Description = 'description',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  UpdatedAt = 'updated_at',
-  XOpenctiFirstname = 'x_opencti_firstname',
-  XOpenctiLastname = 'x_opencti_lastname',
-  XOpenctiReliability = 'x_opencti_reliability',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type IndividualsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<IndividualsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export enum IndividualsOrdering {
@@ -16129,32 +16079,6 @@ export type OrganizationEdge = {
 
 export type OrganizationOrIndividual = Individual | Organization;
 
-export enum OrganizationsFilter {
-  Aliases = 'aliases',
-  ContactInformation = 'contact_information',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Description = 'description',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Revoked = 'revoked',
-  UpdatedAt = 'updated_at',
-  XOpenctiOrganizationType = 'x_opencti_organization_type',
-  XOpenctiReliability = 'x_opencti_reliability',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type OrganizationsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<OrganizationsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum OrganizationsOrdering {
   Confidence = 'confidence',
   Created = 'created',
@@ -17940,7 +17864,7 @@ export type QueryEventArgs = {
 export type QueryEventsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<EventsFiltering>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<EventsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -18208,7 +18132,7 @@ export type QueryIndividualArgs = {
 export type QueryIndividualsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<IndividualsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<IndividualsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -18645,7 +18569,7 @@ export type QueryOrganizationArgs = {
 export type QueryOrganizationsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<OrganizationsFiltering>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<OrganizationsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -18836,7 +18760,7 @@ export type QuerySectorArgs = {
 export type QuerySectorsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<SectorsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<SectorsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -19598,7 +19522,7 @@ export type QuerySystemArgs = {
 export type QuerySystemsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<SystemsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<SystemsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -20995,29 +20919,6 @@ export type SectorEditMutationsRelationAddArgs = {
 export type SectorEditMutationsRelationDeleteArgs = {
   relationship_type: Scalars['String']['input'];
   toId: Scalars['StixRef']['input'];
-};
-
-export enum SectorsFilter {
-  Aliases = 'aliases',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  PartOf = 'partOf',
-  Revoked = 'revoked',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type SectorsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<SectorsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export enum SectorsOrdering {
@@ -24144,29 +24045,6 @@ export type SystemEditMutationsRelationAddArgs = {
 export type SystemEditMutationsRelationDeleteArgs = {
   relationship_type: Scalars['String']['input'];
   toId: Scalars['StixRef']['input'];
-};
-
-export enum SystemsFilter {
-  Aliases = 'aliases',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Revoked = 'revoked',
-  UpdatedAt = 'updated_at',
-  XOpenctiReliability = 'x_opencti_reliability',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type SystemsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<SystemsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export enum SystemsOrdering {
@@ -28242,8 +28120,6 @@ export type ResolversTypes = ResolversObject<{
   EventAddInput: EventAddInput;
   EventConnection: ResolverTypeWrapper<Omit<EventConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['EventEdge']>>> }>;
   EventEdge: ResolverTypeWrapper<Omit<EventEdge, 'node'> & { node: ResolversTypes['Event'] }>;
-  EventsFilter: EventsFilter;
-  EventsFiltering: EventsFiltering;
   EventsOrdering: EventsOrdering;
   ExternalReference: ResolverTypeWrapper<ExternalReference>;
   ExternalReferenceAddInput: ExternalReferenceAddInput;
@@ -28325,8 +28201,6 @@ export type ResolversTypes = ResolversObject<{
   IndividualConnection: ResolverTypeWrapper<Omit<IndividualConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['IndividualEdge']>>> }>;
   IndividualEdge: ResolverTypeWrapper<Omit<IndividualEdge, 'node'> & { node: ResolversTypes['Individual'] }>;
   IndividualEditMutations: ResolverTypeWrapper<Omit<IndividualEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversTypes['Individual']>, contextPatch?: Maybe<ResolversTypes['Individual']>, fieldPatch?: Maybe<ResolversTypes['Individual']>, relationAdd?: Maybe<ResolversTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversTypes['Individual']> }>;
-  IndividualsFilter: IndividualsFilter;
-  IndividualsFiltering: IndividualsFiltering;
   IndividualsOrdering: IndividualsOrdering;
   Inference: ResolverTypeWrapper<Omit<Inference, 'explanation'> & { explanation: Array<Maybe<ResolversTypes['StixObjectOrStixRelationship']>> }>;
   InferenceAttribute: ResolverTypeWrapper<InferenceAttribute>;
@@ -28497,8 +28371,6 @@ export type ResolversTypes = ResolversObject<{
   OrganizationConnection: ResolverTypeWrapper<Omit<OrganizationConnection, 'edges'> & { edges: Array<ResolversTypes['OrganizationEdge']> }>;
   OrganizationEdge: ResolverTypeWrapper<Omit<OrganizationEdge, 'node'> & { node: ResolversTypes['Organization'] }>;
   OrganizationOrIndividual: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['OrganizationOrIndividual']>;
-  OrganizationsFilter: OrganizationsFilter;
-  OrganizationsFiltering: OrganizationsFiltering;
   OrganizationsOrdering: OrganizationsOrdering;
   OtpElement: ResolverTypeWrapper<OtpElement>;
   OverviewMetrics: ResolverTypeWrapper<OverviewMetrics>;
@@ -28586,8 +28458,6 @@ export type ResolversTypes = ResolversObject<{
   SectorConnection: ResolverTypeWrapper<Omit<SectorConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['SectorEdge']>>> }>;
   SectorEdge: ResolverTypeWrapper<Omit<SectorEdge, 'node'> & { node: ResolversTypes['Sector'] }>;
   SectorEditMutations: ResolverTypeWrapper<Omit<SectorEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversTypes['Sector']>, contextPatch?: Maybe<ResolversTypes['Sector']>, fieldPatch?: Maybe<ResolversTypes['Sector']>, relationAdd?: Maybe<ResolversTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversTypes['Sector']> }>;
-  SectorsFilter: SectorsFilter;
-  SectorsFiltering: SectorsFiltering;
   SectorsOrdering: SectorsOrdering;
   SessionDetail: ResolverTypeWrapper<SessionDetail>;
   Settings: ResolverTypeWrapper<Omit<Settings, 'platform_organization'> & { platform_organization?: Maybe<ResolversTypes['Organization']> }>;
@@ -28721,8 +28591,6 @@ export type ResolversTypes = ResolversObject<{
   SystemConnection: ResolverTypeWrapper<Omit<SystemConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['SystemEdge']>>> }>;
   SystemEdge: ResolverTypeWrapper<Omit<SystemEdge, 'node'> & { node: ResolversTypes['System'] }>;
   SystemEditMutations: ResolverTypeWrapper<Omit<SystemEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversTypes['System']>, contextPatch?: Maybe<ResolversTypes['System']>, fieldPatch?: Maybe<ResolversTypes['System']>, relationAdd?: Maybe<ResolversTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversTypes['System']> }>;
-  SystemsFilter: SystemsFilter;
-  SystemsFiltering: SystemsFiltering;
   SystemsOrdering: SystemsOrdering;
   Task: ResolverTypeWrapper<BasicStoreEntityTask>;
   TaskAddInput: TaskAddInput;
@@ -29005,7 +28873,6 @@ export type ResolversParentTypes = ResolversObject<{
   EventAddInput: EventAddInput;
   EventConnection: Omit<EventConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['EventEdge']>>> };
   EventEdge: Omit<EventEdge, 'node'> & { node: ResolversParentTypes['Event'] };
-  EventsFiltering: EventsFiltering;
   ExternalReference: ExternalReference;
   ExternalReferenceAddInput: ExternalReferenceAddInput;
   ExternalReferenceConnection: ExternalReferenceConnection;
@@ -29074,7 +28941,6 @@ export type ResolversParentTypes = ResolversObject<{
   IndividualConnection: Omit<IndividualConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['IndividualEdge']>>> };
   IndividualEdge: Omit<IndividualEdge, 'node'> & { node: ResolversParentTypes['Individual'] };
   IndividualEditMutations: Omit<IndividualEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversParentTypes['Individual']>, contextPatch?: Maybe<ResolversParentTypes['Individual']>, fieldPatch?: Maybe<ResolversParentTypes['Individual']>, relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['Individual']> };
-  IndividualsFiltering: IndividualsFiltering;
   Inference: Omit<Inference, 'explanation'> & { explanation: Array<Maybe<ResolversParentTypes['StixObjectOrStixRelationship']>> };
   InferenceAttribute: InferenceAttribute;
   Infrastructure: Omit<Infrastructure, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, observedData?: Maybe<ResolversParentTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversParentTypes['StixCoreRelationshipConnection']> };
@@ -29213,7 +29079,6 @@ export type ResolversParentTypes = ResolversObject<{
   OrganizationConnection: Omit<OrganizationConnection, 'edges'> & { edges: Array<ResolversParentTypes['OrganizationEdge']> };
   OrganizationEdge: Omit<OrganizationEdge, 'node'> & { node: ResolversParentTypes['Organization'] };
   OrganizationOrIndividual: ResolversUnionTypes<ResolversParentTypes>['OrganizationOrIndividual'];
-  OrganizationsFiltering: OrganizationsFiltering;
   OtpElement: OtpElement;
   OverviewMetrics: OverviewMetrics;
   PageInfo: PageInfo;
@@ -29292,7 +29157,6 @@ export type ResolversParentTypes = ResolversObject<{
   SectorConnection: Omit<SectorConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['SectorEdge']>>> };
   SectorEdge: Omit<SectorEdge, 'node'> & { node: ResolversParentTypes['Sector'] };
   SectorEditMutations: Omit<SectorEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversParentTypes['Sector']>, contextPatch?: Maybe<ResolversParentTypes['Sector']>, fieldPatch?: Maybe<ResolversParentTypes['Sector']>, relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['Sector']> };
-  SectorsFiltering: SectorsFiltering;
   SessionDetail: SessionDetail;
   Settings: Omit<Settings, 'platform_organization'> & { platform_organization?: Maybe<ResolversParentTypes['Organization']> };
   SettingsEditMutations: Omit<SettingsEditMutations, 'contextClean' | 'contextPatch' | 'deleteMessage' | 'editMessage' | 'fieldPatch'> & { contextClean?: Maybe<ResolversParentTypes['Settings']>, contextPatch?: Maybe<ResolversParentTypes['Settings']>, deleteMessage?: Maybe<ResolversParentTypes['Settings']>, editMessage?: Maybe<ResolversParentTypes['Settings']>, fieldPatch?: Maybe<ResolversParentTypes['Settings']> };
@@ -29400,7 +29264,6 @@ export type ResolversParentTypes = ResolversObject<{
   SystemConnection: Omit<SystemConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['SystemEdge']>>> };
   SystemEdge: Omit<SystemEdge, 'node'> & { node: ResolversParentTypes['System'] };
   SystemEditMutations: Omit<SystemEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversParentTypes['System']>, contextPatch?: Maybe<ResolversParentTypes['System']>, fieldPatch?: Maybe<ResolversParentTypes['System']>, relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['System']> };
-  SystemsFiltering: SystemsFiltering;
   Task: BasicStoreEntityTask;
   TaskAddInput: TaskAddInput;
   TaskConnection: Omit<TaskConnection, 'edges'> & { edges: Array<ResolversParentTypes['TaskEdge']> };

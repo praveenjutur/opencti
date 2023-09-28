@@ -4027,31 +4027,6 @@ enum IndividualsOrdering {
   x_opencti_workflow_id
   objectMarking
 }
-enum IndividualsFilter {
-  name
-  aliases
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  description
-  contact_information
-  x_opencti_firstname
-  x_opencti_lastname
-  x_opencti_reliability
-  creator
-}
-input IndividualsFiltering {
-  key: [IndividualsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
 type IndividualConnection {
   pageInfo: PageInfo!
   edges: [IndividualEdge]
@@ -4219,27 +4194,6 @@ enum SectorsOrdering {
   x_opencti_workflow_id
   objectMarking
 }
-enum SectorsFilter {
-  name
-  aliases
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  partOf
-  x_opencti_workflow_id
-  revoked
-}
-input SectorsFiltering {
-  key: [SectorsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
 type SectorConnection {
   pageInfo: PageInfo!
   edges: [SectorEdge]
@@ -4402,27 +4356,6 @@ enum SystemsOrdering {
   created
   modified
   x_opencti_workflow_id
-}
-enum SystemsFilter {
-  name
-  aliases
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  x_opencti_reliability
-  revoked
-}
-input SystemsFiltering {
-  key: [SystemsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 type SystemConnection {
   pageInfo: PageInfo!
@@ -12207,7 +12140,7 @@ type Query {
     after: ID
     orderBy: IndividualsOrdering
     orderMode: OrderingMode
-    filters: [IndividualsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean
@@ -12218,7 +12151,7 @@ type Query {
     after: ID
     orderBy: SectorsOrdering
     orderMode: OrderingMode
-    filters: [SectorsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean
@@ -12229,7 +12162,7 @@ type Query {
     after: ID
     orderBy: SystemsOrdering
     orderMode: OrderingMode
-    filters: [SystemsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean
