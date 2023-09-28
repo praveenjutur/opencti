@@ -4130,28 +4130,6 @@ enum PositionsOrdering {
   x_opencti_workflow_id
 }
 
-enum PositionsFilter {
-  name
-  aliases
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  revoked
-}
-
-input PositionsFiltering {
-  key: [PositionsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
-
 type PositionConnection {
   pageInfo: PageInfo!
   edges: [PositionEdge]
@@ -4258,29 +4236,6 @@ enum CitiesOrdering {
   x_opencti_workflow_id
 }
 
-enum CitiesFilter {
-  name
-  aliases
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  revoked
-  creator
-}
-
-input CitiesFiltering {
-  key: [CitiesFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
-
 type CityConnection {
   pageInfo: PageInfo!
   edges: [CityEdge]
@@ -4381,29 +4336,6 @@ enum CountriesOrdering {
   x_opencti_workflow_id
 }
 
-enum CountriesFilter {
-  name
-  aliases
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  revoked
-  creator
-}
-
-input CountriesFiltering {
-  key: [CountriesFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
-
 type CountryConnection {
   pageInfo: PageInfo!
   edges: [CountryEdge!]!
@@ -4501,26 +4433,6 @@ enum RegionsOrdering {
   created_at
   updated_at
   x_opencti_workflow_id
-}
-
-enum RegionsFilter {
-  name
-  aliases
-  created
-  modified
-  created_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-}
-
-input RegionsFiltering {
-  key: [RegionsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 
 type RegionConnection {
@@ -7820,13 +7732,13 @@ type Query {
   location(id: String!): Location
   locations(first: Int, after: ID, types: [String], orderBy: LocationsOrdering, orderMode: OrderingMode, search: String, filters: [LocationsFiltering], filterMode: FilterMode, toStix: Boolean): LocationConnection
   city(id: String): City
-  cities(first: Int, after: ID, orderBy: CitiesOrdering, orderMode: OrderingMode, filters: [CitiesFiltering], filterMode: FilterMode, search: String, toStix: Boolean): CityConnection
+  cities(first: Int, after: ID, orderBy: CitiesOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): CityConnection
   country(id: String): Country
-  countries(first: Int, after: ID, orderBy: CountriesOrdering, orderMode: OrderingMode, filters: [CountriesFiltering], filterMode: FilterMode, search: String, toStix: Boolean): CountryConnection
+  countries(first: Int, after: ID, orderBy: CountriesOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): CountryConnection
   region(id: String!): Region
-  regions(first: Int, after: ID, orderBy: RegionsOrdering, orderMode: OrderingMode, filters: [RegionsFiltering], filterMode: FilterMode, search: String, toStix: Boolean): RegionConnection
+  regions(first: Int, after: ID, orderBy: RegionsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): RegionConnection
   position(id: String!): Position
-  positions(first: Int, after: ID, orderBy: PositionsOrdering, orderMode: OrderingMode, filters: [PositionsFiltering], filterMode: FilterMode, search: String, toStix: Boolean): PositionConnection
+  positions(first: Int, after: ID, orderBy: PositionsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): PositionConnection
   malware(id: String): Malware
   malwares(first: Int, after: ID, orderBy: MalwaresOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): MalwareConnection
   threatActor(id: String): ThreatActor
@@ -7903,7 +7815,7 @@ type Query {
   vocabularyCategories: [VocabularyDefinition!]!
   vocabularies(category: VocabularyCategory, first: Int, after: ID, orderBy: VocabularyOrdering, orderMode: OrderingMode, filters: [VocabularyFiltering!], filterMode: FilterMode, search: String): VocabularyConnection
   administrativeArea(id: String!): AdministrativeArea
-  administrativeAreas(first: Int, after: ID, orderBy: AdministrativeAreasOrdering, orderMode: OrderingMode, filters: [AdministrativeAreasFiltering!], filterMode: FilterMode, search: String): AdministrativeAreaConnection
+  administrativeAreas(first: Int, after: ID, orderBy: AdministrativeAreasOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String): AdministrativeAreaConnection
   task(id: String!): Task
   tasks(first: Int, after: ID, orderBy: TasksOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): TaskConnection
   taskContainsStixObjectOrStixRelationship(id: String!, stixObjectOrStixRelationshipId: String!): Boolean
@@ -9788,26 +9700,6 @@ enum AdministrativeAreasOrdering {
   objectMarking
   objectLabel
   x_opencti_workflow_id
-}
-
-enum AdministrativeAreasFilter {
-  name
-  aliases
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectLabel
-  x_opencti_workflow_id
-}
-
-input AdministrativeAreasFiltering {
-  key: [AdministrativeAreasFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 
 type AdministrativeAreaConnection {

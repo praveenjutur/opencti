@@ -5223,26 +5223,6 @@ enum PositionsOrdering {
   updated_at
   x_opencti_workflow_id
 }
-enum PositionsFilter {
-  name
-  aliases
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  revoked
-}
-input PositionsFiltering {
-  key: [PositionsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
 type PositionConnection {
   pageInfo: PageInfo!
   edges: [PositionEdge]
@@ -5410,27 +5390,6 @@ enum CitiesOrdering {
   objectLabel
   x_opencti_workflow_id
 }
-enum CitiesFilter {
-  name
-  aliases
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  revoked
-  creator
-}
-input CitiesFiltering {
-  key: [CitiesFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
 type CityConnection {
   pageInfo: PageInfo!
   edges: [CityEdge]
@@ -5592,27 +5551,6 @@ enum CountriesOrdering {
   updated_at
   x_opencti_workflow_id
 }
-enum CountriesFilter {
-  name
-  aliases
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  revoked
-  creator
-}
-input CountriesFiltering {
-  key: [CountriesFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
 type CountryConnection {
   pageInfo: PageInfo!
   edges: [CountryEdge!]!
@@ -5772,24 +5710,6 @@ enum RegionsOrdering {
   created_at
   updated_at
   x_opencti_workflow_id
-}
-enum RegionsFilter {
-  name
-  aliases
-  created
-  modified
-  created_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-}
-input RegionsFiltering {
-  key: [RegionsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 type RegionConnection {
   pageInfo: PageInfo!
@@ -12238,7 +12158,7 @@ type Query {
     after: ID
     orderBy: CitiesOrdering
     orderMode: OrderingMode
-    filters: [CitiesFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean
@@ -12249,7 +12169,7 @@ type Query {
     after: ID
     orderBy: CountriesOrdering
     orderMode: OrderingMode
-    filters: [CountriesFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean
@@ -12260,7 +12180,7 @@ type Query {
     after: ID
     orderBy: RegionsOrdering
     orderMode: OrderingMode
-    filters: [RegionsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean
@@ -12271,7 +12191,7 @@ type Query {
     after: ID
     orderBy: PositionsOrdering
     orderMode: OrderingMode
-    filters: [PositionsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean

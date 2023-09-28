@@ -280,26 +280,6 @@ export type AdministrativeAreaEdge = {
   node: AdministrativeArea;
 };
 
-export enum AdministrativeAreasFilter {
-  Aliases = 'aliases',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectLabel = 'objectLabel',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type AdministrativeAreasFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<AdministrativeAreasFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum AdministrativeAreasOrdering {
   Created = 'created',
   CreatedAt = 'created_at',
@@ -3142,29 +3122,6 @@ export enum ChannelsOrdering {
   XOpenctiWorkflowId = 'x_opencti_workflow_id'
 }
 
-export enum CitiesFilter {
-  Aliases = 'aliases',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Revoked = 'revoked',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type CitiesFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<CitiesFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum CitiesOrdering {
   Aliases = 'aliases',
   Created = 'created',
@@ -3768,29 +3725,6 @@ export type ContextData = {
   from_id?: Maybe<Scalars['String']['output']>;
   message: Scalars['String']['output'];
   to_id?: Maybe<Scalars['String']['output']>;
-};
-
-export enum CountriesFilter {
-  Aliases = 'aliases',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Revoked = 'revoked',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type CountriesFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<CountriesFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export enum CountriesOrdering {
@@ -16887,28 +16821,6 @@ export type PositionInput = {
   y: Scalars['Int']['input'];
 };
 
-export enum PositionsFilter {
-  Aliases = 'aliases',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Revoked = 'revoked',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type PositionsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<PositionsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum PositionsOrdering {
   Created = 'created',
   CreatedAt = 'created_at',
@@ -17447,7 +17359,7 @@ export type QueryAdministrativeAreaArgs = {
 export type QueryAdministrativeAreasArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<AdministrativeAreasFiltering>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<AdministrativeAreasOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -17714,7 +17626,7 @@ export type QueryChannelsArgs = {
 export type QueryCitiesArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<CitiesFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<CitiesOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -17762,7 +17674,7 @@ export type QueryContainersObjectsOfObjectArgs = {
 export type QueryCountriesArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<CountriesFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<CountriesOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -18612,7 +18524,7 @@ export type QueryPositionArgs = {
 export type QueryPositionsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<PositionsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<PositionsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -18634,7 +18546,7 @@ export type QueryRegionArgs = {
 export type QueryRegionsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<RegionsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<RegionsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -20104,26 +20016,6 @@ export type RegionEditMutationsRelationAddArgs = {
 export type RegionEditMutationsRelationDeleteArgs = {
   relationship_type: Scalars['String']['input'];
   toId: Scalars['StixRef']['input'];
-};
-
-export enum RegionsFilter {
-  Aliases = 'aliases',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type RegionsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<RegionsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export enum RegionsOrdering {
@@ -27937,8 +27829,6 @@ export type ResolversTypes = ResolversObject<{
   AdministrativeAreaAddInput: AdministrativeAreaAddInput;
   AdministrativeAreaConnection: ResolverTypeWrapper<Omit<AdministrativeAreaConnection, 'edges'> & { edges?: Maybe<Array<ResolversTypes['AdministrativeAreaEdge']>> }>;
   AdministrativeAreaEdge: ResolverTypeWrapper<Omit<AdministrativeAreaEdge, 'node'> & { node: ResolversTypes['AdministrativeArea'] }>;
-  AdministrativeAreasFilter: AdministrativeAreasFilter;
-  AdministrativeAreasFiltering: AdministrativeAreasFiltering;
   AdministrativeAreasOrdering: AdministrativeAreasOrdering;
   AppDebugDistribution: ResolverTypeWrapper<AppDebugDistribution>;
   AppDebugStatistics: ResolverTypeWrapper<AppDebugStatistics>;
@@ -28026,8 +27916,6 @@ export type ResolversTypes = ResolversObject<{
   ChannelConnection: ResolverTypeWrapper<Omit<ChannelConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['ChannelEdge']>>> }>;
   ChannelEdge: ResolverTypeWrapper<Omit<ChannelEdge, 'node'> & { node: ResolversTypes['Channel'] }>;
   ChannelsOrdering: ChannelsOrdering;
-  CitiesFilter: CitiesFilter;
-  CitiesFiltering: CitiesFiltering;
   CitiesOrdering: CitiesOrdering;
   City: ResolverTypeWrapper<Omit<City, 'administrativeArea' | 'cases' | 'containers' | 'country' | 'createdBy' | 'groupings' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'stixCoreRelationships'> & { administrativeArea?: Maybe<ResolversTypes['AdministrativeArea']>, cases?: Maybe<ResolversTypes['CaseConnection']>, containers?: Maybe<ResolversTypes['ContainerConnection']>, country?: Maybe<ResolversTypes['Country']>, createdBy?: Maybe<ResolversTypes['Identity']>, groupings?: Maybe<ResolversTypes['GroupingConnection']>, notes?: Maybe<ResolversTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversTypes['OrganizationConnection']>, observedData?: Maybe<ResolversTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversTypes['OpinionConnection']>, reports?: Maybe<ResolversTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversTypes['StixCoreRelationshipConnection']> }>;
   CityAddInput: CityAddInput;
@@ -28048,8 +27936,6 @@ export type ResolversTypes = ResolversObject<{
   ContainersFiltering: ContainersFiltering;
   ContainersOrdering: ContainersOrdering;
   ContextData: ResolverTypeWrapper<ContextData>;
-  CountriesFilter: CountriesFilter;
-  CountriesFiltering: CountriesFiltering;
   CountriesOrdering: CountriesOrdering;
   Country: ResolverTypeWrapper<Omit<Country, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'region' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversTypes['CaseConnection']>, containers?: Maybe<ResolversTypes['ContainerConnection']>, createdBy?: Maybe<ResolversTypes['Identity']>, groupings?: Maybe<ResolversTypes['GroupingConnection']>, notes?: Maybe<ResolversTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversTypes['OrganizationConnection']>, observedData?: Maybe<ResolversTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversTypes['OpinionConnection']>, region?: Maybe<ResolversTypes['Region']>, reports?: Maybe<ResolversTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversTypes['StixCoreRelationshipConnection']> }>;
   CountryAddInput: CountryAddInput;
@@ -28402,8 +28288,6 @@ export type ResolversTypes = ResolversObject<{
   PositionEdge: ResolverTypeWrapper<Omit<PositionEdge, 'node'> & { node: ResolversTypes['Position'] }>;
   PositionEditMutations: ResolverTypeWrapper<Omit<PositionEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversTypes['Position']>, contextPatch?: Maybe<ResolversTypes['Position']>, fieldPatch?: Maybe<ResolversTypes['Position']>, relationAdd?: Maybe<ResolversTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversTypes['Position']> }>;
   PositionInput: PositionInput;
-  PositionsFilter: PositionsFilter;
-  PositionsFiltering: PositionsFiltering;
   PositionsOrdering: PositionsOrdering;
   Process: ResolverTypeWrapper<Omit<Process, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'indicators' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'serviceDlls' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversTypes['CaseConnection']>, containers?: Maybe<ResolversTypes['ContainerConnection']>, createdBy?: Maybe<ResolversTypes['Identity']>, groupings?: Maybe<ResolversTypes['GroupingConnection']>, indicators?: Maybe<ResolversTypes['IndicatorConnection']>, notes?: Maybe<ResolversTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversTypes['OrganizationConnection']>, observedData?: Maybe<ResolversTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversTypes['OpinionConnection']>, reports?: Maybe<ResolversTypes['ReportConnection']>, serviceDlls?: Maybe<ResolversTypes['StixFileConnection']>, stixCoreRelationships?: Maybe<ResolversTypes['StixCoreRelationshipConnection']> }>;
   ProcessAddInput: ProcessAddInput;
@@ -28421,8 +28305,6 @@ export type ResolversTypes = ResolversObject<{
   RegionConnection: ResolverTypeWrapper<Omit<RegionConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['RegionEdge']>>> }>;
   RegionEdge: ResolverTypeWrapper<Omit<RegionEdge, 'node'> & { node: ResolversTypes['Region'] }>;
   RegionEditMutations: ResolverTypeWrapper<Omit<RegionEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversTypes['Region']>, contextPatch?: Maybe<ResolversTypes['Region']>, fieldPatch?: Maybe<ResolversTypes['Region']>, relationAdd?: Maybe<ResolversTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversTypes['Region']> }>;
-  RegionsFilter: RegionsFilter;
-  RegionsFiltering: RegionsFiltering;
   RegionsOrdering: RegionsOrdering;
   RegisterConnectorInput: RegisterConnectorInput;
   RemoteStreamCollection: ResolverTypeWrapper<RemoteStreamCollection>;
@@ -28725,7 +28607,6 @@ export type ResolversParentTypes = ResolversObject<{
   AdministrativeAreaAddInput: AdministrativeAreaAddInput;
   AdministrativeAreaConnection: Omit<AdministrativeAreaConnection, 'edges'> & { edges?: Maybe<Array<ResolversParentTypes['AdministrativeAreaEdge']>> };
   AdministrativeAreaEdge: Omit<AdministrativeAreaEdge, 'node'> & { node: ResolversParentTypes['AdministrativeArea'] };
-  AdministrativeAreasFiltering: AdministrativeAreasFiltering;
   AppDebugDistribution: AppDebugDistribution;
   AppDebugStatistics: AppDebugStatistics;
   AppInfo: AppInfo;
@@ -28794,7 +28675,6 @@ export type ResolversParentTypes = ResolversObject<{
   ChannelAddInput: ChannelAddInput;
   ChannelConnection: Omit<ChannelConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['ChannelEdge']>>> };
   ChannelEdge: Omit<ChannelEdge, 'node'> & { node: ResolversParentTypes['Channel'] };
-  CitiesFiltering: CitiesFiltering;
   City: Omit<City, 'administrativeArea' | 'cases' | 'containers' | 'country' | 'createdBy' | 'groupings' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'stixCoreRelationships'> & { administrativeArea?: Maybe<ResolversParentTypes['AdministrativeArea']>, cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, country?: Maybe<ResolversParentTypes['Country']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, observedData?: Maybe<ResolversParentTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversParentTypes['StixCoreRelationshipConnection']> };
   CityAddInput: CityAddInput;
   CityConnection: Omit<CityConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['CityEdge']>>> };
@@ -28811,7 +28691,6 @@ export type ResolversParentTypes = ResolversObject<{
   ContainerEditMutations: Omit<ContainerEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'investigationAdd' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversParentTypes['Container']>, contextPatch?: Maybe<ResolversParentTypes['Container']>, fieldPatch?: Maybe<ResolversParentTypes['Container']>, investigationAdd?: Maybe<ResolversParentTypes['Workspace']>, relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['Container']> };
   ContainersFiltering: ContainersFiltering;
   ContextData: ContextData;
-  CountriesFiltering: CountriesFiltering;
   Country: Omit<Country, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'region' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, observedData?: Maybe<ResolversParentTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, region?: Maybe<ResolversParentTypes['Region']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversParentTypes['StixCoreRelationshipConnection']> };
   CountryAddInput: CountryAddInput;
   CountryConnection: Omit<CountryConnection, 'edges'> & { edges: Array<ResolversParentTypes['CountryEdge']> };
@@ -29107,7 +28986,6 @@ export type ResolversParentTypes = ResolversObject<{
   PositionEdge: Omit<PositionEdge, 'node'> & { node: ResolversParentTypes['Position'] };
   PositionEditMutations: Omit<PositionEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversParentTypes['Position']>, contextPatch?: Maybe<ResolversParentTypes['Position']>, fieldPatch?: Maybe<ResolversParentTypes['Position']>, relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['Position']> };
   PositionInput: PositionInput;
-  PositionsFiltering: PositionsFiltering;
   Process: Omit<Process, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'indicators' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'serviceDlls' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, indicators?: Maybe<ResolversParentTypes['IndicatorConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, observedData?: Maybe<ResolversParentTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, serviceDlls?: Maybe<ResolversParentTypes['StixFileConnection']>, stixCoreRelationships?: Maybe<ResolversParentTypes['StixCoreRelationshipConnection']> };
   ProcessAddInput: ProcessAddInput;
   Provider: Provider;
@@ -29124,7 +29002,6 @@ export type ResolversParentTypes = ResolversObject<{
   RegionConnection: Omit<RegionConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['RegionEdge']>>> };
   RegionEdge: Omit<RegionEdge, 'node'> & { node: ResolversParentTypes['Region'] };
   RegionEditMutations: Omit<RegionEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversParentTypes['Region']>, contextPatch?: Maybe<ResolversParentTypes['Region']>, fieldPatch?: Maybe<ResolversParentTypes['Region']>, relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['Region']> };
-  RegionsFiltering: RegionsFiltering;
   RegisterConnectorInput: RegisterConnectorInput;
   RemoteStreamCollection: RemoteStreamCollection;
   Report: Omit<Report, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'relatedContainers' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, observedData?: Maybe<ResolversParentTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, relatedContainers?: Maybe<ResolversParentTypes['ContainerConnection']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversParentTypes['StixCoreRelationshipConnection']> };
