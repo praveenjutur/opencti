@@ -93,11 +93,11 @@ const localStorageToPaginationOptions = (
     basePagination.orderBy = sortBy;
   }
   let convertedFilters = filters?.filters as Filter[];
-  const fromId = R.head(convertedFilters.filter((n) => n.key === 'fromId'))?.values || undefined;
-  const toId = R.head(convertedFilters.filter((n) => n.key === 'toId'))?.values || undefined;
-  const fromTypes = R.head(convertedFilters.filter((n) => n.key === 'fromTypes'))?.values || undefined;
-  const toTypes = R.head(convertedFilters.filter((n) => n.key === 'toTypes'))?.values || undefined;
-  convertedFilters = convertedFilters.filter(
+  const fromId = convertedFilters ? R.head(convertedFilters.filter((n) => n.key === 'fromId'))?.values : undefined;
+  const toId = convertedFilters ? R.head(convertedFilters.filter((n) => n.key === 'toId'))?.values : undefined;
+  const fromTypes = convertedFilters ? R.head(convertedFilters.filter((n) => n.key === 'fromTypes'))?.values : undefined;
+  const toTypes = convertedFilters ? R.head(convertedFilters.filter((n) => n.key === 'toTypes'))?.values : undefined;
+  convertedFilters = convertedFilters?.filter(
     (n) => !['fromId', 'toId', 'fromTypes', 'toTypes'].includes(Array.isArray(n.key) ? n.key[0] : n.key),
   );
 
