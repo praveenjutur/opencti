@@ -8007,7 +8007,7 @@ type Query {
   administrativeArea(id: String!): AdministrativeArea
   administrativeAreas(first: Int, after: ID, orderBy: AdministrativeAreasOrdering, orderMode: OrderingMode, filters: [AdministrativeAreasFiltering!], filterMode: FilterMode, search: String): AdministrativeAreaConnection
   task(id: String!): Task
-  tasks(first: Int, after: ID, orderBy: TasksOrdering, orderMode: OrderingMode, filters: [TasksFiltering!], filterMode: FilterMode, search: String, toStix: Boolean): TaskConnection
+  tasks(first: Int, after: ID, orderBy: TasksOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): TaskConnection
   taskContainsStixObjectOrStixRelationship(id: String!, stixObjectOrStixRelationshipId: String!): Boolean
   taskTemplate(id: String!): TaskTemplate
   taskTemplates(first: Int, after: ID, orderBy: TaskTemplatesOrdering, orderMode: OrderingMode, filters: [TaskTemplatesFiltering!], filterMode: FilterMode, search: String, toStix: Boolean): TaskTemplateConnection
@@ -8016,16 +8016,16 @@ type Query {
   caseTemplate(id: String!): CaseTemplate
   caseTemplates(first: Int, after: ID, orderBy: CaseTemplatesOrdering, orderMode: OrderingMode, search: String): CaseTemplateConnection
   caseIncident(id: String!): CaseIncident
-  caseIncidents(first: Int, after: ID, orderBy: CaseIncidentsOrdering, orderMode: OrderingMode, filters: [CaseIncidentsFiltering!], filterMode: FilterMode, search: String, toStix: Boolean): CaseIncidentConnection
+  caseIncidents(first: Int, after: ID, orderBy: CaseIncidentsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): CaseIncidentConnection
   caseIncidentContainsStixObjectOrStixRelationship(id: String!, stixObjectOrStixRelationshipId: String!): Boolean
   caseRfi(id: String!): CaseRfi
-  caseRfis(first: Int, after: ID, orderBy: CaseRfisOrdering, orderMode: OrderingMode, filters: [CaseRfisFiltering!], filterMode: FilterMode, search: String, toStix: Boolean): CaseRfiConnection
+  caseRfis(first: Int, after: ID, orderBy: CaseRfisOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): CaseRfiConnection
   caseRfiContainsStixObjectOrStixRelationship(id: String!, stixObjectOrStixRelationshipId: String!): Boolean
   caseRft(id: String!): CaseRft
-  caseRfts(first: Int, after: ID, orderBy: CaseRftsOrdering, orderMode: OrderingMode, filters: [CaseRftsFiltering!], filterMode: FilterMode, search: String, toStix: Boolean): CaseRftConnection
+  caseRfts(first: Int, after: ID, orderBy: CaseRftsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): CaseRftConnection
   caseRftContainsStixObjectOrStixRelationship(id: String!, stixObjectOrStixRelationshipId: String!): Boolean
   feedback(id: String!): Feedback
-  feedbacks(first: Int, after: ID, orderBy: FeedbacksOrdering, orderMode: OrderingMode, filters: [FeedbacksFiltering!], filterMode: FilterMode, search: String, toStix: Boolean): FeedbackConnection
+  feedbacks(first: Int, after: ID, orderBy: FeedbacksOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): FeedbackConnection
   feedbackContainsStixObjectOrStixRelationship(id: String!, stixObjectOrStixRelationshipId: String!): Boolean
   entitySetting(id: String!): EntitySetting
   entitySettingByType(targetType: String!): EntitySetting
@@ -10130,24 +10130,6 @@ enum TasksOrdering {
   objectAssignee
 }
 
-enum TasksFilter {
-  name
-  created
-  modified
-  context
-  created_at
-  updated_at
-  creator
-  createdBy
-  markedBy
-  objectLabel
-  objectAssignee
-  participant
-  objects
-  x_opencti_workflow_id
-  due_date
-}
-
 type TaskEdge {
   cursor: String!
   node: Task!
@@ -10156,13 +10138,6 @@ type TaskEdge {
 type TaskConnection {
   pageInfo: PageInfo!
   edges: [TaskEdge!]!
-}
-
-input TasksFiltering {
-  key: [TasksFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 
 input TaskAddInput {
@@ -10453,33 +10428,6 @@ enum CaseIncidentsOrdering {
   objectMarking
 }
 
-enum CaseIncidentsFilter {
-  name
-  created
-  modified
-  context
-  created_at
-  updated_at
-  creator
-  createdBy
-  markedBy
-  objectLabel
-  objectAssignee
-  participant
-  x_opencti_workflow_id
-  severity
-  priority
-  confidence
-  source_reliability
-}
-
-input CaseIncidentsFiltering {
-  key: [CaseIncidentsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
-
 type CaseIncidentConnection {
   pageInfo: PageInfo!
   edges: [CaseIncidentEdge]
@@ -10594,32 +10542,6 @@ enum CaseRfisOrdering {
   objectMarking
   severity
   priority
-}
-
-enum CaseRfisFilter {
-  name
-  created
-  modified
-  created_at
-  updated_at
-  creator
-  createdBy
-  markedBy
-  objectLabel
-  objectAssignee
-  participant
-  x_opencti_workflow_id
-  confidence
-  source_reliability
-  severity
-  priority
-}
-
-input CaseRfisFiltering {
-  key: [CaseRfisFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 
 type CaseRfiConnection {
@@ -10738,33 +10660,6 @@ enum CaseRftsOrdering {
   priority
 }
 
-enum CaseRftsFilter {
-  name
-  created
-  modified
-  context
-  created_at
-  updated_at
-  creator
-  createdBy
-  markedBy
-  objectLabel
-  objectAssignee
-  participant
-  x_opencti_workflow_id
-  confidence
-  source_reliability
-  severity
-  priority
-}
-
-input CaseRftsFiltering {
-  key: [CaseRftsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
-
 type CaseRftConnection {
   pageInfo: PageInfo!
   edges: [CaseRftEdge]
@@ -10875,31 +10770,6 @@ enum FeedbacksOrdering {
   x_opencti_workflow_id
   confidence
   objectMarking
-}
-
-enum FeedbacksFilter {
-  name
-  created
-  modified
-  context
-  created_at
-  updated_at
-  creator
-  createdBy
-  markedBy
-  objectLabel
-  objectAssignee
-  x_opencti_workflow_id
-  rating
-  confidence
-  source_reliability
-}
-
-input FeedbacksFiltering {
-  key: [FeedbacksFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 
 type FeedbackConnection {

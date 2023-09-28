@@ -160,33 +160,6 @@ enum CaseRfisOrdering {
   priority
 }
 
-# Filtering
-enum CaseRfisFilter {
-  name
-  created
-  modified
-  created_at
-  updated_at
-  creator
-  createdBy
-  markedBy
-  objectLabel
-  objectAssignee
-  participant
-  x_opencti_workflow_id
-  confidence
-  source_reliability
-  severity
-  priority
-}
-
-input CaseRfisFiltering {
-  key: [CaseRfisFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
-
 # Relay connections
 type CaseRfiConnection {
   pageInfo: PageInfo!
@@ -206,7 +179,7 @@ type Query {
     after: ID
     orderBy: CaseRfisOrdering
     orderMode: OrderingMode
-    filters: [CaseRfisFiltering!]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean

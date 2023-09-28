@@ -2256,33 +2256,6 @@ export type CaseIncidentEdge = {
   node: CaseIncident;
 };
 
-export enum CaseIncidentsFilter {
-  Confidence = 'confidence',
-  Context = 'context',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Participant = 'participant',
-  Priority = 'priority',
-  Severity = 'severity',
-  SourceReliability = 'source_reliability',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type CaseIncidentsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<CaseIncidentsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum CaseIncidentsOrdering {
   Confidence = 'confidence',
   Context = 'context',
@@ -2562,32 +2535,6 @@ export type CaseRfiEdge = {
   node: CaseRfi;
 };
 
-export enum CaseRfisFilter {
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Participant = 'participant',
-  Priority = 'priority',
-  Severity = 'severity',
-  SourceReliability = 'source_reliability',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type CaseRfisFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<CaseRfisFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum CaseRfisOrdering {
   Confidence = 'confidence',
   Created = 'created',
@@ -2864,33 +2811,6 @@ export type CaseRftEdge = {
   __typename?: 'CaseRftEdge';
   cursor: Scalars['String']['output'];
   node: CaseRft;
-};
-
-export enum CaseRftsFilter {
-  Confidence = 'confidence',
-  Context = 'context',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Participant = 'participant',
-  Priority = 'priority',
-  Severity = 'severity',
-  SourceReliability = 'source_reliability',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type CaseRftsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<CaseRftsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export enum CaseRftsOrdering {
@@ -7249,31 +7169,6 @@ export type FeedbackEdge = {
   __typename?: 'FeedbackEdge';
   cursor: Scalars['String']['output'];
   node: Feedback;
-};
-
-export enum FeedbacksFilter {
-  Confidence = 'confidence',
-  Context = 'context',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Rating = 'rating',
-  SourceReliability = 'source_reliability',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type FeedbacksFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<FeedbacksFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export enum FeedbacksOrdering {
@@ -17915,7 +17810,7 @@ export type QueryCaseIncidentContainsStixObjectOrStixRelationshipArgs = {
 export type QueryCaseIncidentsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<CaseIncidentsFiltering>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<CaseIncidentsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -17938,7 +17833,7 @@ export type QueryCaseRfiContainsStixObjectOrStixRelationshipArgs = {
 export type QueryCaseRfisArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<CaseRfisFiltering>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<CaseRfisOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -17961,7 +17856,7 @@ export type QueryCaseRftContainsStixObjectOrStixRelationshipArgs = {
 export type QueryCaseRftsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<CaseRftsFiltering>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<CaseRftsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -18208,7 +18103,7 @@ export type QueryFeedbackContainsStixObjectOrStixRelationshipArgs = {
 export type QueryFeedbacksArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<FeedbacksFiltering>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<FeedbacksOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -19863,7 +19758,7 @@ export type QueryTaskTemplatesArgs = {
 export type QueryTasksArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<TasksFiltering>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<TasksOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -24704,31 +24599,6 @@ export enum TaskTemplatesOrdering {
   UpdatedAt = 'updated_at'
 }
 
-export enum TasksFilter {
-  Context = 'context',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  DueDate = 'due_date',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Objects = 'objects',
-  Participant = 'participant',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type TasksFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<TasksFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum TasksOrdering {
   Confidence = 'confidence',
   Context = 'context',
@@ -28374,22 +28244,16 @@ export type ResolversTypes = ResolversObject<{
   CaseIncidentAddInput: CaseIncidentAddInput;
   CaseIncidentConnection: ResolverTypeWrapper<Omit<CaseIncidentConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['CaseIncidentEdge']>>> }>;
   CaseIncidentEdge: ResolverTypeWrapper<Omit<CaseIncidentEdge, 'node'> & { node: ResolversTypes['CaseIncident'] }>;
-  CaseIncidentsFilter: CaseIncidentsFilter;
-  CaseIncidentsFiltering: CaseIncidentsFiltering;
   CaseIncidentsOrdering: CaseIncidentsOrdering;
   CaseRfi: ResolverTypeWrapper<BasicStoreEntityCaseRfi>;
   CaseRfiAddInput: CaseRfiAddInput;
   CaseRfiConnection: ResolverTypeWrapper<Omit<CaseRfiConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['CaseRfiEdge']>>> }>;
   CaseRfiEdge: ResolverTypeWrapper<Omit<CaseRfiEdge, 'node'> & { node: ResolversTypes['CaseRfi'] }>;
-  CaseRfisFilter: CaseRfisFilter;
-  CaseRfisFiltering: CaseRfisFiltering;
   CaseRfisOrdering: CaseRfisOrdering;
   CaseRft: ResolverTypeWrapper<BasicStoreEntityCaseRft>;
   CaseRftAddInput: CaseRftAddInput;
   CaseRftConnection: ResolverTypeWrapper<Omit<CaseRftConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['CaseRftEdge']>>> }>;
   CaseRftEdge: ResolverTypeWrapper<Omit<CaseRftEdge, 'node'> & { node: ResolversTypes['CaseRft'] }>;
-  CaseRftsFilter: CaseRftsFilter;
-  CaseRftsFiltering: CaseRftsFiltering;
   CaseRftsOrdering: CaseRftsOrdering;
   CaseTemplate: ResolverTypeWrapper<BasicStoreEntityCaseTemplate>;
   CaseTemplateAddInput: CaseTemplateAddInput;
@@ -28528,8 +28392,6 @@ export type ResolversTypes = ResolversObject<{
   FeedbackAddInput: FeedbackAddInput;
   FeedbackConnection: ResolverTypeWrapper<Omit<FeedbackConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['FeedbackEdge']>>> }>;
   FeedbackEdge: ResolverTypeWrapper<Omit<FeedbackEdge, 'node'> & { node: ResolversTypes['Feedback'] }>;
-  FeedbacksFilter: FeedbacksFilter;
-  FeedbacksFiltering: FeedbacksFiltering;
   FeedbacksOrdering: FeedbacksOrdering;
   File: ResolverTypeWrapper<File>;
   FileConnection: ResolverTypeWrapper<FileConnection>;
@@ -29003,8 +28865,6 @@ export type ResolversTypes = ResolversObject<{
   TaskTemplatesFilter: TaskTemplatesFilter;
   TaskTemplatesFiltering: TaskTemplatesFiltering;
   TaskTemplatesOrdering: TaskTemplatesOrdering;
-  TasksFilter: TasksFilter;
-  TasksFiltering: TasksFiltering;
   TasksOrdering: TasksOrdering;
   TaxiiAuthType: TaxiiAuthType;
   TaxiiCollection: ResolverTypeWrapper<TaxiiCollection>;
@@ -29179,17 +29039,14 @@ export type ResolversParentTypes = ResolversObject<{
   CaseIncidentAddInput: CaseIncidentAddInput;
   CaseIncidentConnection: Omit<CaseIncidentConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['CaseIncidentEdge']>>> };
   CaseIncidentEdge: Omit<CaseIncidentEdge, 'node'> & { node: ResolversParentTypes['CaseIncident'] };
-  CaseIncidentsFiltering: CaseIncidentsFiltering;
   CaseRfi: BasicStoreEntityCaseRfi;
   CaseRfiAddInput: CaseRfiAddInput;
   CaseRfiConnection: Omit<CaseRfiConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['CaseRfiEdge']>>> };
   CaseRfiEdge: Omit<CaseRfiEdge, 'node'> & { node: ResolversParentTypes['CaseRfi'] };
-  CaseRfisFiltering: CaseRfisFiltering;
   CaseRft: BasicStoreEntityCaseRft;
   CaseRftAddInput: CaseRftAddInput;
   CaseRftConnection: Omit<CaseRftConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['CaseRftEdge']>>> };
   CaseRftEdge: Omit<CaseRftEdge, 'node'> & { node: ResolversParentTypes['CaseRft'] };
-  CaseRftsFiltering: CaseRftsFiltering;
   CaseTemplate: BasicStoreEntityCaseTemplate;
   CaseTemplateAddInput: CaseTemplateAddInput;
   CaseTemplateConnection: Omit<CaseTemplateConnection, 'edges'> & { edges: Array<ResolversParentTypes['CaseTemplateEdge']> };
@@ -29300,7 +29157,6 @@ export type ResolversParentTypes = ResolversObject<{
   FeedbackAddInput: FeedbackAddInput;
   FeedbackConnection: Omit<FeedbackConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['FeedbackEdge']>>> };
   FeedbackEdge: Omit<FeedbackEdge, 'node'> & { node: ResolversParentTypes['Feedback'] };
-  FeedbacksFiltering: FeedbacksFiltering;
   File: File;
   FileConnection: FileConnection;
   FileEdge: FileEdge;
@@ -29689,7 +29545,6 @@ export type ResolversParentTypes = ResolversObject<{
   TaskTemplateConnection: TaskTemplateConnection;
   TaskTemplateEdge: TaskTemplateEdge;
   TaskTemplatesFiltering: TaskTemplatesFiltering;
-  TasksFiltering: TasksFiltering;
   TaxiiCollection: TaxiiCollection;
   TaxiiCollectionAddInput: TaxiiCollectionAddInput;
   TaxiiCollectionConnection: TaxiiCollectionConnection;

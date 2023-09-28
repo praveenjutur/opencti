@@ -161,35 +161,6 @@ enum CaseIncidentsOrdering {
   confidence
   objectMarking
 }
-
-# Filtering
-enum CaseIncidentsFilter {
-  name
-  created
-  modified
-  context
-  created_at
-  updated_at
-  creator
-  createdBy
-  markedBy
-  objectLabel
-  objectAssignee
-  participant
-  x_opencti_workflow_id
-  severity
-  priority
-  confidence
-  source_reliability
-}
-
-input CaseIncidentsFiltering {
-  key: [CaseIncidentsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
-
 # Relay connections
 type CaseIncidentConnection {
   pageInfo: PageInfo!
@@ -209,7 +180,7 @@ type Query {
     after: ID
     orderBy: CaseIncidentsOrdering
     orderMode: OrderingMode
-    filters: [CaseIncidentsFiltering!]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean

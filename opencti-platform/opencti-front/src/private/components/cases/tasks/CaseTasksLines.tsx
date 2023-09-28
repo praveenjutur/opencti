@@ -1,8 +1,4 @@
-import {
-  AddOutlined,
-  CloseOutlined,
-  ContentPasteGoOutlined,
-} from '@mui/icons-material';
+import { AddOutlined, CloseOutlined, ContentPasteGoOutlined, } from '@mui/icons-material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
@@ -30,10 +26,7 @@ import ListLines from '../../../../components/list_lines/ListLines';
 import { CaseTasksLine } from './CaseTasksLine';
 import { tasksDataColumns } from './TasksLine';
 import { CaseTasksLines_data$key } from './__generated__/CaseTasksLines_data.graphql';
-import {
-  CaseTasksLinesQuery,
-  CaseTasksLinesQuery$variables,
-} from './__generated__/CaseTasksLinesQuery.graphql';
+import { CaseTasksLinesQuery, CaseTasksLinesQuery$variables, } from './__generated__/CaseTasksLinesQuery.graphql';
 
 const useStyles = makeStyles<Theme>((theme) => ({
   drawerPaper: {
@@ -90,7 +83,7 @@ const useStyles = makeStyles<Theme>((theme) => ({
 export const caseTasksLinesQuery = graphql`
   query CaseTasksLinesQuery(
     $count: Int
-    $filters: [TasksFiltering!]
+    $filters: FilterGroup
     $cursor: ID
     $orderBy: TasksOrdering
     $orderMode: OrderingMode
@@ -110,7 +103,7 @@ const caseTasksLinesFragment = graphql`
   fragment CaseTasksLines_data on Query
   @argumentDefinitions(
     count: { type: "Int", defaultValue: 25 }
-    filters: { type: "[TasksFiltering!]" }
+    filters: { type: "FilterGroup" }
     cursor: { type: "ID" }
     orderBy: { type: "TasksOrdering" }
     orderMode: { type: "OrderingMode", defaultValue: desc }

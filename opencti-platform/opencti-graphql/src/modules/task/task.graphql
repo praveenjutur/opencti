@@ -152,24 +152,6 @@ enum TasksOrdering {
   due_date
   objectAssignee
 }
-# Filtering
-enum TasksFilter {
-  name
-  created
-  modified
-  context
-  created_at
-  updated_at
-  creator
-  createdBy
-  markedBy
-  objectLabel
-  objectAssignee
-  participant
-  objects
-  x_opencti_workflow_id
-  due_date
-}
 
 type TaskEdge {
   cursor: String!
@@ -181,13 +163,6 @@ type TaskConnection {
   edges: [TaskEdge!]!
 }
 
-input TasksFiltering {
-  key: [TasksFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
-
 # Queries
 type Query {
   task(id: String!): Task @auth
@@ -196,7 +171,7 @@ type Query {
     after: ID
     orderBy: TasksOrdering
     orderMode: OrderingMode
-    filters: [TasksFiltering!]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean

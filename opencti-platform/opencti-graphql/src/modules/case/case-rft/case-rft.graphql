@@ -161,34 +161,6 @@ enum CaseRftsOrdering {
   priority
 }
 
-# Filtering
-enum CaseRftsFilter {
-  name
-  created
-  modified
-  context
-  created_at
-  updated_at
-  creator
-  createdBy
-  markedBy
-  objectLabel
-  objectAssignee
-  participant
-  x_opencti_workflow_id
-  confidence
-  source_reliability
-  severity
-  priority
-}
-
-input CaseRftsFiltering {
-  key: [CaseRftsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
-
 # Relay connections
 type CaseRftConnection {
   pageInfo: PageInfo!
@@ -208,7 +180,7 @@ type Query {
     after: ID
     orderBy: CaseRftsOrdering
     orderMode: OrderingMode
-    filters: [CaseRftsFiltering!]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean
