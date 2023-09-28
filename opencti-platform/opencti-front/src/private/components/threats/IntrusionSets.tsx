@@ -2,7 +2,8 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import { GenericAttackCardDummy } from '@components/common/cards/GenericAttackCard';
 import {
-  IntrusionSetsCardsPaginationQuery, IntrusionSetsCardsPaginationQuery$variables,
+  IntrusionSetsCardsPaginationQuery,
+  IntrusionSetsCardsPaginationQuery$variables,
 } from './intrusion_sets/__generated__/IntrusionSetsCardsPaginationQuery.graphql';
 import ListCards from '../../../components/list_cards/ListCards';
 import IntrusionSetsCards, { intrusionSetsCardsQuery } from './intrusion_sets/IntrusionSetsCards';
@@ -10,8 +11,8 @@ import IntrusionSetCreation from './intrusion_sets/IntrusionSetCreation';
 import Security from '../../../utils/Security';
 import { KNOWLEDGE_KNUPDATE } from '../../../utils/hooks/useGranted';
 import { usePaginationLocalStorage } from '../../../utils/hooks/useLocalStorage';
-import { Filters } from '../../../components/list_lines';
 import useQueryLoading from '../../../utils/hooks/useQueryLoading';
+import { initialFilterGroup } from '../../../utils/filters/filtersUtils';
 
 const LOCAL_STORAGE_KEY = 'view-intrusionSets';
 
@@ -23,7 +24,7 @@ const IntrusionSets = () => {
       sortBy: 'name',
       orderAsc: true,
       openExports: false,
-      filters: {} as Filters,
+      filters: initialFilterGroup,
     },
   );
   const {
@@ -61,6 +62,8 @@ const IntrusionSets = () => {
         handleSearch={helpers.handleSearch}
         handleAddFilter={helpers.handleAddFilter}
         handleRemoveFilter={helpers.handleRemoveFilter}
+        handleSwitchGlobalMode={helpers.handleSwitchGlobalMode}
+        handleSwitchLocalMode={helpers.handleSwitchLocalMode}
         handleToggleExports={helpers.handleToggleExports}
         openExports={openExports}
         exportEntityType="Intrusion-Set"
@@ -76,8 +79,7 @@ const IntrusionSets = () => {
           'source_reliability',
           'confidence',
           'creator',
-          'created_start_date',
-          'created_end_date',
+          'created',
           'revoked',
           'targets',
         ]}

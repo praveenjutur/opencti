@@ -1700,31 +1700,6 @@ export type CampaignEditMutationsRelationDeleteArgs = {
   toId: Scalars['StixRef']['input'];
 };
 
-export enum CampaignsFilter {
-  Aliases = 'aliases',
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Revoked = 'revoked',
-  SourceReliability = 'source_reliability',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type CampaignsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<CampaignsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum CampaignsOrdering {
   Confidence = 'confidence',
   Created = 'created',
@@ -10427,32 +10402,6 @@ export type IntrusionSetEditMutationsRelationDeleteArgs = {
   toId: Scalars['StixRef']['input'];
 };
 
-export enum IntrusionSetsFilter {
-  Aliases = 'aliases',
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Revoked = 'revoked',
-  SourceReliability = 'source_reliability',
-  Targets = 'targets',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type IntrusionSetsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<IntrusionSetsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum IntrusionSetsOrdering {
   Confidence = 'confidence',
   Created = 'created',
@@ -17922,7 +17871,7 @@ export type QueryCampaignArgs = {
 export type QueryCampaignsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<CampaignsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<CampaignsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -18551,7 +18500,7 @@ export type QueryIntrusionSetArgs = {
 export type QueryIntrusionSetsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<IntrusionSetsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<IntrusionSetsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -19962,7 +19911,7 @@ export type QueryThreatActorIndividualContainsStixObjectOrStixRelationshipArgs =
 export type QueryThreatActorsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<ThreatActorsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ThreatActorsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -19974,7 +19923,7 @@ export type QueryThreatActorsArgs = {
 export type QueryThreatActorsGroupArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<ThreatActorsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ThreatActorsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -25785,32 +25734,6 @@ export type ThreatActorIndividualEdge = {
   node: ThreatActorIndividual;
 };
 
-export enum ThreatActorsFilter {
-  Aliases = 'aliases',
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Revoked = 'revoked',
-  SourceReliability = 'source_reliability',
-  Targets = 'targets',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type ThreatActorsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<ThreatActorsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum ThreatActorsIndividualOrdering {
   Confidence = 'confidence',
   Created = 'created',
@@ -28439,8 +28362,6 @@ export type ResolversTypes = ResolversObject<{
   CampaignConnection: ResolverTypeWrapper<Omit<CampaignConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['CampaignEdge']>>> }>;
   CampaignEdge: ResolverTypeWrapper<Omit<CampaignEdge, 'node'> & { node: ResolversTypes['Campaign'] }>;
   CampaignEditMutations: ResolverTypeWrapper<Omit<CampaignEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversTypes['Campaign']>, contextPatch?: Maybe<ResolversTypes['Campaign']>, fieldPatch?: Maybe<ResolversTypes['Campaign']>, relationAdd?: Maybe<ResolversTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversTypes['Campaign']> }>;
-  CampaignsFilter: CampaignsFilter;
-  CampaignsFiltering: CampaignsFiltering;
   CampaignsOrdering: CampaignsOrdering;
   Capabilities: Capabilities;
   Capability: ResolverTypeWrapper<Capability>;
@@ -28702,8 +28623,6 @@ export type ResolversTypes = ResolversObject<{
   IntrusionSetConnection: ResolverTypeWrapper<Omit<IntrusionSetConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['IntrusionSetEdge']>>> }>;
   IntrusionSetEdge: ResolverTypeWrapper<Omit<IntrusionSetEdge, 'node'> & { node: ResolversTypes['IntrusionSet'] }>;
   IntrusionSetEditMutations: ResolverTypeWrapper<Omit<IntrusionSetEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversTypes['IntrusionSet']>, contextPatch?: Maybe<ResolversTypes['IntrusionSet']>, fieldPatch?: Maybe<ResolversTypes['IntrusionSet']>, relationAdd?: Maybe<ResolversTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversTypes['IntrusionSet']> }>;
-  IntrusionSetsFilter: IntrusionSetsFilter;
-  IntrusionSetsFiltering: IntrusionSetsFiltering;
   IntrusionSetsOrdering: IntrusionSetsOrdering;
   KillChainPhase: ResolverTypeWrapper<KillChainPhase>;
   KillChainPhaseAddInput: KillChainPhaseAddInput;
@@ -29111,8 +29030,6 @@ export type ResolversTypes = ResolversObject<{
   ThreatActorIndividualAddInput: ThreatActorIndividualAddInput;
   ThreatActorIndividualConnection: ResolverTypeWrapper<Omit<ThreatActorIndividualConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['ThreatActorIndividualEdge']>>> }>;
   ThreatActorIndividualEdge: ResolverTypeWrapper<Omit<ThreatActorIndividualEdge, 'node'> & { node: ResolversTypes['ThreatActorIndividual'] }>;
-  ThreatActorsFilter: ThreatActorsFilter;
-  ThreatActorsFiltering: ThreatActorsFiltering;
   ThreatActorsIndividualOrdering: ThreatActorsIndividualOrdering;
   ThreatActorsOrdering: ThreatActorsOrdering;
   TimeSeries: ResolverTypeWrapper<TimeSeries>;
@@ -29252,7 +29169,6 @@ export type ResolversParentTypes = ResolversObject<{
   CampaignConnection: Omit<CampaignConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['CampaignEdge']>>> };
   CampaignEdge: Omit<CampaignEdge, 'node'> & { node: ResolversParentTypes['Campaign'] };
   CampaignEditMutations: Omit<CampaignEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversParentTypes['Campaign']>, contextPatch?: Maybe<ResolversParentTypes['Campaign']>, fieldPatch?: Maybe<ResolversParentTypes['Campaign']>, relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['Campaign']> };
-  CampaignsFiltering: CampaignsFiltering;
   Capability: Capability;
   CapabilityConnection: CapabilityConnection;
   CapabilityEdge: CapabilityEdge;
@@ -29462,7 +29378,6 @@ export type ResolversParentTypes = ResolversObject<{
   IntrusionSetConnection: Omit<IntrusionSetConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['IntrusionSetEdge']>>> };
   IntrusionSetEdge: Omit<IntrusionSetEdge, 'node'> & { node: ResolversParentTypes['IntrusionSet'] };
   IntrusionSetEditMutations: Omit<IntrusionSetEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversParentTypes['IntrusionSet']>, contextPatch?: Maybe<ResolversParentTypes['IntrusionSet']>, fieldPatch?: Maybe<ResolversParentTypes['IntrusionSet']>, relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['IntrusionSet']> };
-  IntrusionSetsFiltering: IntrusionSetsFiltering;
   KillChainPhase: KillChainPhase;
   KillChainPhaseAddInput: KillChainPhaseAddInput;
   KillChainPhaseConnection: KillChainPhaseConnection;
@@ -29795,7 +29710,6 @@ export type ResolversParentTypes = ResolversObject<{
   ThreatActorIndividualAddInput: ThreatActorIndividualAddInput;
   ThreatActorIndividualConnection: Omit<ThreatActorIndividualConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['ThreatActorIndividualEdge']>>> };
   ThreatActorIndividualEdge: Omit<ThreatActorIndividualEdge, 'node'> & { node: ResolversParentTypes['ThreatActorIndividual'] };
-  ThreatActorsFiltering: ThreatActorsFiltering;
   TimeSeries: TimeSeries;
   Tool: Omit<Tool, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, observedData?: Maybe<ResolversParentTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversParentTypes['StixCoreRelationshipConnection']> };
   ToolAddInput: ToolAddInput;

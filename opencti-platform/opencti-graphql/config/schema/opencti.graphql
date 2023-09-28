@@ -2521,29 +2521,6 @@ enum CampaignsOrdering {
   x_opencti_workflow_id
   confidence
 }
-enum CampaignsFilter {
-  name
-  aliases
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  revoked
-  confidence
-  source_reliability
-  creator
-}
-input CampaignsFiltering {
-  key: [CampaignsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
 type CampaignConnection {
   pageInfo: PageInfo!
   edges: [CampaignEdge]
@@ -4965,30 +4942,6 @@ enum IntrusionSetsOrdering {
   x_opencti_workflow_id
   confidence
 }
-enum IntrusionSetsFilter {
-  name
-  aliases
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  revoked
-  confidence
-  source_reliability
-  creator
-  targets
-}
-input IntrusionSetsFiltering {
-  key: [IntrusionSetsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
 type IntrusionSetConnection {
   pageInfo: PageInfo!
   edges: [IntrusionSetEdge]
@@ -6269,30 +6222,6 @@ enum ThreatActorsOrdering {
   updated_at
   x_opencti_workflow_id
   confidence
-}
-enum ThreatActorsFilter {
-  name
-  aliases
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  revoked
-  confidence
-  source_reliability
-  creator
-  targets
-}
-input ThreatActorsFiltering {
-  key: [ThreatActorsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 type ThreatActorGroupConnection {
   pageInfo: PageInfo!
@@ -12099,7 +12028,7 @@ type Query {
     after: ID
     orderBy: CampaignsOrdering
     orderMode: OrderingMode
-    filters: [CampaignsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean
@@ -12379,7 +12308,7 @@ type Query {
     after: ID
     orderBy: IntrusionSetsOrdering
     orderMode: OrderingMode
-    filters: [IntrusionSetsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean
@@ -12458,7 +12387,7 @@ type Query {
     after: ID
     orderBy: ThreatActorsOrdering
     orderMode: OrderingMode
-    filters: [ThreatActorsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean
@@ -12469,7 +12398,7 @@ type Query {
     after: ID
     orderBy: ThreatActorsOrdering
     orderMode: OrderingMode
-    filters: [ThreatActorsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean
