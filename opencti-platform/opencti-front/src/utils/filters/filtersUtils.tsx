@@ -207,7 +207,7 @@ export const filtersWithEntityType = (filters: FilterGroup | undefined, type: st
 };
 
 export const isFilterGroupNotEmpty = (filterGroup: FilterGroup) => {
-  return filterGroup.filters.length > 0 || filterGroup.filterGroups.length > 0;
+  return filterGroup && (filterGroup.filters.length > 0 || filterGroup.filterGroups.length > 0);
 };
 
 export const filterValue = (filterKey: string, id: string | null, value?: string | null) => {

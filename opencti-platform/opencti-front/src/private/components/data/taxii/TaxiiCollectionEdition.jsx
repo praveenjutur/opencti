@@ -17,7 +17,7 @@ import inject18n from '../../../../components/i18n';
 import { commitMutation } from '../../../../relay/environment';
 import TextField from '../../../../components/TextField';
 import Filters from '../../common/lists/Filters';
-import { isUniqFilter } from '../../../../utils/filters/filtersUtils';
+import { findFilterFromKey, isUniqFilter } from '../../../../utils/filters/filtersUtils';
 import FilterIconButton from '../../../../components/FilterIconButton';
 import { fieldSpacingContainerStyle } from '../../../../utils/field';
 import { convertAuthorizedMembers } from '../../../../utils/edition';
@@ -104,7 +104,8 @@ const TaxiiCollectionEditionContainer = (props) => {
       })
       .catch(() => false);
   };
-  const handleSubmitFieldOptions = (name, value) => taxiiCollectionValidation(t)
+
+const handleSubmitFieldOptions = (name, value) => taxiiCollectionValidation(t)
     .validateAt(name, { [name]: value })
     .then(() => {
       commitMutation({
@@ -116,18 +117,78 @@ const TaxiiCollectionEditionContainer = (props) => {
       });
     })
     .catch(() => false);
-  const handleAddFilter = (key, id, value) => {
-    let newFilters;
-    if (filters[key] && filters[key].length > 0) {
-      newFilters = {
-        ...filters,
-        [key]: isUniqFilter(key)
-          ? [{ id, value }]
-          : R.uniqBy(R.prop('id'), [{ id, value }, ...filters[key]]),
+  const filtersWithHandleAddFilter = (k, id, op) => {
+    if (filters && findFilterFromKey(filters.filters, k, op)) {
+      const filter = findFilterFromKey(filters.filters, k, op);
+      const newValues = isUniqFilter(k) ? [id] : R.uniq([...filter?.values ?? [], id]);
+      const newFilterElement = {
+        key: k,
+        values: newValues,
+        operator: op,
+        mode: 'or',
       };
-    } else {
-      newFilters = { ...filters, [key]: [{ id, value }] };
+      const newBaseFilters = {
+        ...filters,
+        filters: [
+          ...filters.filters.filter((f) => f.key !== k || f.operator !== op), // remove filter with k as key
+          newFilterElement, // add new filter
+        ],
+      };
+      return newBaseFilters;
     }
+    const newFilterElement = {
+      key: k,
+      values: [id],
+      operator: op ?? 'eq',
+      mode: 'or',
+    };
+    const newBaseFilters = filters ? {
+      ...filters,
+      filters: [...filters.filters, newFilterElement], // add new filter
+    } : {
+      mode: 'and',
+      filterGroups: [],
+      filters: [newFilterElement],
+    };
+    return newBaseFilters;
+  };
+  const filtersWithHandleRemoveFilter = (k, op = 'eq', id = null) => {
+    if (filters) {
+      if (id) {
+        const filter = findFilterFromKey(filters.filters, k, op);
+        if (filter) {
+          const values = filter.values.filter((val) => val !== id);
+          if (values && values.length > 0) {
+            const newFilterElement = {
+              key: k,
+              values,
+              operator: filter.operator ?? 'eq',
+              mode: filter.mode ?? 'or',
+            };
+            const newBaseFilters = {
+              ...filters,
+              filters: [
+                ...filters.filters
+                  .filter((f) => f.key !== k || f.operator !== op), // remove filter with key=k and operator=op
+                newFilterElement, // keep value=id
+              ],
+            };
+            return newBaseFilters;
+          }
+        }
+      } else {
+        const newBaseFilters = {
+          ...filters,
+          filters: filters.filters
+            .filter((f) => f.key !== k || f.operator !== op), // remove filter with key=k and operator=op
+        };
+        return newBaseFilters;
+      }
+    }
+    return undefined;
+  };
+  const handleAddFilter = (key, id, op = 'eq') => {
+    const newFilters = filtersWithHandleAddFilter(key, id, op);
     const jsonFilters = JSON.stringify(newFilters);
     commitMutation({
       mutation: taxiiCollectionMutationFieldPatch,
@@ -140,8 +201,8 @@ const TaxiiCollectionEditionContainer = (props) => {
       },
     });
   };
-  const handleRemoveFilter = (key) => {
-    const newFilters = R.dissoc(key, filters);
+  const handleRemoveFilter = (key, op = 'and', id = null) => {
+    const newFilters = filtersWithHandleRemoveFilter(key, op, id);
     const jsonFilters = JSON.stringify(newFilters);
     const variables = {
       id: props.taxiiCollection.id,

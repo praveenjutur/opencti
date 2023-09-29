@@ -34,7 +34,7 @@ import SwitchField from '../../../../components/SwitchField';
 import useAttributes from '../../../../utils/hooks/useAttributes';
 import { stixCyberObservablesLinesAttributesQuery } from '../../observations/stix_cyber_observables/StixCyberObservablesLines';
 import Filters from '../../common/lists/Filters';
-import { isUniqFilter } from '../../../../utils/filters/filtersUtils';
+import { findFilterFromKey, initialFilterGroup, isUniqFilter } from '../../../../utils/filters/filtersUtils';
 import FilterIconButton from '../../../../components/FilterIconButton';
 import { isNotEmptyField } from '../../../../utils/utils';
 import { fieldSpacingContainerStyle } from '../../../../utils/field';
@@ -185,7 +185,7 @@ const FeedCreation = (props) => {
   const { t, classes } = props;
   const [open, setOpen] = useState(false);
   const [selectedTypes, setSelectedTypes] = useState([]);
-  const [filters, setFilters] = useState({});
+  const [filters, setFilters] = useState(initialFilterGroup);
   const [feedAttributes, setFeedAttributes] = useState({ 0: {} });
 
   const { ignoredAttributesInFeeds } = useAttributes();
@@ -196,7 +196,7 @@ const FeedCreation = (props) => {
 
   const resetStates = () => {
     setSelectedTypes([]);
-    setFilters({});
+    setFilters(initialFilterGroup);
     setFeedAttributes({ 0: {} });
   };
 
@@ -326,24 +326,75 @@ const FeedCreation = (props) => {
     setFeedAttributes(R.assoc(i, newFeedAttribute, feedAttributes));
   };
 
-  const handleAddFilter = (key, id, value) => {
-    if (filters[key] && filters[key].length > 0) {
-      setFilters(
-        R.assoc(
-          key,
-          isUniqFilter(key)
-            ? [{ id, value }]
-            : R.uniqBy(R.prop('id'), [{ id, value }, ...filters[key]]),
-          filters,
-        ),
-      );
+  const handleAddFilter = (k, id, op = 'eq') => {
+    if (filters && findFilterFromKey(filters.filters, k, op)) {
+      const filter = findFilterFromKey(filters.filters, k, op);
+      const newValues = isUniqFilter(k) ? [id] : R.uniq([...filter?.values ?? [], id]);
+      const newFilterElement = {
+        key: k,
+        values: newValues,
+        operator: op,
+        mode: 'or',
+      };
+      const newBaseFilters = {
+        ...filters,
+        filters: [
+          ...filters.filters.filter((f) => f.key !== k || f.operator !== op), // remove filter with k as key
+          newFilterElement, // add new filter
+        ],
+      };
+      setFilters(newBaseFilters);
     } else {
-      setFilters(R.assoc(key, [{ id, value }], filters));
+      const newFilterElement = {
+        key: k,
+        values: [id],
+        operator: op ?? 'eq',
+        mode: 'or',
+      };
+      const newBaseFilters = filters ? {
+        ...filters,
+        filters: [...filters.filters, newFilterElement], // add new filter
+      } : {
+        mode: 'and',
+        filterGroups: [],
+        filters: [newFilterElement],
+      };
+      setFilters(newBaseFilters);
     }
   };
-
-  const handleRemoveFilter = (key) => {
-    setFilters(R.dissoc(key, filters));
+  const handleRemoveFilter = (k, op = 'eq', id = null) => {
+    if (filters) {
+      if (id) {
+        const filter = findFilterFromKey(filters.filters, k, op);
+        if (filter) {
+          const values = filter.values.filter((val) => val !== id);
+          if (values && values.length > 0) {
+            const newFilterElement = {
+              key: k,
+              values,
+              operator: filter.operator ?? 'eq',
+              mode: filter.mode ?? 'or',
+            };
+            const newBaseFilters = {
+              ...filters,
+              filters: [
+                ...filters.filters
+                  .filter((f) => f.key !== k || f.operator !== op), // remove filter with key=k and operator=op
+                newFilterElement, // keep value=id
+              ],
+            };
+            setFilters(newBaseFilters);
+          }
+        }
+      } else {
+        const newBaseFilters = {
+          ...filters,
+          filters: filters.filters
+            .filter((f) => f.key !== k || f.operator !== op), // remove filter with key=k and operator=op
+        };
+        setFilters(newBaseFilters);
+      }
+    }
   };
 
   return (
