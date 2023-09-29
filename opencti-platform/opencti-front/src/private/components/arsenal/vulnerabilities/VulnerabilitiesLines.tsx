@@ -28,7 +28,7 @@ export const vulnerabilitiesLinesQuery = graphql`
     $cursor: ID
     $orderBy: VulnerabilitiesOrdering
     $orderMode: OrderingMode
-    $filters: [VulnerabilitiesFiltering!]
+    $filters: FilterGroup
   ) {
     ...VulnerabilitiesLines_data
       @arguments(
@@ -50,7 +50,7 @@ const vulnerabilitiesLinesFragment = graphql`
     cursor: { type: "ID" }
     orderBy: { type: "VulnerabilitiesOrdering", defaultValue: name }
     orderMode: { type: "OrderingMode", defaultValue: asc }
-    filters: { type: "[VulnerabilitiesFiltering!]" }
+    filters: { type: "FilterGroup" }
   )
   @refetchable(queryName: "VulnerabilitiesLinesRefetchQuery") {
     vulnerabilities(

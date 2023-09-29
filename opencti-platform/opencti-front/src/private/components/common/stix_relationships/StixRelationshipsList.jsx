@@ -60,9 +60,9 @@ export const stixRelationshipsListSearchQuery = graphql`
     $toId: [String]
     $relationship_type: [String]
     $count: Int!
-    $filters: [StixRelationshipsFiltering]
-    $dynamicFrom: [StixCoreObjectsFiltering]
-    $dynamicTo: [StixCoreObjectsFiltering]
+    $filters: FilterGroup
+    $dynamicFrom: FilterGroup
+    $dynamicTo: FilterGroup
   ) {
     stixRelationships(
       search: $search
@@ -97,9 +97,9 @@ const stixRelationshipsListQuery = graphql`
     $first: Int!
     $orderBy: StixRelationshipsOrdering
     $orderMode: OrderingMode
-    $filters: [StixRelationshipsFiltering]
-    $dynamicFrom: [StixCoreObjectsFiltering]
-    $dynamicTo: [StixCoreObjectsFiltering]
+    $filters: FilterGroup
+    $dynamicFrom: FilterGroup
+    $dynamicTo: FilterGroup
     $search: String
   ) {
     stixRelationships(

@@ -41,10 +41,10 @@ const stixRelationshipsNumberNumberQuery = graphql`
     $relationship_type: [String]
     $confidences: [Int]
     $search: String
-    $filters: [StixRelationshipsFiltering]
+    $filters: FilterGroup
     $filterMode: FilterMode
-    $dynamicFrom: [StixCoreObjectsFiltering]
-    $dynamicTo: [StixCoreObjectsFiltering]
+    $dynamicFrom: FilterGroup
+    $dynamicTo: FilterGroup
   ) {
     stixRelationshipsNumber(
       noDirection: $noDirection

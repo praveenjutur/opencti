@@ -65,7 +65,7 @@ const stixCoreObjectOrStixRelationshipLastContainersQuery = graphql`
     $first: Int
     $orderBy: ContainersOrdering
     $orderMode: OrderingMode
-    $filters: [ContainersFiltering]
+    $filters: FilterGroup
   ) {
     containers(
       first: $first

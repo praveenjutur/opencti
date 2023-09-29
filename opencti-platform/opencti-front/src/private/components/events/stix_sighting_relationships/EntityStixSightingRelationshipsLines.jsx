@@ -62,7 +62,7 @@ export const entityStixSightingRelationshipsLinesQuery = graphql`
     $cursor: ID
     $orderBy: StixSightingRelationshipsOrdering
     $orderMode: OrderingMode
-    $filters: [StixSightingRelationshipsFiltering]
+    $filters: FilterGroup
   ) {
     ...EntityStixSightingRelationshipsLines_data
       @arguments(
@@ -96,7 +96,7 @@ export default createPaginationContainer(
           defaultValue: first_seen
         }
         orderMode: { type: "OrderingMode", defaultValue: desc }
-        filters: { type: "[StixSightingRelationshipsFiltering]" }
+        filters: { type: "FilterGroup" }
       ) {
         stixSightingRelationships(
           fromId: $fromId

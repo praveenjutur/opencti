@@ -44,10 +44,10 @@ const stixRelationshipsMultiHorizontalBarsWithRelationshipsDistributionQuery = g
     $relationship_type: [String]
     $confidences: [Int]
     $search: String
-    $filters: [StixRelationshipsFiltering]
+    $filters: FilterGroup
     $filterMode: FilterMode
-    $dynamicFrom: [StixCoreObjectsFiltering]
-    $dynamicTo: [StixCoreObjectsFiltering]
+    $dynamicFrom: FilterGroup
+    $dynamicTo: FilterGroup
     $subDistributionField: String!
     $subDistributionOperation: StatsOperation!
     $subDistributionStartDate: DateTime
@@ -414,10 +414,10 @@ const stixRelationshipsMultiHorizontalBarsWithEntitiesDistributionQuery = graphq
     $relationship_type: [String]
     $confidences: [Int]
     $search: String
-    $filters: [StixRelationshipsFiltering]
+    $filters: FilterGroup
     $filterMode: FilterMode
-    $dynamicFrom: [StixCoreObjectsFiltering]
-    $dynamicTo: [StixCoreObjectsFiltering]
+    $dynamicFrom: FilterGroup
+    $dynamicTo: FilterGroup
     $subDistributionRelationshipType: [String]
     $subDistributionToTypes: [String]
     $subDistributionField: String!
@@ -428,7 +428,7 @@ const stixRelationshipsMultiHorizontalBarsWithEntitiesDistributionQuery = graphq
     $subDistributionLimit: Int
     $subDistributionOrder: String
     $subDistributionTypes: [String]
-    $subDistributionFilters: [StixCoreObjectsFiltering]
+    $subDistributionFilters: FilterGroup
     $subDistributionFilterMode: FilterMode
     $subDistributionSearch: String
   ) {

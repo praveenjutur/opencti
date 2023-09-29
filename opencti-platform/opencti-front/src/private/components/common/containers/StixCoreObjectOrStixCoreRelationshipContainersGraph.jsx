@@ -809,7 +809,7 @@ export const stixCoreObjectOrStixCoreRelationshipContainersGraphQuery = graphql`
   query StixCoreObjectOrStixCoreRelationshipContainersGraphQuery(
     $id: String!
     $types: [String]
-    $filters: [ContainersFiltering]
+    $filters: FilterGroup
     $search: String
   ) {
     ...StixCoreObjectOrStixCoreRelationshipContainersGraph_data

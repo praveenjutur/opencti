@@ -42,7 +42,7 @@ const stixRelationshipsDonutsDistributionQuery = graphql`
     $relationship_type: [String]
     $confidences: [Int]
     $search: String
-    $filters: [StixRelationshipsFiltering]
+    $filters: FilterGroup
     $filterMode: FilterMode
   ) {
     stixRelationshipsDistribution(

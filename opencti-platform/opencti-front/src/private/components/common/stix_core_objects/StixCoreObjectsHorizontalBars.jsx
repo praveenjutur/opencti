@@ -38,7 +38,7 @@ const stixCoreObjectsHorizontalBarsDistributionQuery = graphql`
     $limit: Int
     $order: String
     $types: [String]
-    $filters: [StixCoreObjectsFiltering]
+    $filters: FilterGroup
     $filterMode: FilterMode
     $search: String
   ) {

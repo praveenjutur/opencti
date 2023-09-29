@@ -43,7 +43,7 @@ const stixRelationshipsTimelineStixRelationshipQuery = graphql`
     $first: Int!
     $orderBy: StixRelationshipsOrdering
     $orderMode: OrderingMode
-    $filters: [StixRelationshipsFiltering]
+    $filters: FilterGroup
     $search: String
   ) {
     stixRelationships(

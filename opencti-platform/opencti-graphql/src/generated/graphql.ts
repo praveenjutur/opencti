@@ -185,7 +185,7 @@ export type AdministrativeAreaStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -469,7 +469,7 @@ export type ArtifactStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -696,7 +696,7 @@ export type AttackPatternStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -1032,7 +1032,7 @@ export type AutonomousSystemStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -1320,7 +1320,7 @@ export type BankAccountStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -1537,7 +1537,7 @@ export type CampaignStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -1840,7 +1840,7 @@ export type CaseObjectsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   all?: InputMaybe<Scalars['Boolean']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixObjectOrStixRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<StixObjectOrStixRelationshipsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -1867,7 +1867,7 @@ export type CasePendingFilesArgs = {
 export type CaseRelatedContainersArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<ContainersFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ContainersOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -1887,7 +1887,7 @@ export type CaseStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -2074,7 +2074,7 @@ export type CaseIncidentObjectsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   all?: InputMaybe<Scalars['Boolean']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixObjectOrStixRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<StixObjectOrStixRelationshipsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -2101,7 +2101,7 @@ export type CaseIncidentPendingFilesArgs = {
 export type CaseIncidentRelatedContainersArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<ContainersFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ContainersOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -2121,7 +2121,7 @@ export type CaseIncidentStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -2354,7 +2354,7 @@ export type CaseRfiObjectsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   all?: InputMaybe<Scalars['Boolean']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixObjectOrStixRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<StixObjectOrStixRelationshipsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -2381,7 +2381,7 @@ export type CaseRfiPendingFilesArgs = {
 export type CaseRfiRelatedContainersArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<ContainersFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ContainersOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -2401,7 +2401,7 @@ export type CaseRfiStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -2632,7 +2632,7 @@ export type CaseRftObjectsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   all?: InputMaybe<Scalars['Boolean']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixObjectOrStixRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<StixObjectOrStixRelationshipsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -2659,7 +2659,7 @@ export type CaseRftPendingFilesArgs = {
 export type CaseRftRelatedContainersArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<ContainersFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ContainersOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -2679,7 +2679,7 @@ export type CaseRftStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -2835,31 +2835,6 @@ export enum CaseTemplatesOrdering {
   Name = 'name'
 }
 
-export enum CasesFilter {
-  Confidence = 'confidence',
-  Context = 'context',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Participant = 'participant',
-  SourceReliability = 'source_reliability',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type CasesFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<CasesFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum CasesOrdering {
   Confidence = 'confidence',
   Context = 'context',
@@ -3002,7 +2977,7 @@ export type ChannelStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -3254,7 +3229,7 @@ export type CityStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -3510,7 +3485,7 @@ export type ContainerObjectsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   all?: InputMaybe<Scalars['Boolean']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixObjectOrStixRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<StixObjectOrStixRelationshipsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -3532,7 +3507,7 @@ export type ContainerOpinionsArgs = {
 export type ContainerRelatedContainersArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<ContainersFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ContainersOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -3552,7 +3527,7 @@ export type ContainerStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -3656,37 +3631,6 @@ export type ContainerEditMutationsRelationAddArgs = {
 export type ContainerEditMutationsRelationDeleteArgs = {
   relationship_type: Scalars['String']['input'];
   toId: Scalars['StixRef']['input'];
-};
-
-export enum ContainersFilter {
-  AttributeAbstract = 'attribute_abstract',
-  Authors = 'authors',
-  Confidence = 'confidence',
-  Content = 'content',
-  Context = 'context',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  ElementId = 'elementId',
-  EntityType = 'entity_type',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Objects = 'objects',
-  ReportTypes = 'report_types',
-  Revoked = 'revoked',
-  SourceReliability = 'source_reliability',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type ContainersFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<ContainersFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values: Array<InputMaybe<Scalars['String']['input']>>;
 };
 
 export enum ContainersOrdering {
@@ -3855,7 +3799,7 @@ export type CountryStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -4114,7 +4058,7 @@ export type CourseOfActionStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -4421,7 +4365,7 @@ export type CryptocurrencyWalletStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -4610,7 +4554,7 @@ export type CryptographicKeyStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -4804,7 +4748,7 @@ export type DataComponentStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -5038,7 +4982,7 @@ export type DataSourceStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -5328,7 +5272,7 @@ export type DirectoryStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -5551,7 +5495,7 @@ export type DomainNameStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -5771,7 +5715,7 @@ export type EmailAddrStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -5967,7 +5911,7 @@ export type EmailMessageStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -6164,7 +6108,7 @@ export type EmailMimePartTypeStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -6408,7 +6352,7 @@ export type EventStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -6855,7 +6799,7 @@ export type FeedbackObjectsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   all?: InputMaybe<Scalars['Boolean']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixObjectOrStixRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<StixObjectOrStixRelationshipsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -6882,7 +6826,7 @@ export type FeedbackPendingFilesArgs = {
 export type FeedbackRelatedContainersArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<ContainersFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ContainersOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -6902,7 +6846,7 @@ export type FeedbackStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -7292,7 +7236,7 @@ export type GroupingObjectsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   all?: InputMaybe<Scalars['Boolean']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixObjectOrStixRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<StixObjectOrStixRelationshipsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -7319,7 +7263,7 @@ export type GroupingPendingFilesArgs = {
 export type GroupingRelatedContainersArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<ContainersFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ContainersOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -7339,7 +7283,7 @@ export type GroupingStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -7590,7 +7534,7 @@ export type HashedObservableStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -7774,7 +7718,7 @@ export type HostnameStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -7964,7 +7908,7 @@ export type IPv4AddrStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -8156,7 +8100,7 @@ export type IPv6AddrStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -8385,7 +8329,7 @@ export type IdentityStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -8653,7 +8597,7 @@ export type IncidentStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -8954,7 +8898,7 @@ export type IndicatorStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -9247,7 +9191,7 @@ export type IndividualStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -9531,7 +9475,7 @@ export type InfrastructureStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -9965,7 +9909,7 @@ export type IntrusionSetStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -10393,7 +10337,7 @@ export type LanguageStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -10668,7 +10612,7 @@ export type LocationStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -10794,31 +10738,6 @@ export type LocationEditMutationsRelationAddArgs = {
 export type LocationEditMutationsRelationDeleteArgs = {
   relationship_type: Scalars['String']['input'];
   toId: Scalars['StixRef']['input'];
-};
-
-export enum LocationsFilter {
-  Aliases = 'aliases',
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  EntityType = 'entity_type',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Revoked = 'revoked',
-  UpdatedAt = 'updated_at',
-  XOpenctiAliases = 'x_opencti_aliases',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type LocationsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<LocationsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export enum LocationsOrdering {
@@ -11023,7 +10942,7 @@ export type MacAddrStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -11223,7 +11142,7 @@ export type MalwareStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -11466,7 +11385,7 @@ export type MalwareAnalysisStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -11896,7 +11815,7 @@ export type MediaContentStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -13427,7 +13346,7 @@ export type MutationStixCoreObjectsExportAskArgs = {
   elementId?: InputMaybe<Scalars['String']['input']>;
   exportType: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   format: Scalars['String']['input'];
   maxMarkingDefinition?: InputMaybe<Scalars['String']['input']>;
   orderBy?: InputMaybe<StixCoreObjectsOrdering>;
@@ -14082,7 +14001,7 @@ export type MutexStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -14278,7 +14197,7 @@ export type NarrativeStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -14518,7 +14437,7 @@ export type NetworkTrafficStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -14702,7 +14621,7 @@ export type NoteObjectsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   all?: InputMaybe<Scalars['Boolean']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixObjectOrStixRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<StixObjectOrStixRelationshipsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -14729,7 +14648,7 @@ export type NotePendingFilesArgs = {
 export type NoteRelatedContainersArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<ContainersFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ContainersOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -14749,7 +14668,7 @@ export type NoteStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -15162,7 +15081,7 @@ export type ObservedDataObjectsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   all?: InputMaybe<Scalars['Boolean']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixObjectOrStixRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<StixObjectOrStixRelationshipsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -15189,7 +15108,7 @@ export type ObservedDataPendingFilesArgs = {
 export type ObservedDataRelatedContainersArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<ContainersFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ContainersOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -15209,7 +15128,7 @@ export type ObservedDataStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -15468,7 +15387,7 @@ export type OpinionObjectsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   all?: InputMaybe<Scalars['Boolean']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixObjectOrStixRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<StixObjectOrStixRelationshipsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -15495,7 +15414,7 @@ export type OpinionPendingFilesArgs = {
 export type OpinionRelatedContainersArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<ContainersFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ContainersOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -15515,7 +15434,7 @@ export type OpinionStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -15854,7 +15773,7 @@ export type OrganizationStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -16132,7 +16051,7 @@ export type PaymentCardStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -16324,7 +16243,7 @@ export type PhoneNumberStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -16625,7 +16544,7 @@ export type PositionStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -16916,7 +16835,7 @@ export type ProcessStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -17537,7 +17456,7 @@ export type QueryCaseTemplatesArgs = {
 export type QueryCasesArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<CasesFiltering>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<CasesOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -17592,7 +17511,7 @@ export type QueryContainerArgs = {
 export type QueryContainersArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<ContainersFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ContainersOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -17603,7 +17522,7 @@ export type QueryContainersArgs = {
 
 export type QueryContainersObjectsOfObjectArgs = {
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<ContainersFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   id: Scalars['String']['input'];
   search?: InputMaybe<Scalars['String']['input']>;
   types?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -17790,7 +17709,7 @@ export type QueryFiltersRepresentativesArgs = {
 export type QueryGlobalSearchArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<StixCoreObjectsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -18115,7 +18034,7 @@ export type QueryLocationArgs = {
 export type QueryLocationsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<LocationsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<LocationsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -18674,7 +18593,7 @@ export type QueryStixCoreObjectsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   elementId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<StixCoreObjectsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -18690,7 +18609,7 @@ export type QueryStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   objectId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   operation: StatsOperation;
@@ -18743,7 +18662,7 @@ export type QueryStixCoreObjectsNumberArgs = {
   elementId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   onlyInferred?: InputMaybe<Scalars['Boolean']['input']>;
   relationship_type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   search?: InputMaybe<Scalars['String']['input']>;
@@ -18758,7 +18677,7 @@ export type QueryStixCoreObjectsTimeSeriesArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   interval: Scalars['String']['input'];
   onlyInferred?: InputMaybe<Scalars['Boolean']['input']>;
   operation: StatsOperation;
@@ -18809,8 +18728,8 @@ export type QueryStixCoreRelationshipsArgs = {
 export type QueryStixCoreRelationshipsDistributionArgs = {
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   dateAttribute?: InputMaybe<Scalars['String']['input']>;
-  dynamicFrom?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
-  dynamicTo?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  dynamicFrom?: InputMaybe<FilterGroup>;
+  dynamicTo?: InputMaybe<FilterGroup>;
   elementId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   elementWithTargetTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
@@ -18852,8 +18771,8 @@ export type QueryStixCoreRelationshipsMultiTimeSeriesArgs = {
 export type QueryStixCoreRelationshipsNumberArgs = {
   authorId?: InputMaybe<Scalars['String']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
-  dynamicFrom?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
-  dynamicTo?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  dynamicFrom?: InputMaybe<FilterGroup>;
+  dynamicTo?: InputMaybe<FilterGroup>;
   elementId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   elementWithTargetTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
@@ -18874,8 +18793,8 @@ export type QueryStixCoreRelationshipsNumberArgs = {
 
 export type QueryStixCoreRelationshipsTimeSeriesArgs = {
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
-  dynamicFrom?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
-  dynamicTo?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  dynamicFrom?: InputMaybe<FilterGroup>;
+  dynamicTo?: InputMaybe<FilterGroup>;
   elementId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   elementWithTargetTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
@@ -19038,7 +18957,7 @@ export type QueryStixNestedRefRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   elementId?: InputMaybe<Scalars['String']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixRefRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   fromId?: InputMaybe<Scalars['StixRef']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -19070,7 +18989,7 @@ export type QueryStixRefRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   elementId?: InputMaybe<Scalars['String']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixRefRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   fromId?: InputMaybe<Scalars['StixRef']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -19118,13 +19037,13 @@ export type QueryStixRelationshipArgs = {
 export type QueryStixRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
-  dynamicFrom?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
-  dynamicTo?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  dynamicFrom?: InputMaybe<FilterGroup>;
+  dynamicTo?: InputMaybe<FilterGroup>;
   elementId?: InputMaybe<Scalars['String']['input']>;
   elementWithTargetTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -19152,14 +19071,14 @@ export type QueryStixRelationshipsArgs = {
 export type QueryStixRelationshipsDistributionArgs = {
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   dateAttribute?: InputMaybe<Scalars['String']['input']>;
-  dynamicFrom?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
-  dynamicTo?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  dynamicFrom?: InputMaybe<FilterGroup>;
+  dynamicTo?: InputMaybe<FilterGroup>;
   elementId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   elementWithTargetTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -19189,13 +19108,13 @@ export type QueryStixRelationshipsMultiTimeSeriesArgs = {
 export type QueryStixRelationshipsNumberArgs = {
   authorId?: InputMaybe<Scalars['String']['input']>;
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
-  dynamicFrom?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
-  dynamicTo?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  dynamicFrom?: InputMaybe<FilterGroup>;
+  dynamicTo?: InputMaybe<FilterGroup>;
   elementId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   elementWithTargetTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -19211,14 +19130,14 @@ export type QueryStixRelationshipsNumberArgs = {
 
 export type QueryStixRelationshipsTimeSeriesArgs = {
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
-  dynamicFrom?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
-  dynamicTo?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  dynamicFrom?: InputMaybe<FilterGroup>;
+  dynamicTo?: InputMaybe<FilterGroup>;
   elementId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   elementWithTargetTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -19249,7 +19168,7 @@ export type QueryStixSightingRelationshipsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   elementId?: InputMaybe<Scalars['String']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixSightingRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   firstSeenStart?: InputMaybe<Scalars['DateTime']['input']>;
   firstSeenStop?: InputMaybe<Scalars['DateTime']['input']>;
@@ -19272,7 +19191,7 @@ export type QueryStixSightingRelationshipsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixSightingRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Scalars['StixRef']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -19289,7 +19208,7 @@ export type QueryStixSightingRelationshipsNumberArgs = {
   elementId?: InputMaybe<Scalars['String']['input']>;
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixSightingRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Scalars['StixRef']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   search?: InputMaybe<Scalars['String']['input']>;
@@ -19303,7 +19222,7 @@ export type QueryStixSightingRelationshipsTimeSeriesArgs = {
   endDate: Scalars['DateTime']['input'];
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixSightingRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Scalars['StixRef']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   interval: Scalars['String']['input'];
@@ -19502,7 +19421,7 @@ export type QueryToolArgs = {
 export type QueryToolsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<ToolsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ToolsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -19581,7 +19500,7 @@ export type QueryVocabularyArgs = {
 export type QueryVulnerabilitiesArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<VulnerabilitiesFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<VulnerabilitiesOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -19829,7 +19748,7 @@ export type RegionStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -20099,7 +20018,7 @@ export type ReportObjectsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   all?: InputMaybe<Scalars['Boolean']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixObjectOrStixRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<StixObjectOrStixRelationshipsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -20126,7 +20045,7 @@ export type ReportPendingFilesArgs = {
 export type ReportRelatedContainersArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<ContainersFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ContainersOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -20146,7 +20065,7 @@ export type ReportStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -20625,7 +20544,7 @@ export type SectorStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -21011,7 +20930,7 @@ export type SoftwareStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -21290,7 +21209,7 @@ export type StixCoreObjectStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -21433,7 +21352,7 @@ export type StixCoreObjectOrStixCoreRelationship = AdministrativeArea | Artifact
 
 export type StixCoreObjectsDistributionParameters = {
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   objectId?: InputMaybe<Scalars['String']['input']>;
   relationship_type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   search?: InputMaybe<Scalars['String']['input']>;
@@ -21505,7 +21424,7 @@ export type StixCoreObjectsFiltering = {
 export type StixCoreObjectsNumberParameters = {
   elementId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   relationship_type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   search?: InputMaybe<Scalars['String']['input']>;
   types?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -21538,7 +21457,7 @@ export type StixCoreObjectsTimeSeriesParameters = {
   elementId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   relationship_type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   search?: InputMaybe<Scalars['String']['input']>;
   types?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -21822,8 +21741,8 @@ export enum StixCoreRelationshipsOrdering {
 
 export type StixCoreRelationshipsTimeSeriesParameters = {
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
-  dynamicFrom?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
-  dynamicTo?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  dynamicFrom?: InputMaybe<FilterGroup>;
+  dynamicTo?: InputMaybe<FilterGroup>;
   elementId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   elementWithTargetTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   field: Scalars['String']['input'];
@@ -21960,7 +21879,7 @@ export type StixCyberObservableStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -22225,7 +22144,7 @@ export type StixDomainObjectStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -22590,7 +22509,7 @@ export type StixFileStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -22768,38 +22687,6 @@ export type StixObjectOrStixRelationshipRefEdge = {
   types: Array<Maybe<Scalars['String']['output']>>;
 };
 
-export enum StixObjectOrStixRelationshipsFilter {
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  EntityType = 'entity_type',
-  HasExternalReference = 'hasExternalReference',
-  HashesMd5 = 'hashes_MD5',
-  HashesSha1 = 'hashes_SHA1',
-  HashesSha256 = 'hashes_SHA256',
-  HashesSha512 = 'hashes_SHA512',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectLabel = 'objectLabel',
-  Objects = 'objects',
-  RelatedTo = 'relatedTo',
-  RelationshipType = 'relationship_type',
-  SightedBy = 'sightedBy',
-  UpdatedAt = 'updated_at',
-  Value = 'value',
-  XOpenctiOrganizationType = 'x_opencti_organization_type',
-  XOpenctiScore = 'x_opencti_score'
-}
-
-export type StixObjectOrStixRelationshipsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<StixObjectOrStixRelationshipsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values: Array<InputMaybe<Scalars['String']['input']>>;
-};
-
 export enum StixObjectOrStixRelationshipsOrdering {
   Created = 'created',
   CreatedBy = 'createdBy',
@@ -22940,17 +22827,6 @@ export type StixRefRelationshipsAddInput = {
   toIds?: InputMaybe<Array<InputMaybe<Scalars['StixRef']['input']>>>;
 };
 
-export enum StixRefRelationshipsFilter {
-  CreatedAt = 'created_at'
-}
-
-export type StixRefRelationshipsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<StixRefRelationshipsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum StixRefRelationshipsOrdering {
   Confidence = 'confidence',
   Created = 'created',
@@ -23017,38 +22893,6 @@ export type StixRelationshipSchema = {
   values: Array<Scalars['String']['output']>;
 };
 
-export enum StixRelationshipsFilter {
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  ElementWithTargetTypes = 'elementWithTargetTypes',
-  EntityType = 'entity_type',
-  FromId = 'fromId',
-  FromName = 'fromName',
-  FromTypes = 'fromTypes',
-  KillChainPhase = 'killChainPhase',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  ObjectLabel = 'objectLabel',
-  RelationshipType = 'relationship_type',
-  Revoked = 'revoked',
-  ToCreatedAt = 'toCreatedAt',
-  ToMainObservableType = 'toMainObservableType',
-  ToName = 'toName',
-  ToPatternType = 'toPatternType',
-  ToTypes = 'toTypes',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type StixRelationshipsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<StixRelationshipsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum StixRelationshipsOrdering {
   Confidence = 'confidence',
   Created = 'created',
@@ -23074,13 +22918,13 @@ export enum StixRelationshipsOrdering {
 
 export type StixRelationshipsTimeSeriesParameters = {
   confidences?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
-  dynamicFrom?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
-  dynamicTo?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  dynamicFrom?: InputMaybe<FilterGroup>;
+  dynamicTo?: InputMaybe<FilterGroup>;
   elementId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   elementWithTargetTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   fromId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fromRole?: InputMaybe<Scalars['String']['input']>;
   fromTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -23264,30 +23108,6 @@ export type StixSightingRelationshipsEdge = {
   __typename?: 'StixSightingRelationshipsEdge';
   cursor: Scalars['String']['output'];
   node: StixSightingRelationship;
-};
-
-export enum StixSightingRelationshipsFilter {
-  AttributeCount = 'attribute_count',
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  FromId = 'fromId',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  ObjectLabel = 'objectLabel',
-  ToId = 'toId',
-  ToMainObservableType = 'toMainObservableType',
-  ToPatternType = 'toPatternType',
-  XOpenctiNegative = 'x_opencti_negative',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type StixSightingRelationshipsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<StixSightingRelationshipsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export enum StixSightingRelationshipsOrdering {
@@ -23748,7 +23568,7 @@ export type SystemStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -23997,7 +23817,7 @@ export type TaskObjectsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   all?: InputMaybe<Scalars['Boolean']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixObjectOrStixRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<StixObjectOrStixRelationshipsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -24024,7 +23844,7 @@ export type TaskPendingFilesArgs = {
 export type TaskRelatedContainersArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<ContainersFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<ContainersOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -24044,7 +23864,7 @@ export type TaskStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -24399,7 +24219,7 @@ export type TextStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -24602,7 +24422,7 @@ export type ThreatActorStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -24813,7 +24633,7 @@ export type ThreatActorGroupStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -25089,7 +24909,7 @@ export type ThreatActorIndividualStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -25349,7 +25169,7 @@ export type ToolStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -25476,28 +25296,6 @@ export type ToolEditMutationsRelationAddArgs = {
 export type ToolEditMutationsRelationDeleteArgs = {
   relationship_type: Scalars['String']['input'];
   toId: Scalars['StixRef']['input'];
-};
-
-export enum ToolsFilter {
-  Aliases = 'aliases',
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  SourceReliability = 'source_reliability',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type ToolsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<ToolsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export enum ToolsOrdering {
@@ -25778,7 +25576,7 @@ export type UrlStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -26032,7 +25830,7 @@ export type UserAccountStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -26248,7 +26046,7 @@ export type UserAgentStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -26535,32 +26333,6 @@ export enum VocabularyOrdering {
   Order = 'order'
 }
 
-export enum VulnerabilitiesFilter {
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  SourceReliability = 'source_reliability',
-  XOpenctiAliases = 'x_opencti_aliases',
-  XOpenctiAttackVector = 'x_opencti_attack_vector',
-  XOpenctiBaseScore = 'x_opencti_base_score',
-  XOpenctiBaseSeverity = 'x_opencti_base_severity',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type VulnerabilitiesFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<VulnerabilitiesFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum VulnerabilitiesOrdering {
   Confidence = 'confidence',
   Created = 'created',
@@ -26709,7 +26481,7 @@ export type VulnerabilityStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -26967,7 +26739,7 @@ export type WindowsRegistryKeyStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -27160,7 +26932,7 @@ export type WindowsRegistryValueTypeStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -27357,7 +27129,7 @@ export type WorkspaceObjectsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   all?: InputMaybe<Scalars['Boolean']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixObjectOrStixRelationshipsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<StixObjectOrStixRelationshipsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -27558,7 +27330,7 @@ export type X509CertificateStixCoreObjectsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixCoreObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -27830,8 +27602,6 @@ export type ResolversTypes = ResolversObject<{
   CaseTemplateConnection: ResolverTypeWrapper<Omit<CaseTemplateConnection, 'edges'> & { edges: Array<ResolversTypes['CaseTemplateEdge']> }>;
   CaseTemplateEdge: ResolverTypeWrapper<Omit<CaseTemplateEdge, 'node'> & { node: ResolversTypes['CaseTemplate'] }>;
   CaseTemplatesOrdering: CaseTemplatesOrdering;
-  CasesFilter: CasesFilter;
-  CasesFiltering: CasesFiltering;
   CasesOrdering: CasesOrdering;
   Channel: ResolverTypeWrapper<BasicStoreEntityChannel>;
   ChannelAddInput: ChannelAddInput;
@@ -27854,8 +27624,6 @@ export type ResolversTypes = ResolversObject<{
   ContainerConnection: ResolverTypeWrapper<Omit<ContainerConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['ContainerEdge']>>> }>;
   ContainerEdge: ResolverTypeWrapper<Omit<ContainerEdge, 'node'> & { node: ResolversTypes['Container'] }>;
   ContainerEditMutations: ResolverTypeWrapper<Omit<ContainerEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'investigationAdd' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversTypes['Container']>, contextPatch?: Maybe<ResolversTypes['Container']>, fieldPatch?: Maybe<ResolversTypes['Container']>, investigationAdd?: Maybe<ResolversTypes['Workspace']>, relationAdd?: Maybe<ResolversTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversTypes['Container']> }>;
-  ContainersFilter: ContainersFilter;
-  ContainersFiltering: ContainersFiltering;
   ContainersOrdering: ContainersOrdering;
   ContextData: ResolverTypeWrapper<ContextData>;
   CountriesOrdering: CountriesOrdering;
@@ -28068,8 +27836,6 @@ export type ResolversTypes = ResolversObject<{
   LocationConnection: ResolverTypeWrapper<Omit<LocationConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['LocationEdge']>>> }>;
   LocationEdge: ResolverTypeWrapper<Omit<LocationEdge, 'node'> & { node: ResolversTypes['Location'] }>;
   LocationEditMutations: ResolverTypeWrapper<Omit<LocationEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversTypes['Location']>, contextPatch?: Maybe<ResolversTypes['Location']>, fieldPatch?: Maybe<ResolversTypes['Location']>, relationAdd?: Maybe<ResolversTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversTypes['Location']> }>;
-  LocationsFilter: LocationsFilter;
-  LocationsFiltering: LocationsFiltering;
   LocationsOrdering: LocationsOrdering;
   Log: ResolverTypeWrapper<Log>;
   LogConnection: ResolverTypeWrapper<LogConnection>;
@@ -28330,8 +28096,6 @@ export type ResolversTypes = ResolversObject<{
   StixObjectOrStixRelationshipOrCreator: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['StixObjectOrStixRelationshipOrCreator']>;
   StixObjectOrStixRelationshipRefConnection: ResolverTypeWrapper<StixObjectOrStixRelationshipRefConnection>;
   StixObjectOrStixRelationshipRefEdge: ResolverTypeWrapper<Omit<StixObjectOrStixRelationshipRefEdge, 'node'> & { node: ResolversTypes['StixObjectOrStixRelationship'] }>;
-  StixObjectOrStixRelationshipsFilter: StixObjectOrStixRelationshipsFilter;
-  StixObjectOrStixRelationshipsFiltering: StixObjectOrStixRelationshipsFiltering;
   StixObjectOrStixRelationshipsOrdering: StixObjectOrStixRelationshipsOrdering;
   StixRef: ResolverTypeWrapper<Scalars['StixRef']['output']>;
   StixRefRelationship: ResolverTypeWrapper<Omit<StixRefRelationship, 'cases' | 'containers' | 'createdBy' | 'from' | 'groupings' | 'notes' | 'opinions' | 'reports' | 'to'> & { cases?: Maybe<ResolversTypes['CaseConnection']>, containers?: Maybe<ResolversTypes['ContainerConnection']>, createdBy?: Maybe<ResolversTypes['Identity']>, from?: Maybe<ResolversTypes['StixObjectOrStixRelationshipOrCreator']>, groupings?: Maybe<ResolversTypes['GroupingConnection']>, notes?: Maybe<ResolversTypes['NoteConnection']>, opinions?: Maybe<ResolversTypes['OpinionConnection']>, reports?: Maybe<ResolversTypes['ReportConnection']>, to?: Maybe<ResolversTypes['StixObjectOrStixRelationshipOrCreator']> }>;
@@ -28340,16 +28104,12 @@ export type ResolversTypes = ResolversObject<{
   StixRefRelationshipEdge: ResolverTypeWrapper<Omit<StixRefRelationshipEdge, 'node'> & { node: ResolversTypes['StixRefRelationship'] }>;
   StixRefRelationshipEditMutations: ResolverTypeWrapper<Omit<StixRefRelationshipEditMutations, 'contextPatch' | 'fieldPatch'> & { contextPatch?: Maybe<ResolversTypes['StixRefRelationship']>, fieldPatch?: Maybe<ResolversTypes['StixRefRelationship']> }>;
   StixRefRelationshipsAddInput: StixRefRelationshipsAddInput;
-  StixRefRelationshipsFilter: StixRefRelationshipsFilter;
-  StixRefRelationshipsFiltering: StixRefRelationshipsFiltering;
   StixRefRelationshipsOrdering: StixRefRelationshipsOrdering;
   StixRelationship: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['StixRelationship']>;
   StixRelationshipConnection: ResolverTypeWrapper<Omit<StixRelationshipConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['StixRelationshipEdge']>>> }>;
   StixRelationshipEdge: ResolverTypeWrapper<Omit<StixRelationshipEdge, 'node'> & { node: ResolversTypes['StixRelationship'] }>;
   StixRelationshipEditMutations: ResolverTypeWrapper<StixRelationshipEditMutations>;
   StixRelationshipSchema: ResolverTypeWrapper<StixRelationshipSchema>;
-  StixRelationshipsFilter: StixRelationshipsFilter;
-  StixRelationshipsFiltering: StixRelationshipsFiltering;
   StixRelationshipsOrdering: StixRelationshipsOrdering;
   StixRelationshipsTimeSeriesParameters: StixRelationshipsTimeSeriesParameters;
   StixSightingRelationship: ResolverTypeWrapper<Omit<StixSightingRelationship, 'cases' | 'containers' | 'createdBy' | 'from' | 'groupings' | 'notes' | 'objectOrganization' | 'opinions' | 'reports' | 'to'> & { cases?: Maybe<ResolversTypes['CaseConnection']>, containers?: Maybe<ResolversTypes['ContainerConnection']>, createdBy?: Maybe<ResolversTypes['Identity']>, from?: Maybe<ResolversTypes['StixObjectOrStixRelationshipOrCreator']>, groupings?: Maybe<ResolversTypes['GroupingConnection']>, notes?: Maybe<ResolversTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversTypes['OrganizationConnection']>, opinions?: Maybe<ResolversTypes['OpinionConnection']>, reports?: Maybe<ResolversTypes['ReportConnection']>, to?: Maybe<ResolversTypes['StixObjectOrStixRelationshipOrCreator']> }>;
@@ -28357,8 +28117,6 @@ export type ResolversTypes = ResolversObject<{
   StixSightingRelationshipConnection: ResolverTypeWrapper<Omit<StixSightingRelationshipConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['StixSightingRelationshipsEdge']>>> }>;
   StixSightingRelationshipEditMutations: ResolverTypeWrapper<Omit<StixSightingRelationshipEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete' | 'relationsAdd' | 'restrictionOrganizationAdd' | 'restrictionOrganizationDelete'> & { contextClean?: Maybe<ResolversTypes['StixSightingRelationship']>, contextPatch?: Maybe<ResolversTypes['StixSightingRelationship']>, fieldPatch?: Maybe<ResolversTypes['StixSightingRelationship']>, relationAdd?: Maybe<ResolversTypes['StixSightingRelationship']>, relationDelete?: Maybe<ResolversTypes['StixSightingRelationship']>, relationsAdd?: Maybe<ResolversTypes['StixSightingRelationship']>, restrictionOrganizationAdd?: Maybe<ResolversTypes['StixSightingRelationship']>, restrictionOrganizationDelete?: Maybe<ResolversTypes['StixSightingRelationship']> }>;
   StixSightingRelationshipsEdge: ResolverTypeWrapper<Omit<StixSightingRelationshipsEdge, 'node'> & { node: ResolversTypes['StixSightingRelationship'] }>;
-  StixSightingRelationshipsFilter: StixSightingRelationshipsFilter;
-  StixSightingRelationshipsFiltering: StixSightingRelationshipsFiltering;
   StixSightingRelationshipsOrdering: StixSightingRelationshipsOrdering;
   StreamCollection: ResolverTypeWrapper<StreamCollection>;
   StreamCollectionAddInput: StreamCollectionAddInput;
@@ -28432,8 +28190,6 @@ export type ResolversTypes = ResolversObject<{
   ToolConnection: ResolverTypeWrapper<Omit<ToolConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['ToolEdge']>>> }>;
   ToolEdge: ResolverTypeWrapper<Omit<ToolEdge, 'node'> & { node: ResolversTypes['Tool'] }>;
   ToolEditMutations: ResolverTypeWrapper<Omit<ToolEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversTypes['Tool']>, contextPatch?: Maybe<ResolversTypes['Tool']>, fieldPatch?: Maybe<ResolversTypes['Tool']>, relationAdd?: Maybe<ResolversTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversTypes['Tool']> }>;
-  ToolsFilter: ToolsFilter;
-  ToolsFiltering: ToolsFiltering;
   ToolsOrdering: ToolsOrdering;
   Trigger: ResolverTypeWrapper<BasicStoreEntityTrigger>;
   TriggerActivityDigestAddInput: TriggerActivityDigestAddInput;
@@ -28479,8 +28235,6 @@ export type ResolversTypes = ResolversObject<{
   VocabularyFilter: VocabularyFilter;
   VocabularyFiltering: VocabularyFiltering;
   VocabularyOrdering: VocabularyOrdering;
-  VulnerabilitiesFilter: VulnerabilitiesFilter;
-  VulnerabilitiesFiltering: VulnerabilitiesFiltering;
   VulnerabilitiesOrdering: VulnerabilitiesOrdering;
   Vulnerability: ResolverTypeWrapper<Omit<Vulnerability, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'softwares' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversTypes['CaseConnection']>, containers?: Maybe<ResolversTypes['ContainerConnection']>, createdBy?: Maybe<ResolversTypes['Identity']>, groupings?: Maybe<ResolversTypes['GroupingConnection']>, notes?: Maybe<ResolversTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversTypes['OrganizationConnection']>, observedData?: Maybe<ResolversTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversTypes['OpinionConnection']>, reports?: Maybe<ResolversTypes['ReportConnection']>, softwares?: Maybe<ResolversTypes['StixCyberObservableConnection']>, stixCoreRelationships?: Maybe<ResolversTypes['StixCoreRelationshipConnection']> }>;
   VulnerabilityAddInput: VulnerabilityAddInput;
@@ -28581,7 +28335,6 @@ export type ResolversParentTypes = ResolversObject<{
   CaseTemplateAddInput: CaseTemplateAddInput;
   CaseTemplateConnection: Omit<CaseTemplateConnection, 'edges'> & { edges: Array<ResolversParentTypes['CaseTemplateEdge']> };
   CaseTemplateEdge: Omit<CaseTemplateEdge, 'node'> & { node: ResolversParentTypes['CaseTemplate'] };
-  CasesFiltering: CasesFiltering;
   Channel: BasicStoreEntityChannel;
   ChannelAddInput: ChannelAddInput;
   ChannelConnection: Omit<ChannelConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['ChannelEdge']>>> };
@@ -28600,7 +28353,6 @@ export type ResolversParentTypes = ResolversObject<{
   ContainerConnection: Omit<ContainerConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['ContainerEdge']>>> };
   ContainerEdge: Omit<ContainerEdge, 'node'> & { node: ResolversParentTypes['Container'] };
   ContainerEditMutations: Omit<ContainerEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'investigationAdd' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversParentTypes['Container']>, contextPatch?: Maybe<ResolversParentTypes['Container']>, fieldPatch?: Maybe<ResolversParentTypes['Container']>, investigationAdd?: Maybe<ResolversParentTypes['Workspace']>, relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['Container']> };
-  ContainersFiltering: ContainersFiltering;
   ContextData: ContextData;
   Country: Omit<Country, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'region' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, observedData?: Maybe<ResolversParentTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, region?: Maybe<ResolversParentTypes['Region']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversParentTypes['StixCoreRelationshipConnection']> };
   CountryAddInput: CountryAddInput;
@@ -28779,7 +28531,6 @@ export type ResolversParentTypes = ResolversObject<{
   LocationConnection: Omit<LocationConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['LocationEdge']>>> };
   LocationEdge: Omit<LocationEdge, 'node'> & { node: ResolversParentTypes['Location'] };
   LocationEditMutations: Omit<LocationEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversParentTypes['Location']>, contextPatch?: Maybe<ResolversParentTypes['Location']>, fieldPatch?: Maybe<ResolversParentTypes['Location']>, relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['Location']> };
-  LocationsFiltering: LocationsFiltering;
   Log: Log;
   LogConnection: LogConnection;
   LogEdge: LogEdge;
@@ -29003,7 +28754,6 @@ export type ResolversParentTypes = ResolversObject<{
   StixObjectOrStixRelationshipOrCreator: ResolversUnionTypes<ResolversParentTypes>['StixObjectOrStixRelationshipOrCreator'];
   StixObjectOrStixRelationshipRefConnection: StixObjectOrStixRelationshipRefConnection;
   StixObjectOrStixRelationshipRefEdge: Omit<StixObjectOrStixRelationshipRefEdge, 'node'> & { node: ResolversParentTypes['StixObjectOrStixRelationship'] };
-  StixObjectOrStixRelationshipsFiltering: StixObjectOrStixRelationshipsFiltering;
   StixRef: Scalars['StixRef']['output'];
   StixRefRelationship: Omit<StixRefRelationship, 'cases' | 'containers' | 'createdBy' | 'from' | 'groupings' | 'notes' | 'opinions' | 'reports' | 'to'> & { cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, from?: Maybe<ResolversParentTypes['StixObjectOrStixRelationshipOrCreator']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, to?: Maybe<ResolversParentTypes['StixObjectOrStixRelationshipOrCreator']> };
   StixRefRelationshipAddInput: StixRefRelationshipAddInput;
@@ -29011,20 +28761,17 @@ export type ResolversParentTypes = ResolversObject<{
   StixRefRelationshipEdge: Omit<StixRefRelationshipEdge, 'node'> & { node: ResolversParentTypes['StixRefRelationship'] };
   StixRefRelationshipEditMutations: Omit<StixRefRelationshipEditMutations, 'contextPatch' | 'fieldPatch'> & { contextPatch?: Maybe<ResolversParentTypes['StixRefRelationship']>, fieldPatch?: Maybe<ResolversParentTypes['StixRefRelationship']> };
   StixRefRelationshipsAddInput: StixRefRelationshipsAddInput;
-  StixRefRelationshipsFiltering: StixRefRelationshipsFiltering;
   StixRelationship: ResolversInterfaceTypes<ResolversParentTypes>['StixRelationship'];
   StixRelationshipConnection: Omit<StixRelationshipConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['StixRelationshipEdge']>>> };
   StixRelationshipEdge: Omit<StixRelationshipEdge, 'node'> & { node: ResolversParentTypes['StixRelationship'] };
   StixRelationshipEditMutations: StixRelationshipEditMutations;
   StixRelationshipSchema: StixRelationshipSchema;
-  StixRelationshipsFiltering: StixRelationshipsFiltering;
   StixRelationshipsTimeSeriesParameters: StixRelationshipsTimeSeriesParameters;
   StixSightingRelationship: Omit<StixSightingRelationship, 'cases' | 'containers' | 'createdBy' | 'from' | 'groupings' | 'notes' | 'objectOrganization' | 'opinions' | 'reports' | 'to'> & { cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, from?: Maybe<ResolversParentTypes['StixObjectOrStixRelationshipOrCreator']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, to?: Maybe<ResolversParentTypes['StixObjectOrStixRelationshipOrCreator']> };
   StixSightingRelationshipAddInput: StixSightingRelationshipAddInput;
   StixSightingRelationshipConnection: Omit<StixSightingRelationshipConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['StixSightingRelationshipsEdge']>>> };
   StixSightingRelationshipEditMutations: Omit<StixSightingRelationshipEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete' | 'relationsAdd' | 'restrictionOrganizationAdd' | 'restrictionOrganizationDelete'> & { contextClean?: Maybe<ResolversParentTypes['StixSightingRelationship']>, contextPatch?: Maybe<ResolversParentTypes['StixSightingRelationship']>, fieldPatch?: Maybe<ResolversParentTypes['StixSightingRelationship']>, relationAdd?: Maybe<ResolversParentTypes['StixSightingRelationship']>, relationDelete?: Maybe<ResolversParentTypes['StixSightingRelationship']>, relationsAdd?: Maybe<ResolversParentTypes['StixSightingRelationship']>, restrictionOrganizationAdd?: Maybe<ResolversParentTypes['StixSightingRelationship']>, restrictionOrganizationDelete?: Maybe<ResolversParentTypes['StixSightingRelationship']> };
   StixSightingRelationshipsEdge: Omit<StixSightingRelationshipsEdge, 'node'> & { node: ResolversParentTypes['StixSightingRelationship'] };
-  StixSightingRelationshipsFiltering: StixSightingRelationshipsFiltering;
   StreamCollection: StreamCollection;
   StreamCollectionAddInput: StreamCollectionAddInput;
   StreamCollectionConnection: StreamCollectionConnection;
@@ -29083,7 +28830,6 @@ export type ResolversParentTypes = ResolversObject<{
   ToolConnection: Omit<ToolConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['ToolEdge']>>> };
   ToolEdge: Omit<ToolEdge, 'node'> & { node: ResolversParentTypes['Tool'] };
   ToolEditMutations: Omit<ToolEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversParentTypes['Tool']>, contextPatch?: Maybe<ResolversParentTypes['Tool']>, fieldPatch?: Maybe<ResolversParentTypes['Tool']>, relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['Tool']> };
-  ToolsFiltering: ToolsFiltering;
   Trigger: BasicStoreEntityTrigger;
   TriggerActivityDigestAddInput: TriggerActivityDigestAddInput;
   TriggerActivityFiltering: TriggerActivityFiltering;
@@ -29118,7 +28864,6 @@ export type ResolversParentTypes = ResolversObject<{
   VocabularyEdge: Omit<VocabularyEdge, 'node'> & { node: ResolversParentTypes['Vocabulary'] };
   VocabularyFieldDefinition: VocabularyFieldDefinition;
   VocabularyFiltering: VocabularyFiltering;
-  VulnerabilitiesFiltering: VulnerabilitiesFiltering;
   Vulnerability: Omit<Vulnerability, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'softwares' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, observedData?: Maybe<ResolversParentTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, softwares?: Maybe<ResolversParentTypes['StixCyberObservableConnection']>, stixCoreRelationships?: Maybe<ResolversParentTypes['StixCoreRelationshipConnection']> };
   VulnerabilityAddInput: VulnerabilityAddInput;
   VulnerabilityConnection: Omit<VulnerabilityConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['VulnerabilityEdge']>>> };

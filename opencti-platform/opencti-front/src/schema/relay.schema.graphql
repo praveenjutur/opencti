@@ -290,7 +290,7 @@ input AuditsTimeSeriesParameters {
 input StixCoreObjectsTimeSeriesParameters {
   field: String!
   types: [String]
-  filters: [StixCoreObjectsFiltering]
+  filters: FilterGroup
   filterMode: FilterMode
   search: String
   relationship_type: [String]
@@ -310,10 +310,10 @@ input StixRelationshipsTimeSeriesParameters {
   relationship_type: [String]
   confidences: [Int]
   search: String
-  filters: [StixRelationshipsFiltering]
+  filters: FilterGroup
   filterMode: FilterMode
-  dynamicFrom: [StixCoreObjectsFiltering]
-  dynamicTo: [StixCoreObjectsFiltering]
+  dynamicFrom: FilterGroup
+  dynamicTo: FilterGroup
 }
 
 input StixCoreRelationshipsTimeSeriesParameters {
@@ -331,8 +331,8 @@ input StixCoreRelationshipsTimeSeriesParameters {
   search: String
   filters: FilterGroup
   filterMode: FilterMode
-  dynamicFrom: [StixCoreObjectsFiltering]
-  dynamicTo: [StixCoreObjectsFiltering]
+  dynamicFrom: FilterGroup
+  dynamicTo: FilterGroup
 }
 
 type Distribution {
@@ -350,7 +350,7 @@ input StixCoreObjectsDistributionParameters {
   relationship_type: [String]
   toTypes: [String]
   types: [String]
-  filters: [StixCoreObjectsFiltering]
+  filters: FilterGroup
   filterMode: FilterMode
   search: String
 }
@@ -379,7 +379,7 @@ type Number {
 
 input StixCoreObjectsNumberParameters {
   types: [String]
-  filters: [StixCoreObjectsFiltering]
+  filters: FilterGroup
   filterMode: FilterMode
   search: String
   relationship_type: [String]
@@ -2067,7 +2067,7 @@ interface StixCoreObject {
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   creators: [Creator!]
   toStix: String
@@ -2159,7 +2159,7 @@ interface StixDomainObject {
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -2279,7 +2279,7 @@ type AttackPattern implements BasicObject & StixObject & StixCoreObject & StixDo
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -2390,7 +2390,7 @@ type Campaign implements BasicObject & StixObject & StixCoreObject & StixDomainO
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -2457,37 +2457,6 @@ enum ContainersOrdering {
   entity_type
 }
 
-enum ContainersFilter {
-  entity_type
-  confidence
-  source_reliability
-  attribute_abstract
-  report_types
-  context
-  content
-  authors
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  objects
-  x_opencti_workflow_id
-  revoked
-  creator
-  elementId
-}
-
-input ContainersFiltering {
-  key: [ContainersFilter!]!
-  values: [String]!
-  operator: String
-  filterMode: FilterMode
-}
-
 type ContainerConnection {
   pageInfo: PageInfo!
   edges: [ContainerEdge]
@@ -2524,7 +2493,7 @@ interface Container {
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -2534,8 +2503,8 @@ interface Container {
   x_opencti_graph_data: String
   objectAssignee: AssigneeConnection
   avatar: OpenCtiFile
-  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: [StixObjectOrStixRelationshipsFiltering], filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
-  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: [ContainersFiltering], filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
+  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
+  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
   creators: [Creator!]
   workflowEnabled: Boolean
   status: Status
@@ -2591,7 +2560,7 @@ type Note implements BasicObject & StixObject & StixCoreObject & StixDomainObjec
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -2601,8 +2570,8 @@ type Note implements BasicObject & StixObject & StixCoreObject & StixDomainObjec
   x_opencti_graph_data: String
   objectAssignee: AssigneeConnection
   avatar: OpenCtiFile
-  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: [StixObjectOrStixRelationshipsFiltering], filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
-  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: [ContainersFiltering], filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
+  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
+  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
   attribute_abstract: String
   content: String!
   authors: [String]
@@ -2718,7 +2687,7 @@ type ObservedData implements BasicObject & StixObject & StixCoreObject & StixDom
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -2728,8 +2697,8 @@ type ObservedData implements BasicObject & StixObject & StixCoreObject & StixDom
   x_opencti_graph_data: String
   objectAssignee: AssigneeConnection
   avatar: OpenCtiFile
-  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: [StixObjectOrStixRelationshipsFiltering], filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
-  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: [ContainersFiltering], filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
+  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
+  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
   first_observed: DateTime!
   last_observed: DateTime!
   number_observed: Int!
@@ -2845,7 +2814,7 @@ type Opinion implements BasicObject & StixObject & StixCoreObject & StixDomainOb
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -2855,8 +2824,8 @@ type Opinion implements BasicObject & StixObject & StixCoreObject & StixDomainOb
   x_opencti_graph_data: String
   objectAssignee: AssigneeConnection
   avatar: OpenCtiFile
-  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: [StixObjectOrStixRelationshipsFiltering], filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
-  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: [ContainersFiltering], filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
+  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
+  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
   explanation: String
   authors: [String]
   opinion: String!
@@ -2965,7 +2934,7 @@ type Report implements BasicObject & StixObject & StixCoreObject & StixDomainObj
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -2975,8 +2944,8 @@ type Report implements BasicObject & StixObject & StixCoreObject & StixDomainObj
   x_opencti_graph_data: String
   objectAssignee: AssigneeConnection
   avatar: OpenCtiFile
-  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: [StixObjectOrStixRelationshipsFiltering], filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
-  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: [ContainersFiltering], filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
+  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
+  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
   name: String!
   description: String
   content: String
@@ -3099,7 +3068,7 @@ type CourseOfAction implements BasicObject & StixObject & StixCoreObject & StixD
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -3228,7 +3197,7 @@ interface Identity {
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -3326,7 +3295,7 @@ type Individual implements BasicObject & StixObject & StixCoreObject & StixDomai
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -3432,7 +3401,7 @@ type Sector implements BasicObject & StixObject & StixCoreObject & StixDomainObj
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -3534,7 +3503,7 @@ type System implements BasicObject & StixObject & StixCoreObject & StixDomainObj
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -3649,7 +3618,7 @@ type Indicator implements BasicObject & StixObject & StixCoreObject & StixDomain
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -3770,7 +3739,7 @@ type Infrastructure implements BasicObject & StixObject & StixCoreObject & StixD
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -3871,7 +3840,7 @@ type IntrusionSet implements BasicObject & StixObject & StixCoreObject & StixDom
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -3942,31 +3911,6 @@ enum LocationsOrdering {
   x_opencti_workflow_id
 }
 
-enum LocationsFilter {
-  entity_type
-  name
-  aliases
-  x_opencti_aliases
-  confidence
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  revoked
-}
-
-input LocationsFiltering {
-  key: [LocationsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
-
 type LocationConnection {
   pageInfo: PageInfo!
   edges: [LocationEdge]
@@ -4003,7 +3947,7 @@ interface Location {
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -4102,7 +4046,7 @@ type Position implements BasicObject & StixObject & StixCoreObject & StixDomainO
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -4208,7 +4152,7 @@ type City implements BasicObject & StixObject & StixCoreObject & StixDomainObjec
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -4308,7 +4252,7 @@ type Country implements BasicObject & StixObject & StixCoreObject & StixDomainOb
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -4407,7 +4351,7 @@ type Region implements BasicObject & StixObject & StixCoreObject & StixDomainObj
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -4514,7 +4458,7 @@ type Malware implements BasicObject & StixObject & StixCoreObject & StixDomainOb
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -4624,7 +4568,7 @@ interface ThreatActor implements BasicObject & StixObject & StixCoreObject & Sti
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -4698,7 +4642,7 @@ type ThreatActorGroup implements BasicObject & StixObject & StixCoreObject & Sti
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -4777,28 +4721,6 @@ enum ToolsOrdering {
   confidence
 }
 
-enum ToolsFilter {
-  name
-  aliases
-  created
-  modified
-  created_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  confidence
-  source_reliability
-}
-
-input ToolsFiltering {
-  key: [ToolsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
-
 type ToolConnection {
   pageInfo: PageInfo!
   edges: [ToolEdge]
@@ -4836,7 +4758,7 @@ type Tool implements BasicObject & StixObject & StixCoreObject & StixDomainObjec
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -4902,32 +4824,6 @@ enum VulnerabilitiesOrdering {
   confidence
 }
 
-enum VulnerabilitiesFilter {
-  name
-  x_opencti_aliases
-  x_opencti_base_score
-  x_opencti_base_severity
-  x_opencti_attack_vector
-  created
-  modified
-  created_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  creator
-  confidence
-  source_reliability
-}
-
-input VulnerabilitiesFiltering {
-  key: [VulnerabilitiesFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
-
 type VulnerabilityConnection {
   pageInfo: PageInfo!
   edges: [VulnerabilityEdge]
@@ -4965,7 +4861,7 @@ type Vulnerability implements BasicObject & StixObject & StixCoreObject & StixDo
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -5079,7 +4975,7 @@ type Incident implements BasicObject & StixObject & StixCoreObject & StixDomainO
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -5186,7 +5082,7 @@ interface StixCyberObservable {
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -5229,7 +5125,7 @@ type AutonomousSystem implements BasicObject & StixObject & StixCoreObject & Sti
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -5282,7 +5178,7 @@ type Directory implements BasicObject & StixObject & StixCoreObject & StixCyberO
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -5339,7 +5235,7 @@ type DomainName implements BasicObject & StixObject & StixCoreObject & StixCyber
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   observable_value: String!
   x_opencti_score: Int
@@ -5388,7 +5284,7 @@ type EmailAddr implements BasicObject & StixObject & StixCoreObject & StixCyberO
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -5439,7 +5335,7 @@ type EmailMessage implements BasicObject & StixObject & StixCoreObject & StixCyb
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -5500,7 +5396,7 @@ type EmailMimePartType implements BasicObject & StixObject & StixCoreObject & St
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -5576,7 +5472,7 @@ interface HashedObservable {
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -5620,7 +5516,7 @@ type Artifact implements BasicObject & StixObject & StixCoreObject & StixCyberOb
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -5681,7 +5577,7 @@ type StixFile implements BasicObject & StixObject & StixCoreObject & StixCyberOb
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -5751,7 +5647,7 @@ type X509Certificate implements BasicObject & StixObject & StixCoreObject & Stix
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -5854,7 +5750,7 @@ type IPv4Addr implements BasicObject & StixObject & StixCoreObject & StixCyberOb
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -5906,7 +5802,7 @@ type IPv6Addr implements BasicObject & StixObject & StixCoreObject & StixCyberOb
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -5956,7 +5852,7 @@ type MacAddr implements BasicObject & StixObject & StixCoreObject & StixCyberObs
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -6005,7 +5901,7 @@ type Mutex implements BasicObject & StixObject & StixCoreObject & StixCyberObser
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -6054,7 +5950,7 @@ type NetworkTraffic implements BasicObject & StixObject & StixCoreObject & StixC
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -6122,7 +6018,7 @@ type Process implements BasicObject & StixObject & StixCoreObject & StixCyberObs
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -6213,7 +6109,7 @@ type Software implements BasicObject & StixObject & StixCoreObject & StixCyberOb
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -6283,7 +6179,7 @@ type Url implements BasicObject & StixObject & StixCoreObject & StixCyberObserva
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -6332,7 +6228,7 @@ type UserAccount implements BasicObject & StixObject & StixCoreObject & StixCybe
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -6408,7 +6304,7 @@ type WindowsRegistryKey implements BasicObject & StixObject & StixCoreObject & S
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -6461,7 +6357,7 @@ type WindowsRegistryValueType implements BasicObject & StixObject & StixCoreObje
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -6514,7 +6410,7 @@ type CryptographicKey implements BasicObject & StixObject & StixCoreObject & Sti
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -6563,7 +6459,7 @@ type CryptocurrencyWallet implements BasicObject & StixObject & StixCoreObject &
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -6612,7 +6508,7 @@ type Hostname implements BasicObject & StixObject & StixCoreObject & StixCyberOb
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -6661,7 +6557,7 @@ type Text implements BasicObject & StixObject & StixCoreObject & StixCyberObserv
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -6710,7 +6606,7 @@ type UserAgent implements BasicObject & StixObject & StixCoreObject & StixCyberO
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -6759,7 +6655,7 @@ type BankAccount implements BasicObject & StixObject & StixCoreObject & StixCybe
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementId: [String], elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -6812,7 +6708,7 @@ type PhoneNumber implements BasicObject & StixObject & StixCoreObject & StixCybe
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -6861,7 +6757,7 @@ type PaymentCard implements BasicObject & StixObject & StixCoreObject & StixCybe
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -6916,7 +6812,7 @@ type MediaContent implements BasicObject & StixObject & StixCoreObject & StixCyb
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   x_opencti_score: Int
   x_opencti_description: String
@@ -6995,38 +6891,6 @@ enum StixObjectOrStixRelationshipsOrdering {
   creator
 }
 
-enum StixObjectOrStixRelationshipsFilter {
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectLabel
-  entity_type
-  relationship_type
-  x_opencti_score
-  x_opencti_organization_type
-  created
-  modified
-  relatedTo
-  objects
-  hasExternalReference
-  sightedBy
-  value
-  name
-  confidence
-  hashes_MD5
-  hashes_SHA1
-  hashes_SHA256
-  hashes_SHA512
-}
-
-input StixObjectOrStixRelationshipsFiltering {
-  key: [StixObjectOrStixRelationshipsFilter!]!
-  values: [String]!
-  operator: String
-  filterMode: FilterMode
-}
-
 type StixObjectOrStixRelationshipConnection {
   pageInfo: PageInfo!
   edges: [StixObjectOrStixRelationshipEdge]
@@ -7075,38 +6939,6 @@ enum StixRelationshipsOrdering {
   x_opencti_workflow_id
   createdBy
   creator
-}
-
-enum StixRelationshipsFilter {
-  created
-  modified
-  created_at
-  confidence
-  createdBy
-  creator
-  markedBy
-  objectLabel
-  killChainPhase
-  fromName
-  toName
-  toCreatedAt
-  toPatternType
-  toMainObservableType
-  x_opencti_workflow_id
-  revoked
-  relationship_type
-  elementWithTargetTypes
-  fromTypes
-  toTypes
-  entity_type
-  fromId
-}
-
-input StixRelationshipsFiltering {
-  key: [StixRelationshipsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 
 type StixRelationshipConnection {
@@ -7309,30 +7141,6 @@ enum StixSightingRelationshipsOrdering {
   x_opencti_workflow_id
 }
 
-enum StixSightingRelationshipsFilter {
-  fromId
-  toId
-  x_opencti_negative
-  attribute_count
-  created
-  modified
-  created_at
-  confidence
-  createdBy
-  markedBy
-  objectLabel
-  toPatternType
-  toMainObservableType
-  x_opencti_workflow_id
-}
-
-input StixSightingRelationshipsFiltering {
-  key: [StixSightingRelationshipsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
-
 type StixSightingRelationshipConnection {
   pageInfo: PageInfo!
   edges: [StixSightingRelationshipsEdge]
@@ -7428,17 +7236,6 @@ enum StixRefRelationshipsOrdering {
   toValidUntil
   toPatternType
   toCreatedAt
-}
-
-enum StixRefRelationshipsFilter {
-  created_at
-}
-
-input StixRefRelationshipsFiltering {
-  key: [StixRefRelationshipsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 
 type StixRefRelationshipConnection {
@@ -7595,14 +7392,14 @@ type Query {
   killChainPhases(first: Int, after: ID, orderBy: KillChainPhasesOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String): KillChainPhaseConnection
   stixCoreObjectRaw(id: String!): String
   stixCoreObject(id: String!): StixCoreObject
-  stixCoreObjects(first: Int, after: ID, types: [String], orderBy: StixCoreObjectsOrdering, orderMode: OrderingMode, filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String, relationship_type: [String], elementId: [String]): StixCoreObjectConnection
-  globalSearch(first: Int, after: ID, search: String, types: [String], orderBy: StixCoreObjectsOrdering, orderMode: OrderingMode, filters: [StixCoreObjectsFiltering], filterMode: FilterMode): StixCoreObjectConnection
+  stixCoreObjects(first: Int, after: ID, types: [String], orderBy: StixCoreObjectsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, relationship_type: [String], elementId: [String]): StixCoreObjectConnection
+  globalSearch(first: Int, after: ID, search: String, types: [String], orderBy: StixCoreObjectsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode): StixCoreObjectConnection
   stixCoreObjectsExportFiles(first: Int, type: String!): FileConnection
-  stixCoreObjectsTimeSeries(authorId: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime, interval: String!, onlyInferred: Boolean, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String, relationship_type: [String], elementId: [String]): [TimeSeries]
+  stixCoreObjectsTimeSeries(authorId: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime, interval: String!, onlyInferred: Boolean, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String, relationship_type: [String], elementId: [String]): [TimeSeries]
   stixCoreObjectsMultiTimeSeries(operation: StatsOperation!, startDate: DateTime!, endDate: DateTime, interval: String!, onlyInferred: Boolean, timeSeriesParameters: [StixCoreObjectsTimeSeriesParameters]): [MultiTimeSeries]
-  stixCoreObjectsNumber(types: [String], startDate: DateTime, endDate: DateTime, onlyInferred: Boolean, filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String, relationship_type: [String], elementId: [String]): Number
+  stixCoreObjectsNumber(types: [String], startDate: DateTime, endDate: DateTime, onlyInferred: Boolean, filters: FilterGroup, filterMode: FilterMode, search: String, relationship_type: [String], elementId: [String]): Number
   stixCoreObjectsMultiNumber(startDate: DateTime, endDate: DateTime, onlyInferred: Boolean, numberParameters: [StixCoreObjectsNumberParameters]): [Number]
-  stixCoreObjectsDistribution(objectId: [String], relationship_type: [String], toTypes: [String], elementWithTargetTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(objectId: [String], relationship_type: [String], toTypes: [String], elementWithTargetTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreObjectsMultiDistribution(field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, distributionParameters: StixCoreObjectsDistributionParameters): [MultiDistribution]
   filtersRepresentatives(filters: FilterGroup!): ResolvedFilterGroup
   stixDomainObject(id: String!): StixDomainObject
@@ -7618,8 +7415,8 @@ type Query {
   campaigns(first: Int, after: ID, orderBy: CampaignsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): CampaignConnection
   campaignsTimeSeries(objectId: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime!, interval: String!, relationship_type: [String]): [TimeSeries]
   container(id: String): Container
-  containers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: [ContainersFiltering], filterMode: FilterMode, search: String, toStix: Boolean): ContainerConnection
-  containersObjectsOfObject(id: String!, types: [String], filters: [ContainersFiltering], filterMode: FilterMode, search: String): StixObjectOrStixRelationshipConnection
+  containers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): ContainerConnection
+  containersObjectsOfObject(id: String!, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): StixObjectOrStixRelationshipConnection
   note(id: String): Note
   notes(first: Int, after: ID, orderBy: NotesOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): NoteConnection
   notesNumber(objectId: String, endDate: DateTime): Number
@@ -7665,7 +7462,7 @@ type Query {
   intrusionSet(id: String): IntrusionSet
   intrusionSets(first: Int, after: ID, orderBy: IntrusionSetsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): IntrusionSetConnection
   location(id: String!): Location
-  locations(first: Int, after: ID, types: [String], orderBy: LocationsOrdering, orderMode: OrderingMode, search: String, filters: [LocationsFiltering], filterMode: FilterMode, toStix: Boolean): LocationConnection
+  locations(first: Int, after: ID, types: [String], orderBy: LocationsOrdering, orderMode: OrderingMode, search: String, filters: FilterGroup, filterMode: FilterMode, toStix: Boolean): LocationConnection
   city(id: String): City
   cities(first: Int, after: ID, orderBy: CitiesOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): CityConnection
   country(id: String): Country
@@ -7681,9 +7478,9 @@ type Query {
   threatActorGroup(id: String): ThreatActorGroup
   threatActorsGroup(first: Int, after: ID, orderBy: ThreatActorsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): ThreatActorGroupConnection
   tool(id: String): Tool
-  tools(first: Int, after: ID, orderBy: ToolsOrdering, orderMode: OrderingMode, filters: [ToolsFiltering], filterMode: FilterMode, search: String, toStix: Boolean): ToolConnection
+  tools(first: Int, after: ID, orderBy: ToolsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): ToolConnection
   vulnerability(id: String): Vulnerability
-  vulnerabilities(first: Int, after: ID, orderBy: VulnerabilitiesOrdering, orderMode: OrderingMode, filters: [VulnerabilitiesFiltering], filterMode: FilterMode, search: String, toStix: Boolean): VulnerabilityConnection
+  vulnerabilities(first: Int, after: ID, orderBy: VulnerabilitiesOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): VulnerabilityConnection
   incident(id: String): Incident
   incidents(first: Int, after: ID, orderBy: IncidentsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): IncidentConnection
   incidentsTimeSeries(objectId: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime!, interval: String!, relationship_type: [String]): [TimeSeries]
@@ -7694,27 +7491,27 @@ type Query {
   stixCyberObservablesTimeSeries(types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [TimeSeries]
   stixCyberObservablesDistribution(objectId: String, field: String!, dateAttribute: String, operation: String!, filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixRelationship(id: String): StixRelationship
-  stixRelationships(first: Int, after: ID, orderBy: StixRelationshipsOrdering, orderMode: OrderingMode, elementId: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, startDate: DateTime, endDate: DateTime, confidences: [Int], search: String, filters: [StixRelationshipsFiltering], filterMode: FilterMode, dynamicFrom: [StixCoreObjectsFiltering], dynamicTo: [StixCoreObjectsFiltering], stix: Boolean): StixRelationshipConnection
-  stixRelationshipsTimeSeries(field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime, interval: String!, onlyInferred: Boolean, elementId: [String], elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: [StixRelationshipsFiltering], filterMode: FilterMode, dynamicFrom: [StixCoreObjectsFiltering], dynamicTo: [StixCoreObjectsFiltering]): [TimeSeries]
+  stixRelationships(first: Int, after: ID, orderBy: StixRelationshipsOrdering, orderMode: OrderingMode, elementId: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, startDate: DateTime, endDate: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode, dynamicFrom: FilterGroup, dynamicTo: FilterGroup, stix: Boolean): StixRelationshipConnection
+  stixRelationshipsTimeSeries(field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime, interval: String!, onlyInferred: Boolean, elementId: [String], elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode, dynamicFrom: FilterGroup, dynamicTo: FilterGroup): [TimeSeries]
   stixRelationshipsMultiTimeSeries(operation: StatsOperation!, startDate: DateTime!, endDate: DateTime, interval: String!, onlyInferred: Boolean, timeSeriesParameters: [StixRelationshipsTimeSeriesParameters]): [MultiTimeSeries]
-  stixRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementId: [String], elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: [StixRelationshipsFiltering], filterMode: FilterMode, dynamicFrom: [StixCoreObjectsFiltering], dynamicTo: [StixCoreObjectsFiltering]): [Distribution]
-  stixRelationshipsNumber(authorId: String, noDirection: Boolean, endDate: DateTime, onlyInferred: Boolean, elementId: [String], elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: [StixRelationshipsFiltering], filterMode: FilterMode, dynamicFrom: [StixCoreObjectsFiltering], dynamicTo: [StixCoreObjectsFiltering]): Number
+  stixRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementId: [String], elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode, dynamicFrom: FilterGroup, dynamicTo: FilterGroup): [Distribution]
+  stixRelationshipsNumber(authorId: String, noDirection: Boolean, endDate: DateTime, onlyInferred: Boolean, elementId: [String], elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode, dynamicFrom: FilterGroup, dynamicTo: FilterGroup): Number
   schemaRelationsTypesMapping: [StixRelationshipSchema!]!
   stixCoreRelationship(id: String): StixCoreRelationship
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, elementId: [String], elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, startDate: DateTime, endDate: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode, stix: Boolean): StixCoreRelationshipConnection
-  stixCoreRelationshipsTimeSeries(field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime, interval: String!, onlyInferred: Boolean, elementId: [String], elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode, dynamicFrom: [StixCoreObjectsFiltering], dynamicTo: [StixCoreObjectsFiltering]): [TimeSeries]
+  stixCoreRelationshipsTimeSeries(field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime, interval: String!, onlyInferred: Boolean, elementId: [String], elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode, dynamicFrom: FilterGroup, dynamicTo: FilterGroup): [TimeSeries]
   stixCoreRelationshipsMultiTimeSeries(operation: StatsOperation!, startDate: DateTime!, endDate: DateTime, interval: String!, onlyInferred: Boolean, timeSeriesParameters: [StixCoreRelationshipsTimeSeriesParameters]): [MultiTimeSeries]
-  stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementId: [String], elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode, dynamicFrom: [StixCoreObjectsFiltering], dynamicTo: [StixCoreObjectsFiltering]): [Distribution]
-  stixCoreRelationshipsNumber(authorId: String, noDirection: Boolean, endDate: DateTime, onlyInferred: Boolean, elementId: [String], elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode, dynamicFrom: [StixCoreObjectsFiltering], dynamicTo: [StixCoreObjectsFiltering]): Number
+  stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementId: [String], elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode, dynamicFrom: FilterGroup, dynamicTo: FilterGroup): [Distribution]
+  stixCoreRelationshipsNumber(authorId: String, noDirection: Boolean, endDate: DateTime, onlyInferred: Boolean, elementId: [String], elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode, dynamicFrom: FilterGroup, dynamicTo: FilterGroup): Number
   stixCoreRelationshipsExportFiles(first: Int, type: String!): FileConnection
   stixSightingRelationship(id: String): StixSightingRelationship
-  stixSightingRelationships(first: Int, after: ID, orderBy: StixSightingRelationshipsOrdering, orderMode: OrderingMode, elementId: String, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, search: String, filters: [StixSightingRelationshipsFiltering], filterMode: FilterMode, toStix: Boolean): StixSightingRelationshipConnection
-  stixSightingRelationshipsTimeSeries(elementId: String, fromId: StixRef, toId: StixRef, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime!, interval: String!, fromTypes: [String], toTypes: [String], search: String, filters: [StixSightingRelationshipsFiltering], filterMode: FilterMode): [TimeSeries]
-  stixSightingRelationshipsDistribution(elementId: String, fromId: StixRef, toId: StixRef, field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, limit: Int, order: String, fromTypes: [String], toTypes: [String], search: String, filters: [StixSightingRelationshipsFiltering], filterMode: FilterMode): [Distribution]
-  stixSightingRelationshipsNumber(elementId: String, fromId: StixRef, toId: StixRef, endDate: DateTime, fromTypes: [String], toTypes: [String], search: String, filters: [StixSightingRelationshipsFiltering], filterMode: FilterMode): Number
+  stixSightingRelationships(first: Int, after: ID, orderBy: StixSightingRelationshipsOrdering, orderMode: OrderingMode, elementId: String, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, search: String, filters: FilterGroup, filterMode: FilterMode, toStix: Boolean): StixSightingRelationshipConnection
+  stixSightingRelationshipsTimeSeries(elementId: String, fromId: StixRef, toId: StixRef, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime!, interval: String!, fromTypes: [String], toTypes: [String], search: String, filters: FilterGroup, filterMode: FilterMode): [TimeSeries]
+  stixSightingRelationshipsDistribution(elementId: String, fromId: StixRef, toId: StixRef, field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, limit: Int, order: String, fromTypes: [String], toTypes: [String], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
+  stixSightingRelationshipsNumber(elementId: String, fromId: StixRef, toId: StixRef, endDate: DateTime, fromTypes: [String], toTypes: [String], search: String, filters: FilterGroup, filterMode: FilterMode): Number
   stixRefRelationship(id: String): StixRefRelationship
-  stixRefRelationships(first: Int, after: ID, orderBy: StixRefRelationshipsOrdering, orderMode: OrderingMode, elementId: String, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: [String], startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, search: String, filters: [StixRefRelationshipsFiltering], filterMode: FilterMode, toStix: Boolean): StixRefRelationshipConnection
-  stixNestedRefRelationships(first: Int, after: ID, orderBy: StixRefRelationshipsOrdering, orderMode: OrderingMode, elementId: String, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: [String], startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, search: String, filters: [StixRefRelationshipsFiltering], filterMode: FilterMode, toStix: Boolean): StixRefRelationshipConnection
+  stixRefRelationships(first: Int, after: ID, orderBy: StixRefRelationshipsOrdering, orderMode: OrderingMode, elementId: String, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: [String], startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, search: String, filters: FilterGroup, filterMode: FilterMode, toStix: Boolean): StixRefRelationshipConnection
+  stixNestedRefRelationships(first: Int, after: ID, orderBy: StixRefRelationshipsOrdering, orderMode: OrderingMode, elementId: String, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: [String], startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, search: String, filters: FilterGroup, filterMode: FilterMode, toStix: Boolean): StixRefRelationshipConnection
   stixSchemaRefRelationships(id: String, toType: String): DefinitionRefRelationship
   stixRefRelationshipsDistribution(field: String!, operation: StatsOperation!, relationship_type: [String], isTo: Boolean, toRole: String, toTypes: [String], startDate: DateTime, endDate: DateTime, dateAttribute: String, limit: Int, order: String): [Distribution]
   stixRefRelationshipsNumber(types: [String!], fromId: StixRef, endDate: DateTime): Number
@@ -7757,7 +7554,7 @@ type Query {
   taskTemplate(id: String!): TaskTemplate
   taskTemplates(first: Int, after: ID, orderBy: TaskTemplatesOrdering, orderMode: OrderingMode, filters: [TaskTemplatesFiltering!], filterMode: FilterMode, search: String, toStix: Boolean): TaskTemplateConnection
   case(id: String!): Case
-  cases(first: Int, after: ID, orderBy: CasesOrdering, orderMode: OrderingMode, filters: [CasesFiltering!], filterMode: FilterMode, search: String, toStix: Boolean): CaseConnection
+  cases(first: Int, after: ID, orderBy: CasesOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): CaseConnection
   caseTemplate(id: String!): CaseTemplate
   caseTemplates(first: Int, after: ID, orderBy: CaseTemplatesOrdering, orderMode: OrderingMode, search: String): CaseTemplateConnection
   caseIncident(id: String!): CaseIncident
@@ -8313,7 +8110,7 @@ type Mutation {
   killChainPhaseAdd(input: KillChainPhaseAddInput!): KillChainPhase
   killChainPhaseEdit(id: ID!): KillChainPhaseEditMutations
   stixCoreObjectEdit(id: ID!): StixCoreObjectEditMutations
-  stixCoreObjectsExportAsk(type: String!, format: String!, exportType: String!, maxMarkingDefinition: String, context: String, search: String, relationship_type: [String], elementId: String, orderBy: StixCoreObjectsOrdering, orderMode: OrderingMode, filters: [StixCoreObjectsFiltering], filterMode: FilterMode, selectedIds: [String]): [File!]
+  stixCoreObjectsExportAsk(type: String!, format: String!, exportType: String!, maxMarkingDefinition: String, context: String, search: String, relationship_type: [String], elementId: String, orderBy: StixCoreObjectsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, selectedIds: [String]): [File!]
   stixCoreObjectsExportPush(type: String!, file: Upload!, listFilters: String): Boolean
   stixDomainObjectAdd(input: StixDomainObjectAddInput!): StixDomainObject
   stixDomainObjectEdit(id: ID!): StixDomainObjectEditMutations
@@ -8557,7 +8354,7 @@ type Channel implements BasicObject & StixObject & StixCoreObject & StixDomainOb
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -8655,7 +8452,7 @@ type Language implements BasicObject & StixCoreObject & StixDomainObject & StixO
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -8767,7 +8564,7 @@ type Event implements BasicObject & StixCoreObject & StixDomainObject & StixObje
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -8869,7 +8666,7 @@ type Grouping implements BasicObject & StixObject & StixCoreObject & StixDomainO
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -8879,8 +8676,8 @@ type Grouping implements BasicObject & StixObject & StixCoreObject & StixDomainO
   x_opencti_graph_data: String
   objectAssignee: AssigneeConnection
   avatar: OpenCtiFile
-  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: [StixObjectOrStixRelationshipsFiltering], filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
-  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: [ContainersFiltering], filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
+  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
+  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
   name: String!
   description: String
   content: String
@@ -8976,7 +8773,7 @@ type Narrative implements BasicObject & StixCoreObject & StixDomainObject & Stix
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -9278,7 +9075,7 @@ type DataComponent implements BasicObject & StixObject & StixCoreObject & StixDo
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -9374,7 +9171,7 @@ type DataSource implements BasicObject & StixObject & StixCoreObject & StixDomai
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -9596,7 +9393,7 @@ type AdministrativeArea implements BasicObject & StixCoreObject & StixDomainObje
   observedData(first: Int): ObservedDataConnection
   groupings(first: Int): GroupingConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -9697,7 +9494,7 @@ type Task implements Container & StixDomainObject & StixCoreObject & StixObject 
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -9707,8 +9504,8 @@ type Task implements Container & StixDomainObject & StixCoreObject & StixObject 
   x_opencti_graph_data: String
   objectAssignee: AssigneeConnection
   avatar: OpenCtiFile
-  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: [StixObjectOrStixRelationshipsFiltering], filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
-  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: [ContainersFiltering], filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
+  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
+  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
   creators: [Creator!]
   toStix: String
   importFiles(first: Int, prefixMimeType: String): FileConnection
@@ -9847,7 +9644,7 @@ interface Case implements BasicObject & StixObject & StixCoreObject & StixDomain
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -9857,8 +9654,8 @@ interface Case implements BasicObject & StixObject & StixCoreObject & StixDomain
   x_opencti_graph_data: String
   objectAssignee: AssigneeConnection
   avatar: OpenCtiFile
-  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: [StixObjectOrStixRelationshipsFiltering], filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
-  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: [ContainersFiltering], filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
+  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
+  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
   creators: [Creator!]
   toStix: String
   importFiles(first: Int, prefixMimeType: String): FileConnection
@@ -9889,31 +9686,6 @@ enum CasesOrdering {
   x_opencti_workflow_id
   confidence
   objectMarking
-}
-
-enum CasesFilter {
-  name
-  created
-  modified
-  context
-  created_at
-  updated_at
-  creator
-  createdBy
-  markedBy
-  objectLabel
-  objectAssignee
-  participant
-  x_opencti_workflow_id
-  confidence
-  source_reliability
-}
-
-input CasesFiltering {
-  key: [CasesFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 
 type CaseConnection {
@@ -9988,7 +9760,7 @@ type CaseIncident implements BasicObject & StixObject & StixCoreObject & StixDom
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -9998,8 +9770,8 @@ type CaseIncident implements BasicObject & StixObject & StixCoreObject & StixDom
   x_opencti_graph_data: String
   objectAssignee: AssigneeConnection
   avatar: OpenCtiFile
-  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: [StixObjectOrStixRelationshipsFiltering], filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
-  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: [ContainersFiltering], filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
+  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
+  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
   creators: [Creator!]
   toStix: String
   importFiles(first: Int, prefixMimeType: String): FileConnection
@@ -10106,7 +9878,7 @@ type CaseRfi implements BasicObject & StixObject & StixCoreObject & StixDomainOb
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -10116,8 +9888,8 @@ type CaseRfi implements BasicObject & StixObject & StixCoreObject & StixDomainOb
   x_opencti_graph_data: String
   objectAssignee: AssigneeConnection
   avatar: OpenCtiFile
-  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: [StixObjectOrStixRelationshipsFiltering], filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
-  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: [ContainersFiltering], filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
+  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
+  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
   creators: [Creator!]
   toStix: String
   importFiles(first: Int, prefixMimeType: String): FileConnection
@@ -10221,7 +9993,7 @@ type CaseRft implements BasicObject & StixObject & StixCoreObject & StixDomainOb
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -10231,8 +10003,8 @@ type CaseRft implements BasicObject & StixObject & StixCoreObject & StixDomainOb
   x_opencti_graph_data: String
   objectAssignee: AssigneeConnection
   avatar: OpenCtiFile
-  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: [StixObjectOrStixRelationshipsFiltering], filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
-  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: [ContainersFiltering], filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
+  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
+  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
   creators: [Creator!]
   toStix: String
   importFiles(first: Int, prefixMimeType: String): FileConnection
@@ -10337,7 +10109,7 @@ type Feedback implements BasicObject & StixObject & StixCoreObject & StixDomainO
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -10347,8 +10119,8 @@ type Feedback implements BasicObject & StixObject & StixCoreObject & StixDomainO
   x_opencti_graph_data: String
   objectAssignee: AssigneeConnection
   avatar: OpenCtiFile
-  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: [StixObjectOrStixRelationshipsFiltering], filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
-  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: [ContainersFiltering], filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
+  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
+  relatedContainers(first: Int, after: ID, orderBy: ContainersOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], viaTypes: [String]): ContainerConnection
   creators: [Creator!]
   toStix: String
   importFiles(first: Int, prefixMimeType: String): FileConnection
@@ -10504,7 +10276,7 @@ type Workspace implements InternalObject & BasicObject {
   updated_at: DateTime
   editContext: [EditUserContext!]
   investigated_entities_ids: [String]
-  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: [StixObjectOrStixRelationshipsFiltering], filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
+  objects(first: Int, after: ID, orderBy: StixObjectOrStixRelationshipsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, types: [String], all: Boolean): StixObjectOrStixRelationshipRefConnection
   graph_data: String
   authorizedMembers: [MemberAccess!]!
   currentUserAccessRight: String
@@ -10578,7 +10350,7 @@ type MalwareAnalysis implements BasicObject & StixCoreObject & StixDomainObject 
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -10760,7 +10532,7 @@ type ThreatActorIndividual implements BasicObject & StixObject & StixCoreObject 
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int
@@ -11115,7 +10887,7 @@ type Organization implements BasicObject & StixObject & StixCoreObject & StixDom
   groupings(first: Int): GroupingConnection
   cases(first: Int): CaseConnection
   stixCoreRelationships(first: Int, after: ID, orderBy: StixCoreRelationshipsOrdering, orderMode: OrderingMode, fromId: StixRef, toId: StixRef, fromTypes: [String], toTypes: [String], relationship_type: String, startTimeStart: DateTime, startTimeStop: DateTime, stopTimeStart: DateTime, stopTimeStop: DateTime, firstSeenStart: DateTime, firstSeenStop: DateTime, lastSeenStart: DateTime, lastSeenStop: DateTime, confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): StixCoreRelationshipConnection
-  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: [StixCoreObjectsFiltering], filterMode: FilterMode, search: String): [Distribution]
+  stixCoreObjectsDistribution(relationship_type: [String], toTypes: [String], field: String!, startDate: DateTime, endDate: DateTime, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String, types: [String], filters: FilterGroup, filterMode: FilterMode, search: String): [Distribution]
   stixCoreRelationshipsDistribution(field: String!, operation: StatsOperation!, startDate: DateTime, endDate: DateTime, dateAttribute: String, isTo: Boolean, limit: Int, order: String, elementWithTargetTypes: [String], fromId: [String], fromRole: String, fromTypes: [String], toId: [String], toRole: String, toTypes: [String], relationship_type: [String], confidences: [Int], search: String, filters: FilterGroup, filterMode: FilterMode): [Distribution]
   revoked: Boolean!
   confidence: Int

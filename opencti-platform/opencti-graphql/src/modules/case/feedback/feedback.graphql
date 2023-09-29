@@ -61,7 +61,7 @@ type Feedback implements BasicObject & StixObject & StixCoreObject & StixDomainO
     limit: Int
     order: String
     types: [String]
-    filters: [StixCoreObjectsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): [Distribution] @auth(for: [KNOWLEDGE, EXPLORE])
@@ -102,7 +102,7 @@ type Feedback implements BasicObject & StixObject & StixCoreObject & StixDomainO
     after: ID
     orderBy: StixObjectOrStixRelationshipsOrdering
     orderMode: OrderingMode
-    filters: [StixObjectOrStixRelationshipsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     types: [String]
@@ -113,7 +113,7 @@ type Feedback implements BasicObject & StixObject & StixCoreObject & StixDomainO
     after: ID
     orderBy: ContainersOrdering
     orderMode: OrderingMode
-    filters: [ContainersFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     types: [String]

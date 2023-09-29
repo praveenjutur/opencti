@@ -38,7 +38,7 @@ const stixCoreObjectsMultiHorizontalBarsDistributionQuery = graphql`
     $limit: Int
     $order: String
     $types: [String]
-    $filters: [StixCoreObjectsFiltering]
+    $filters: FilterGroup
     $filterMode: FilterMode
     $search: String
     $subDistributionRelationshipType: [String]
@@ -51,7 +51,7 @@ const stixCoreObjectsMultiHorizontalBarsDistributionQuery = graphql`
     $subDistributionLimit: Int
     $subDistributionOrder: String
     $subDistributionTypes: [String]
-    $subDistributionFilters: [StixCoreObjectsFiltering]
+    $subDistributionFilters: FilterGroup
     $subDistributionFilterMode: FilterMode
     $subDistributionSearch: String
   ) {

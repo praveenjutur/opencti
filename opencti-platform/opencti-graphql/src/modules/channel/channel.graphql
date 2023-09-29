@@ -61,7 +61,7 @@ type Channel implements BasicObject & StixObject & StixCoreObject & StixDomainOb
         limit: Int
         order: String
         types: [String]
-        filters: [StixCoreObjectsFiltering]
+        filters: FilterGroup
         filterMode: FilterMode
         search: String
     ): [Distribution] @auth(for: [KNOWLEDGE, EXPLORE])

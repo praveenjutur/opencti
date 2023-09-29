@@ -28,7 +28,7 @@ export const toolsLinesQuery = graphql`
         $cursor: ID
         $orderBy: ToolsOrdering
         $orderMode: OrderingMode
-        $filters: [ToolsFiltering]
+        $filters: FilterGroup
     ) {
         ...ToolsLines_data
         @arguments(
@@ -50,7 +50,7 @@ const toolsLinesFragment = graphql`
         cursor: { type: "ID" }
         orderBy: { type: "ToolsOrdering", defaultValue: name }
         orderMode: { type: "OrderingMode", defaultValue: asc }
-        filters: { type: "[ToolsFiltering]" }
+        filters: { type: "FilterGroup" }
     )
     @refetchable(queryName: "ToolsLinesRefetchQuery") {
         tools(

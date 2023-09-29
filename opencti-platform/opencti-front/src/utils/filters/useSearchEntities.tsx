@@ -38,7 +38,7 @@ import { useSearchEntitiesStixCoreObjectsContainersSearchQuery$data } from './__
 import { isNotEmptyField } from '../utils';
 
 const filtersStixCoreObjectsContainersSearchQuery = graphql`
-  query useSearchEntitiesStixCoreObjectsContainersSearchQuery($filters: [ContainersFiltering]) {
+  query useSearchEntitiesStixCoreObjectsContainersSearchQuery($filters: FilterGroup) {
     containers(filters: $filters) {
       edges {
         node {
@@ -59,7 +59,7 @@ const filtersStixCoreObjectsSearchQuery = graphql`
     $search: String
     $types: [String]
     $count: Int
-    $filters: [StixCoreObjectsFiltering]
+    $filters: FilterGroup
   ) {
     stixCoreObjects(
       search: $search

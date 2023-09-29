@@ -40,7 +40,7 @@ export const ContainerStixCyberObservablesLinesSearchQuery = graphql`
     $id: String!
     $types: [String]
     $search: String
-    $filters: [StixObjectOrStixRelationshipsFiltering]
+    $filters: FilterGroup
     $count: Int
   ) {
     container(id: $id) {

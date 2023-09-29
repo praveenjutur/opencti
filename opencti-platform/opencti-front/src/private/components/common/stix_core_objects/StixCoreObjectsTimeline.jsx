@@ -39,7 +39,7 @@ const stixCoreObjectsTimelineQuery = graphql`
     $first: Int
     $orderBy: StixCoreObjectsOrdering
     $orderMode: OrderingMode
-    $filters: [StixCoreObjectsFiltering]
+    $filters: FilterGroup
     $relationship_type: [String]
     $elementId: [String]
   ) {
