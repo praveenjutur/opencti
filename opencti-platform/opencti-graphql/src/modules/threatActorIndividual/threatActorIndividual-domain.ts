@@ -47,14 +47,10 @@ export const threatActorIndividualContainsStixObjectOrStixRelationship = async (
         {
           key: 'internal_id',
           values: [threatActorIndividualId],
-          operator: 'eq',
-          mode: 'or',
         },
         {
           key: buildRefRelationKey(RELATION_OBJECT),
           values: [resolvedThingId],
-          operator: 'eq',
-          mode: 'or',
         }
       ],
     },

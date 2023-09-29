@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { dissoc, filter } from 'ramda';
+import { dissoc } from 'ramda';
 import { v4 as uuidv4 } from 'uuid';
 import { delEditContext, notify, setEditContext } from '../database/redis';
 import {
@@ -60,7 +60,7 @@ export const findById = (context, user, stixCyberObservableId) => {
 export const findAll = async (context, user, args) => {
   let types = [];
   if (args.types && args.types.length > 0) {
-    types = filter((type) => isStixCyberObservable(type), args.types);
+    types = args.types.filter((type) => isStixCyberObservable(type));
   }
   if (types.length === 0) {
     types.push(ABSTRACT_STIX_CYBER_OBSERVABLE);
