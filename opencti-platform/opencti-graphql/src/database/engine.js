@@ -83,7 +83,7 @@ import { isBooleanAttribute, isDateAttribute, isDateNumericOrBooleanAttribute } 
 import { convertTypeToStixType } from './stix-converter';
 import { extractEntityRepresentativeName } from './entity-representative';
 import { ENTITY_TYPE_IDENTITY_ORGANIZATION } from '../modules/organization/organization-types';
-import { checkFilterKeys } from '../utils/filtering';
+import { checkedAndConvertedFilters } from '../utils/filtering';
 
 const ELK_ENGINE = 'elk';
 const OPENSEARCH_ENGINE = 'opensearch';
@@ -1564,8 +1564,8 @@ const elQueryBodyBuilder = async (context, user, options) => {
   return body;
 };
 export const elCount = async (context, user, indexName, options = {}) => {
-  checkFilterKeys(options.filters, options.types ?? []);
-  const body = await elQueryBodyBuilder(context, user, { ...options, noSize: true, noSort: true });
+  const convertedFilters = checkedAndConvertedFilters(options.filters, options.types ?? []);
+  const body = await elQueryBodyBuilder(context, user, { ...options, filters: convertedFilters, noSize: true, noSort: true });
   const query = { index: indexName, body };
   logApp.debug('[SEARCH] elCount', { query });
   return engine.count(query)
@@ -1869,7 +1869,7 @@ export const elPaginate = async (context, user, indexName, options = {}) => {
     );
 };
 export const elList = async (context, user, indexName, options = {}) => {
-  checkFilterKeys(options.filters, options.types ?? []);
+  const convertedFilters = checkedAndConvertedFilters(options.filters, options.types ?? []);
   const { first = MAX_SEARCH_SIZE, infinite = false } = options;
   let hasNextPage = true;
   let continueProcess = true;
@@ -1886,7 +1886,7 @@ export const elList = async (context, user, indexName, options = {}) => {
   };
   while (continueProcess && hasNextPage) {
     // Force options to prevent connection format and manage search after
-    const opts = { ...options, first, after: searchAfter, connectionFormat: false };
+    const opts = { ...options, filters: convertedFilters, first, after: searchAfter, connectionFormat: false };
     const elements = await elPaginate(context, user, indexName, opts);
     if (!infinite && (elements.length === 0 || elements.length < first)) {
       if (elements.length > 0) {

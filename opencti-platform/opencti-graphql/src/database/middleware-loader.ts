@@ -20,7 +20,7 @@ import type {
 } from '../types/store';
 import { FunctionalError, UnsupportedError } from '../config/errors';
 import type { FilterMode, InputMaybe, OrderingMode } from '../generated/graphql';
-import { ASSIGNEE_FILTER, checkFilterKeys, CREATOR_FILTER, PARTICIPANT_FILTER } from '../utils/filtering';
+import { ASSIGNEE_FILTER, checkedAndConvertedFilters, CREATOR_FILTER, PARTICIPANT_FILTER } from '../utils/filtering';
 import { publishUserAction } from '../listener/UserActionListener';
 import { extractEntityRepresentativeName } from './entity-representative';
 
@@ -436,12 +436,12 @@ export const listAllEntitiesForFilter = async (context: AuthContext, user: AuthU
 export const listEntities: InternalListEntities = async (context, user, entityTypes, args = {}) => {
   const { indices = READ_ENTITIES_INDICES } = args;
   const { filters } = args;
-  checkFilterKeys(filters, entityTypes);
+  const convertedFilters = checkedAndConvertedFilters(filters, entityTypes);
   // TODO Reactivate this test after global migration to typescript
   // if (connectionFormat !== false) {
   //   throw UnsupportedError('List connection require connectionFormat option to false');
   // }
-  const paginateArgs = buildEntityFilters({ entityTypes, ...args });
+  const paginateArgs = buildEntityFilters({ entityTypes, ...args, filters: convertedFilters });
   return elPaginate(context, user, indices, paginateArgs);
 };
 export const listAllEntities = async <T extends BasicStoreEntity>(context: AuthContext, user: AuthUser, entityTypes: Array<string>,

@@ -109,8 +109,8 @@ export const resolvedFiltersMapForUser = async (context, user, filters) => {
 const convertFiltersFrontendFormatContent = async (context, user, mainFilterGroup, resolvedMap) => {
   const adaptedFilters = [];
   const adaptedFilterGroups = [];
-  const { filters } = mainFilterGroup;
-  const { filterGroups } = mainFilterGroup;
+  const { filters = [] } = mainFilterGroup;
+  const { filterGroups = [] } = mainFilterGroup;
   for (let index = 0; index < filterGroups.length; index += 1) {
     const group = filterGroups[index];
     const adaptedGroup = await convertFiltersFrontendFormatContent(context, user, group, resolvedMap);
@@ -618,16 +618,16 @@ export const extractFilterIds = (filters, key = null) => {
   return uniq(ids);
 };
 
-export const checkFilterKeys = (filters, entityTypes) => {
+export const checkedAndConvertedFilters = (filters, entityTypes) => {
   const listActivities = entityTypes.length === 1 && entityTypes.includes(ENTITY_TYPE_ACTIVITY);
-  if (filters && entityTypes.length > 0 && !listActivities) {
+  if (filters?.filters && entityTypes.length > 0 && !listActivities) { // TODO replace by filters && XX
     const keys = extractFilterKeys(filters);
     // check filters keys correspond to the entity types
     if (keys.length > 0) {
-      entityTypes.forEach((type) => {
+      entityTypes.forEach((type) => { // TODO the keys in AT LEAST a type
         const availableAttributes = schemaAttributesDefinition.getAttributeNames(type);
         const availableRelations = schemaRelationsRefDefinition.getInputNames(type);
-        const availableKeys = availableAttributes.concat(availableRelations).concat(['rel_object.internal_id', 'rel_object.*']);
+        const availableKeys = availableAttributes.concat(availableRelations).concat(['rel_object.internal_id', 'rel_object.*']); // TODO remove hardcode when all the enum are removed
         if (!keys.every((k) => availableKeys.includes(k))) {
           const incorrectKeys = keys
             .map((k) => (!availableKeys.includes(k) ? k : null))
@@ -636,5 +636,23 @@ export const checkFilterKeys = (filters, entityTypes) => {
         }
       });
     }
+    const newFilters = [];
+    // translate the filter keys on relation refs
+    filters.filters.forEach((f) => {
+      const key = Array.isArray(f.key) ? f.key[0] : f.key;
+      const databaseName = schemaRelationsRefDefinition.getDatabaseName(key);
+      if (databaseName) {
+        const newKey = buildRefRelationKey(databaseName);
+        newFilters.push({ ...f, key: newKey });
+      } else {
+        newFilters.push(f);
+      }
+    });
+    return {
+      mode: filters.mode,
+      filters: newFilters,
+      filterGroups: filters.filterGroups,
+    };
   }
+  return undefined;
 };

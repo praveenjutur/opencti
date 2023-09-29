@@ -519,12 +519,6 @@ export const stixCoreObjectEditContext = async (context, user, stixCoreObjectId,
 // endregion
 
 // region filters representatives
-const batchFilters = (context, user, ids) => {
-  return storeLoadByIds(context, user, ids, ABSTRACT_BASIC_OBJECT);
-};
-
-const filtersLoader = batchLoader(batchFilters);
-
 const filtersWithRepresentatives = (inputFilters, representativesMap) => {
   const { filters, filterGroups } = inputFilters;
   const newFilters = [];
@@ -561,9 +555,12 @@ export const findFiltersRepresentatives = async (context, user, inputFilters) =>
   const statusIds = extractFilterIds(inputFilters, WORKFLOW_FILTER);
   // keep ids that should be resolved
   const idsToResolve = ids.filter((id) => !statusIds.includes(id)); // TODO to complete: keep only the ids to resolve
-  const resolvedEntities = await Promise.all(idsToResolve.map((id) => filtersLoader.load(id, context, user)));
+  const resolvedEntities = await storeLoadByIds(context, user, idsToResolve, ABSTRACT_BASIC_OBJECT);
   // resolve status ids differently
   const resolvedStatuses = await Promise.all(statusIds.map((id) => findStatusById(context, user, id)));
+  // TOOD find status by IDS
+  // TODO await on entities+status at the same time
+  // TODO Solution 2: store on all the ids, iter the result and complete the result of type status with cache
   // create the representative map
   const representativesMap = new Map(
     resolvedEntities.concat(resolvedStatuses)
