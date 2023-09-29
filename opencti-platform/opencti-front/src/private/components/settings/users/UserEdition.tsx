@@ -1,46 +1,22 @@
 import React, { FunctionComponent, useState } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { Close } from '@mui/icons-material';
-import makeStyles from '@mui/styles/makeStyles';
-import { SubscriptionAvatars } from '../../../../components/Subscription';
+import Drawer, { DrawerVariant } from '@components/common/drawer/Drawer';
 import UserEditionOverview from './UserEditionOverview';
 import UserEditionPassword from './UserEditionPassword';
 import UserEditionGroups from './UserEditionGroups';
 import { useFormatter } from '../../../../components/i18n';
 import { UserEdition_user$data } from './__generated__/UserEdition_user.graphql';
-import { Theme } from '../../../../components/Theme';
-
-const useStyles = makeStyles<Theme>((theme) => ({
-  header: {
-    backgroundColor: theme.palette.background.nav,
-    padding: '20px 20px 20px 60px',
-  },
-  closeButton: {
-    position: 'absolute',
-    top: 12,
-    left: 5,
-    color: 'inherit',
-  },
-  container: {
-    padding: '10px 20px 20px 20px',
-  },
-  title: {
-    float: 'left',
-  },
-}));
 
 interface UserEditionProps {
-  handleClose: () => void,
-  user: UserEdition_user$data,
+  handleClose?: () => void
+  user: UserEdition_user$data
+  open?: boolean
 }
 
-const UserEdition: FunctionComponent<UserEditionProps> = ({ handleClose, user }) => {
-  const classes = useStyles();
+const UserEdition: FunctionComponent<UserEditionProps> = ({ handleClose = () => {}, user, open }) => {
   const { t } = useFormatter();
   const { editContext } = user;
   const external = user.external === true;
@@ -50,24 +26,14 @@ const UserEdition: FunctionComponent<UserEditionProps> = ({ handleClose, user })
   };
 
   return (
-    <>
-      <div className={classes.header}>
-        <IconButton
-          aria-label="Close"
-          className={classes.closeButton}
-          onClick={handleClose}
-          size="large"
-          color="primary"
-        >
-          <Close fontSize="small" color="primary" />
-        </IconButton>
-        <Typography variant="h6" classes={{ root: classes.title }}>
-          {t('Update a user')}
-        </Typography>
-        <SubscriptionAvatars context={editContext} />
-        <div className="clearfix" />
-      </div>
-      <div className={classes.container}>
+    <Drawer
+      title={t('Update a user')}
+      variant={open == null ? DrawerVariant.updateWithPanel : undefined}
+      open={open}
+      onClose={handleClose}
+      context={editContext}
+    >
+      <>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs
             value={currentTab}
@@ -87,8 +53,8 @@ const UserEdition: FunctionComponent<UserEditionProps> = ({ handleClose, user })
         {currentTab === 2 && (
           <UserEditionGroups user={user} context={editContext} />
         )}
-      </div>
-    </>
+      </>
+    </Drawer>
   );
 };
 
@@ -96,27 +62,27 @@ const UserEditionFragment = createFragmentContainer(UserEdition, {
   user: graphql`
     fragment UserEdition_user on User
     @argumentDefinitions(
-        rolesOrderBy: { type: "RolesOrdering", defaultValue: name }
-        rolesOrderMode: { type: "OrderingMode", defaultValue: asc }
-        groupsOrderBy: { type: "GroupsOrdering", defaultValue: name }
-        groupsOrderMode: { type: "OrderingMode", defaultValue: asc }
-        organizationsOrderBy: { type: "OrganizationsOrdering", defaultValue: name }
-        organizationsOrderMode: { type: "OrderingMode", defaultValue: asc }
+      rolesOrderBy: { type: "RolesOrdering", defaultValue: name }
+      rolesOrderMode: { type: "OrderingMode", defaultValue: asc }
+      groupsOrderBy: { type: "GroupsOrdering", defaultValue: name }
+      groupsOrderMode: { type: "OrderingMode", defaultValue: asc }
+      organizationsOrderBy: { type: "OrganizationsOrdering", defaultValue: name }
+      organizationsOrderMode: { type: "OrderingMode", defaultValue: asc }
     ) {
       id
       external
       ...UserEditionOverview_user
       @arguments(
-          rolesOrderBy: $rolesOrderBy
-          rolesOrderMode: $rolesOrderMode
-          organizationsOrderBy: $organizationsOrderBy
-          organizationsOrderMode: $organizationsOrderMode
+        rolesOrderBy: $rolesOrderBy
+        rolesOrderMode: $rolesOrderMode
+        organizationsOrderBy: $organizationsOrderBy
+        organizationsOrderMode: $organizationsOrderMode
       )
       ...UserEditionPassword_user
       ...UserEditionGroups_user
       @arguments(
-          groupsOrderBy: $groupsOrderBy
-          groupsOrderMode: $groupsOrderMode
+        groupsOrderBy: $groupsOrderBy
+        groupsOrderMode: $groupsOrderMode
       )
       editContext {
         name

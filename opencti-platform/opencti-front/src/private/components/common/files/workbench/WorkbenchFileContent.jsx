@@ -15,7 +15,6 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import Drawer from '@mui/material/Drawer';
 import Fab from '@mui/material/Fab';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
@@ -87,6 +86,7 @@ import WorkbenchFilePopover from './WorkbenchFilePopover';
 import WorkbenchFileToolbar from './WorkbenchFileToolbar';
 import { fieldSpacingContainerStyle } from '../../../../../utils/field';
 import RichTextField from '../../../../../components/RichTextField';
+import Drawer from '../../drawer/Drawer';
 
 const Transition = React.forwardRef((props, ref) => (
   <Slide direction="up" ref={ref} {...props} />
@@ -691,7 +691,7 @@ const WorkbenchFileContentComponent = ({
       'object_refs',
       (n.object_refs || []).filter(
         (o) => !objectsToBeDeletedIds.includes(o)
-            && !stixCoreRelationshipsToRemove.includes(o),
+          && !stixCoreRelationshipsToRemove.includes(o),
       ),
       n,
     ));
@@ -965,7 +965,7 @@ const WorkbenchFileContentComponent = ({
       'object_refs',
       (n.object_refs || []).filter(
         (o) => o !== toDeleteObject.id
-            && !stixCoreRelationshipsToRemove.includes(o),
+          && !stixCoreRelationshipsToRemove.includes(o),
       ),
       n,
     ));
@@ -1059,7 +1059,7 @@ const WorkbenchFileContentComponent = ({
           newEntity.identity_class = resolveIdentityClass(currentEntityType);
         } else if (
           newEntity.type === 'location'
-            && !newEntity.x_opencti_location_type
+          && !newEntity.x_opencti_location_type
         ) {
           newEntity.x_opencti_location_type = currentEntityType;
         }
@@ -1411,7 +1411,7 @@ const WorkbenchFileContentComponent = ({
     );
     setContainerSelectAll(
       (container.object_refs || []).length
-        >= Object.keys(indexedStixObjects).length,
+      >= Object.keys(indexedStixObjects).length,
     );
     setContainerStep(1);
     setStixDomainObjects(
@@ -3111,7 +3111,7 @@ const WorkbenchFileContentComponent = ({
                             render={({ props }) => {
                               if (props && props.stixDomainObjects) {
                                 return props.stixDomainObjects.edges.length
-                                  > 0 ? (
+                                > 0 ? (
                                   <ItemBoolean
                                     variant="inList"
                                     status={true}
@@ -3167,29 +3167,14 @@ const WorkbenchFileContentComponent = ({
         </Fab>
         <Drawer
           open={entityStep != null}
-          anchor="right"
-          sx={{ zIndex: 1202 }}
-          elevation={1}
-          classes={{ paper: classes.drawerPaper }}
           onClose={handleCloseEntity}
+          title={t('Manage an entity')}
         >
-          <div className={classes.header}>
-            <IconButton
-              aria-label="Close"
-              className={classes.closeButton}
-              onClick={handleCloseEntity}
-              size="large"
-              color="primary"
-            >
-              <Close fontSize="small" color="primary" />
-            </IconButton>
-            <Typography variant="h6">{t('Manage an entity')}</Typography>
-          </div>
-          <div className={classes.container}>
+          <>
             {!entityType && renderEntityTypesList()}
             {entityType && entityStep === 0 && renderEntityForm()}
             {entityType && entityStep === 1 && renderEntityContext()}
-          </div>
+          </>
         </Drawer>
       </div>
     );
@@ -3368,7 +3353,7 @@ const WorkbenchFileContentComponent = ({
                             render={({ props }) => {
                               if (props && props.stixCyberObservables) {
                                 return props.stixCyberObservables.edges.length
-                                  > 0 ? (
+                                > 0 ? (
                                   <ItemBoolean
                                     variant="inList"
                                     status={true}
@@ -3795,7 +3780,7 @@ const WorkbenchFileContentComponent = ({
                             render={({ props }) => {
                               if (props && props.stixDomainObjects) {
                                 return props.stixDomainObjects.edges.length
-                                  > 0 ? (
+                                > 0 ? (
                                   <ItemBoolean
                                     variant="inList"
                                     status={true}
