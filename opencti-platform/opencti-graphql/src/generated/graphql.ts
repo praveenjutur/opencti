@@ -8165,32 +8165,6 @@ export type IPv6AddrAddInput = {
   value?: InputMaybe<Scalars['String']['input']>;
 };
 
-export enum IdentitiesFilter {
-  Aliases = 'aliases',
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  EntityType = 'entity_type',
-  IdentityClass = 'identity_class',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Revoked = 'revoked',
-  UpdatedAt = 'updated_at',
-  XOpenctiAliases = 'x_opencti_aliases',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type IdentitiesFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<IdentitiesFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum IdentitiesOrdering {
   Created = 'created',
   CreatedAt = 'created_at',
@@ -10427,26 +10401,6 @@ export type LanguageEdge = {
   __typename?: 'LanguageEdge';
   cursor: Scalars['String']['output'];
   node: Language;
-};
-
-export enum LanguagesFilter {
-  Aliases = 'aliases',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectLabel = 'objectLabel',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type LanguagesFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<LanguagesFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export enum LanguagesOrdering {
@@ -15581,33 +15535,6 @@ export type OpinionUserAddInput = {
   x_opencti_stix_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export enum OpinionsFilter {
-  Authors = 'authors',
-  Confidence = 'confidence',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  Explanation = 'explanation',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  ObjectAssignee = 'objectAssignee',
-  ObjectLabel = 'objectLabel',
-  Objects = 'objects',
-  Opinion = 'opinion',
-  Revoked = 'revoked',
-  SourceReliability = 'source_reliability',
-  UpdatedAt = 'updated_at',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type OpinionsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<OpinionsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values: Array<InputMaybe<Scalars['String']['input']>>;
-};
-
 export enum OpinionsOrdering {
   Confidence = 'confidence',
   Created = 'created',
@@ -17799,7 +17726,7 @@ export type QueryGroupsArgs = {
 export type QueryIdentitiesArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<IdentitiesFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<IdentitiesOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -18018,7 +17945,7 @@ export type QueryLanguageArgs = {
 export type QueryLanguagesArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<LanguagesFiltering>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<LanguagesOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -18295,7 +18222,7 @@ export type QueryOpinionContainsStixObjectOrStixRelationshipArgs = {
 export type QueryOpinionsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<OpinionsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<OpinionsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -18944,7 +18871,7 @@ export type QueryStixMetaObjectArgs = {
 export type QueryStixMetaObjectsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<StixMetaObjectsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<StixMetaObjectsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -21360,67 +21287,6 @@ export type StixCoreObjectsDistributionParameters = {
   types?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export enum StixCoreObjectsFilter {
-  Abstract = 'abstract',
-  Aliases = 'aliases',
-  Confidence = 'confidence',
-  Context = 'context',
-  Created = 'created',
-  CreatedBy = 'createdBy',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  ElementId = 'elementId',
-  EntityType = 'entity_type',
-  HasExternalReference = 'hasExternalReference',
-  HashesMd5 = 'hashes_MD5',
-  HashesSha1 = 'hashes_SHA1',
-  HashesSha256 = 'hashes_SHA256',
-  HashesSha512 = 'hashes_SHA512',
-  IncidentTypes = 'incident_types',
-  Indicates = 'indicates',
-  IndicatorTypes = 'indicator_types',
-  KillChainPhase = 'killChainPhase',
-  MalwareTypes = 'malware_types',
-  MarkedBy = 'markedBy',
-  Modified = 'modified',
-  Name = 'name',
-  ObjectAssignee = 'objectAssignee',
-  ObjectId = 'objectId',
-  ObjectLabel = 'objectLabel',
-  Objects = 'objects',
-  Participant = 'participant',
-  PatternType = 'pattern_type',
-  Published = 'published',
-  RelatedTo = 'relatedTo',
-  RelationshipType = 'relationship_type',
-  ReportTypes = 'report_types',
-  Revoked = 'revoked',
-  SourceReliability = 'source_reliability',
-  StartTime = 'start_time',
-  StopTime = 'stop_time',
-  Subject = 'subject',
-  Targets = 'targets',
-  ThreatActorTypes = 'threat_actor_types',
-  ValidFrom = 'valid_from',
-  ValidUntil = 'valid_until',
-  Value = 'value',
-  XMitreId = 'x_mitre_id',
-  XOpenctiAdditionalNames = 'x_opencti_additional_names',
-  XOpenctiAliases = 'x_opencti_aliases',
-  XOpenctiDetection = 'x_opencti_detection',
-  XOpenctiMainObservableType = 'x_opencti_main_observable_type',
-  XOpenctiOrganizationType = 'x_opencti_organization_type',
-  XOpenctiReliability = 'x_opencti_reliability',
-  XOpenctiWorkflowId = 'x_opencti_workflow_id'
-}
-
-export type StixCoreObjectsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<StixCoreObjectsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export type StixCoreObjectsNumberParameters = {
   elementId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   filterMode?: InputMaybe<FilterMode>;
@@ -22620,18 +22486,6 @@ export type StixMetaObjectEdge = {
   __typename?: 'StixMetaObjectEdge';
   cursor: Scalars['String']['output'];
   node: StixMetaObject;
-};
-
-export enum StixMetaObjectsFilter {
-  EntityType = 'entity_type',
-  IsInferred = 'is_inferred'
-}
-
-export type StixMetaObjectsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<StixMetaObjectsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export enum StixMetaObjectsOrdering {
@@ -27750,8 +27604,6 @@ export type ResolversTypes = ResolversObject<{
   IPv4AddrAddInput: IPv4AddrAddInput;
   IPv6Addr: ResolverTypeWrapper<Omit<IPv6Addr, 'cases' | 'containers' | 'countries' | 'createdBy' | 'groupings' | 'indicators' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversTypes['CaseConnection']>, containers?: Maybe<ResolversTypes['ContainerConnection']>, countries?: Maybe<ResolversTypes['CountryConnection']>, createdBy?: Maybe<ResolversTypes['Identity']>, groupings?: Maybe<ResolversTypes['GroupingConnection']>, indicators?: Maybe<ResolversTypes['IndicatorConnection']>, notes?: Maybe<ResolversTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversTypes['OrganizationConnection']>, observedData?: Maybe<ResolversTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversTypes['OpinionConnection']>, reports?: Maybe<ResolversTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversTypes['StixCoreRelationshipConnection']> }>;
   IPv6AddrAddInput: IPv6AddrAddInput;
-  IdentitiesFilter: IdentitiesFilter;
-  IdentitiesFiltering: IdentitiesFiltering;
   IdentitiesOrdering: IdentitiesOrdering;
   Identity: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['Identity']>;
   IdentityAddInput: IdentityAddInput;
@@ -27826,8 +27678,6 @@ export type ResolversTypes = ResolversObject<{
   LanguageAddInput: LanguageAddInput;
   LanguageConnection: ResolverTypeWrapper<Omit<LanguageConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversTypes['LanguageEdge']>>> }>;
   LanguageEdge: ResolverTypeWrapper<Omit<LanguageEdge, 'node'> & { node: ResolversTypes['Language'] }>;
-  LanguagesFilter: LanguagesFilter;
-  LanguagesFiltering: LanguagesFiltering;
   LanguagesOrdering: LanguagesOrdering;
   ListTask: ResolverTypeWrapper<ListTask>;
   ListTaskAddInput: ListTaskAddInput;
@@ -27928,8 +27778,6 @@ export type ResolversTypes = ResolversObject<{
   OpinionEdge: ResolverTypeWrapper<Omit<OpinionEdge, 'node'> & { node: ResolversTypes['Opinion'] }>;
   OpinionEditMutations: ResolverTypeWrapper<Omit<OpinionEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversTypes['Opinion']>, contextPatch?: Maybe<ResolversTypes['Opinion']>, fieldPatch?: Maybe<ResolversTypes['Opinion']>, relationAdd?: Maybe<ResolversTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversTypes['Opinion']> }>;
   OpinionUserAddInput: OpinionUserAddInput;
-  OpinionsFilter: OpinionsFilter;
-  OpinionsFiltering: OpinionsFiltering;
   OpinionsOrdering: OpinionsOrdering;
   OrderingMode: OrderingMode;
   Organization: ResolverTypeWrapper<BasicStoreEntityOrganization>;
@@ -28050,8 +27898,6 @@ export type ResolversTypes = ResolversObject<{
   StixCoreObjectEditMutations: ResolverTypeWrapper<Omit<StixCoreObjectEditMutations, 'relationAdd' | 'relationDelete' | 'relationsAdd' | 'restrictionOrganizationAdd' | 'restrictionOrganizationDelete'> & { relationAdd?: Maybe<ResolversTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversTypes['StixCoreObject']>, relationsAdd?: Maybe<ResolversTypes['StixCoreObject']>, restrictionOrganizationAdd?: Maybe<ResolversTypes['StixCoreObject']>, restrictionOrganizationDelete?: Maybe<ResolversTypes['StixCoreObject']> }>;
   StixCoreObjectOrStixCoreRelationship: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['StixCoreObjectOrStixCoreRelationship']>;
   StixCoreObjectsDistributionParameters: StixCoreObjectsDistributionParameters;
-  StixCoreObjectsFilter: StixCoreObjectsFilter;
-  StixCoreObjectsFiltering: StixCoreObjectsFiltering;
   StixCoreObjectsNumberParameters: StixCoreObjectsNumberParameters;
   StixCoreObjectsOrdering: StixCoreObjectsOrdering;
   StixCoreObjectsTimeSeriesParameters: StixCoreObjectsTimeSeriesParameters;
@@ -28086,8 +27932,6 @@ export type ResolversTypes = ResolversObject<{
   StixMetaObject: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['StixMetaObject']>;
   StixMetaObjectConnection: ResolverTypeWrapper<StixMetaObjectConnection>;
   StixMetaObjectEdge: ResolverTypeWrapper<StixMetaObjectEdge>;
-  StixMetaObjectsFilter: StixMetaObjectsFilter;
-  StixMetaObjectsFiltering: StixMetaObjectsFiltering;
   StixMetaObjectsOrdering: StixMetaObjectsOrdering;
   StixObject: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['StixObject']>;
   StixObjectOrStixRelationship: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['StixObjectOrStixRelationship']>;
@@ -28461,7 +28305,6 @@ export type ResolversParentTypes = ResolversObject<{
   IPv4AddrAddInput: IPv4AddrAddInput;
   IPv6Addr: Omit<IPv6Addr, 'cases' | 'containers' | 'countries' | 'createdBy' | 'groupings' | 'indicators' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, countries?: Maybe<ResolversParentTypes['CountryConnection']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, indicators?: Maybe<ResolversParentTypes['IndicatorConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, observedData?: Maybe<ResolversParentTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversParentTypes['StixCoreRelationshipConnection']> };
   IPv6AddrAddInput: IPv6AddrAddInput;
-  IdentitiesFiltering: IdentitiesFiltering;
   Identity: ResolversInterfaceTypes<ResolversParentTypes>['Identity'];
   IdentityAddInput: IdentityAddInput;
   IdentityConnection: Omit<IdentityConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['IdentityEdge']>>> };
@@ -28523,7 +28366,6 @@ export type ResolversParentTypes = ResolversObject<{
   LanguageAddInput: LanguageAddInput;
   LanguageConnection: Omit<LanguageConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['LanguageEdge']>>> };
   LanguageEdge: Omit<LanguageEdge, 'node'> & { node: ResolversParentTypes['Language'] };
-  LanguagesFiltering: LanguagesFiltering;
   ListTask: ListTask;
   ListTaskAddInput: ListTaskAddInput;
   Location: ResolversInterfaceTypes<ResolversParentTypes>['Location'];
@@ -28610,7 +28452,6 @@ export type ResolversParentTypes = ResolversObject<{
   OpinionEdge: Omit<OpinionEdge, 'node'> & { node: ResolversParentTypes['Opinion'] };
   OpinionEditMutations: Omit<OpinionEditMutations, 'contextClean' | 'contextPatch' | 'fieldPatch' | 'relationAdd' | 'relationDelete'> & { contextClean?: Maybe<ResolversParentTypes['Opinion']>, contextPatch?: Maybe<ResolversParentTypes['Opinion']>, fieldPatch?: Maybe<ResolversParentTypes['Opinion']>, relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['Opinion']> };
   OpinionUserAddInput: OpinionUserAddInput;
-  OpinionsFiltering: OpinionsFiltering;
   Organization: BasicStoreEntityOrganization;
   OrganizationAddInput: OrganizationAddInput;
   OrganizationConnection: Omit<OrganizationConnection, 'edges'> & { edges: Array<ResolversParentTypes['OrganizationEdge']> };
@@ -28716,7 +28557,6 @@ export type ResolversParentTypes = ResolversObject<{
   StixCoreObjectEditMutations: Omit<StixCoreObjectEditMutations, 'relationAdd' | 'relationDelete' | 'relationsAdd' | 'restrictionOrganizationAdd' | 'restrictionOrganizationDelete'> & { relationAdd?: Maybe<ResolversParentTypes['StixRefRelationship']>, relationDelete?: Maybe<ResolversParentTypes['StixCoreObject']>, relationsAdd?: Maybe<ResolversParentTypes['StixCoreObject']>, restrictionOrganizationAdd?: Maybe<ResolversParentTypes['StixCoreObject']>, restrictionOrganizationDelete?: Maybe<ResolversParentTypes['StixCoreObject']> };
   StixCoreObjectOrStixCoreRelationship: ResolversUnionTypes<ResolversParentTypes>['StixCoreObjectOrStixCoreRelationship'];
   StixCoreObjectsDistributionParameters: StixCoreObjectsDistributionParameters;
-  StixCoreObjectsFiltering: StixCoreObjectsFiltering;
   StixCoreObjectsNumberParameters: StixCoreObjectsNumberParameters;
   StixCoreObjectsTimeSeriesParameters: StixCoreObjectsTimeSeriesParameters;
   StixCoreRelationship: Omit<StixCoreRelationship, 'cases' | 'containers' | 'createdBy' | 'from' | 'groupings' | 'notes' | 'objectOrganization' | 'opinions' | 'reports' | 'stixCoreRelationships' | 'to'> & { cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, from?: Maybe<ResolversParentTypes['StixObjectOrStixRelationshipOrCreator']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversParentTypes['StixCoreRelationshipConnection']>, to?: Maybe<ResolversParentTypes['StixObjectOrStixRelationshipOrCreator']> };
@@ -28746,7 +28586,6 @@ export type ResolversParentTypes = ResolversObject<{
   StixMetaObject: ResolversInterfaceTypes<ResolversParentTypes>['StixMetaObject'];
   StixMetaObjectConnection: StixMetaObjectConnection;
   StixMetaObjectEdge: StixMetaObjectEdge;
-  StixMetaObjectsFiltering: StixMetaObjectsFiltering;
   StixObject: ResolversInterfaceTypes<ResolversParentTypes>['StixObject'];
   StixObjectOrStixRelationship: ResolversUnionTypes<ResolversParentTypes>['StixObjectOrStixRelationship'];
   StixObjectOrStixRelationshipConnection: StixObjectOrStixRelationshipConnection;

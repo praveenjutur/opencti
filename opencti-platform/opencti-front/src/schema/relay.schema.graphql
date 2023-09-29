@@ -1674,18 +1674,6 @@ enum StixMetaObjectsOrdering {
   updated_at
 }
 
-enum StixMetaObjectsFilter {
-  entity_type
-  is_inferred
-}
-
-input StixMetaObjectsFiltering {
-  key: [StixMetaObjectsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
-
 type StixMetaObjectConnection {
   pageInfo: PageInfo!
   edges: [StixMetaObjectEdge]
@@ -1966,67 +1954,6 @@ enum StixCoreObjectsOrdering {
   subject
   value
   _score
-}
-
-enum StixCoreObjectsFilter {
-  name
-  entity_type
-  revoked
-  relationship_type
-  elementId
-  objectId
-  aliases
-  x_opencti_aliases
-  x_mitre_id
-  created
-  modified
-  created_at
-  start_time
-  stop_time
-  createdBy
-  markedBy
-  objectAssignee
-  participant
-  objectLabel
-  killChainPhase
-  hasExternalReference
-  objects
-  indicates
-  confidence
-  source_reliability
-  x_opencti_reliability
-  valid_from
-  valid_until
-  pattern_type
-  indicator_types
-  x_opencti_main_observable_type
-  report_types
-  context
-  x_opencti_organization_type
-  published
-  creator
-  x_opencti_workflow_id
-  x_opencti_detection
-  subject
-  value
-  abstract
-  malware_types
-  threat_actor_types
-  incident_types
-  targets
-  relatedTo
-  hashes_MD5
-  hashes_SHA1
-  hashes_SHA256
-  hashes_SHA512
-  x_opencti_additional_names
-}
-
-input StixCoreObjectsFiltering {
-  key: [StixCoreObjectsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 
 type StixCoreObjectConnection {
@@ -2750,33 +2677,6 @@ enum OpinionsOrdering {
   creator
 }
 
-enum OpinionsFilter {
-  explanation
-  authors
-  opinion
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  objects
-  x_opencti_workflow_id
-  revoked
-  confidence
-  source_reliability
-  creator
-}
-
-input OpinionsFiltering {
-  key: [OpinionsFilter!]!
-  values: [String]!
-  operator: String
-  filterMode: FilterMode
-}
-
 type OpinionConnection {
   pageInfo: PageInfo!
   edges: [OpinionEdge]
@@ -3126,32 +3026,6 @@ enum IdentitiesOrdering {
   created_at
   updated_at
   x_opencti_workflow_id
-}
-
-enum IdentitiesFilter {
-  entity_type
-  identity_class
-  name
-  aliases
-  x_opencti_aliases
-  confidence
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  revoked
-}
-
-input IdentitiesFiltering {
-  key: [IdentitiesFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 
 type IdentityConnection {
@@ -7381,7 +7255,7 @@ type Query {
   synchronizers(first: Int, after: ID, orderBy: SynchronizersOrdering, orderMode: OrderingMode, search: String): SynchronizerConnection
   synchronizerFetch(input: SynchronizerFetchInput): [RemoteStreamCollection]
   stixMetaObject(id: String!): StixMetaObject
-  stixMetaObjects(first: Int, after: ID, types: [String], orderBy: StixMetaObjectsOrdering, orderMode: OrderingMode, filters: [StixMetaObjectsFiltering], filterMode: FilterMode, search: String): StixMetaObjectConnection
+  stixMetaObjects(first: Int, after: ID, types: [String], orderBy: StixMetaObjectsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String): StixMetaObjectConnection
   markingDefinition(id: String!): MarkingDefinition
   markingDefinitions(first: Int, after: ID, orderBy: MarkingDefinitionsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): MarkingDefinitionConnection
   label(id: String!): Label
@@ -7430,7 +7304,7 @@ type Query {
   observedDatasDistribution(objectId: String, field: String!, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String): [Distribution]
   observedDataContainsStixObjectOrStixRelationship(id: String!, stixObjectOrStixRelationshipId: String!): Boolean
   opinion(id: String): Opinion
-  opinions(first: Int, after: ID, orderBy: OpinionsOrdering, orderMode: OrderingMode, filters: [OpinionsFiltering], filterMode: FilterMode, search: String, toStix: Boolean): OpinionConnection
+  opinions(first: Int, after: ID, orderBy: OpinionsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): OpinionConnection
   opinionsTimeSeries(objectId: String, authorId: String, field: String!, operation: StatsOperation!, startDate: DateTime!, endDate: DateTime!, interval: String!): [TimeSeries]
   opinionsNumber(objectId: String, endDate: DateTime): Number
   opinionsDistribution(objectId: String, field: String!, dateAttribute: String, operation: StatsOperation!, limit: Int, order: String): [Distribution]
@@ -7445,7 +7319,7 @@ type Query {
   courseOfAction(id: String): CourseOfAction
   coursesOfAction(first: Int, after: ID, orderBy: CoursesOfActionOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): CourseOfActionConnection
   identity(id: String!): Identity
-  identities(first: Int, after: ID, types: [String], orderBy: IdentitiesOrdering, orderMode: OrderingMode, search: String, filters: [IdentitiesFiltering], filterMode: FilterMode, toStix: Boolean): IdentityConnection
+  identities(first: Int, after: ID, types: [String], orderBy: IdentitiesOrdering, orderMode: OrderingMode, search: String, filters: FilterGroup, filterMode: FilterMode, toStix: Boolean): IdentityConnection
   individual(id: String!): Individual
   individuals(first: Int, after: ID, orderBy: IndividualsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String, toStix: Boolean): IndividualConnection
   sector(id: String): Sector
@@ -7520,7 +7394,7 @@ type Query {
   channel(id: String!): Channel
   channels(first: Int, after: ID, orderBy: ChannelsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String): ChannelConnection
   language(id: String!): Language
-  languages(first: Int, after: ID, orderBy: LanguagesOrdering, orderMode: OrderingMode, filters: [LanguagesFiltering!], filterMode: FilterMode, search: String): LanguageConnection
+  languages(first: Int, after: ID, orderBy: LanguagesOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String): LanguageConnection
   event(id: String!): Event
   events(first: Int, after: ID, orderBy: EventsOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String): EventConnection
   grouping(id: String!): Grouping
@@ -8485,26 +8359,6 @@ enum LanguagesOrdering {
   objectMarking
   objectLabel
   x_opencti_workflow_id
-}
-
-enum LanguagesFilter {
-  name
-  aliases
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectLabel
-  x_opencti_workflow_id
-}
-
-input LanguagesFiltering {
-  key: [LanguagesFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 
 type LanguageConnection {

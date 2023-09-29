@@ -123,26 +123,6 @@ enum LanguagesOrdering {
     x_opencti_workflow_id
 }
 
-# Filtering
-enum LanguagesFilter {
-    name
-    aliases
-    created
-    modified
-    created_at
-    updated_at
-    createdBy
-    markedBy
-    objectLabel
-    x_opencti_workflow_id
-}
-input LanguagesFiltering {
-    key: [LanguagesFilter!]!
-    values: [String]
-    operator: String
-    filterMode: FilterMode
-}
-
 # Relay connections
 type LanguageConnection {
     pageInfo: PageInfo!
@@ -161,7 +141,7 @@ type Query {
         after: ID
         orderBy: LanguagesOrdering
         orderMode: OrderingMode
-        filters: [LanguagesFiltering!]
+        filters: FilterGroup
         filterMode: FilterMode
         search: String
     ): LanguageConnection @auth(for: [KNOWLEDGE])

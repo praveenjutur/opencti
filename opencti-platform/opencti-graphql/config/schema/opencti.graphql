@@ -1610,16 +1610,6 @@ enum StixMetaObjectsOrdering {
   created_at
   updated_at
 }
-enum StixMetaObjectsFilter {
-  entity_type
-  is_inferred
-}
-input StixMetaObjectsFiltering {
-  key: [StixMetaObjectsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
-}
 type StixMetaObjectConnection {
   pageInfo: PageInfo!
   edges: [StixMetaObjectEdge]
@@ -1908,65 +1898,6 @@ enum StixCoreObjectsOrdering {
   subject
   value
   _score
-}
-enum StixCoreObjectsFilter {
-  name
-  entity_type
-  revoked
-  relationship_type
-  elementId
-  objectId
-  aliases
-  x_opencti_aliases
-  x_mitre_id
-  created
-  modified
-  created_at
-  start_time
-  stop_time
-  createdBy
-  markedBy
-  objectAssignee
-  participant
-  objectLabel
-  killChainPhase
-  hasExternalReference
-  objects
-  indicates
-  confidence
-  source_reliability
-  x_opencti_reliability
-  valid_from
-  valid_until
-  pattern_type
-  indicator_types
-  x_opencti_main_observable_type
-  report_types
-  context
-  x_opencti_organization_type
-  published
-  creator
-  x_opencti_workflow_id
-  x_opencti_detection
-  subject
-  value
-  abstract
-  malware_types
-  threat_actor_types
-  incident_types
-  targets
-  relatedTo
-  hashes_MD5
-  hashes_SHA1
-  hashes_SHA256
-  hashes_SHA512
-  x_opencti_additional_names
-}
-input StixCoreObjectsFiltering {
-  key: [StixCoreObjectsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 type StixCoreObjectConnection {
   pageInfo: PageInfo!
@@ -3162,31 +3093,6 @@ enum OpinionsOrdering {
   confidence
   creator
 }
-enum OpinionsFilter {
-  explanation
-  authors
-  opinion
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  objects
-  x_opencti_workflow_id
-  revoked
-  confidence
-  source_reliability
-  creator
-}
-input OpinionsFiltering {
-  key: [OpinionsFilter!]!
-  values: [String]!
-  operator: String
-  filterMode: FilterMode
-}
 type OpinionConnection {
   pageInfo: PageInfo!
   edges: [OpinionEdge]
@@ -3756,30 +3662,6 @@ enum IdentitiesOrdering {
   created_at
   updated_at
   x_opencti_workflow_id
-}
-enum IdentitiesFilter {
-  entity_type
-  identity_class
-  name
-  aliases
-  x_opencti_aliases
-  confidence
-  created
-  modified
-  created_at
-  updated_at
-  createdBy
-  markedBy
-  objectAssignee
-  objectLabel
-  x_opencti_workflow_id
-  revoked
-}
-input IdentitiesFiltering {
-  key: [IdentitiesFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 type IdentityConnection {
   pageInfo: PageInfo!
@@ -11401,7 +11283,7 @@ type Query {
     types: [String]
     orderBy: StixMetaObjectsOrdering
     orderMode: OrderingMode
-    filters: [StixMetaObjectsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): StixMetaObjectConnection @auth(for: [KNOWLEDGE])
@@ -11713,7 +11595,7 @@ type Query {
     after: ID
     orderBy: OpinionsOrdering
     orderMode: OrderingMode
-    filters: [OpinionsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
     toStix: Boolean
@@ -11808,7 +11690,7 @@ type Query {
     orderBy: IdentitiesOrdering
     orderMode: OrderingMode
     search: String
-    filters: [IdentitiesFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     toStix: Boolean
   ): IdentityConnection @auth(for: [KNOWLEDGE])
