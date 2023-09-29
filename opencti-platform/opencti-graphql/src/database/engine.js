@@ -1966,24 +1966,7 @@ const buildIndexFileBody = (documentId, file, entity = null) => {
   }
   return documentBody;
 };
-export const elIndexFile = async (documentId, fileContent, fileId) => {
-  const indexName = INDEX_FILES;
-  const file = {
-    id: fileId,
-    content: fileContent,
-  };
-  const documentBody = buildIndexFileBody(documentId, file);
-  return engine.index({
-    id: documentId,
-    index: indexName,
-    timeout: BULK_TIMEOUT,
-    refresh: true,
-    pipeline: 'attachment',
-    body: documentBody,
-  }).catch((err) => {
-    throw DatabaseError('[SEARCH] Error updating elastic (update)', { error: err, documentId, body: documentBody });
-  });
-};
+
 export const elBulkIndexFiles = async (context, user, files, maxBulkOperations = 10) => {
   if (!files || files.length === 0) {
     return;
