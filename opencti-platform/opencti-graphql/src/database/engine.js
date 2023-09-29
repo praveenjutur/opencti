@@ -580,6 +580,16 @@ const elCreateIndexTemplate = async (index) => {
                 },
               },
             },
+            internal_id: {
+              type: 'text',
+              fields: {
+                keyword: {
+                  type: 'keyword',
+                  normalizer: 'string_normalizer',
+                  ignore_above: 512,
+                },
+              },
+            },
             timestamp: {
               type: 'date',
             },
