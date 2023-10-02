@@ -2029,7 +2029,6 @@ interface StixCoreObject {
   updated_at: DateTime!
   # StixCoreObject
   is_from_relation_inferred: Boolean
-  representative: Representative!
   createdBy: Identity
   objectMarking: MarkingDefinitionConnection
   objectOrganization: OrganizationConnection @auth(for: [KNOWLEDGE_KNUPDATE_KNORGARESTRICT])
@@ -2228,7 +2227,6 @@ interface StixDomainObject {
   created_at: DateTime!
   updated_at: DateTime!
   # StixCoreObject
-  representative: Representative!
   is_from_relation_inferred: Boolean
   createdBy: Identity
   objectMarking: MarkingDefinitionConnection
