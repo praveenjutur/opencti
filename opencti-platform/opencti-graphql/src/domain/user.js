@@ -449,7 +449,12 @@ export const addUser = async (context, user, newUser) => {
   const userOrganizations = newUser.objectOrganization ?? [];
   await Promise.all(R.map((organization) => assignOrganizationToUser(context, user, element.id, organization), userOrganizations));
   // Assign default groups to user
-  const defaultGroups = await findGroups(context, user, { filters: [{ key: 'default_assignation', values: [true] }] });
+  const defaultAssignationFilter = {
+    mode: 'and',
+    filters: [{ key: 'default_assignation', values: [true] }],
+    filterGroups: [],
+  };
+  const defaultGroups = await findGroups(context, user, { filters: defaultAssignationFilter });
   const relationGroups = defaultGroups.edges.map((e) => ({
     fromId: element.id,
     toId: e.node.internal_id,
@@ -733,7 +738,12 @@ export const loginFromProvider = async (userInfo, opts = {}) => {
   // region test the groups existence and eventually auto create groups
   if (providerGroups.length > 0) {
     const providerGroupsIds = providerGroups.map((groupName) => generateStandardId(ENTITY_TYPE_GROUP, { name: groupName }));
-    const foundGroups = await findGroups(context, SYSTEM_USER, { filters: [{ key: 'standard_id', values: providerGroupsIds }] });
+    const groupsFilters = {
+      mode: 'and',
+      filters: [{ key: 'standard_id', values: providerGroupsIds }],
+      filterGroups: [],
+    };
+    const foundGroups = await findGroups(context, SYSTEM_USER, { filters: groupsFilters });
     const foundGroupsNames = foundGroups.edges.map((group) => group.node.name);
     const newGroupsToCreate = [];
     providerGroups.forEach((groupName) => {
@@ -948,7 +958,12 @@ export const buildCompleteUser = async (context, client) => {
     return undefined;
   }
   const batchOpts = { batched: false, paginate: false };
-  const args = { filters: [{ key: 'contact_information', values: [client.user_email] }], connectionFormat: false };
+  const contactInformationFilter = {
+    mode: 'and',
+    filters: [{ key: 'contact_information', values: [client.user_email] }],
+    filterGroups: [],
+  };
+  const args = { filters: contactInformationFilter, connectionFormat: false };
   const individualsPromise = listEntities(context, SYSTEM_USER, [ENTITY_TYPE_IDENTITY_INDIVIDUAL], args);
   const organizationsPromise = batchOrganizations(context, SYSTEM_USER, client.id, { ...batchOpts, withInferences: false });
   const userGroupsPromise = listThroughGetTo(context, SYSTEM_USER, client.id, RELATION_MEMBER_OF, ENTITY_TYPE_GROUP);

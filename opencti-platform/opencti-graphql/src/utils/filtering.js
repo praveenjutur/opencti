@@ -595,6 +595,15 @@ export const addFilter = (filterGroup, newKey, newValues) => {
   };
 };
 
+export const removeFilter = (filterGroup, filterKeys) => {
+  const keysToRemove = Array.isArray(filterKeys) ? filterKeys : [filterKeys];
+  return {
+    mode: filterGroup?.mode ?? 'and',
+    filters: filterGroup?.filters.filter((f) => !keysToRemove.includes(f.key)),
+    filterGroups: filterGroup?.filterGroups ?? [],
+  };
+};
+
 export const extractFilterKeys = (filters) => {
   let keys = filters.filters?.map((f) => f.key).flat() ?? []; // TODO remove filters.filters can be null when filter format refacto done
   if (filters.filterGroups && filters.filterGroups.length > 0) {

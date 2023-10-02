@@ -52,6 +52,7 @@ import {
   stixObjectOrRelationshipAddRefRelation,
   stixObjectOrRelationshipDeleteRefRelation
 } from './stixObjectOrStixRelationship';
+import { addFilter } from '../utils/filtering';
 
 export const findById = (context, user, stixCyberObservableId) => {
   return storeLoadById(context, user, stixCyberObservableId, ABSTRACT_STIX_CYBER_OBSERVABLE);
@@ -342,7 +343,7 @@ export const stixCyberObservableDistribution = async (context, user, args) => {
 
 export const stixCyberObservableDistributionByEntity = async (context, user, args) => {
   const { relationship_type, objectId, types = [ABSTRACT_STIX_CYBER_OBSERVABLE] } = args;
-  const filters = [{ key: [relationship_type.map((n) => buildRefRelationKey(n, '*'))], values: [objectId] }, ...(args.filters || [])];
+  const filters = addFilter(args.filters, relationship_type.map((n) => buildRefRelationKey(n, '*')), objectId);
   return distributionEntities(context, user, types, { ...args, filters });
 };
 

@@ -115,7 +115,14 @@ export const executeTaskQuery = async (context, user, filters, search, start = n
 export const createRuleTask = async (context, user, ruleDefinition, input) => {
   const { rule, enable } = input;
   const { scan } = ruleDefinition;
-  const opts = enable ? buildEntityFilters(scan) : { filters: [{ key: `${RULE_PREFIX}${rule}`, values: ['EXISTS'] }] };
+  const opts = enable
+    ? buildEntityFilters(scan)
+    : { filters: {
+      mode: 'and',
+      filters: [{ key: `${RULE_PREFIX}${rule}`, values: ['EXISTS'] }],
+      filterGroups: [],
+    }
+    };
   const queryData = await elPaginate(context, user, READ_DATA_INDICES, { ...opts, first: 1 });
   const countExpected = queryData.pageInfo.globalCount;
   const task = createDefaultTask(user, input, TASK_TYPE_RULE, countExpected);
@@ -150,7 +157,11 @@ export const createQueryTask = async (context, user, input) => {
 };
 
 export const deleteRuleTasks = async (context, user, ruleId) => {
-  const tasksFilters = [{ key: 'type', values: ['RULE'] }, { key: 'rule', values: [ruleId] }];
+  const tasksFilters = {
+    mode: 'and',
+    filters: [{ key: 'type', values: ['RULE'] }, { key: 'rule', values: [ruleId] }],
+    filterGroups: [],
+  };
   const args = { filters: tasksFilters, connectionFormat: false };
   const tasks = await listEntities(context, user, [ENTITY_TYPE_BACKGROUND_TASK], args);
   await Promise.all(tasks.map((t) => deleteElementById(context, user, t.internal_id, ENTITY_TYPE_BACKGROUND_TASK)));
