@@ -2,7 +2,6 @@ import * as R from 'ramda';
 import {
   batchListThroughGetFrom,
   batchListThroughGetTo,
-  batchLoader,
   batchLoadThroughGetTo,
   createEntity,
   createRelationRaw,
@@ -69,7 +68,7 @@ import {
 } from './stixObjectOrStixRelationship';
 import { buildContextDataForFile, publishUserAction } from '../listener/UserActionListener';
 import { extractEntityRepresentativeName } from '../database/entity-representative';
-import { extractFilterIds, WORKFLOW_FILTER } from '../utils/filtering';
+import { extractFilterIds } from '../utils/filtering';
 
 export const findAll = async (context, user, args) => {
   let types = [];
@@ -552,18 +551,21 @@ const filtersWithRepresentatives = (inputFilters, representativesMap) => {
 export const findFiltersRepresentatives = async (context, user, inputFilters) => {
   // extract the ids from inputFilters
   const ids = extractFilterIds(inputFilters);
-  const statusIds = extractFilterIds(inputFilters, WORKFLOW_FILTER);
   // keep ids that should be resolved
-  const idsToResolve = ids.filter((id) => !statusIds.includes(id)); // TODO to complete: keep only the ids to resolve
+  const idsToResolve = ids; // TODO to complete: keep only the ids to resolve
   const resolvedEntities = await storeLoadByIds(context, user, idsToResolve, ABSTRACT_BASIC_OBJECT);
   // resolve status ids differently
-  const resolvedStatuses = await Promise.all(statusIds.map((id) => findStatusById(context, user, id)));
-  // TOOD find status by IDS
-  // TODO await on entities+status at the same time
-  // TODO Solution 2: store on all the ids, iter the result and complete the result of type status with cache
+  for (let index = 0; index < resolvedEntities.length; index += 1) {
+    const entity = resolvedEntities[index];
+    if (entity.entity_type === 'Status') {
+      // complete the result of type status with cache
+      const newEntity = await findStatusById(context, user, entity.id);
+      resolvedEntities[index] = newEntity;
+    }
+  }
   // create the representative map
   const representativesMap = new Map(
-    resolvedEntities.concat(resolvedStatuses)
+    resolvedEntities
       .filter((e) => e)
       .map((e) => [e.id, extractEntityRepresentativeName(e)])
   );
