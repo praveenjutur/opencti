@@ -212,7 +212,9 @@ export const rawFilesListing = async (context, user, directory, recursive = fals
     return !isFileObjectExcluded(obj.Key)
         && (!modifiedSince || obj.LastModified > modifiedSince)
         && (!excludePath || !obj.Key.startsWith(excludePath));
+    // TODO filter extensions (either no extension or the extensions we can index)s
   });
+  // TODO limit loadFile => sort by LastModified and get the first 50 ?
   // Load file metadata with 5 // call maximum
   return BluePromise.map(filteredObjects, (f) => loadFile(context, user, f.Key), { concurrency: 5 });
 };

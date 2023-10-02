@@ -33,6 +33,7 @@ import activityListener from './manager/activityListener';
 import activityManager from './manager/activityManager';
 import playbookManager from './manager/playbookManager';
 import fileIndexManager from './manager/fileIndexManager';
+import { isAttachmentProcessorEnabled } from './database/engine';
 
 // region dynamic modules
 const startModules = async () => {
@@ -85,8 +86,10 @@ const startModules = async () => {
   } else {
     logApp.info('[OPENCTI-MODULE] Sync manager not started (disabled by configuration)');
   }
-  if (ENABLED_INGESTION_MANAGER) {
+  if (ENABLED_INGESTION_MANAGER && isAttachmentProcessorEnabled()) {
     await ingestionManager.start();
+  } else if (ENABLED_INGESTION_MANAGER && !isAttachmentProcessorEnabled()) {
+    logApp.info('[OPENCTI-MODULE] Ingestion manager not started : attachment processor is not configured.');
   } else {
     logApp.info('[OPENCTI-MODULE] Ingestion manager not started (disabled by configuration)');
   }

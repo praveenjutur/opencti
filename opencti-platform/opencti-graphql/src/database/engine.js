@@ -157,6 +157,10 @@ const searchConfiguration = {
 const elasticSearchClient = new ElkClient(searchConfiguration);
 const openSearchClient = new OpenClient(searchConfiguration);
 let isRuntimeSortingEnable = false;
+let attachmentProcessorEnabled = true;
+export const isAttachmentProcessorEnabled = () => {
+  return attachmentProcessorEnabled === true;
+};
 let engine = openSearchClient;
 
 // The OpenSearch/ELK Body Parser (oebp)
@@ -709,20 +713,41 @@ const elCreateIndexTemplate = async (index) => {
   });
 };
 export const elConfigureAttachmentProcessor = async () => {
-  await engine.ingest.putPipeline({
-    id: 'attachment',
-    description: 'Extract attachment information',
-    processors: [
-      {
-        attachment: {
-          field: 'file_data',
-          remove_binary: true
+  if (engine instanceof ElkClient) {
+    await engine.ingest.putPipeline({
+      id: 'attachment',
+      description: 'Extract attachment information',
+      processors: [
+        {
+          attachment: {
+            field: 'file_data',
+            remove_binary: true
+          }
         }
+      ]
+    }).catch((e) => {
+      logApp.error('[SEARCH] Error configure attachment processor', { error: e });
+      attachmentProcessorEnabled = false;
+    });
+  } else {
+    await engine.ingest.putPipeline({
+      id: 'attachment',
+      body: {
+        description: 'Extract attachment information',
+        processors: [
+          {
+            attachment: {
+              field: 'file_data',
+              remove_binary: true
+            }
+          }
+        ]
       }
-    ]
-  }).catch((e) => {
-    throw DatabaseError('[SEARCH] Error configure attachment processor', { error: e });
-  });
+    }).catch((e) => {
+      logApp.error('[SEARCH] Error configure attachment processor', { error: e });
+      attachmentProcessorEnabled = false;
+    });
+  }
 };
 export const elCreateIndex = async (index) => {
   await elCreateIndexTemplate(index);
