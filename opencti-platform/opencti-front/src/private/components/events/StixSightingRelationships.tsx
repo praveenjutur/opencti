@@ -178,7 +178,7 @@ const StixSightingRelationships = () => {
           search={searchTerm}
           filters={renderFilters}
           handleClearSelectedElements={handleClearSelectedElements}
-          type="Stix-Sighting-Relationship"
+          type="stix-sighting-relationship"
         />
       </>
     );

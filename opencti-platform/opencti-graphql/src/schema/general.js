@@ -1,5 +1,6 @@
 import * as R from 'ramda';
 import { ENTITY_TYPE_CONTAINER_CASE } from '../modules/case/case-types';
+import { STIX_SIGHTING_RELATIONSHIP } from './stixSightingRelationship';
 
 // General
 export const STIX_TYPE_RELATION = 'relationship';
@@ -121,6 +122,7 @@ export const KNOWLEDGE_TYPES = [
   ABSTRACT_STIX_REF_RELATIONSHIP,
   ABSTRACT_STIX_META_RELATIONSHIP,
   ABSTRACT_STIX_CYBER_OBSERVABLE_RELATIONSHIP,
+  STIX_SIGHTING_RELATIONSHIP,
 ];
 export const isKnowledge = (type) => R.includes(type, KNOWLEDGE_TYPES);
 // region utils
