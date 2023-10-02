@@ -70,10 +70,6 @@ export const GlobalFilters = {
   creator: 'creator_id',
 };
 
-export const isFilterGroupNotEmpty = (filterGroup) => {
-  return filterGroup && (filterGroup.filterGroups?.length > 0 || filterGroup.filters?.length > 0);
-};
-
 export const extractFilterIdsToResolve = (filters) => {
   const filterEntries = Object.entries(filters);
   return filterEntries
