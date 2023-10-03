@@ -222,7 +222,7 @@ export const filterValue = (filterKey: string, id: string | null, value?: string
     return id === 'EXISTS' ? t('Yes') : t('No');
   }
   if (filterKey === 'x_opencti_negative') {
-    return t(id ? 'False positive' : 'Malicious');
+    return t(id ? 'False positive' : 'True positive');
   }
   if (id && entityTypesFilters.includes(filterKey)) {
     return id === 'all'

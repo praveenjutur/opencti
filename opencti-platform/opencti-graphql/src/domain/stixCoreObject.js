@@ -551,7 +551,7 @@ export const findFiltersRepresentatives = async (context, user, inputFilters) =>
   // resolve status ids differently
   for (let index = 0; index < resolvedEntities.length; index += 1) {
     const entity = resolvedEntities[index];
-    if (entity.entity_type === 'Status') {
+    if (entity?.entity_type === 'Status') {
       // complete the result of type status with cache
       const newEntity = await findStatusById(context, user, entity.id);
       resolvedEntities[index] = newEntity;
