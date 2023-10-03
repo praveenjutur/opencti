@@ -22,13 +22,12 @@ import useEntityToggle from '../../utils/hooks/useEntityToggle';
 import useQueryLoading from '../../utils/hooks/useQueryLoading';
 import useAuth from '../../utils/hooks/useAuth';
 import { useFormatter } from '../../components/i18n';
-import useEnterpriseEdition from '../../utils/hooks/useEnterpriseEdition';
 
 const LOCAL_STORAGE_KEY = 'view-search';
 
 const Search = () => {
   const {
-    platformModuleHelpers: { isRuntimeFieldEnable },
+    platformModuleHelpers: { isRuntimeFieldEnable, isFileIndexManagerEnable },
   } = useAuth();
   const { t } = useFormatter();
   const { keyword } = useParams() as { keyword: string };
@@ -38,7 +37,7 @@ const Search = () => {
   } catch (e) {
     // Do nothing
   }
-  const isEnterpriseEdition = useEnterpriseEdition();
+  const fileSearchEnabled = isFileIndexManagerEnable();
   const { viewStorage, helpers: storageHelpers, paginationOptions } = usePaginationLocalStorage<SearchStixCoreObjectsLinesPaginationQuery$variables>(
     LOCAL_STORAGE_KEY,
     {
@@ -204,7 +203,7 @@ const Search = () => {
             {t('Search for an entity')}
           </Typography>
           {renderLines()}
-          { isEnterpriseEdition
+          { fileSearchEnabled
             ? (<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <Button
                 size="small"

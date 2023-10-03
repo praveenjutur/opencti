@@ -86,10 +86,8 @@ const startModules = async () => {
   } else {
     logApp.info('[OPENCTI-MODULE] Sync manager not started (disabled by configuration)');
   }
-  if (ENABLED_INGESTION_MANAGER && isAttachmentProcessorEnabled()) {
+  if (ENABLED_INGESTION_MANAGER) {
     await ingestionManager.start();
-  } else if (ENABLED_INGESTION_MANAGER && !isAttachmentProcessorEnabled()) {
-    logApp.info('[OPENCTI-MODULE] Ingestion manager not started : attachment processor is not configured.');
   } else {
     logApp.info('[OPENCTI-MODULE] Ingestion manager not started (disabled by configuration)');
   }
@@ -119,8 +117,10 @@ const startModules = async () => {
   } else {
     logApp.info('[OPENCTI-MODULE] Playbook manager not started (disabled by configuration)');
   }
-  if (ENABLED_FILE_INDEX_MANAGER) {
+  if (ENABLED_FILE_INDEX_MANAGER && isAttachmentProcessorEnabled()) {
     await fileIndexManager.start();
+  } else if (ENABLED_FILE_INDEX_MANAGER && !isAttachmentProcessorEnabled()) {
+    logApp.info('[OPENCTI-MODULE] File index manager not started : attachment processor is not configured.');
   } else {
     logApp.info('[OPENCTI-MODULE] File index manager not started (disabled by configuration)');
   }

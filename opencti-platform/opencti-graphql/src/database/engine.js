@@ -157,7 +157,7 @@ const searchConfiguration = {
 const elasticSearchClient = new ElkClient(searchConfiguration);
 const openSearchClient = new OpenClient(searchConfiguration);
 let isRuntimeSortingEnable = false;
-let attachmentProcessorEnabled = true;
+let attachmentProcessorEnabled = false;
 export const isAttachmentProcessorEnabled = () => {
   return attachmentProcessorEnabled === true;
 };
@@ -223,7 +223,9 @@ export const searchEngineInit = async () => {
   // Setup the platform runtime field option
   isRuntimeSortingEnable = enginePlatform === ELK_ENGINE && semver.satisfies(engineVersion, '>=7.12.x');
   const runtimeStatus = isRuntimeSortingEnable ? 'enabled' : 'disabled';
-  logApp.info(`[SEARCH] ${enginePlatform} (${engineVersion}) client selected / runtime sorting ${runtimeStatus}`);
+  // configure attachment processor
+  attachmentProcessorEnabled = await elConfigureAttachmentProcessor();
+  logApp.info(`[SEARCH] ${enginePlatform} (${engineVersion}) client selected / runtime sorting ${runtimeStatus} / attachment processor ${attachmentProcessorEnabled ? 'enabled' : 'disabled'}`);
   // Everything is fine, return true
   return true;
 };
@@ -713,6 +715,8 @@ const elCreateIndexTemplate = async (index) => {
   });
 };
 export const elConfigureAttachmentProcessor = async () => {
+  let success = true;
+  // TODO get configuration and test if it's already configured
   if (engine instanceof ElkClient) {
     await engine.ingest.putPipeline({
       id: 'attachment',
@@ -727,7 +731,7 @@ export const elConfigureAttachmentProcessor = async () => {
       ]
     }).catch((e) => {
       logApp.error('[SEARCH] Error configure attachment processor', { error: e });
-      attachmentProcessorEnabled = false;
+      success = false;
     });
   } else {
     await engine.ingest.putPipeline({
@@ -745,9 +749,10 @@ export const elConfigureAttachmentProcessor = async () => {
       }
     }).catch((e) => {
       logApp.error('[SEARCH] Error configure attachment processor', { error: e });
-      attachmentProcessorEnabled = false;
+      success = false;
     });
   }
+  return success;
 };
 export const elCreateIndex = async (index) => {
   await elCreateIndexTemplate(index);
@@ -770,7 +775,6 @@ export const elCreateIndices = async (indexesToCreate = WRITE_PLATFORM_INDICES) 
       createdIndices.push(oebp(createdIndex));
     }
   }
-  await elConfigureAttachmentProcessor();
   return createdIndices;
 };
 export const elDeleteIndices = async (indexesToDelete) => {

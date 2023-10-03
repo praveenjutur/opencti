@@ -3,14 +3,14 @@ import { Promise as BluePromise } from 'bluebird';
 import moment from 'moment';
 import type { BasicStoreSettings } from '../types/settings';
 import { isNotEmptyField } from '../database/utils';
-import conf, { logApp } from '../config/conf';
+import conf, { ENABLED_FILE_INDEX_MANAGER, logApp } from '../config/conf';
 import {
   lockResource,
 } from '../database/redis';
 import { executionContext, SYSTEM_USER } from '../utils/access';
 import { getEntityFromCache } from '../database/cache';
 import { ENTITY_TYPE_SETTINGS } from '../schema/internalObject';
-import { elBulkIndexFiles, elSearchFiles } from '../database/engine';
+import { elBulkIndexFiles, elSearchFiles, isAttachmentProcessorEnabled } from '../database/engine';
 import { getFileContent, rawFilesListing } from '../database/file-storage';
 import type { AuthContext } from '../types/user';
 import { generateInternalId } from '../schema/identifier';
@@ -112,7 +112,7 @@ const initFileIndexManager = () => {
     status: (settings?: BasicStoreSettings) => {
       return {
         id: 'FILE_INDEX_MANAGER',
-        enable: isNotEmptyField(settings?.enterprise_edition),
+        enable: ENABLED_FILE_INDEX_MANAGER && isAttachmentProcessorEnabled() && isNotEmptyField(settings?.enterprise_edition),
         running,
       };
     },
