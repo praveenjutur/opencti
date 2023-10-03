@@ -741,8 +741,7 @@ export const elConfigureAttachmentProcessor = async () => {
         processors: [
           {
             attachment: {
-              field: 'file_data',
-              remove_binary: true
+              field: 'file_data'
             }
           }
         ]
