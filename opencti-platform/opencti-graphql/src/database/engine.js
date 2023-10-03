@@ -743,6 +743,11 @@ export const elConfigureAttachmentProcessor = async () => {
             attachment: {
               field: 'file_data'
             }
+          },
+          {
+            remove: {
+              field: 'file_data'
+            }
           }
         ]
       }

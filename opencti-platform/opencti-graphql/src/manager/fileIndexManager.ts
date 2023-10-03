@@ -25,7 +25,7 @@ const ACCEPT_MIME_TYPES: string[] = conf.get('file_index_manager:accept_mime_typ
 const indexImportedFiles = async (
   context: AuthContext,
   fromDate: Date | null = null,
-  path = '/import', // or '/import/global'
+  path = 'import/', // or '/import/global'
   // limit = 1000,
   maxFileSize = MAX_FILE_SIZE,
   mimeTypes = ACCEPT_MIME_TYPES,
