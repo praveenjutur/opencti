@@ -16,7 +16,10 @@ import type { AuthContext } from '../types/user';
 import { generateInternalId } from '../schema/identifier';
 
 const FILE_INDEX_MANAGER_KEY = conf.get('file_index_manager:lock_key');
-const SCHEDULE_TIME = conf.get('file_index_manager:interval') || 60000;
+const SCHEDULE_TIME = conf.get('file_index_manager:interval') || 300000; // 5 minutes
+const MAX_FILE_SIZE: number = conf.get('file_index_manager:max_file_size') || 5242880; // 5 mb
+const defaultMimeTypes = ['application/pdf', 'text/plain', 'text/csv', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+const ACCEPT_MIME_TYPES: string[] = conf.get('file_index_manager:accept_mime_types') || defaultMimeTypes;
 
 // TODO use configuration entity for parameters
 const indexImportedFiles = async (
@@ -24,8 +27,8 @@ const indexImportedFiles = async (
   fromDate: Date | null = null,
   path = '/import', // or '/import/global'
   // limit = 1000,
-  maxFileSize = 5242880, // 5 mb
-  mimeTypes = ['application/pdf', 'text/plain', 'text/csv'], // TODO add xsl & xslx
+  maxFileSize = MAX_FILE_SIZE,
+  mimeTypes = ACCEPT_MIME_TYPES,
 ) => {
   const fileListingOpts = { modifiedSince: fromDate, excludePath: 'import/pending/' };
   let files = await rawFilesListing(context, SYSTEM_USER, path, true, fileListingOpts);
