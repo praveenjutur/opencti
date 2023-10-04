@@ -5,7 +5,13 @@ import { generateInternalId, generateStandardId } from '../schema/identifier';
 import { ENTITY_TYPE_BACKGROUND_TASK } from '../schema/internalObject';
 import { now } from '../utils/format';
 import { BYPASS, MEMBER_ACCESS_RIGHT_ADMIN, SETTINGS_SET_ACCESSES } from '../utils/access';
-import { ABSTRACT_STIX_OBJECT, isKnowledge, KNOWLEDGE_DELETE, KNOWLEDGE_UPDATE } from '../schema/general';
+import {
+  ABSTRACT_STIX_OBJECT,
+  ABSTRACT_STIX_RELATIONSHIP,
+  isKnowledge,
+  KNOWLEDGE_DELETE,
+  KNOWLEDGE_UPDATE
+} from '../schema/general';
 import { ForbiddenAccess } from '../config/errors';
 import { elIndex } from '../database/engine';
 import { INDEX_INTERNAL_OBJECTS } from '../database/utils';
@@ -16,7 +22,6 @@ import { publishUserAction } from '../listener/UserActionListener';
 import { storeLoadById } from '../database/middleware-loader';
 import { getParentTypes } from '../schema/schemaUtils';
 import { ENTITY_TYPE_VOCABULARY } from '../modules/vocabulary/vocabulary-types';
-import { STIX_SIGHTING_RELATIONSHIP } from '../schema/stixSightingRelationship';
 
 export const TASK_TYPE_QUERY = 'QUERY';
 export const TASK_TYPE_RULE = 'RULE';
@@ -59,8 +64,7 @@ export const checkActionValidity = async (context, user, input, scope, taskType)
         throw ForbiddenAccess(undefined, 'The targeted ids are not knowledges.');
       }
     } else if (taskType === TASK_TYPE_LIST) {
-      const objects = await Promise.all(ids.map((id) => storeLoadById(context, user, id, [ABSTRACT_STIX_OBJECT, STIX_SIGHTING_RELATIONSHIP])));
-      console.log("objects", objects);
+      const objects = await Promise.all(ids.map((id) => storeLoadById(context, user, id, [ABSTRACT_STIX_OBJECT, ABSTRACT_STIX_RELATIONSHIP])));
       const isNotKnowledges = objects.includes(undefined)
         || !areParentTypesKnowledge(objects.map((o) => o.parent_types))
         || objects.some(({ entity_type }) => entity_type === ENTITY_TYPE_VOCABULARY);
@@ -176,8 +180,6 @@ export const createListTask = async (context, user, input) => {
     context_data: { entity_type: ENTITY_TYPE_BACKGROUND_TASK, input: listTask }
   });
   await elIndex(INDEX_INTERNAL_OBJECTS, listTask);
-  console.log('listTask', listTask);
-
   return listTask;
 };
 
