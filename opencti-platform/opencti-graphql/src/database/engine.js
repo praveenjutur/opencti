@@ -1995,7 +1995,12 @@ const buildIndexFileBody = (documentId, file, entity = null) => {
   };
   if (entity) {
     documentBody.entity_id = entity.internal_id;
-    // TODO markings + authorized_members + authorized_authorities
+    // TODO authorized_members + authorized_authorities + organization restriction
+    const entityMarkings = entity[RELATION_OBJECT_MARKING];
+    if (entityMarkings) {
+      const markingField = buildRefRelationKey(RELATION_OBJECT_MARKING);
+      documentBody[markingField] = entityMarkings;
+    }
   }
   return documentBody;
 };
@@ -2053,6 +2058,7 @@ const buildFilesSearchResult = (data, first, searchAfter, connectionFormat = tru
     return {
       _index: hit._index,
       id: elementData.internal_id,
+      internal_id: elementData.internal_id,
       name: elementData.name,
       indexed_at: elementData.indexed_at,
       uploaded_at: elementData.uploaded_at,
@@ -2073,8 +2079,10 @@ export const elSearchFiles = async (context, user, options = {}) => {
   const { search = null, fileIds = [] } = options; // search options
   const { fields = [], connectionFormat = true, highlight = true } = options; // return format options
   const searchAfter = after ? cursorToOffset(after) : undefined;
-  const must = [];
-  const mustNot = [];
+  const { includeAuthorities = false } = options;
+  const dataRestrictions = await buildDataRestrictions(context, user, { includeAuthorities });
+  const must = [...dataRestrictions.must];
+  const mustNot = [...dataRestrictions.must_not];
   const sort = [];
   if (search) {
     const fullTextSearch = {
