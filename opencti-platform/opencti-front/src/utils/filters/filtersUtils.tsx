@@ -58,7 +58,7 @@ export const inlineFilters = [
 export const EqFilters = [
   'objectLabel',
   'createdBy',
-  'markedBy',
+  'objectMarking',
   'entity_type',
   'x_opencti_workflow_id',
   'malware_types',
@@ -134,7 +134,7 @@ export const filtersWithRepresentative = [
   'indicates',
   'containers',
   'objectLabel',
-  'markedBy',
+  'objectMarking',
   'killChainPhase',
   'x_opencti_workflow_id',
 ];

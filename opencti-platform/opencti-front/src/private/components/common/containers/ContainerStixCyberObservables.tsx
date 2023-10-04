@@ -268,7 +268,7 @@ ContainerStixCyberObservablesComponentProps
               filters={filters}
               availableFilterKeys={[
                 'objectLabel',
-                'markedBy',
+                'objectMarking',
                 'created_at',
                 'x_opencti_score',
                 'createdBy',

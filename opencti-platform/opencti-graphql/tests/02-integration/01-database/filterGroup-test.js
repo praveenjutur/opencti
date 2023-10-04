@@ -406,7 +406,7 @@ describe('Complex filters combinations, behavior tested on reports', () => {
           mode: 'or',
           filters: [
             {
-              key: 'markedBy',
+              key: 'objectMarking',
               operator: 'eq',
               values: [marking1Id],
               mode: 'or',
@@ -495,7 +495,7 @@ describe('Complex filters combinations, behavior tested on reports', () => {
                         mode: 'or',
                       },
                       {
-                        key: 'markedBy',
+                        key: 'objectMarking',
                         operator: 'eq',
                         values: [marking2Id],
                         mode: 'and',
@@ -533,7 +533,7 @@ describe('Complex filters combinations, behavior tested on reports', () => {
                   mode: 'or',
                 },
                 {
-                  key: 'markedBy',
+                  key: 'objectMarking',
                   operator: 'eq',
                   values: [marking2Id],
                   mode: 'or',
@@ -561,7 +561,7 @@ describe('Complex filters combinations, behavior tested on reports', () => {
                     mode: 'or',
                   },
                   {
-                    key: 'markedBy',
+                    key: 'objectMarking',
                     operator: 'eq',
                     values: [marking1Id],
                     mode: 'or',

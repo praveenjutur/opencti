@@ -161,7 +161,7 @@ const Notes: FunctionComponent<NotesProps> = ({ objectId, authorId, onChangeOpen
             'note_types',
             'x_opencti_workflow_id',
             'objectLabel',
-            'markedBy',
+            'objectMarking',
             'createdBy',
             'source_reliability',
             'confidence',

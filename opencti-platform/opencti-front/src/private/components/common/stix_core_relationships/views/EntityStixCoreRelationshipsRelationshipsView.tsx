@@ -70,7 +70,7 @@ const EntityStixCoreRelationshipsRelationshipsView: FunctionComponent<EntityStix
   const availableFilterKeys = [
     'relationship_type',
     'entity_type',
-    'markedBy',
+    'objectMarking',
     'confidence',
     'objectLabel',
     'createdBy',

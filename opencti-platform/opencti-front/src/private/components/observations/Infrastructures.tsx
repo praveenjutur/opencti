@@ -124,7 +124,7 @@ const Infrastructures = () => {
         iconExtension={true}
         availableFilterKeys={[
           'objectLabel',
-          'markedBy',
+          'objectMarking',
           'created',
           'createdBy',
           'confidence',

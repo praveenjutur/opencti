@@ -212,7 +212,7 @@ const ContainerStixDomainObjects = ({ container }: { container: ContainerStixDom
           filters={filters}
           availableFilterKeys={[
             'labelledBy',
-            'markedBy',
+            'objectMarking',
             'created_at',
             'createdBy',
           ]}

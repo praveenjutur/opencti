@@ -498,7 +498,7 @@ class ReportKnowledgeGraphComponent extends Component {
     );
     const markedBy = R.propOr(
       allMarkedBy.map((n) => n.id),
-      'markedBy',
+      'objectMarking',
       params,
     );
     const createdBy = R.propOr(

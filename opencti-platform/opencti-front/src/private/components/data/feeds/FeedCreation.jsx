@@ -597,7 +597,7 @@ const FeedCreation = (props) => {
                               'x_opencti_workflow_id',
                               'objectAssignee',
                               'objects',
-                              'markedBy',
+                              'objectMarking',
                               'objectLabel',
                               'creator',
                               'createdBy',

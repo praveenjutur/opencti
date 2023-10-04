@@ -389,7 +389,7 @@ const ContainerAddStixCoreObjects = (props) => {
               availableEntityTypes={[resolveAvailableTypes()]}
               availableFilterKeys={[
                 'entity_type',
-                'markedBy',
+                'objectMarking',
                 'objectLabel',
                 'createdBy',
                 'confidence',

@@ -147,7 +147,7 @@ class ContainerStixCoreObjectsMapping extends Component {
               availableFilterKeys={[
                 'entity_type',
                 'objectLabel',
-                'markedBy',
+                'objectMarking',
                 'created_at_start_date',
                 'created_at_end_date',
                 'createdBy',

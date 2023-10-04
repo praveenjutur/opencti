@@ -143,7 +143,7 @@ const Entities = () => {
               secondaryAction={true}
               availableFilterKeys={[
                 'objectLabel',
-                'markedBy',
+                'objectMarking',
                 'createdBy',
                 'source_reliability',
                 'confidence',

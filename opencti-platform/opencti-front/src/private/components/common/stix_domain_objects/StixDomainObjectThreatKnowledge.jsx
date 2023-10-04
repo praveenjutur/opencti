@@ -495,7 +495,7 @@ class StixDomainObjectThreatKnowledge extends Component {
             <Filters
               availableFilterKeys={[
                 'entity_type',
-                'markedBy',
+                'objectMarking',
                 'createdBy',
                 'objectLabel',
                 'created_start_date',

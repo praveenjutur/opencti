@@ -634,7 +634,7 @@ const useSearchEntities = ({
             unionSetEntities('containers', containerEntities);
           });
         break;
-      case 'markedBy':
+      case 'objectMarking':
         fetchQuery(markingDefinitionsLinesSearchQuery, {
           search: event.target.value !== 0 ? event.target.value : '',
         })
@@ -649,7 +649,7 @@ const useSearchEntities = ({
               type: 'Marking-Definition',
               color: n?.node.x_opencti_color,
             }));
-            unionSetEntities('markedBy', markedByEntities);
+            unionSetEntities('objectMarking', markedByEntities);
           });
         break;
       case 'killChainPhase':

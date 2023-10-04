@@ -80,7 +80,7 @@ const Tasks = () => {
           'x_opencti_workflow_id',
           'objectAssignee',
           'objectParticipant',
-          'markedBy',
+          'objectMarking',
           'objectLabel',
           'createdBy',
           'creator',

@@ -82,7 +82,7 @@ const Systems = () => {
         numberOfElements={numberOfElements}
         availableFilterKeys={[
           'objectLabel',
-          'markedBy',
+          'objectMarking',
           'created',
           'createdBy',
           'x_opencti_reliability',

@@ -170,7 +170,7 @@ const Reports: FunctionComponent<ReportsProps> = ({
           availableFilterKeys={[
             'x_opencti_workflow_id',
             'objectLabel',
-            'markedBy',
+            'objectMarking',
             'createdBy',
             'x_opencti_reliability',
             'confidence',

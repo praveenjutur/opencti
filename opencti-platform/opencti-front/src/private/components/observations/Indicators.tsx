@@ -169,7 +169,7 @@ const Indicators = () => {
           numberOfElements={numberOfElements}
           availableFilterKeys={[
             'objectLabel',
-            'markedBy',
+            'objectMarking',
             'created',
             'created_at',
             'valid_from',

@@ -316,7 +316,7 @@ class StixDomainObjectIndicators extends Component {
               numberOfElements={numberOfElements}
               availableFilterKeys={[
                 'objectLabel',
-                'markedBy',
+                'objectMarking',
                 'created_start_date',
                 'created_end_date',
                 'valid_from_start_date',

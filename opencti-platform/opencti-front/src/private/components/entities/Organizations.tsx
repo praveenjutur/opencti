@@ -87,7 +87,7 @@ const Organizations = () => {
         availableFilterKeys={[
           'x_opencti_organization_type',
           'objectLabel',
-          'markedBy',
+          'objectMarking',
           'createdBy',
           'created',
           'x_opencti_reliability',

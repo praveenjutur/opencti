@@ -135,7 +135,7 @@ const Artifacts: FunctionComponent = () => {
               numberOfElements={numberOfElements}
               availableFilterKeys={[
                 'objectLabel',
-                'markedBy',
+                'objectMarking',
                 'created_at',
                 'createdBy',
               ]}

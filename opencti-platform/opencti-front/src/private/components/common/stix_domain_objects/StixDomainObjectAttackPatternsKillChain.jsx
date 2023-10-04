@@ -174,7 +174,7 @@ class StixDomainObjectAttackPatternsKillChainComponent extends Component {
           </div>
           <Filters
             availableFilterKeys={[
-              'markedBy',
+              'objectMarking',
               'createdBy',
               'created_start_date',
               'created_end_date',

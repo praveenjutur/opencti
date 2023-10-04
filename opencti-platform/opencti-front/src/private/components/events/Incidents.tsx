@@ -131,7 +131,7 @@ const Incidents: FunctionComponent = () => {
           availableFilterKeys={[
             'incident_type',
             'objectLabel',
-            'markedBy',
+            'objectMarking',
             'createdBy',
             'source_reliability',
             'confidence',

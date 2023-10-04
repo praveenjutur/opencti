@@ -131,7 +131,7 @@ const StixSightingRelationships = () => {
           availableFilterKeys={[
             'x_opencti_workflow_id',
             'objectLabel',
-            'markedBy',
+            'objectMarking',
             'createdBy',
             'confidence',
             'created',

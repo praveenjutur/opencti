@@ -74,7 +74,7 @@ const IntrusionSets = () => {
         availableFilterKeys={[
           'x_opencti_workflow_id',
           'objectLabel',
-          'markedBy',
+          'objectMarking',
           'createdBy',
           'source_reliability',
           'confidence',

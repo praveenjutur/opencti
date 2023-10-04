@@ -258,7 +258,7 @@ const RetentionCreation = (props) => {
                     variant="text"
                     availableFilterKeys={[
                       'entity_type',
-                      'markedBy',
+                      'objectMarking',
                       'objectLabel',
                       'createdBy',
                       'x_opencti_score',

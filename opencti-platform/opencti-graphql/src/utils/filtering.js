@@ -20,7 +20,7 @@ import { ENTITY_TYPE_ACTIVITY } from '../schema/internalObject';
 import { schemaRelationsRefDefinition } from '../schema/schema-relationsRef';
 
 // Resolutions
-export const MARKING_FILTER = 'markedBy';
+export const MARKING_FILTER = 'objectMarking';
 export const CREATED_BY_FILTER = 'createdBy';
 export const CREATOR_FILTER = 'creator';
 export const ASSIGNEE_FILTER = 'objectAssignee';

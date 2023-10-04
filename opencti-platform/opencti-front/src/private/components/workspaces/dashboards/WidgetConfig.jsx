@@ -147,7 +147,7 @@ const useStyles = makeStyles((theme) => ({
 const entitiesFilters = [
   'entity_type',
   'elementId',
-  'markedBy',
+  'objectMarking',
   'objectLabel',
   'createdBy',
   'creator',
@@ -172,7 +172,7 @@ const relationshipsFilters = [
   'fromTypes',
   'toTypes',
   'relationship_type',
-  'markedBy',
+  'objectMarking',
   'objectLabel',
   'createdBy',
   'confidence',

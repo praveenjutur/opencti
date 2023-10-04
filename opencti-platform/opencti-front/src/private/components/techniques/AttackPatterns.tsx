@@ -93,7 +93,7 @@ const AttackPatterns = () => {
         availableFilterKeys={[
           'x_opencti_workflow_id',
           'objectLabel',
-          'markedBy',
+          'objectMarking',
           'createdBy',
           'source_reliability',
           'creator',

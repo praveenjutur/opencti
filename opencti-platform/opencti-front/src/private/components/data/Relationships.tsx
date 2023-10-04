@@ -141,7 +141,7 @@ const Relationships = () => {
             'toId',
             'fromTypes',
             'toTypes',
-            'markedBy',
+            'objectMarking',
             'created',
             'createdBy',
             'creator',

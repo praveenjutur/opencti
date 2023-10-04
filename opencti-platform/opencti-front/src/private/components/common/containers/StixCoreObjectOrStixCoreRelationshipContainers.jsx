@@ -271,7 +271,7 @@ class StixCoreObjectOrStixCoreRelationshipContainers extends Component {
               'x_opencti_workflow_id',
               'objectLabel',
               'createdBy',
-              'markedBy',
+              'objectMarking',
               'created_start_date',
               'created_end_date',
               'entity_type',
@@ -304,7 +304,7 @@ class StixCoreObjectOrStixCoreRelationshipContainers extends Component {
     const availableFilterKeys = [
       'objectLabel',
       'createdBy',
-      'markedBy',
+      'objectMarking',
       'created_start_date',
       'created_end_date',
       'container_type',

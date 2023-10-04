@@ -189,7 +189,7 @@ const StixCyberObservables: FunctionComponent = () => {
           numberOfElements={numberOfElements}
           availableFilterKeys={[
             'objectLabel',
-            'markedBy',
+            'objectMarking',
             'created_at',
             'x_opencti_score',
             'createdBy',

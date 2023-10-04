@@ -75,7 +75,7 @@ EntityStixCoreRelationshipsEntitiesViewProps
   let availableFilterKeys = [
     'relationship_type',
     'entity_type',
-    'markedBy',
+    'objectMarking',
     'confidence',
     'objectLabel',
     'createdBy',

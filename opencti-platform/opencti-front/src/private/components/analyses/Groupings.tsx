@@ -172,7 +172,7 @@ const Groupings: FunctionComponent<GroupingsProps> = ({
             'context',
             'x_opencti_workflow_id',
             'objectLabel',
-            'markedBy',
+            'objectMarking',
             'createdBy',
             'source_reliability',
             'confidence',

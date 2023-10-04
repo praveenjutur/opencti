@@ -541,7 +541,7 @@ const StixCoreRelationshipCreationFromEntity = (props) => {
                   handleToggleSelectAll="no"
                   availableFilterKeys={[
                     'entity_type',
-                    'markedBy',
+                    'objectMarking',
                     'objectLabel',
                     'createdBy',
                     'confidence',

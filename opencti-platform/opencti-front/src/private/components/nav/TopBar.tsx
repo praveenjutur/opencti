@@ -363,7 +363,7 @@ const TopBarComponent: FunctionComponent<TopBarProps> = ({
                   availableFilterKeys={[
                     'entity_type',
                     'objectLabel',
-                    'markedBy',
+                    'objectMarking',
                     'createdBy',
                     'source_reliability',
                     'confidence',
