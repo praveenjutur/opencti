@@ -79,7 +79,7 @@ const Tasks = () => {
         availableFilterKeys={[
           'x_opencti_workflow_id',
           'objectAssignee',
-          'participant',
+          'objectParticipant',
           'markedBy',
           'objectLabel',
           'createdBy',

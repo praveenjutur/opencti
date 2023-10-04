@@ -144,7 +144,7 @@ const CaseIncidents: FunctionComponent<CaseIncidentsProps> = () => {
           'source_reliability',
           'confidence',
           'objectAssignee',
-          'participant',
+          'objectParticipant',
           'priority',
           'severity',
           'creator',

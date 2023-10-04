@@ -135,7 +135,7 @@ const Incidents: FunctionComponent = () => {
             'createdBy',
             'source_reliability',
             'confidence',
-            'participant',
+            'objectParticipant',
             'severity',
             'source',
             'creator',

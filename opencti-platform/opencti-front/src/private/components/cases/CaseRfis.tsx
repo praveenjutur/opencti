@@ -142,7 +142,7 @@ const CaseRfis: FunctionComponent<CaseRfisProps> = () => {
           'source_reliability',
           'confidence',
           'objectAssignee',
-          'participant',
+          'objectParticipant',
           'severity',
           'priority',
           'creator',

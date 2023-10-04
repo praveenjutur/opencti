@@ -24,7 +24,7 @@ export const MARKING_FILTER = 'markedBy';
 export const CREATED_BY_FILTER = 'createdBy';
 export const CREATOR_FILTER = 'creator';
 export const ASSIGNEE_FILTER = 'objectAssignee';
-export const PARTICIPANT_FILTER = 'participant';
+export const PARTICIPANT_FILTER = 'objectParticipant';
 export const OBJECT_CONTAINS_FILTER = 'objects';
 export const RELATION_FROM = 'fromId';
 export const RELATION_TO = 'toId';
@@ -645,7 +645,10 @@ export const checkedAndConvertedFilters = (filters, entityTypes) => {
     // translate the filter keys on relation refs
     filters.filters.forEach((f) => {
       const key = Array.isArray(f.key) ? f.key[0] : f.key;
-      const databaseName = schemaRelationsRefDefinition.getDatabaseName(key);
+      console.log('entityTypes', entityTypes);
+      const databaseName = schemaRelationsRefDefinition.getDatabaseName(key, entityTypes);
+      console.log('key', key);
+      console.log('databaseName', databaseName);
       if (databaseName) {
         const newKey = buildRefRelationKey(databaseName);
         newFilters.push({ ...f, key: newKey });

@@ -423,7 +423,7 @@ const useSearchEntities = ({
             });
         }
         break;
-      case 'participant': // only used
+      case 'objectParticipant': // only used
         if (!cacheEntities[filterKey]) {
           fetchQuery(objectParticipantFieldParticipantsSearchQuery, {
             entityTypes: searchContext?.entityTypes ?? [],
@@ -442,7 +442,7 @@ const useSearchEntities = ({
                 ...cacheEntities,
                 [filterKey]: participantToEntities,
               });
-              unionSetEntities('participant', participantToEntities);
+              unionSetEntities('objectParticipant', participantToEntities);
             });
         }
         break;

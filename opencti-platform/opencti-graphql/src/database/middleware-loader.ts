@@ -437,6 +437,7 @@ export const listEntities: InternalListEntities = async (context, user, entityTy
   const { indices = READ_ENTITIES_INDICES } = args;
   const { filters } = args;
   const convertedFilters = checkedAndConvertedFilters(filters, entityTypes);
+  console.log('convertedFilters', convertedFilters);
   // TODO Reactivate this test after global migration to typescript
   // if (connectionFormat !== false) {
   //   throw UnsupportedError('List connection require connectionFormat option to false');

@@ -175,7 +175,7 @@ const Reports: FunctionComponent<ReportsProps> = ({
             'x_opencti_reliability',
             'confidence',
             'objectAssignee',
-            'participant',
+            'objectParticipant',
             'report_types',
             'creator',
             'published',

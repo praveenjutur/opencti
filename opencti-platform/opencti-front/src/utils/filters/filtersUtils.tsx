@@ -122,7 +122,7 @@ export const filtersWithRepresentative = [
   'members_group',
   'members_organization',
   'objectAssignee',
-  'participant',
+  'objectParticipant',
   'creator',
   'createdBy',
   'sightedBy',
