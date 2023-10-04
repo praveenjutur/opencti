@@ -135,7 +135,7 @@ export const filtersWithRepresentative = [
   'containers',
   'objectLabel',
   'objectMarking',
-  'killChainPhase',
+  'killChainPhases',
   'x_opencti_workflow_id',
 ];
 

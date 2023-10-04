@@ -160,7 +160,7 @@ const entitiesFilters = [
   'revoked',
   'confidence',
   'pattern_type',
-  'killChainPhase',
+  'killChainPhases',
   'malware_types',
   'report_types',
   'relationship_type',
@@ -176,7 +176,7 @@ const relationshipsFilters = [
   'objectLabel',
   'createdBy',
   'confidence',
-  'killChainPhase',
+  'killChainPhases',
   'creator',
 ];
 

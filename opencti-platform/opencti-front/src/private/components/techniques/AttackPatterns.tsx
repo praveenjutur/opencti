@@ -99,7 +99,7 @@ const AttackPatterns = () => {
           'creator',
           'created',
           'revoked',
-          'killChainPhase',
+          'killChainPhases',
         ]}
       >
         {queryRef && (

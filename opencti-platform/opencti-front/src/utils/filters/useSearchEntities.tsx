@@ -652,7 +652,7 @@ const useSearchEntities = ({
             unionSetEntities('objectMarking', markedByEntities);
           });
         break;
-      case 'killChainPhase':
+      case 'killChainPhases':
         fetchQuery(killChainPhasesLinesSearchQuery, {
           search: event.target.value !== 0 ? event.target.value : '',
           first: 10,
@@ -669,7 +669,7 @@ const useSearchEntities = ({
               value: n?.node.id,
               type: 'Kill-Chain-Phase',
             }));
-            unionSetEntities('killChainPhase', killChainPhaseEntities);
+            unionSetEntities('killChainPhases', killChainPhaseEntities);
           });
         break;
       case 'objectLabel':
