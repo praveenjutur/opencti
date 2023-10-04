@@ -2093,6 +2093,9 @@ export const elSearchFiles = async (context, user, options = {}) => {
   }
   if (!orderBy) { // TODO handle orderby param
     // order by last indexed date by default
+    if (search) {
+      sort.push({ _score: 'desc' });
+    }
     sort.push({ indexed_at: 'desc' });
     // add internal_id sort since indexed_at is not unique
     sort.push({ 'internal_id.keyword': 'desc' });
