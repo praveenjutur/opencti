@@ -6,7 +6,7 @@ import { chain, CredentialsProviderError, memoize } from '@aws-sdk/property-prov
 import { remoteProvider } from '@aws-sdk/credential-provider-node/dist-cjs/remoteProvider';
 import mime from 'mime-types';
 import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
-import conf, { booleanConf, logApp } from '../config/conf';
+import conf, { booleanConf, ENABLED_FILE_INDEX_MANAGER, logApp } from '../config/conf';
 import { now, sinceNowInMinutes } from '../utils/format';
 import { DatabaseError, FunctionalError } from '../config/errors';
 import { createWork, deleteWorkForFile, loadExportWorksAsProgressFiles } from '../domain/work';
@@ -14,6 +14,7 @@ import { buildPagination } from './utils';
 import { connectorsForImport } from './repository';
 import { pushToConnector } from './rabbitmq';
 import { telemetry } from '../config/tracing';
+import { elDeleteFilesByIds, isAttachmentProcessorEnabled } from './engine';
 
 // Minio configuration
 const clientEndpoint = conf.get('minio:endpoint');
@@ -96,6 +97,15 @@ export const deleteFile = async (context, user, id) => {
     Key: id
   }));
   await deleteWorkForFile(context, user, id);
+  // delete in index if file has been indexed
+  // TODO test if file index manager is activated (dependency cycle issue with isModuleActivated)
+  if (ENABLED_FILE_INDEX_MANAGER && isAttachmentProcessorEnabled()) {
+    logApp.info(`[FILE STORAGE] delete file ${id} in index`);
+    await elDeleteFilesByIds(context, user, [id])
+      .catch((databaseError) => {
+        logApp.error('[FILE STORAGE] Error deleting file in index', { databaseError });
+      });
+  }
   return up;
 };
 

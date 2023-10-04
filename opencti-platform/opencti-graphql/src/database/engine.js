@@ -17,6 +17,7 @@ import {
   READ_DATA_INDICES,
   READ_DATA_INDICES_WITHOUT_INTERNAL,
   READ_ENTITIES_INDICES,
+  READ_INDEX_FILES,
   READ_INDEX_INTERNAL_OBJECTS,
   READ_INDEX_STIX_DOMAIN_OBJECTS,
   READ_PLATFORM_INDICES,
@@ -2146,6 +2147,22 @@ export const elSearchFiles = async (context, user, options = {}) => {
     });
 };
 
+export const elDeleteFilesByIds = async (context, user, fileIds) => {
+  if (!fileIds) {
+    return;
+  }
+  const query = {
+    terms: { 'file_id.keyword': fileIds },
+  };
+  // Clean all current platform attributes
+  await elRawDeleteByQuery({
+    index: READ_INDEX_FILES,
+    refresh: true,
+    body: { query },
+  }).catch((err) => {
+    throw DatabaseError('[SEARCH] Error deleting files by ids', { error: err });
+  });
+};
 // end index and search files
 
 const buildSearchResult = (data, first, searchAfter, connectionFormat = true) => {
