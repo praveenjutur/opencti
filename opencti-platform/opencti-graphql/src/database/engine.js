@@ -2006,7 +2006,13 @@ const buildIndexFileBody = (documentId, file, entity = null) => {
     if (entityGrantedTo) {
       documentBody[buildRefRelationKey(RELATION_GRANTED_TO)] = entityGrantedTo;
     }
-    // TODO index entity authorized_members + authorized_authorities
+    // index entity authorized_members & authorized_authorities
+    if (entity.authorized_members) {
+      documentBody.authorized_members = entity.authorized_members;
+    }
+    if (entity.authorized_authorities) {
+      documentBody.authorized_authorities = entity.authorized_authorities;
+    }
   }
   return documentBody;
 };
@@ -2083,7 +2089,7 @@ const buildFilesSearchResult = (data, first, searchAfter, connectionFormat = tru
 export const elSearchFiles = async (context, user, options = {}) => {
   const { first = 20, after, orderBy = null } = options; // pagination options // TODO orderMode = 'asc'
   const { search = null, fileIds = [] } = options; // search options
-  const { fields = [], connectionFormat = true, highlight = true } = options; // return format options
+  const { fields = [], excludeFields = ['attachment.content'], connectionFormat = true, highlight = true } = options; // result options
   const searchAfter = after ? cursorToOffset(after) : undefined;
   const { includeAuthorities = false } = options;
   const dataRestrictions = await buildDataRestrictions(context, user, { includeAuthorities });
@@ -2134,11 +2140,13 @@ export const elSearchFiles = async (context, user, options = {}) => {
       }
     };
   }
+  const sourceIncludes = (fields?.length > 0) ? fields : [];
+  const sourceExcludes = (excludeFields?.length > 0) ? excludeFields : [];
   const query = {
     index: INDEX_FILES,
     ignore_throttled: ES_IGNORE_THROTTLED,
     track_total_hits: true,
-    _source: (fields?.length > 0) ? fields : true,
+    _source: { includes: sourceIncludes, excludes: sourceExcludes },
     body,
   };
   logApp.debug('[SEARCH] search files', { query });
