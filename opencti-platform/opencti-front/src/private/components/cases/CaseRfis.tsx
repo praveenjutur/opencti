@@ -146,8 +146,7 @@ const CaseRfis: FunctionComponent<CaseRfisProps> = () => {
           'severity',
           'priority',
           'creator',
-          'created_start_date',
-          'created_end_date',
+          'created',
         ]}
       >
         {queryRef && (

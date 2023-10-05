@@ -121,6 +121,12 @@ const FilterIconButtonContainer: FunctionComponent<FilterIconButtonContainerProp
             <>
               {filterValues.map((id) => {
                 const value = currentFilter.representatives.filter((n) => n?.id === id)[0]?.value;
+                const dissocCurrentFilter = {
+                  key: currentFilter.key,
+                  values: currentFilter.values,
+                  operator: currentFilter.operator,
+                  mode: currentFilter.mode,
+                };
                 return (
                   <span key={id}>
                     <FilterIconButtonContent
@@ -133,7 +139,7 @@ const FilterIconButtonContainer: FunctionComponent<FilterIconButtonContainerProp
                       <Chip
                         className={classes.inlineOperator}
                         label={t((currentFilter.mode ?? 'or').toUpperCase())}
-                        onClick={() => handleSwitchLocalMode?.(currentFilter)}
+                        onClick={() => handleSwitchLocalMode?.(dissocCurrentFilter)}
                       />
                     )}{' '}
                   </span>
