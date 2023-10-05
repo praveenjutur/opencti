@@ -35,6 +35,7 @@ import useGranted, { SETTINGS } from '../../../../utils/hooks/useGranted';
 import MarkdownDisplay from '../../../../components/MarkdownDisplay';
 import { isNotEmptyField } from '../../../../utils/utils';
 import useEnterpriseEdition from '../../../../utils/hooks/useEnterpriseEdition';
+import { findFilterFromKey } from "../../../../utils/filters/filtersUtils";
 
 const useStyles = makeStyles({
   container: {
@@ -141,26 +142,31 @@ const AuditsList = ({
     }
     const selection = dataSelection[0];
     let types = ['History', 'Activity'];
+    const entityTypeFilter = findFilterFromKey(selection.filters, 'entity_type');
     if (
-      selection.filters.entity_type
-      && selection.filters.entity_type.length > 0
+        entityTypeFilter
+      && entityTypeFilter.values.length > 0
     ) {
       if (
-        selection.filters.entity_type.filter((o) => o.id === 'all').length === 0
+          entityTypeFilter.values.filter((o) => o.id === 'all').length === 0
       ) {
-        types = selection.filters.entity_type.map((o) => o.id);
+        types = entityTypeFilter;
       }
     }
-    const filters = convertFilters(R.dissoc('entity_type', selection.filters));
     const dateAttribute = selection.date_attribute && selection.date_attribute.length > 0
       ? selection.date_attribute
       : 'timestamp';
+    const filtersContent = selection.filters.filters((f) => f.key !== 'entity_type');
     if (startDate) {
-      filters.push({ key: dateAttribute, values: [startDate], operator: 'gt' });
+      filtersContent.push({ key: dateAttribute, values: [startDate], operator: 'gt' });
     }
     if (endDate) {
-      filters.push({ key: dateAttribute, values: [endDate], operator: 'lt' });
+      filtersContent.push({ key: dateAttribute, values: [endDate], operator: 'lt' });
     }
+    const filters = {
+      ...selection.filters,
+      filters: filtersContent,
+    };
     return (
       <QueryRenderer
         query={auditsListQuery}

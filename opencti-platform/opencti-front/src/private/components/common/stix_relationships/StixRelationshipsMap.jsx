@@ -111,7 +111,7 @@ const StixRelationshipsMap = ({
   const classes = useStyles();
   const { t } = useFormatter();
   const renderContent = () => {
-    let finalFilters = [];
+    let filtersContent = [];
     let selection = {};
     let dataSelectionRelationshipType = null;
     let dataSelectionFromId = null;
@@ -121,15 +121,15 @@ const StixRelationshipsMap = ({
     if (dataSelection) {
       // eslint-disable-next-line prefer-destructuring
       selection = dataSelection[0];
-      finalFilters = convertFilters(selection.filters);
-      dataSelectionRelationshipType = R.head(finalFilters.filter((n) => n.key === 'relationship_type'))
+      filtersContent = selection.filters.filters;
+      dataSelectionRelationshipType = R.head(filtersContent.filter((n) => n.key === 'relationship_type'))
         ?.values || null;
-      dataSelectionFromId = R.head(finalFilters.filter((n) => n.key === 'fromId'))?.values || null;
-      dataSelectionToId = R.head(finalFilters.filter((n) => n.key === 'toId'))?.values || null;
-      dataSelectionFromTypes = R.head(finalFilters.filter((n) => n.key === 'fromTypes'))?.values
+      dataSelectionFromId = R.head(filtersContent.filter((n) => n.key === 'fromId'))?.values || null;
+      dataSelectionToId = R.head(filtersContent.filter((n) => n.key === 'toId'))?.values || null;
+      dataSelectionFromTypes = R.head(filtersContent.filter((n) => n.key === 'fromTypes'))?.values
         || null;
-      dataSelectionToTypes = R.head(finalFilters.filter((n) => n.key === 'toTypes'))?.values || null;
-      finalFilters = finalFilters.filter(
+      dataSelectionToTypes = R.head(filtersContent.filter((n) => n.key === 'toTypes'))?.values || null;
+      filtersContent = filtersContent.filter(
         (n) => ![
           'relationship_type',
           'fromId',
@@ -153,7 +153,7 @@ const StixRelationshipsMap = ({
       endDate,
       dateAttribute,
       limit: selection.number ?? 10,
-      filters: finalFilters,
+      filters: { ...selection.filters, filters: filtersContent },
       isTo: selection.isTo,
       dynamicFrom: convertFilters(selection.dynamicFrom),
       dynamicTo: convertFilters(selection.dynamicTo),

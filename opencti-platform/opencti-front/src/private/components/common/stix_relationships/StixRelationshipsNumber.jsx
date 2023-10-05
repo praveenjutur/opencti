@@ -83,17 +83,17 @@ const StixRelationshipsNumber = ({
   const { t, n } = useFormatter();
   const renderContent = () => {
     const selection = dataSelection[0];
-    let finalFilters = convertFilters(selection.filters);
-    const relationshipType = R.head(finalFilters.filter((o) => o.key === 'relationship_type'))
+    let filtersContent = selection.filters.filters;
+    const relationshipType = R.head(filtersContent.filter((o) => o.key === 'relationship_type'))
       ?.values || null;
-    const elementId = R.head(finalFilters.filter((o) => o.key === 'elementId'))?.values || null;
-    const elementWithTargetTypes = R.head(finalFilters.filter((o) => o.key === 'elementWithTargetTypes'))
+    const elementId = R.head(filtersContent.filter((o) => o.key === 'elementId'))?.values || null;
+    const elementWithTargetTypes = R.head(filtersContent.filter((o) => o.key === 'elementWithTargetTypes'))
       ?.values || null;
-    const fromId = R.head(finalFilters.filter((o) => o.key === 'fromId'))?.values || null;
-    const toId = R.head(finalFilters.filter((o) => o.key === 'toId'))?.values || null;
-    const fromTypes = R.head(finalFilters.filter((o) => o.key === 'fromTypes'))?.values || null;
-    const toTypes = R.head(finalFilters.filter((o) => o.key === 'toTypes'))?.values || null;
-    finalFilters = finalFilters.filter(
+    const fromId = R.head(filtersContent.filter((o) => o.key === 'fromId'))?.values || null;
+    const toId = R.head(filtersContent.filter((o) => o.key === 'toId'))?.values || null;
+    const fromTypes = R.head(filtersContent.filter((o) => o.key === 'fromTypes'))?.values || null;
+    const toTypes = R.head(filtersContent.filter((o) => o.key === 'toTypes'))?.values || null;
+    filtersContent = filtersContent.filter(
       (o) => ![
         'relationship_type',
         'fromId',
@@ -113,7 +113,7 @@ const StixRelationshipsNumber = ({
           toId,
           toTypes,
           relationship_type: relationshipType,
-          filters: finalFilters,
+          filters: { ...selection.filters, filters: filtersContent },
           startDate,
           endDate: dayAgo(),
           dynamicFrom: convertFilters(selection.dynamicFrom),

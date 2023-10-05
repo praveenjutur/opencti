@@ -16,9 +16,7 @@ import { convertFilters } from '../../../../utils/ListParameters';
 import { defaultValue } from '../../../../utils/Graph';
 import { resolveLink } from '../../../../utils/Entity';
 import ItemIcon from '../../../../components/ItemIcon';
-import useGranted, {
-  SETTINGS_SETACCESSES,
-} from '../../../../utils/hooks/useGranted';
+import useGranted, { SETTINGS_SETACCESSES, } from '../../../../utils/hooks/useGranted';
 
 const useStyles = makeStyles({
   container: {
@@ -272,7 +270,7 @@ const StixRelationshipsDistributionList = ({
   const { t, n } = useFormatter();
   const hasSetAccess = useGranted([SETTINGS_SETACCESSES]);
   const renderContent = () => {
-    let finalFilters = [];
+    let filtersContent = [];
     let selection = {};
     let dataSelectionRelationshipType = null;
     let dataSelectionFromId = null;
@@ -282,15 +280,15 @@ const StixRelationshipsDistributionList = ({
     if (dataSelection) {
       // eslint-disable-next-line prefer-destructuring
       selection = dataSelection[0];
-      finalFilters = convertFilters(selection.filters);
-      dataSelectionRelationshipType = R.head(finalFilters.filter((o) => o.key === 'relationship_type'))
+      filtersContent = selection.filters.filters;
+      dataSelectionRelationshipType = R.head(filtersContent.filter((o) => o.key === 'relationship_type'))
         ?.values || null;
-      dataSelectionFromId = R.head(finalFilters.filter((o) => o.key === 'fromId'))?.values || null;
-      dataSelectionToId = R.head(finalFilters.filter((o) => o.key === 'toId'))?.values || null;
-      dataSelectionFromTypes = R.head(finalFilters.filter((o) => o.key === 'fromTypes'))?.values
+      dataSelectionFromId = R.head(filtersContent.filter((o) => o.key === 'fromId'))?.values || null;
+      dataSelectionToId = R.head(filtersContent.filter((o) => o.key === 'toId'))?.values || null;
+      dataSelectionFromTypes = R.head(filtersContent.filter((o) => o.key === 'fromTypes'))?.values
         || null;
-      dataSelectionToTypes = R.head(finalFilters.filter((o) => o.key === 'toTypes'))?.values || null;
-      finalFilters = finalFilters.filter(
+      dataSelectionToTypes = R.head(filtersContent.filter((o) => o.key === 'toTypes'))?.values || null;
+      filtersContent = filtersContent.filter(
         (o) => ![
           'relationship_type',
           'fromId',
@@ -313,7 +311,7 @@ const StixRelationshipsDistributionList = ({
       endDate,
       dateAttribute,
       limit: selection.number ?? 10,
-      filters: finalFilters,
+      filters: { ...selection.filters, filters: filtersContent },
       isTo: selection.isTo,
       dynamicFrom: convertFilters(selection.dynamicFrom),
       dynamicTo: convertFilters(selection.dynamicTo),

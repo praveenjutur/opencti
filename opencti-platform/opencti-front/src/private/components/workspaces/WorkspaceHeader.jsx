@@ -21,11 +21,7 @@ import { DotsHorizontalCircleOutline } from 'mdi-material-ui';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import PropTypes from 'prop-types';
-import {
-  commitMutation,
-  fetchQuery,
-  MESSAGING$,
-} from '../../../relay/environment';
+import { commitMutation, fetchQuery, MESSAGING$, } from '../../../relay/environment';
 import TextField from '../../../components/TextField';
 import Security from '../../../utils/Security';
 import { nowUTC } from '../../../utils/Time';
@@ -124,7 +120,7 @@ const WorkspaceHeader = ({
   };
   const deleteTag = (tag) => {
     const currentTags = getCurrentTags();
-    const tags = R.filter((a) => a !== tag, currentTags);
+    const tags = currentTags.filter((a) => a !== tag);
     commitMutation({
       mutation: workspaceMutation,
       variables: {

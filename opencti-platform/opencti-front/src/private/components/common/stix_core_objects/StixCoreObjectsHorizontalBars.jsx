@@ -223,15 +223,15 @@ const StixCoreObjectsHorizontalBars = ({
   const navigate = useNavigate();
   const renderContent = () => {
     const selection = dataSelection[0];
-    let finalFilters = convertFilters(selection.filters);
+    let filtersContent = selection.filters.filters;
     const dataSelectionTypes = R.head(
-      finalFilters.filter((n) => n.key === 'entity_type'),
+      filtersContent.filter((n) => n.key === 'entity_type'),
     )?.values || ['Stix-Core-Object'];
-    const dataSelectionObjectId = R.head(finalFilters.filter((n) => n.key === 'elementId'))?.values || null;
-    const dataSelectionRelationshipType = R.head(finalFilters.filter((n) => n.key === 'relationship_type'))
+    const dataSelectionObjectId = R.head(filtersContent.filter((n) => n.key === 'elementId'))?.values || null;
+    const dataSelectionRelationshipType = R.head(filtersContent.filter((n) => n.key === 'relationship_type'))
       ?.values || null;
-    const dataSelectionToTypes = R.head(finalFilters.filter((n) => n.key === 'toTypes'))?.values || null;
-    finalFilters = finalFilters.filter(
+    const dataSelectionToTypes = R.head(filtersContent.filter((n) => n.key === 'toTypes'))?.values || null;
+    filtersContent = filtersContent.filter(
       (n) => !['entity_type', 'elementId', 'relationship_type', 'toTypes'].includes(
         n.key,
       ),
@@ -252,7 +252,7 @@ const StixCoreObjectsHorizontalBars = ({
             selection.date_attribute && selection.date_attribute.length > 0
               ? selection.date_attribute
               : 'created_at',
-          filters: finalFilters,
+          filters: { ...selection.filters, filters: filtersContent },
           limit: selection.number ?? 10,
         }}
         render={({ props }) => {
