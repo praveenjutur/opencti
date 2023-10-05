@@ -51,7 +51,11 @@ export const getTypeStatuses = async (context: AuthContext, user: AuthUser, type
     const args = {
       orderBy: StatusOrdering.Order,
       orderMode: OrderingMode.Asc,
-      filters: [{ key: [StatusFilter.Type], values: [type] }],
+      filters: {
+        mode: 'and',
+        filters: [{ key: [StatusFilter.Type], values: [type] }],
+        filterGroups: [],
+      },
     };
     return findAll(context, user, args);
   };
@@ -65,7 +69,11 @@ export const batchStatusesByType = async (context: AuthContext, user: AuthUser, 
     const args = {
       orderBy: StatusOrdering.Order,
       orderMode: OrderingMode.Asc,
-      filters: [{ key: [StatusFilter.Type], values: types }],
+      filters: {
+        mode: 'and',
+        filters: [{ key: [StatusFilter.Type], values: types }],
+        filterGroups: [],
+      },
       connectionFormat: false
     };
     const statuses = await listAllEntities<BasicWorkflowStatus>(context, user, [ENTITY_TYPE_STATUS], args);
@@ -144,7 +152,11 @@ export const statusDelete = async (context: AuthContext, user: AuthUser, subType
   return findSubTypeById(subTypeId);
 };
 export const statusTemplateDelete = async (context: AuthContext, user: AuthUser, statusTemplateId: string) => {
-  const filters = [{ key: ['template_id'], values: [statusTemplateId] }];
+  const filters = {
+    mode: 'and',
+    filters: [{ key: ['template_id'], values: [statusTemplateId] }],
+    filterGroups: [],
+  };
   const result = await listAllEntities(context, user, [ENTITY_TYPE_STATUS], { filters, connectionFormat: false });
   await Promise.all(result.map((status) => internalDeleteElementById(context, user, status.id)
     .then(({ element }) => notify(BUS_TOPICS[ABSTRACT_INTERNAL_OBJECT].DELETE_TOPIC, element, user))));
