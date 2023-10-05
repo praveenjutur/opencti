@@ -133,15 +133,15 @@ const StixCoreObjectsDistributionList = ({
   const hasSetAccess = useGranted([SETTINGS_SETACCESSES]);
   const renderContent = () => {
     const selection = dataSelection[0];
-    let finalFilters = convertFilters(selection.filters);
+    let filtersContent = selection.filters.filters;
     const dataSelectionTypes = R.head(
-      finalFilters.filter((o) => o.key === 'entity_type'),
+      filtersContent.filter((o) => o.key === 'entity_type'),
     )?.values || ['Stix-Core-Object'];
-    const dataSelectionObjectId = finalFilters.filter((o) => o.key === 'elementId')?.values || null;
-    const dataSelectionRelationshipType = R.head(finalFilters.filter((o) => o.key === 'relationship_type'))
+    const dataSelectionObjectId = filtersContent.filter((o) => o.key === 'elementId')?.values || null;
+    const dataSelectionRelationshipType = R.head(filtersContent.filter((o) => o.key === 'relationship_type'))
       ?.values || null;
-    const dataSelectionToTypes = R.head(finalFilters.filter((o) => o.key === 'toTypes'))?.values || null;
-    finalFilters = finalFilters.filter(
+    const dataSelectionToTypes = R.head(filtersContent.filter((o) => o.key === 'toTypes'))?.values || null;
+    filtersContent = filtersContent.filter(
       (o) => !['entity_type', 'elementId', 'relationship_type', 'toTypes'].includes(
         o.key,
       ),
@@ -171,7 +171,7 @@ const StixCoreObjectsDistributionList = ({
             selection.date_attribute && selection.date_attribute.length > 0
               ? selection.date_attribute
               : 'created_at',
-          filters: finalFilters,
+          filters: { ...selection.filters, filters: filtersContent },
           limit: selection.number ?? 10,
         }}
         render={({ props }) => {

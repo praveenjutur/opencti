@@ -313,7 +313,7 @@ export const stixCoreObjectsDistribution = async (context, user, args) => {
 
 export const stixCoreObjectsDistributionByEntity = async (context, user, args) => {
   const { relationship_type, objectId, types } = args;
-  const filters = addFilter(filters, (relationship_type ?? [RELATION_RELATED_TO]).map((n) => buildRefRelationKey(n, '*')), objectId);
+  const filters = addFilter(args.filters, (relationship_type ?? [RELATION_RELATED_TO]).map((n) => buildRefRelationKey(n, '*')), objectId);
   return distributionEntities(context, user, types ?? [ABSTRACT_STIX_CORE_OBJECT], { ...args, filters });
 };
 

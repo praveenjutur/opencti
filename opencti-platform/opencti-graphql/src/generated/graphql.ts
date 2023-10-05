@@ -19465,7 +19465,7 @@ export type QueryWorkspaceArgs = {
 export type QueryWorkspacesArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<WorkspacesFiltering>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   includeAuthorities?: InputMaybe<Scalars['Boolean']['input']>;
   orderBy?: InputMaybe<WorkspacesOrdering>;
@@ -27005,20 +27005,6 @@ export type WorkspaceEdge = {
   node: Workspace;
 };
 
-export enum WorkspacesFilter {
-  Creator = 'creator',
-  Name = 'name',
-  Tag = 'tag',
-  Type = 'type'
-}
-
-export type WorkspacesFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<WorkspacesFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum WorkspacesOrdering {
   CreatedAt = 'created_at',
   Creator = 'creator',
@@ -28095,8 +28081,6 @@ export type ResolversTypes = ResolversObject<{
   WorkspaceAddInput: WorkspaceAddInput;
   WorkspaceConnection: ResolverTypeWrapper<Omit<WorkspaceConnection, 'edges'> & { edges: Array<ResolversTypes['WorkspaceEdge']> }>;
   WorkspaceEdge: ResolverTypeWrapper<Omit<WorkspaceEdge, 'node'> & { node: ResolversTypes['Workspace'] }>;
-  WorkspacesFilter: WorkspacesFilter;
-  WorkspacesFiltering: WorkspacesFiltering;
   WorkspacesOrdering: WorkspacesOrdering;
   X509Certificate: ResolverTypeWrapper<Omit<X509Certificate, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'indicators' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversTypes['CaseConnection']>, containers?: Maybe<ResolversTypes['ContainerConnection']>, createdBy?: Maybe<ResolversTypes['Identity']>, groupings?: Maybe<ResolversTypes['GroupingConnection']>, indicators?: Maybe<ResolversTypes['IndicatorConnection']>, notes?: Maybe<ResolversTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversTypes['OrganizationConnection']>, observedData?: Maybe<ResolversTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversTypes['OpinionConnection']>, reports?: Maybe<ResolversTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversTypes['StixCoreRelationshipConnection']> }>;
   X509CertificateAddInput: X509CertificateAddInput;
@@ -28715,7 +28699,6 @@ export type ResolversParentTypes = ResolversObject<{
   WorkspaceAddInput: WorkspaceAddInput;
   WorkspaceConnection: Omit<WorkspaceConnection, 'edges'> & { edges: Array<ResolversParentTypes['WorkspaceEdge']> };
   WorkspaceEdge: Omit<WorkspaceEdge, 'node'> & { node: ResolversParentTypes['Workspace'] };
-  WorkspacesFiltering: WorkspacesFiltering;
   X509Certificate: Omit<X509Certificate, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'indicators' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, indicators?: Maybe<ResolversParentTypes['IndicatorConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, observedData?: Maybe<ResolversParentTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversParentTypes['StixCoreRelationshipConnection']> };
   X509CertificateAddInput: X509CertificateAddInput;
 }>;

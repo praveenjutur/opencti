@@ -38,19 +38,6 @@ enum WorkspacesOrdering {
     updated_at
     creator
 }
-# Filtering
-enum WorkspacesFilter {
-    name
-    creator
-    tag
-    type
-}
-input WorkspacesFiltering {
-    key: [WorkspacesFilter!]!
-    values: [String]
-    operator: String
-    filterMode: FilterMode
-}
 
 # Relay connections
 type WorkspaceConnection {
@@ -66,7 +53,7 @@ type Query {
         after: ID
         orderBy: WorkspacesOrdering
         orderMode: OrderingMode
-        filters: [WorkspacesFiltering!]
+        filters: FilterGroup
         filterMode: FilterMode
         includeAuthorities: Boolean
         search: String

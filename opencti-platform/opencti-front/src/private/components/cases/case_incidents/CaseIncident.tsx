@@ -57,7 +57,7 @@ const CaseIncidentComponent: FunctionComponent<CaseIncidentProps> = ({
   const { t } = useFormatter();
   const ref = useRef(null);
   const caseIncidentData = useFragment(caseFragment, data);
-  const tasksFilters = [
+  const additionnalFilters = [
     {
       key: 'objects',
       values: [caseIncidentData.id],
@@ -73,7 +73,7 @@ const CaseIncidentComponent: FunctionComponent<CaseIncidentProps> = ({
       sortBy: 'created',
       orderAsc: false,
     },
-    tasksFilters,
+    additionnalFilters,
   );
   const { sortBy, orderAsc } = viewStorage;
   const queryRef = useQueryLoading<CaseTasksLinesQuery>(
