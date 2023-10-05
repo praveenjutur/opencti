@@ -101,37 +101,40 @@ describe('Indexing file test', () => {
     const expectedFile1 = {
       _index: 'test_files-000001',
       id: 'TEST_FILE_1',
+      internal_id: 'TEST_FILE_1',
       name: 'test-report-to-index.pdf',
       indexed_at: document1.indexed_at,
       uploaded_at: document1.uploaded_at,
       entity_id: undefined,
       file_id: 'import/global/test-report-to-index.pdf',
       searchOccurrences: 11,
-      sort: [new Date(document1.indexed_at).getTime(), 'test_file_1']
+      sort: [3.0948513, new Date(document1.indexed_at).getTime(), 'test_file_1']
     };
     await testFilesSearching('elastic', [expectedFile1]);
 
     const expectedFile4 = {
       _index: 'test_files-000001',
       id: 'TEST_FILE_4',
+      internal_id: 'TEST_FILE_4',
       name: 'test-file-to-index.csv',
       indexed_at: document4.indexed_at,
       uploaded_at: document4.uploaded_at,
       entity_id: undefined,
       file_id: 'import/global/test-file-to-index.csv',
       searchOccurrences: 3,
-      sort: [new Date(document4.indexed_at).getTime(), 'test_file_4'],
+      sort: [1.5410707, new Date(document4.indexed_at).getTime(), 'test_file_4'],
     };
     const expectedFile2 = {
       _index: 'test_files-000001',
       id: 'TEST_FILE_2',
+      internal_id: 'TEST_FILE_2',
       name: 'test-large-report-to-index.pdf',
       indexed_at: document2.indexed_at,
       uploaded_at: document2.uploaded_at,
       entity_id: undefined,
       file_id: 'import/global/test-large-report-to-index.pdf',
       searchOccurrences: 1,
-      sort: [new Date(document2.indexed_at).getTime(), 'test_file_2'],
+      sort: [0.5858766, new Date(document2.indexed_at).getTime(), 'test_file_2'],
     };
     await testFilesSearching('control', [expectedFile4, expectedFile2]);
   });

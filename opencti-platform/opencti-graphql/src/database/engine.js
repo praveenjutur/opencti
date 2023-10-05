@@ -1996,12 +1996,17 @@ const buildIndexFileBody = (documentId, file, entity = null) => {
   };
   if (entity) {
     documentBody.entity_id = entity.internal_id;
-    // TODO authorized_members + authorized_authorities + organization restriction
+    // index entity markings
     const entityMarkings = entity[RELATION_OBJECT_MARKING];
     if (entityMarkings) {
-      const markingField = buildRefRelationKey(RELATION_OBJECT_MARKING);
-      documentBody[markingField] = entityMarkings;
+      documentBody[buildRefRelationKey(RELATION_OBJECT_MARKING)] = entityMarkings;
     }
+    // index entity organization restrictions
+    const entityGrantedTo = entity[RELATION_GRANTED_TO];
+    if (entityGrantedTo) {
+      documentBody[buildRefRelationKey(RELATION_GRANTED_TO)] = entityGrantedTo;
+    }
+    // TODO index entity authorized_members + authorized_authorities
   }
   return documentBody;
 };
@@ -2154,7 +2159,6 @@ export const elDeleteFilesByIds = async (context, user, fileIds) => {
   const query = {
     terms: { 'file_id.keyword': fileIds },
   };
-  // Clean all current platform attributes
   await elRawDeleteByQuery({
     index: READ_INDEX_FILES,
     refresh: true,
