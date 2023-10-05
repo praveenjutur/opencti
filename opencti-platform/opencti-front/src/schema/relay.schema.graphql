@@ -7419,7 +7419,7 @@ type Query {
   dataSources(first: Int, after: ID, orderBy: DataSourcesOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String): DataSourceConnection
   vocabulary(id: String!): Vocabulary
   vocabularyCategories: [VocabularyDefinition!]!
-  vocabularies(category: VocabularyCategory, first: Int, after: ID, orderBy: VocabularyOrdering, orderMode: OrderingMode, filters: [VocabularyFiltering!], filterMode: FilterMode, search: String): VocabularyConnection
+  vocabularies(category: VocabularyCategory, first: Int, after: ID, orderBy: VocabularyOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String): VocabularyConnection
   administrativeArea(id: String!): AdministrativeArea
   administrativeAreas(first: Int, after: ID, orderBy: AdministrativeAreasOrdering, orderMode: OrderingMode, filters: FilterGroup, filterMode: FilterMode, search: String): AdministrativeAreaConnection
   task(id: String!): Task
@@ -9189,13 +9189,6 @@ enum VocabularyFilter {
   description
   entity_types
   aliases
-}
-
-input VocabularyFiltering {
-  key: [VocabularyFilter!]!
-  values: [String!]!
-  operator: String
-  filterMode: FilterMode
 }
 
 type VocabularyConnection {

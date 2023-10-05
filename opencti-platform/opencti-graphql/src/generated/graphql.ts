@@ -19411,7 +19411,7 @@ export type QueryVocabulariesArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   category?: InputMaybe<VocabularyCategory>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<VocabularyFiltering>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<VocabularyOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -26173,13 +26173,6 @@ export enum VocabularyFilter {
   Name = 'name'
 }
 
-export type VocabularyFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<VocabularyFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values: Array<Scalars['String']['input']>;
-};
-
 export enum VocabularyOrdering {
   Category = 'category',
   Description = 'description',
@@ -28077,7 +28070,6 @@ export type ResolversTypes = ResolversObject<{
   VocabularyEdge: ResolverTypeWrapper<Omit<VocabularyEdge, 'node'> & { node: ResolversTypes['Vocabulary'] }>;
   VocabularyFieldDefinition: ResolverTypeWrapper<VocabularyFieldDefinition>;
   VocabularyFilter: VocabularyFilter;
-  VocabularyFiltering: VocabularyFiltering;
   VocabularyOrdering: VocabularyOrdering;
   VulnerabilitiesOrdering: VulnerabilitiesOrdering;
   Vulnerability: ResolverTypeWrapper<Omit<Vulnerability, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'softwares' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversTypes['CaseConnection']>, containers?: Maybe<ResolversTypes['ContainerConnection']>, createdBy?: Maybe<ResolversTypes['Identity']>, groupings?: Maybe<ResolversTypes['GroupingConnection']>, notes?: Maybe<ResolversTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversTypes['OrganizationConnection']>, observedData?: Maybe<ResolversTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversTypes['OpinionConnection']>, reports?: Maybe<ResolversTypes['ReportConnection']>, softwares?: Maybe<ResolversTypes['StixCyberObservableConnection']>, stixCoreRelationships?: Maybe<ResolversTypes['StixCoreRelationshipConnection']> }>;
@@ -28702,7 +28694,6 @@ export type ResolversParentTypes = ResolversObject<{
   VocabularyDefinition: VocabularyDefinition;
   VocabularyEdge: Omit<VocabularyEdge, 'node'> & { node: ResolversParentTypes['Vocabulary'] };
   VocabularyFieldDefinition: VocabularyFieldDefinition;
-  VocabularyFiltering: VocabularyFiltering;
   Vulnerability: Omit<Vulnerability, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'softwares' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, observedData?: Maybe<ResolversParentTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, softwares?: Maybe<ResolversParentTypes['StixCyberObservableConnection']>, stixCoreRelationships?: Maybe<ResolversParentTypes['StixCoreRelationshipConnection']> };
   VulnerabilityAddInput: VulnerabilityAddInput;
   VulnerabilityConnection: Omit<VulnerabilityConnection, 'edges'> & { edges?: Maybe<Array<Maybe<ResolversParentTypes['VulnerabilityEdge']>>> };

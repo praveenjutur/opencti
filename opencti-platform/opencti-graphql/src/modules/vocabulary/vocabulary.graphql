@@ -90,18 +90,12 @@ enum VocabularyOrdering {
 }
 
 # Filtering
-enum VocabularyFilter {
+enum VocabularyFilter { # kept for migrations TODO change migrations calling VocabularyFilter
   name
   category
   description
   entity_types
   aliases
-}
-input VocabularyFiltering {
-  key: [VocabularyFilter!]!
-  values: [String!]!
-  operator: String
-  filterMode: FilterMode
 }
 
 # Relay connections
@@ -124,7 +118,7 @@ type Query {
     after: ID
     orderBy: VocabularyOrdering
     orderMode: OrderingMode
-    filters: [VocabularyFiltering!]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): VocabularyConnection @auth(for: [KNOWLEDGE])
