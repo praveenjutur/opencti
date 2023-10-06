@@ -15,6 +15,7 @@ import { hexToRGB, itemColor } from '../../../utils/Colors';
 import ItemMarkings from '../../../components/ItemMarkings';
 import { getFileUri } from '../../../utils/utils';
 import { resolveLink } from '../../../utils/Entity';
+import useGranted, { KNOWLEDGE_KNGETEXPORT, KNOWLEDGE_KNUPLOAD } from '../../../utils/hooks/useGranted';
 
 const useStyles = makeStyles<Theme>((theme) => ({
   item: {
@@ -52,6 +53,11 @@ const SearchIndexedFileLineComponent: FunctionComponent<SearchIndexedFileLineCom
 }) => {
   const classes = useStyles();
   const { fd, t } = useFormatter();
+  let entityLink = node.entity ? `${resolveLink(node.entity.entity_type)}/${node.entity.id}` : '';
+  const isGrantedToFiles = useGranted([KNOWLEDGE_KNUPLOAD, KNOWLEDGE_KNGETEXPORT]);
+  if (entityLink && isGrantedToFiles) {
+    entityLink = entityLink.concat('/files');
+  }
   return (
     <ListItem
       classes={{ root: classes.item }}
@@ -80,14 +86,14 @@ const SearchIndexedFileLineComponent: FunctionComponent<SearchIndexedFileLineCom
               {fd(node.uploaded_at)}
             </div>
             <div
-                className={classes.bodyItem}
-                style={{ width: dataColumns.occurrences.width }}
+              className={classes.bodyItem}
+              style={{ width: dataColumns.occurrences.width }}
             >
-              {node.searchOccurrences}
+              {(node.searchOccurrences && node.searchOccurrences > 99) ? '99+' : node.searchOccurrences}
             </div>
             <div
-                className={classes.bodyItem}
-                style={{ width: dataColumns.entity_type.width }}
+              className={classes.bodyItem}
+              style={{ width: dataColumns.entity_type.width }}
             >
               {node.entity && (
                 <Chip
@@ -106,7 +112,7 @@ const SearchIndexedFileLineComponent: FunctionComponent<SearchIndexedFileLineCom
               style={{ width: dataColumns.entity_name.width }}
             >
               {node.entity && (
-                <Link to={`${resolveLink(node.entity.entity_type)}/${node.entity.id}/files`}>
+                <Link to={entityLink}>
                   <span>{node.entity?.representative.main}</span>
                 </Link>
               )}
