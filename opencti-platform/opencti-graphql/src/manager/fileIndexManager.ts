@@ -2,10 +2,11 @@ import { clearIntervalAsync, setIntervalAsync, type SetIntervalAsyncTimer } from
 import { Promise as BluePromise } from 'bluebird';
 import moment from 'moment';
 import type { BasicStoreSettings } from '../types/settings';
-import { isNotEmptyField } from '../database/utils';
+import { EVENT_TYPE_UPDATE, isNotEmptyField } from '../database/utils';
 import conf, { ENABLED_FILE_INDEX_MANAGER, logApp } from '../config/conf';
 import {
-  lockResource,
+  createStreamProcessor,
+  lockResource, type StreamProcessor,
 } from '../database/redis';
 import { executionContext, SYSTEM_USER } from '../utils/access';
 import { getEntityFromCache } from '../database/cache';
@@ -14,19 +15,24 @@ import { elBulkIndexFiles, elSearchFiles, isAttachmentProcessorEnabled } from '.
 import { getFileContent, rawFilesListing } from '../database/file-storage';
 import type { AuthContext } from '../types/user';
 import { generateInternalId } from '../schema/identifier';
+import { TYPE_LOCK_ERROR } from '../config/errors';
+import type { SseEvent, StreamDataEvent } from '../types/event';
+import { STIX_EXT_OCTI } from '../types/stix-extensions';
 
 const FILE_INDEX_MANAGER_KEY = conf.get('file_index_manager:lock_key');
 const SCHEDULE_TIME = conf.get('file_index_manager:interval') || 300000; // 5 minutes
+const STREAM_SCHEDULE_TIME = 10000;
+const FILE_INDEX_MANAGER_STREAM_KEY = conf.get('file_index_manager:stream_lock_key');
+
 const MAX_FILE_SIZE: number = conf.get('file_index_manager:max_file_size') || 5242880; // 5 mb
 const defaultMimeTypes = ['application/pdf', 'text/plain', 'text/csv', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
 const ACCEPT_MIME_TYPES: string[] = conf.get('file_index_manager:accept_mime_types') || defaultMimeTypes;
 
-// TODO use configuration entity for parameters
+// TODO add limit for number of files ?
 const indexImportedFiles = async (
   context: AuthContext,
   fromDate: Date | null = null,
-  path = 'import/', // or '/import/global'
-  // limit = 1000,
+  path = 'import/',
   maxFileSize = MAX_FILE_SIZE,
   mimeTypes = ACCEPT_MIME_TYPES,
 ) => {
@@ -60,7 +66,7 @@ const indexImportedFiles = async (
       name: file.name,
       uploaded_at: file.lastModified,
     };
-  }); // TODO add data (like entity_id, mimeType) ?
+  });
   const loadFilesToIndex = async (file: { id: string, internalId: string, entityId: string | null, name: string, uploaded_at: Date | undefined }) => {
     const content = await getFileContent(file.id, 'base64');
     // TODO test content is not null
@@ -77,12 +83,45 @@ const indexImportedFiles = async (
   await elBulkIndexFiles(context, SYSTEM_USER, filesToIndex);
 };
 
+const handleStreamEvents = async (streamEvents: Array<SseEvent<StreamDataEvent>>) => {
+  try {
+    if (streamEvents.length === 0) {
+      return;
+    }
+    const context = executionContext('file_index_manager');
+    for (let index = 0; index < streamEvents.length; index += 1) {
+      const event = streamEvents[index];
+      const stix = event.data.data;
+      const entityId = stix.extensions[STIX_EXT_OCTI].id;
+      const entityType = stix.extensions[STIX_EXT_OCTI].type;
+      const stixFiles = stix.extensions[STIX_EXT_OCTI].files;
+      const isUpdateEvent = event.data.type === EVENT_TYPE_UPDATE;
+      // TODO test if markings or organization sharing or authorized members or authorities have been updated
+      if (isUpdateEvent && stixFiles?.length > 0) {
+        // reindex all uploaded files for this entity
+        const entityFilesPath = `import/${entityType}/${entityId}/`;
+        await indexImportedFiles(context, null, entityFilesPath);
+      }
+    }
+  } catch (e) {
+    logApp.error('[OPENCTI-MODULE] Error executing file index manager stream handler', { error: e });
+  }
+};
+
 const initFileIndexManager = () => {
+  const WAIT_TIME_ACTION = 2000;
   let scheduler: SetIntervalAsyncTimer<[]>;
-  // let streamProcessor: StreamProcessor;
+  let streamScheduler: SetIntervalAsyncTimer<[]>;
+  let streamProcessor: StreamProcessor;
   let running = false;
-  const context = executionContext('file_index_manager');
+  let shutdown = false;
+  const wait = (ms: number) => {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+  };
   const fileIndexHandler = async () => {
+    const context = executionContext('file_index_manager');
     const settings = await getEntityFromCache<BasicStoreSettings>(context, SYSTEM_USER, ENTITY_TYPE_SETTINGS);
     const enterpriseEditionEnabled = isNotEmptyField(settings?.enterprise_edition);
     if (enterpriseEditionEnabled) {
@@ -96,13 +135,35 @@ const initFileIndexManager = () => {
         const lastIndexedDate = lastFiles?.length > 0 ? moment(lastFiles[0].indexed_at).toDate() : null;
         logApp.info('[OPENCTI-MODULE] Index imported files since', { lastIndexedDate });
         await indexImportedFiles(context, lastIndexedDate);
-        // TODO handle lock ?
         logApp.info('[OPENCTI-MODULE] End of file index manager processing');
       } finally {
         running = false;
-        // if (streamProcessor) await streamProcessor.shutdown();
         if (lock) await lock.unlock();
       }
+    }
+  };
+  const fileIndexStreamHandler = async () => {
+    let lock;
+    try {
+      // Lock the manager
+      lock = await lockResource([FILE_INDEX_MANAGER_STREAM_KEY], { retryCount: 0 });
+      running = true;
+      logApp.info('[OPENCTI-MODULE] Running file index manager stream handler');
+      streamProcessor = createStreamProcessor(SYSTEM_USER, 'File index manager', handleStreamEvents);
+      await streamProcessor.start('live');
+      while (!shutdown && streamProcessor.running()) {
+        await wait(WAIT_TIME_ACTION);
+      }
+      logApp.info('[OPENCTI-MODULE] End of file index manager stream handler');
+    } catch (e: any) {
+      if (e.name === TYPE_LOCK_ERROR) {
+        logApp.debug('[OPENCTI-MODULE] File index manager stream handler already started by another API');
+      } else {
+        logApp.error('[OPENCTI-MODULE] File index manager stream handler failed to start', { error: e });
+      }
+    } finally {
+      if (streamProcessor) await streamProcessor.shutdown();
+      if (lock) await lock.unlock();
     }
   };
 
@@ -111,6 +172,10 @@ const initFileIndexManager = () => {
       scheduler = setIntervalAsync(async () => {
         await fileIndexHandler();
       }, SCHEDULE_TIME);
+      // stream to index updates on entities
+      streamScheduler = setIntervalAsync(async () => {
+        await fileIndexStreamHandler();
+      }, STREAM_SCHEDULE_TIME);
     },
     status: (settings?: BasicStoreSettings) => {
       return {
@@ -121,9 +186,9 @@ const initFileIndexManager = () => {
     },
     shutdown: async () => {
       logApp.info('[OPENCTI-MODULE] Stopping file index manager');
-      if (scheduler) {
-        await clearIntervalAsync(scheduler);
-      }
+      shutdown = true;
+      if (scheduler) await clearIntervalAsync(scheduler);
+      if (streamScheduler) await clearIntervalAsync(streamScheduler);
       return true;
     },
   };

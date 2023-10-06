@@ -1997,22 +1997,12 @@ const buildIndexFileBody = (documentId, file, entity = null) => {
   if (entity) {
     documentBody.entity_id = entity.internal_id;
     // index entity markings
-    const entityMarkings = entity[RELATION_OBJECT_MARKING];
-    if (entityMarkings) {
-      documentBody[buildRefRelationKey(RELATION_OBJECT_MARKING)] = entityMarkings;
-    }
+    documentBody[buildRefRelationKey(RELATION_OBJECT_MARKING)] = entity[RELATION_OBJECT_MARKING] ?? [];
     // index entity organization restrictions
-    const entityGrantedTo = entity[RELATION_GRANTED_TO];
-    if (entityGrantedTo) {
-      documentBody[buildRefRelationKey(RELATION_GRANTED_TO)] = entityGrantedTo;
-    }
+    documentBody[buildRefRelationKey(RELATION_GRANTED_TO)] = entity[RELATION_GRANTED_TO] ?? [];
     // index entity authorized_members & authorized_authorities
-    if (entity.authorized_members) {
-      documentBody.authorized_members = entity.authorized_members;
-    }
-    if (entity.authorized_authorities) {
-      documentBody.authorized_authorities = entity.authorized_authorities;
-    }
+    documentBody.authorized_members = entity.authorized_members ?? [];
+    documentBody.authorized_authorities = entity.authorized_authorities ?? [];
   }
   return documentBody;
 };
