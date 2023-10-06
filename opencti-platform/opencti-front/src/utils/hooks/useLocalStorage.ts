@@ -370,7 +370,7 @@ export const usePaginationLocalStorage = <U>(
         const newFilterElement = {
           key: k,
           values: [id],
-          operator: op ?? 'eq',
+          operator: op,
           mode: 'or',
         };
         const newBaseFilters = viewStorage.filters ? {

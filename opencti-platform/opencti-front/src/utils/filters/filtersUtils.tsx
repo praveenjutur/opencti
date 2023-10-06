@@ -172,6 +172,21 @@ export const findFilterFromKey = (filters: Filter[], key: string, operator?: str
   return null;
 };
 
+export const findFiltersFromKeys = (filters: Filter[], keys: string[], operator?: string) => {
+  const result = [];
+  for (const filter of filters) {
+    if (keys.includes(filter.key)) {
+      if (operator && filter.operator === operator) {
+        result.push(filter);
+      }
+      if (!operator) {
+        result.push(filter);
+      }
+    }
+  }
+  return result;
+};
+
 export const findFilterIndexFromKey = (filters: Filter[], key: string, operator?: string) => {
   for (let i = 0; i < filters.length; i += 1) {
     const filter = filters[i];

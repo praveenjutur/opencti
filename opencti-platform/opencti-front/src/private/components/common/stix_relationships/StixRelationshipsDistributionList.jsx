@@ -12,7 +12,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { QueryRenderer } from '../../../../relay/environment';
 import { useFormatter } from '../../../../components/i18n';
-import { convertFilters } from '../../../../utils/ListParameters';
 import { defaultValue } from '../../../../utils/Graph';
 import { resolveLink } from '../../../../utils/Entity';
 import ItemIcon from '../../../../components/ItemIcon';
@@ -313,8 +312,8 @@ const StixRelationshipsDistributionList = ({
       limit: selection.number ?? 10,
       filters: { ...selection.filters, filters: filtersContent },
       isTo: selection.isTo,
-      dynamicFrom: convertFilters(selection.dynamicFrom),
-      dynamicTo: convertFilters(selection.dynamicTo),
+      dynamicFrom: selection.dynamicFrom,
+      dynamicTo: selection.dynamicTo,
     };
     return (
       <QueryRenderer

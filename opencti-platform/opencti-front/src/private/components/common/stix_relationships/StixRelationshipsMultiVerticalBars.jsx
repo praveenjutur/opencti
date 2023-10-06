@@ -12,7 +12,6 @@ import { useFormatter } from '../../../../components/i18n';
 import { monthsAgo, now } from '../../../../utils/Time';
 import { verticalBarsChartOptions } from '../../../../utils/Charts';
 import { simpleNumberFormat } from '../../../../utils/Number';
-import { convertFilters } from '../../../../utils/ListParameters';
 
 const useStyles = makeStyles(() => ({
   paper: {
@@ -88,8 +87,8 @@ const StixRelationshipsMultiVerticalBars = ({
         toTypes: dataSelectionToTypes,
         field: dataSelectionDateAttribute,
         filters: { ...selection.filters, filters: finalFilters },
-        dynamicFrom: convertFilters(selection.dynamicFrom),
-        dynamicTo: convertFilters(selection.dynamicTo),
+        dynamicFrom: selection.dynamicFrom,
+        dynamicTo: selection.dynamicTo,
       };
     });
     let formatter = fsd;

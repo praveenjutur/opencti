@@ -16,7 +16,6 @@ import { useFormatter } from '../../../../components/i18n';
 import { QueryRenderer } from '../../../../relay/environment';
 import { resolveLink } from '../../../../utils/Entity';
 import { defaultValue } from '../../../../utils/Graph';
-import { convertFilters } from '../../../../utils/ListParameters';
 import ItemMarkings from '../../../../components/ItemMarkings';
 
 const useStyles = makeStyles({

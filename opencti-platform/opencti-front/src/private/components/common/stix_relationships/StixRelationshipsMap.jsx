@@ -9,7 +9,6 @@ import { useFormatter } from '../../../../components/i18n';
 import LocationMiniMapTargets from '../location/LocationMiniMapTargets';
 import { QueryRenderer } from '../../../../relay/environment';
 import { computeLevel } from '../../../../utils/Number';
-import { convertFilters } from '../../../../utils/ListParameters';
 
 const useStyles = makeStyles(() => ({
   paper: {
@@ -155,8 +154,8 @@ const StixRelationshipsMap = ({
       limit: selection.number ?? 10,
       filters: { ...selection.filters, filters: filtersContent },
       isTo: selection.isTo,
-      dynamicFrom: convertFilters(selection.dynamicFrom),
-      dynamicTo: convertFilters(selection.dynamicTo),
+      dynamicFrom: selection.dynamicFrom,
+      dynamicTo: selection.dynamicTo,
     };
     return (
       <QueryRenderer

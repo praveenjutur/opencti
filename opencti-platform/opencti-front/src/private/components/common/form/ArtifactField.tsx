@@ -4,6 +4,7 @@ import type { Option } from './ReferenceField';
 import ReferenceField from './ReferenceField';
 import { ArtifactFieldGetQuery, } from './__generated__/ArtifactFieldGetQuery.graphql';
 import useQueryLoading from '../../../../utils/hooks/useQueryLoading';
+import { Filter, FilterGroup } from '../../../../utils/filters/filtersUtils';
 
 interface ArtifactFieldProps {
   attributeName: string;
@@ -66,10 +67,17 @@ const ArtifactField: FunctionComponent<ArtifactFieldProps> = ({
   onChange,
 }) => {
   const [search, setSearch] = useState<string | null>(null);
-  const filters = [
-    { key: ['entity_type'], values: ['Artifact'] },
-    search ? { key: ['name'], values: [search] } : undefined,
-  ].filter((f) => Boolean(f)) as FilterGroup;
+  const filtersContent = [
+    { key: 'entity_type', values: ['Artifact'], operator: 'eq', mode: 'or' },
+  ];
+  if (search) {
+    filtersContent.push({ key: 'name', values: [search], operator: 'eq', mode: 'or' });
+  };
+  const filters = {
+    mode: 'and',
+    filters: filtersContent,
+    filterGroups: [],
+  };
   const queryRef = useQueryLoading<ArtifactFieldGetQuery>(artifactQuery, {
     filters,
   });

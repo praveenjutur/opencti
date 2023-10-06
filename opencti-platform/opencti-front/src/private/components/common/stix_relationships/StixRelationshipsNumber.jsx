@@ -7,7 +7,6 @@ import makeStyles from '@mui/styles/makeStyles';
 import * as R from 'ramda';
 import { QueryRenderer } from '../../../../relay/environment';
 import { useFormatter } from '../../../../components/i18n';
-import { convertFilters } from '../../../../utils/ListParameters';
 import ItemNumberDifference from '../../../../components/ItemNumberDifference';
 import { dayAgo } from '../../../../utils/Time';
 
@@ -116,8 +115,8 @@ const StixRelationshipsNumber = ({
           filters: { ...selection.filters, filters: filtersContent },
           startDate,
           endDate: dayAgo(),
-          dynamicFrom: convertFilters(selection.dynamicFrom),
-          dynamicTo: convertFilters(selection.dynamicTo),
+          dynamicFrom: selection.dynamicFrom,
+          dynamicTo: selection.dynamicTo,
         }}
         render={({ props }) => {
           if (props && props.stixRelationshipsNumber) {

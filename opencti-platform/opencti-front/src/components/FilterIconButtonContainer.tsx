@@ -75,6 +75,7 @@ interface FilterIconButtonContainerProps {
   disabledPossible?: boolean;
   redirection?: boolean;
   filtersRepresentativesQueryRef: PreloadedQuery<FilterIconButtonContentQuery>;
+  chipColor?: string;
 }
 
 const FilterIconButtonContainer: FunctionComponent<FilterIconButtonContainerProps> = ({
@@ -86,6 +87,7 @@ const FilterIconButtonContainer: FunctionComponent<FilterIconButtonContainerProp
   disabledPossible,
   redirection,
   filtersRepresentativesQueryRef,
+  chipColor,
 }) => {
   const { t } = useFormatter();
   const classes = useStyles();
@@ -158,6 +160,7 @@ const FilterIconButtonContainer: FunctionComponent<FilterIconButtonContainerProp
               >
                 <Chip
                   classes={{ root: classFilter, label: classes.chipLabel }}
+                  color={chipColor}
                   label={
                     <>
                       <strong>{label}</strong>: {values}

@@ -11,7 +11,7 @@ const TasksFilterValueContainer = ({ filters }: {
 }) => {
   const queryRef = useQueryLoading<FilterIconButtonContentQuery>(
     filterIconButtonContentQuery,
-    { filters: filters.filters.filter((f) => filtersWithRepresentative.includes(f.key)) },
+    { filters },
   );
 
   return (

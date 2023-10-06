@@ -13,7 +13,6 @@ import { useFormatter } from '../../../../components/i18n';
 import { itemColor } from '../../../../utils/Colors';
 import { horizontalBarsChartOptions } from '../../../../utils/Charts';
 import { simpleNumberFormat } from '../../../../utils/Number';
-import { convertFilters } from '../../../../utils/ListParameters';
 import { defaultValue } from '../../../../utils/Graph';
 
 const useStyles = makeStyles(() => ({
@@ -286,8 +285,8 @@ const StixRelationshipsHorizontalBars = ({
       limit: selection.number ?? 10,
       filters: { ...selection.filters, filters: filtersContent },
       isTo: selection.isTo,
-      dynamicFrom: convertFilters(selection.dynamicFrom),
-      dynamicTo: convertFilters(selection.dynamicTo),
+      dynamicFrom: selection.dynamicFrom,
+      dynamicTo: selection.dynamicTo,
     };
     return (
       <QueryRenderer

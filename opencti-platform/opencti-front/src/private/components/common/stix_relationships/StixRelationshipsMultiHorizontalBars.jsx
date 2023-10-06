@@ -12,7 +12,6 @@ import { QueryRenderer } from '../../../../relay/environment';
 import { useFormatter } from '../../../../components/i18n';
 import { horizontalBarsChartOptions } from '../../../../utils/Charts';
 import { simpleNumberFormat } from '../../../../utils/Number';
-import { convertFilters } from '../../../../utils/ListParameters';
 import { defaultValue } from '../../../../utils/Graph';
 
 const useStyles = makeStyles(() => ({
@@ -864,8 +863,8 @@ const StixRelationshipsMultiHorizontalBars = ({
       limit: selection.number ?? 10,
       filters: { ...selection.filters, filters: filtersContent },
       isTo: selection.isTo,
-      dynamicFrom: convertFilters(selection.dynamicFrom),
-      dynamicTo: convertFilters(selection.dynamicTo),
+      dynamicFrom: selection.dynamicFrom,
+      dynamicTo: selection.dynamicTo,
     };
     const finalSubDistributionField = subSelection.attribute || field || 'entity_type';
     if (subSelection.perspective === 'entities') {

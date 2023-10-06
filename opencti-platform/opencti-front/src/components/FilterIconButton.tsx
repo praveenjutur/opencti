@@ -36,6 +36,9 @@ const useStyles = makeStyles(() => ({
     float: 'left',
     margin: '2px 0 0 15px',
   },
+  filters7: {
+    marginTop: 10,
+  },
 }));
 
 interface FilterIconButtonProps {
@@ -46,6 +49,7 @@ interface FilterIconButtonProps {
   handleSwitchLocalMode?: (filter: Filter) => void;
   classNameNumber?: number;
   styleNumber?: number;
+  chipColor?: string;
   dataColumns?: DataColumns;
   disabledPossible?: boolean;
   redirection?: boolean;
@@ -62,6 +66,7 @@ const FilterIconButton: FunctionComponent<FilterIconButtonProps> = ({
   dataColumns,
   disabledPossible,
   redirection,
+  chipColor,
 }) => {
   const classes = useStyles();
 
@@ -76,6 +81,8 @@ const FilterIconButton: FunctionComponent<FilterIconButtonProps> = ({
     finalClassName = classes.filters5;
   } else if (classNameNumber === 6) {
     finalClassName = classes.filters6;
+  } else if (classNameNumber === 7) {
+    finalClassName = classes.filters7;
   }
 
   const displayedFilters = {
@@ -103,6 +110,7 @@ const FilterIconButton: FunctionComponent<FilterIconButtonProps> = ({
           handleSwitchGlobalMode={handleSwitchGlobalMode}
           handleSwitchLocalMode={handleSwitchLocalMode}
           styleNumber={styleNumber}
+          chipColor={chipColor}
           disabledPossible={disabledPossible}
           redirection={redirection}
           filtersRepresentativesQueryRef={filtersRepresentativesQueryRef}

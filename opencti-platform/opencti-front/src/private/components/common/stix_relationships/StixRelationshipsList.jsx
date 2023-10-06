@@ -15,7 +15,6 @@ import { useFormatter } from '../../../../components/i18n';
 import { QueryRenderer } from '../../../../relay/environment';
 import { computeLink } from '../../../../utils/Entity';
 import { defaultValue } from '../../../../utils/Graph';
-import { convertFilters } from '../../../../utils/ListParameters';
 import ItemMarkings from '../../../../components/ItemMarkings';
 
 const useStyles = makeStyles((theme) => ({
@@ -4351,8 +4350,8 @@ const StixRelationshipsList = ({
           orderBy: dateAttribute,
           orderMode: 'desc',
           filters: { ...selection.filters, filters: filtersContent },
-          dynamicFrom: convertFilters(selection.dynamicFrom),
-          dynamicTo: convertFilters(selection.dynamicTo),
+          dynamicFrom: selection.dynamicFrom,
+          dynamicTo: selection.dynamicTo,
         }}
         render={({ props }) => {
           if (

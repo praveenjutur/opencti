@@ -48,7 +48,6 @@ const FilterIconButtonContent: FunctionComponent<FilterIconButtonContentProps> =
       </>
     );
   }
-  console.log('filterKey', filterKey);
   if (redirection && entityFilters.includes(filterKey)) {
     return (
       <Link to={`/dashboard/id/${id}`}>
