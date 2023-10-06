@@ -1996,13 +1996,12 @@ const buildIndexFileBody = (documentId, file, entity = null) => {
   };
   if (entity) {
     documentBody.entity_id = entity.internal_id;
-    // index entity markings
+    // index entity markings & organization restrictions
     documentBody[buildRefRelationKey(RELATION_OBJECT_MARKING)] = entity[RELATION_OBJECT_MARKING] ?? [];
-    // index entity organization restrictions
     documentBody[buildRefRelationKey(RELATION_GRANTED_TO)] = entity[RELATION_GRANTED_TO] ?? [];
-    // index entity authorized_members & authorized_authorities
-    documentBody.authorized_members = entity.authorized_members ?? [];
-    documentBody.authorized_authorities = entity.authorized_authorities ?? [];
+    // index entity authorized_members & authorized_authorities => not yet
+    // documentBody.authorized_members = entity.authorized_members ?? [];
+    // documentBody.authorized_authorities = entity.authorized_authorities ?? [];
   }
   return documentBody;
 };
@@ -2027,10 +2026,7 @@ export const elBulkIndexFiles = async (context, user, files, maxBulkOperations =
           retry_on_conflict: ES_RETRY_ON_CONFLICT
         }
       };
-      let entity = null;
-      if (entity_id) {
-        entity = entitiesMap[entity_id];
-      }
+      const entity = entity_id ? entitiesMap[entity_id] : null;
       const fileObject = {
         id: file_id,
         content: file_data,
@@ -2050,6 +2046,33 @@ export const elBulkIndexFiles = async (context, user, files, maxBulkOperations =
     logApp.debug(`[SEARCH] indexing files: ${currentProcessing} / ${bulkOperations.length}`);
   };
   await BluePromise.map(groupsOfOperations, concurrentUpdate, { concurrency: ES_MAX_CONCURRENCY });
+};
+
+export const elUpdateFilesWithEntityRestrictions = async (entity) => {
+  if (!entity) {
+    return null;
+  }
+  const changes = {
+    [buildRefRelationKey(RELATION_OBJECT_MARKING)]: entity[RELATION_OBJECT_MARKING] ?? [],
+    [buildRefRelationKey(RELATION_GRANTED_TO)]: entity[RELATION_GRANTED_TO] ?? [],
+  };
+  logApp.info('elUpdateFilesWithEntityRestrictions', { changes, entity });
+  const source = 'for (change in params.changes.entrySet()) { ctx._source[change.getKey()] = change.getValue() }';
+  return elRawUpdateByQuery({
+    index: READ_INDEX_FILES,
+    refresh: true,
+    conflicts: 'proceed',
+    body: {
+      script: { source, params: { changes } },
+      query: {
+        term: {
+          'entity_id.keyword': entity.internal_id
+        }
+      },
+    },
+  }).catch((err) => {
+    throw DatabaseError('[SEARCH] Error updating elastic (files entity restrictions)', { error: err, entityId: entity.internal_id });
+  });
 };
 
 const buildFilesSearchResult = (data, first, searchAfter, connectionFormat = true) => {
@@ -2078,7 +2101,7 @@ const buildFilesSearchResult = (data, first, searchAfter, connectionFormat = tru
 };
 export const elSearchFiles = async (context, user, options = {}) => {
   const { first = 20, after, orderBy = null } = options; // pagination options // TODO orderMode = 'asc'
-  const { search = null, fileIds = [] } = options; // search options
+  const { search = null, fileIds = [], entityIds = [] } = options; // search options
   const { fields = [], excludeFields = ['attachment.content'], connectionFormat = true, highlight = true } = options; // result options
   const searchAfter = after ? cursorToOffset(after) : undefined;
   const { includeAuthorities = false } = options;
@@ -2096,10 +2119,10 @@ export const elSearchFiles = async (context, user, options = {}) => {
     must.push(fullTextSearch);
   }
   if (fileIds?.length > 0) {
-    const fileIdsSearch = {
-      terms: { 'file_id.keyword': fileIds }
-    };
-    must.push(fileIdsSearch);
+    must.push({ terms: { 'file_id.keyword': fileIds } });
+  }
+  if (entityIds?.length > 0) {
+    must.push({ terms: { 'entity_id.keyword': entityIds } });
   }
   if (!orderBy) { // TODO handle orderby param
     // order by last indexed date by default

@@ -6,17 +6,24 @@ import { EVENT_TYPE_UPDATE, isNotEmptyField } from '../database/utils';
 import conf, { ENABLED_FILE_INDEX_MANAGER, logApp } from '../config/conf';
 import {
   createStreamProcessor,
-  lockResource, type StreamProcessor,
+  lockResource,
+  type StreamProcessor,
 } from '../database/redis';
 import { executionContext, SYSTEM_USER } from '../utils/access';
 import { getEntityFromCache } from '../database/cache';
 import { ENTITY_TYPE_SETTINGS } from '../schema/internalObject';
-import { elBulkIndexFiles, elSearchFiles, isAttachmentProcessorEnabled } from '../database/engine';
+import {
+  elBulkIndexFiles,
+  elLoadById,
+  elSearchFiles,
+  elUpdateFilesWithEntityRestrictions,
+  isAttachmentProcessorEnabled
+} from '../database/engine';
 import { getFileContent, rawFilesListing } from '../database/file-storage';
 import type { AuthContext } from '../types/user';
 import { generateInternalId } from '../schema/identifier';
 import { TYPE_LOCK_ERROR } from '../config/errors';
-import type { SseEvent, StreamDataEvent } from '../types/event';
+import type { SseEvent, StreamDataEvent, UpdateEvent } from '../types/event';
 import { STIX_EXT_OCTI } from '../types/stix-extensions';
 
 const FILE_INDEX_MANAGER_KEY = conf.get('file_index_manager:lock_key');
@@ -91,16 +98,19 @@ const handleStreamEvents = async (streamEvents: Array<SseEvent<StreamDataEvent>>
     const context = executionContext('file_index_manager');
     for (let index = 0; index < streamEvents.length; index += 1) {
       const event = streamEvents[index];
-      const stix = event.data.data;
-      const entityId = stix.extensions[STIX_EXT_OCTI].id;
-      const entityType = stix.extensions[STIX_EXT_OCTI].type;
-      const stixFiles = stix.extensions[STIX_EXT_OCTI].files;
-      const isUpdateEvent = event.data.type === EVENT_TYPE_UPDATE;
-      // TODO test if markings or organization sharing or authorized members or authorities have been updated
-      if (isUpdateEvent && stixFiles?.length > 0) {
-        // reindex all uploaded files for this entity
-        const entityFilesPath = `import/${entityType}/${entityId}/`;
-        await indexImportedFiles(context, null, entityFilesPath);
+      if (event.data.type === EVENT_TYPE_UPDATE) {
+        const updateEvent: UpdateEvent = event.data as UpdateEvent;
+        const stix = updateEvent.data;
+        const entityId = stix.extensions[STIX_EXT_OCTI].id;
+        const stixFiles = stix.extensions[STIX_EXT_OCTI].files;
+        // test if markings or organization sharing or authorized members or authorities have been updated
+        const isDataRestrictionsUpdate = updateEvent.context?.patch && updateEvent.context.patch
+          .map((op) => op.path && (op.path.includes('granted_refs') || op.path.includes('object_marking_refs')));
+        if (stixFiles?.length > 0 && isDataRestrictionsUpdate) {
+          // update all indexed files for this entity
+          const entity = await elLoadById(context, SYSTEM_USER, entityId);
+          await elUpdateFilesWithEntityRestrictions(entity);
+        }
       }
     }
   } catch (e) {
@@ -132,6 +142,7 @@ const initFileIndexManager = () => {
         running = true;
         logApp.info('[OPENCTI-MODULE] Running file index manager');
         const lastFiles = await elSearchFiles(context, SYSTEM_USER, { first: 1, connectionFormat: false });
+        // TODO fix last time we indexed all uploaded files
         const lastIndexedDate = lastFiles?.length > 0 ? moment(lastFiles[0].indexed_at).toDate() : null;
         logApp.info('[OPENCTI-MODULE] Index imported files since', { lastIndexedDate });
         await indexImportedFiles(context, lastIndexedDate);
