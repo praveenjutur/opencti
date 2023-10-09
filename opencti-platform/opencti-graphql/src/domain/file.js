@@ -6,7 +6,12 @@ import { internalLoadById } from '../database/middleware-loader';
 import { ENTITY_TYPE_FILE_INDEX_STATUS } from '../schema/internalObject';
 import { buildContextDataForFile, publishUserAction } from '../listener/UserActionListener';
 import { stixCoreObjectImportDelete } from './stixCoreObject';
+import { elSearchFiles } from '../database/engine';
 import { extractEntityRepresentativeName } from '../database/entity-representative';
+
+export const searchIndexedFiles = async (context, user, args) => {
+  return elSearchFiles(context, context.user, args);
+};
 
 const loadFileIndexStatus = async (context, user) => {
   return loadEntity(context, user, [ENTITY_TYPE_FILE_INDEX_STATUS]);
