@@ -96,7 +96,7 @@ const AttackPatterns = () => {
           'objectMarking',
           'createdBy',
           'source_reliability',
-          'creator',
+          'creator_id',
           'created',
           'revoked',
           'killChainPhases',

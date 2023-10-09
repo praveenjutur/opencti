@@ -144,7 +144,7 @@ const Relationships = () => {
             'objectMarking',
             'created',
             'createdBy',
-            'creator',
+            'creator_id',
           ]}
         >
         {queryRef && (

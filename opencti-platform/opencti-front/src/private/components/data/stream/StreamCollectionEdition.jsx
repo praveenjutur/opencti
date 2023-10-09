@@ -210,7 +210,7 @@ const StreamCollectionEditionContainer = ({ handleClose, streamCollection }) => 
                     'objects',
                     'objectMarking',
                     'objectLabel',
-                    'creator',
+                    'creator_id',
                     'createdBy',
                     'priority',
                     'severity',

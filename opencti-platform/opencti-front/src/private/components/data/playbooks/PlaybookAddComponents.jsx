@@ -453,7 +453,7 @@ const PlaybookAddComponentsContent = ({
                               'objectContains',
                               'markedBy',
                               'labelledBy',
-                              'creator',
+                              'creator_id',
                               'createdBy',
                               'priority',
                               'severity',

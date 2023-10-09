@@ -22,7 +22,7 @@ import { schemaRelationsRefDefinition } from '../schema/schema-relationsRef';
 // Resolutions
 export const MARKING_FILTER = 'objectMarking';
 export const CREATED_BY_FILTER = 'createdBy';
-export const CREATOR_FILTER = 'creator';
+export const CREATOR_FILTER = 'creator_id';
 export const ASSIGNEE_FILTER = 'objectAssignee';
 export const PARTICIPANT_FILTER = 'objectParticipant';
 export const OBJECT_CONTAINS_FILTER = 'objects';
@@ -633,6 +633,7 @@ export const checkedAndConvertedFilters = (filters, entityTypes) => {
         const availableAttributes = schemaAttributesDefinition.getAttributeNames(type);
         const availableRelations = schemaRelationsRefDefinition.getInputNames(type);
         const availableKeys = availableAttributes.concat(availableRelations).concat(['rel_object.internal_id', 'rel_object.*']); // TODO remove hardcode when all the enum are removed
+        console.log('availableKeys', availableKeys);
         if (!keys.every((k) => availableKeys.includes(k))) {
           const incorrectKeys = keys
             .map((k) => (!availableKeys.includes(k) ? k : null))

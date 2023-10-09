@@ -194,7 +194,7 @@ const StixCyberObservables: FunctionComponent = () => {
             'x_opencti_score',
             'createdBy',
             'sightedBy',
-            'creator',
+            'creator_id',
           ]}
         >
           <QueryRenderer

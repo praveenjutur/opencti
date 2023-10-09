@@ -177,7 +177,7 @@ const Reports: FunctionComponent<ReportsProps> = ({
             'objectAssignee',
             'objectParticipant',
             'report_types',
-            'creator',
+            'creator_id',
             'published',
             'created_at',
             'objects',

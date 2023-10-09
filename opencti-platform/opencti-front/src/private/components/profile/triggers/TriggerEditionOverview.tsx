@@ -433,7 +433,7 @@ TriggerEditionOverviewProps
                         'objects',
                         'objectMarking',
                         'objectLabel',
-                        'creator',
+                        'creator_id',
                         'createdBy',
                         'priority',
                         'severity',

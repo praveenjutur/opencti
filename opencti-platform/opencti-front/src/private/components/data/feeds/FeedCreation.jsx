@@ -599,7 +599,7 @@ const FeedCreation = (props) => {
                               'objects',
                               'objectMarking',
                               'objectLabel',
-                              'creator',
+                              'creator_id',
                               'createdBy',
                               'priority',
                               'severity',

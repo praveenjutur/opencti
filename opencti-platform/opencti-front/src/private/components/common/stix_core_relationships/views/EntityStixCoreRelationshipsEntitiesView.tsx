@@ -79,7 +79,7 @@ EntityStixCoreRelationshipsEntitiesViewProps
     'confidence',
     'objectLabel',
     'createdBy',
-    'creator',
+    'creator_id',
     'created_start_date',
     'created_end_date',
   ];

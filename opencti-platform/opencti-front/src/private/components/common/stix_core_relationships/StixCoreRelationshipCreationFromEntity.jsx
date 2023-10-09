@@ -550,7 +550,7 @@ const StixCoreRelationshipCreationFromEntity = (props) => {
                     'created_end_date',
                     'created_at_start_date',
                     'created_at_end_date',
-                    'creator',
+                    'creator_id',
                   ]}
                 >
                   <QueryRenderer

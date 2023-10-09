@@ -147,7 +147,7 @@ const Entities = () => {
                 'createdBy',
                 'source_reliability',
                 'confidence',
-                'creator',
+                'creator_id',
                 'created',
                 'created_at',
               ]}

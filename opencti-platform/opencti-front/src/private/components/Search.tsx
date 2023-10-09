@@ -141,7 +141,7 @@ const Search = () => {
                 'source_reliability',
                 'confidence',
                 'x_opencti_organization_type',
-                'creator',
+                'creator_id',
                 'created',
                 'created_at',
               ]}

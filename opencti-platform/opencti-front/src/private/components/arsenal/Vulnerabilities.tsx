@@ -102,7 +102,7 @@ const Vulnerabilities = () => {
           'x_opencti_base_score',
           'x_opencti_base_severity',
           'x_opencti_attack_vector',
-          'creator',
+          'creator_id',
           'created',
         ]}
       >

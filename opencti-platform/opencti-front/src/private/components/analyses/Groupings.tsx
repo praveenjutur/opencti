@@ -176,7 +176,7 @@ const Groupings: FunctionComponent<GroupingsProps> = ({
             'createdBy',
             'source_reliability',
             'confidence',
-            'creator',
+            'creator_id',
             'created',
           ]}
         >

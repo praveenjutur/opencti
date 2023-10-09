@@ -145,7 +145,7 @@ const CaseRfis: FunctionComponent<CaseRfisProps> = () => {
           'objectParticipant',
           'severity',
           'priority',
-          'creator',
+          'creator_id',
           'created',
         ]}
       >

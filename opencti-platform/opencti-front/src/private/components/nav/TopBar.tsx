@@ -368,7 +368,7 @@ const TopBarComponent: FunctionComponent<TopBarProps> = ({
                     'source_reliability',
                     'confidence',
                     'x_opencti_organization_type',
-                    'creator',
+                    'creator_id',
                     'created_start_date',
                     'created_end_date',
                     'created_at_start_date',

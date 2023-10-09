@@ -180,7 +180,7 @@ const Indicators = () => {
             'x_opencti_detection',
             'basedOn',
             'revoked',
-            'creator',
+            'creator_id',
             'confidence',
             'indicator_types',
           ]}

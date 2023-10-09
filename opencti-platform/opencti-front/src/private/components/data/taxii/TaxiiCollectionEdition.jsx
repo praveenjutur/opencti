@@ -293,7 +293,7 @@ const handleSubmitFieldOptions = (name, value) => taxiiCollectionValidation(t)
                     'objects',
                     'objectMarking',
                     'objectLabel',
-                    'creator',
+                    'creator_id',
                     'createdBy',
                     'priority',
                     'severity',

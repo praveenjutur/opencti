@@ -85,7 +85,7 @@ const ThreatActorsIndividual = () => {
           'createdBy',
           'source_reliability',
           'confidence',
-          'creator',
+          'creator_id',
           'created',
           'revoked',
         ]}

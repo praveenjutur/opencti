@@ -157,7 +157,7 @@ const entitiesFilters = [
   'objectMarking',
   'objectLabel',
   'createdBy',
-  'creator',
+  'creator_id',
   'x_opencti_workflow_id',
   'objectAssignee',
   'objectParticipant',
@@ -184,7 +184,7 @@ const relationshipsFilters = [
   'createdBy',
   'confidence',
   'killChainPhases',
-  'creator',
+  'creator_id',
 ];
 
 const auditsFilters = [

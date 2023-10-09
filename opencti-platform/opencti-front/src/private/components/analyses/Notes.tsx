@@ -166,7 +166,7 @@ const Notes: FunctionComponent<NotesProps> = ({ objectId, authorId, onChangeOpen
             'source_reliability',
             'confidence',
             'likelihood',
-            'creator',
+            'creator_id',
             'created',
           ]}
         >

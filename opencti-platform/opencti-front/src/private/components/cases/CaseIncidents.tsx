@@ -147,7 +147,7 @@ const CaseIncidents: FunctionComponent<CaseIncidentsProps> = () => {
           'objectParticipant',
           'priority',
           'severity',
-          'creator',
+          'creator_id',
           'created',
         ]}
       >

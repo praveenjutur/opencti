@@ -138,7 +138,7 @@ const Incidents: FunctionComponent = () => {
             'objectParticipant',
             'severity',
             'source',
-            'creator',
+            'creator_id',
             'created',
             'targets',
           ]}

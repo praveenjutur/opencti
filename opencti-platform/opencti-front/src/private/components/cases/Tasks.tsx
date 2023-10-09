@@ -83,7 +83,7 @@ const Tasks = () => {
           'objectMarking',
           'objectLabel',
           'createdBy',
-          'creator',
+          'creator_id',
         ]}
       >
         {queryRef && (

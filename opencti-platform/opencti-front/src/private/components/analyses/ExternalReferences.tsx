@@ -103,7 +103,7 @@ const ExternalReferences: FunctionComponent<ExternalReferencesProps> = () => {
         paginationOptions={paginationOptions}
         numberOfElements={numberOfElements}
         availableFilterKeys={[
-          'creator',
+          'creator_id',
           'created',
         ]}
       >

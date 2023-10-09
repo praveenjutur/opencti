@@ -141,7 +141,7 @@ const EntityStixCoreRelationshipsIndicatorsContextualViewComponent: FunctionComp
     'x_opencti_detection',
     'basedOn',
     'revoked',
-    'creator',
+    'creator_id',
     'confidence',
     'indicator_types',
     'pattern_type',

@@ -146,7 +146,7 @@ const CaseRfts: FunctionComponent<CaseRftsProps> = () => {
           'objectParticipant',
           'severity',
           'priority',
-          'creator',
+          'creator_id',
           'created',
         ]}
       >

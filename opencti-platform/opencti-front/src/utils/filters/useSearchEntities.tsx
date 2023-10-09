@@ -380,7 +380,7 @@ const useSearchEntities = ({
         break;
       // endregion
       // region user usage
-      case 'creator': // only used
+      case 'creator_id': // only used
         if (!cacheEntities[filterKey]) {
           fetchQuery(identitySearchCreatorsSearchQuery, {
             entityTypes: searchContext?.entityTypes ?? [],
@@ -396,7 +396,7 @@ const useSearchEntities = ({
                 type: 'Individual',
               }));
               setCacheEntities({ ...cacheEntities, [filterKey]: creators });
-              unionSetEntities('creator', creators);
+              unionSetEntities('creator_id', creators);
             });
         }
         break;

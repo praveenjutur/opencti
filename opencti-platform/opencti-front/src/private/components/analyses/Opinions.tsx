@@ -143,7 +143,7 @@ const Opinions: FunctionComponent<OpinionsProps> = ({
             'createdBy',
             'source_reliability',
             'confidence',
-            'creator',
+            'creator_id',
             'created',
           ]}
         >
