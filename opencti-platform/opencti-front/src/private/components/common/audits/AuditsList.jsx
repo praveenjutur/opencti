@@ -14,7 +14,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 */
 
 import React from 'react';
-import * as R from 'ramda';
 import { graphql } from 'react-relay';
 import CircularProgress from '@mui/material/CircularProgress';
 import Paper from '@mui/material/Paper';
@@ -30,12 +29,11 @@ import ItemIcon from '../../../../components/ItemIcon';
 import { useFormatter } from '../../../../components/i18n';
 import { QueryRenderer } from '../../../../relay/environment';
 import { resolveLink } from '../../../../utils/Entity';
-import { convertFilters } from '../../../../utils/ListParameters';
 import useGranted, { SETTINGS } from '../../../../utils/hooks/useGranted';
 import MarkdownDisplay from '../../../../components/MarkdownDisplay';
 import { isNotEmptyField } from '../../../../utils/utils';
 import useEnterpriseEdition from '../../../../utils/hooks/useEnterpriseEdition';
-import { findFilterFromKey } from "../../../../utils/filters/filtersUtils";
+import { findFilterFromKey } from '../../../../utils/filters/filtersUtils';
 
 const useStyles = makeStyles({
   container: {
@@ -74,7 +72,7 @@ const auditsListQuery = graphql`
     $first: Int
     $orderBy: LogsOrdering
     $orderMode: OrderingMode
-    $filters: [LogsFiltering!]
+    $filters: FilterGroup
   ) {
     audits(
       types: $types
@@ -144,11 +142,11 @@ const AuditsList = ({
     let types = ['History', 'Activity'];
     const entityTypeFilter = findFilterFromKey(selection.filters, 'entity_type');
     if (
-        entityTypeFilter
+      entityTypeFilter
       && entityTypeFilter.values.length > 0
     ) {
       if (
-          entityTypeFilter.values.filter((o) => o.id === 'all').length === 0
+        entityTypeFilter.values.filter((o) => o.id === 'all').length === 0
       ) {
         types = entityTypeFilter;
       }

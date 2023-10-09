@@ -901,7 +901,7 @@ export enum AttributesOrdering {
 export type AuditsTimeSeriesParameters = {
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<LogsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   search?: InputMaybe<Scalars['String']['input']>;
   types?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
@@ -10732,29 +10732,6 @@ export type LogEdge = {
   node: Log;
 };
 
-export enum LogsFilter {
-  ApplicantId = 'applicant_id',
-  ConnectionId = 'connection_id',
-  Created = 'created',
-  CreatedAt = 'created_at',
-  Creator = 'creator',
-  ElementId = 'elementId',
-  EntityId = 'entity_id',
-  EventScope = 'event_scope',
-  EventType = 'event_type',
-  MembersGroup = 'members_group',
-  MembersOrganization = 'members_organization',
-  MembersUser = 'members_user',
-  UserId = 'user_id'
-}
-
-export type LogsFiltering = {
-  filterMode?: InputMaybe<FilterMode>;
-  key: Array<LogsFilter>;
-  operator?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export enum LogsOrdering {
   CreatedAt = 'created_at',
   Event = 'event',
@@ -17177,7 +17154,7 @@ export type QueryAttackPatternsArgs = {
 export type QueryAuditsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<LogsFiltering>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<LogsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -17191,7 +17168,7 @@ export type QueryAuditsDistributionArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<LogsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   operation: StatsOperation;
   order?: InputMaybe<Scalars['String']['input']>;
@@ -17214,7 +17191,7 @@ export type QueryAuditsMultiTimeSeriesArgs = {
 export type QueryAuditsNumberArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<LogsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   onlyInferred?: InputMaybe<Scalars['Boolean']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   startDate?: InputMaybe<Scalars['DateTime']['input']>;
@@ -17226,7 +17203,7 @@ export type QueryAuditsTimeSeriesArgs = {
   endDate?: InputMaybe<Scalars['DateTime']['input']>;
   field: Scalars['String']['input'];
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<InputMaybe<LogsFiltering>>>;
+  filters?: InputMaybe<FilterGroup>;
   interval: Scalars['String']['input'];
   operation: StatsOperation;
   search?: InputMaybe<Scalars['String']['input']>;
@@ -17974,7 +17951,7 @@ export type QueryLocationsArgs = {
 export type QueryLogsArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<LogsFiltering>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<LogsOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
@@ -27669,8 +27646,6 @@ export type ResolversTypes = ResolversObject<{
   Log: ResolverTypeWrapper<Log>;
   LogConnection: ResolverTypeWrapper<LogConnection>;
   LogEdge: ResolverTypeWrapper<LogEdge>;
-  LogsFilter: LogsFilter;
-  LogsFiltering: LogsFiltering;
   LogsOrdering: LogsOrdering;
   LogsWorkerConfig: ResolverTypeWrapper<LogsWorkerConfig>;
   MacAddr: ResolverTypeWrapper<Omit<MacAddr, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'indicators' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversTypes['CaseConnection']>, containers?: Maybe<ResolversTypes['ContainerConnection']>, createdBy?: Maybe<ResolversTypes['Identity']>, groupings?: Maybe<ResolversTypes['GroupingConnection']>, indicators?: Maybe<ResolversTypes['IndicatorConnection']>, notes?: Maybe<ResolversTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversTypes['OrganizationConnection']>, observedData?: Maybe<ResolversTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversTypes['OpinionConnection']>, reports?: Maybe<ResolversTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversTypes['StixCoreRelationshipConnection']> }>;
@@ -28352,7 +28327,6 @@ export type ResolversParentTypes = ResolversObject<{
   Log: Log;
   LogConnection: LogConnection;
   LogEdge: LogEdge;
-  LogsFiltering: LogsFiltering;
   LogsWorkerConfig: LogsWorkerConfig;
   MacAddr: Omit<MacAddr, 'cases' | 'containers' | 'createdBy' | 'groupings' | 'indicators' | 'notes' | 'objectOrganization' | 'observedData' | 'opinions' | 'reports' | 'stixCoreRelationships'> & { cases?: Maybe<ResolversParentTypes['CaseConnection']>, containers?: Maybe<ResolversParentTypes['ContainerConnection']>, createdBy?: Maybe<ResolversParentTypes['Identity']>, groupings?: Maybe<ResolversParentTypes['GroupingConnection']>, indicators?: Maybe<ResolversParentTypes['IndicatorConnection']>, notes?: Maybe<ResolversParentTypes['NoteConnection']>, objectOrganization?: Maybe<ResolversParentTypes['OrganizationConnection']>, observedData?: Maybe<ResolversParentTypes['ObservedDataConnection']>, opinions?: Maybe<ResolversParentTypes['OpinionConnection']>, reports?: Maybe<ResolversParentTypes['ReportConnection']>, stixCoreRelationships?: Maybe<ResolversParentTypes['StixCoreRelationshipConnection']> };
   MacAddrAddInput: MacAddrAddInput;

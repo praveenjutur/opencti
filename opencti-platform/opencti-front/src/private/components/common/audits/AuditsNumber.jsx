@@ -49,7 +49,7 @@ const auditsNumberNumberQuery = graphql`
     $startDate: DateTime
     $endDate: DateTime
     $onlyInferred: Boolean
-    $filters: [LogsFiltering]
+    $filters: FilterGroup
     $filterMode: FilterMode
     $search: String
   ) {

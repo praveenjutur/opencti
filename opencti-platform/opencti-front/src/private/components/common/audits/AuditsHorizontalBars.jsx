@@ -51,7 +51,7 @@ const auditsHorizontalBarsDistributionQuery = graphql`
     $limit: Int
     $order: String
     $types: [String]
-    $filters: [LogsFiltering]
+    $filters: FilterGroup
     $filterMode: FilterMode
     $search: String
   ) {

@@ -60,7 +60,8 @@ export interface ListFilter<T extends BasicStoreCommon> {
   types?: string[]
 }
 
-type InternalListEntities = <T extends BasicStoreCommon>(context: AuthContext, user: AuthUser, entityTypes: Array<string>, args: EntityOptions<T>) => Promise<Array<T>>;
+type InternalListEntities = <T extends BasicStoreCommon>
+(context: AuthContext, user: AuthUser, entityTypes: Array<string>, args: EntityOptions<T>, noFiltersChecking?: boolean) => Promise<Array<T>>;
 
 // entities
 interface EntityFilters<T extends BasicStoreCommon> extends ListFilter<T> {
@@ -433,10 +434,10 @@ export const listAllEntitiesForFilter = async (context: AuthContext, user: AuthU
   return buildPagination(0, null, nodeElements, nodeElements.length);
 };
 
-export const listEntities: InternalListEntities = async (context, user, entityTypes, args = {}) => {
+export const listEntities: InternalListEntities = async (context, user, entityTypes, args = {}, noFiltersChecking = false) => {
   const { indices = READ_ENTITIES_INDICES } = args;
   const { filters } = args;
-  const convertedFilters = checkedAndConvertedFilters(filters, entityTypes);
+  const convertedFilters = noFiltersChecking ? filters : checkedAndConvertedFilters(filters, entityTypes);
   console.log('convertedFilters', convertedFilters);
   // TODO Reactivate this test after global migration to typescript
   // if (connectionFormat !== false) {

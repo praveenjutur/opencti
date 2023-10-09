@@ -279,7 +279,7 @@ type MultiTimeSeries {
 input AuditsTimeSeriesParameters {
   field: String!
   types: [String]
-  filters: [LogsFiltering]
+  filters: FilterGroup
   filterMode: FilterMode
   search: String
 }
@@ -393,30 +393,9 @@ enum LogsOrdering {
   timestamp
   created_at
 }
-enum LogsFilter {
-  elementId
-  event_type
-  event_scope
-  entity_id
-  created
-  connection_id
-  user_id
-  creator
-  members_user
-  members_group
-  members_organization
-  applicant_id
-  created_at
-}
 type LogConnection {
   pageInfo: PageInfo!
   edges: [LogEdge]
-}
-input LogsFiltering {
-  key: [LogsFilter!]!
-  values: [String]
-  operator: String
-  filterMode: FilterMode
 }
 type LogEdge {
   cursor: String!
@@ -11081,7 +11060,7 @@ type Query {
     after: ID
     orderBy: LogsOrdering
     orderMode: OrderingMode
-    filters: [LogsFiltering!]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): LogConnection @auth(for: [KNOWLEDGE])
@@ -11091,7 +11070,7 @@ type Query {
     types: [String!]
     orderBy: LogsOrdering
     orderMode: OrderingMode
-    filters: [LogsFiltering!]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): LogConnection @auth(for: [SETTINGS])
@@ -11100,7 +11079,7 @@ type Query {
     startDate: DateTime
     endDate: DateTime
     onlyInferred: Boolean
-    filters: [LogsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): Number @auth(for: [KNOWLEDGE, EXPLORE])
@@ -11111,7 +11090,7 @@ type Query {
     endDate: DateTime
     interval: String!
     types: [String]
-    filters: [LogsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): [TimeSeries] @auth(for: [SETTINGS])
@@ -11124,7 +11103,7 @@ type Query {
     limit: Int
     order: String
     types: [String]
-    filters: [LogsFiltering]
+    filters: FilterGroup
     filterMode: FilterMode
     search: String
   ): [Distribution] @auth(for: [SETTINGS])
