@@ -253,3 +253,25 @@ export const filterValue = (filterKey: string, id: string | null, value?: string
   }
   return id;
 };
+
+export const addFilter = (filters: FilterGroup, key: string, value: string | string[], operator = 'eq', mode = 'or') => {
+  return {
+    mode: filters?.mode ?? 'and',
+    filters: (filters?.filters ?? []).concat([
+      {
+        key,
+        values: Array.isArray(value) ? value : [value],
+        operator,
+        mode,
+      },
+    ]),
+    filterGroups: filters?.filterGroups ?? [],
+  };
+};
+
+export const removeFilter = (filters: FilterGroup, key: string) => {
+  return filters ? {
+    ...filters,
+    filters: filters.filters.filter((f) => f.key !== key),
+  } : undefined;
+};
