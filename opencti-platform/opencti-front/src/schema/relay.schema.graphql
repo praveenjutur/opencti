@@ -1464,6 +1464,7 @@ input UserAddInput {
   objectOrganization: [ID!]
   account_status: String
   account_lock_after_date: DateTime
+  groups: [ID!]
 }
 
 scalar user_email_String_NotNull_minLength_5_format_email
