@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { KeyboardDoubleArrowDownOutlined } from '@mui/icons-material';
 import Typography from '@mui/material/Typography';
 import { SearchStixCoreObjectLineDummy } from '@components/search/SearchStixCoreObjectLine';
 import {
@@ -203,16 +204,16 @@ const Search = () => {
             {t('Search for an entity')}
           </Typography>
           {renderLines()}
-          { fileSearchEnabled
-            ? (<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          {fileSearchEnabled && searchTerm && (
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <Button
                 size="small"
-                onClick={handleSearchIndexFiles}>
-                {t('Extend the search to the indexed files')}
+                onClick={handleSearchIndexFiles}
+              >
+                <KeyboardDoubleArrowDownOutlined /> {t('Extend this search to indexed files')} <KeyboardDoubleArrowDownOutlined />
               </Button>
-            </div>) : (
-              ' '
-            )}
+            </div>
+          )}
           { searchOpen ? (<SearchIndexedFiles search={searchTerm}/>) : ('')}
         </div>
       </ExportContextProvider>
