@@ -618,7 +618,11 @@ const useSearchEntities = ({
         fetchQuery(filtersStixCoreObjectsContainersSearchQuery, {
           search: event.target.value !== 0 ? event.target.value : '',
           count: 50,
-          filters: [{ key: 'objects', values: searchContext?.elementId ?? [] }],
+          filters: {
+            mode: 'and',
+            filterGroups: [],
+            filters: [{ key: 'objects', values: searchContext?.elementId ?? [] }],
+          },
         })
           .toPromise()
           .then((data) => {
@@ -993,7 +997,11 @@ const useSearchEntities = ({
         fetchQuery(statusFieldStatusesSearchQuery, {
           search: event.target.value !== 0 ? event.target.value : '',
           first: 50,
-          filters: [{ key: 'type', values: isNotEmptyField(entityType) ? [entityType] : [] }],
+          filters: {
+            mode: 'and',
+            filterGroups: [],
+            filters: [{ key: 'type', values: isNotEmptyField(entityType) ? [entityType] : [] }],
+          },
         })
           .toPromise()
           .then((data) => {

@@ -120,7 +120,7 @@ const DashboardSettings = () => {
                   mode: 'and',
                   filters: [{ key: 'type', values: ['dashboard'] }],
                   filterGroups: [],
-                }
+                },
               }}
               render={({ props }) => {
                 if (props) {

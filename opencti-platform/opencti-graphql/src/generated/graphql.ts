@@ -18465,7 +18465,7 @@ export type QueryStatusTemplatesArgs = {
 export type QueryStatusesArgs = {
   after?: InputMaybe<Scalars['ID']['input']>;
   filterMode?: InputMaybe<FilterMode>;
-  filters?: InputMaybe<Array<StatusesFiltering>>;
+  filters?: InputMaybe<FilterGroup>;
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<StatusOrdering>;
   orderMode?: InputMaybe<OrderingMode>;
