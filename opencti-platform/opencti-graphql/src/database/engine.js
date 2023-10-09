@@ -2056,7 +2056,6 @@ export const elUpdateFilesWithEntityRestrictions = async (entity) => {
     [buildRefRelationKey(RELATION_OBJECT_MARKING)]: entity[RELATION_OBJECT_MARKING] ?? [],
     [buildRefRelationKey(RELATION_GRANTED_TO)]: entity[RELATION_GRANTED_TO] ?? [],
   };
-  logApp.info('elUpdateFilesWithEntityRestrictions', { changes, entity });
   const source = 'for (change in params.changes.entrySet()) { ctx._source[change.getKey()] = change.getValue() }';
   return elRawUpdateByQuery({
     index: READ_INDEX_FILES,

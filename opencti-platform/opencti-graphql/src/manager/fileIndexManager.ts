@@ -25,6 +25,7 @@ import { generateInternalId } from '../schema/identifier';
 import { TYPE_LOCK_ERROR } from '../config/errors';
 import type { SseEvent, StreamDataEvent, UpdateEvent } from '../types/event';
 import { STIX_EXT_OCTI } from '../types/stix-extensions';
+import { getLastIndexedDate, saveFileIndexStatus } from '../domain/file';
 
 const FILE_INDEX_MANAGER_KEY = conf.get('file_index_manager:lock_key');
 const SCHEDULE_TIME = conf.get('file_index_manager:interval') || 300000; // 5 minutes
@@ -141,11 +142,11 @@ const initFileIndexManager = () => {
         lock = await lockResource([FILE_INDEX_MANAGER_KEY], { retryCount: 0 });
         running = true;
         logApp.info('[OPENCTI-MODULE] Running file index manager');
-        const lastFiles = await elSearchFiles(context, SYSTEM_USER, { first: 1, connectionFormat: false });
-        // TODO fix last time we indexed all uploaded files
-        const lastIndexedDate = lastFiles?.length > 0 ? moment(lastFiles[0].indexed_at).toDate() : null;
+        const lastIndexedDate = await getLastIndexedDate(context, SYSTEM_USER);
+        const indexFromDate = lastIndexedDate ? moment(lastIndexedDate).toDate() : null;
         logApp.info('[OPENCTI-MODULE] Index imported files since', { lastIndexedDate });
-        await indexImportedFiles(context, lastIndexedDate);
+        await indexImportedFiles(context, indexFromDate);
+        await saveFileIndexStatus(context, SYSTEM_USER);
         logApp.info('[OPENCTI-MODULE] End of file index manager processing');
       } finally {
         running = false;
