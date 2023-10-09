@@ -628,19 +628,22 @@ export const checkedAndConvertedFilters = (filters, entityTypes) => {
   if (filters?.filters && entityTypes.length > 0 && !listActivities) { // TODO replace by filters && XX
     const keys = extractFilterKeys(filters);
     // check filters keys correspond to the entity types
+    // correct keys are keys in AT LEAST one of the entity types schema definition
     if (keys.length > 0) {
-      entityTypes.forEach((type) => { // TODO the keys in AT LEAST a type
+      let incorrectKeys = keys;
+      entityTypes.forEach((type) => {
         const availableAttributes = schemaAttributesDefinition.getAttributeNames(type);
         const availableRelations = schemaRelationsRefDefinition.getInputNames(type);
         const availableKeys = availableAttributes.concat(availableRelations).concat(['rel_object.internal_id', 'rel_object.*']); // TODO remove hardcode when all the enum are removed
-        console.log('availableKeys', availableKeys);
-        if (!keys.every((k) => availableKeys.includes(k))) {
-          const incorrectKeys = keys
-            .map((k) => (!availableKeys.includes(k) ? k : null))
-            .filter((k) => k);
-          throw Error(`incorrect filter keys: ${incorrectKeys}`); // TODO display/filter the keys that are not correct
-        }
+        keys.forEach((k) => {
+          if (availableKeys.includes(k)) {
+            incorrectKeys = incorrectKeys.filter((n) => n !== k);
+          }
+        });
       });
+      if (incorrectKeys.length > 0) {
+        throw Error(`incorrect filter keys: ${incorrectKeys}`); // TODO remove filter keys that are not correct when dev finished
+      }
     }
     const newFilters = [];
     // translate the filter keys on relation refs
