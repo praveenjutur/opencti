@@ -7,6 +7,10 @@ import makeStyles from '@mui/styles/makeStyles';
 import { SearchIndexedFileLine_node$data } from '@components/search/__generated__/SearchIndexedFileLine_node.graphql';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Chip from '@mui/material/Chip';
+import { OpenInNewOutlined } from '@mui/icons-material';
+import IconButton from '@mui/material/IconButton';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import Tooltip from '@mui/material/Tooltip';
 import { DataColumns } from '../../../components/list_lines';
 import { Theme } from '../../../components/Theme';
 import { useFormatter } from '../../../components/i18n';
@@ -112,9 +116,7 @@ const SearchIndexedFileLineComponent: FunctionComponent<SearchIndexedFileLineCom
               style={{ width: dataColumns.entity_name.width }}
             >
               {node.entity && (
-                <Link to={entityLink}>
-                  <span>{node.entity?.representative.main}</span>
-                </Link>
+                <span>{node.entity?.representative.main}</span>
               )}
             </div>
             <div
@@ -132,6 +134,20 @@ const SearchIndexedFileLineComponent: FunctionComponent<SearchIndexedFileLineCom
           </div>
         }
       />
+      <ListItemSecondaryAction>
+        {node.entity && entityLink && (
+          <Tooltip title={t('Open the entity overview in a separated tab')}>
+            <IconButton
+              component={Link}
+              target="_blank"
+              to={entityLink}
+              size="medium"
+            >
+              <OpenInNewOutlined fontSize="medium" />
+            </IconButton>
+          </Tooltip>
+        )}
+      </ListItemSecondaryAction>
     </ListItem>
   );
 };

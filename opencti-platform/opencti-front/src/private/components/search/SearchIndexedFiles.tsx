@@ -68,7 +68,7 @@ const SearchIndexedFiles : FunctionComponent<SearchIndexedFilesProps> = ({ searc
       },
       entity_type: {
         label: 'Attached entity type',
-        width: '18%',
+        width: '15%',
         isSortable: isRuntimeSort,
       },
       entity_name: {
@@ -94,6 +94,7 @@ const SearchIndexedFiles : FunctionComponent<SearchIndexedFilesProps> = ({ searc
           handleRemoveFilter={storageHelpers.handleRemoveFilter}
           handleChangeView={storageHelpers.handleChangeView}
           disableCards={true}
+          secondaryAction={true}
           filters={filters}
           paginationOptions={paginationOptions}
           numberOfElements={numberOfElements}
