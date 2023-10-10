@@ -24,7 +24,7 @@ Whether you are an organisation or an individual working or studying in the fiel
 
 Now that the first version of the tool has been released, our goal for the future releases is two-fold:
 
-* Of course, fix bugs and develop features which are identify as non-critical but would really add-up to OpenCTI power.
+* Of course, fix bugs and develop features which are identified as non-critical but would really add-up to OpenCTI power.
 
 * On a longer term vision, we would like to develop a multi-layered approach in the platform, which would be divided in three strata: a strategic level (for information about actors), a kill chain level (with the different steps of the attack chain) and an infrastructure level (containing data on the infrastructure used by the attacker).
 
