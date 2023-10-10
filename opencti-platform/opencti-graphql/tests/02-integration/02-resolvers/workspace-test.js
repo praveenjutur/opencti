@@ -355,6 +355,28 @@ describe('Workspace resolver standard behavior', () => {
     expect(queryResult).not.toBeNull();
     expect(queryResult.data.workspace).toBeNull();
   });
+
+  it('should add knowledge from investigation to container', async () => {
+    const graphQLResponse = await queryAsAdmin({
+      query: gql`
+        mutation KnowledgeAddFromInvestigation($id: ID!, $workspaceId: ID) {
+          containerEdit(id: $id) {
+            knowledgeAddFromInvestigation(workspaceId: $workspaceId) {
+              id
+              entity_type
+            }
+          }
+        }
+      `,
+      variables: {
+        containerId: '',
+        workspaceId: ''
+      }
+    });
+    const { containerEdit } = graphQLResponse.data;
+
+    expect(containerEdit.knowledgeAddFromInvestigation.id).toBeDefined();
+  })
 });
 
 describe('Workspace member access behavior', () => {
